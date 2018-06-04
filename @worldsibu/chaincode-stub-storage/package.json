@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-stub-storage",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Chaincode STUB Storage class",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@theledger/fabric-chaincode-utils": "^2.0.9",
-    "@worldsibu/chaincode-base-storage": "^0.1.6",
-    "@worldsibu/chaincode-errors": "^0.1.5",
+    "@worldsibu/chaincode-base-storage": "^0.1.7",
+    "@worldsibu/chaincode-errors": "^0.1.6",
     "tslib": "^1.9.0"
   },
   "devDependencies": {

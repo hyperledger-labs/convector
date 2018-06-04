@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-fabric-controller-adapter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Controller adapter to use with fabric-client SDK",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -19,7 +19,7 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@worldsibu/chaincode-controller-interface": "^1.0.3",
+    "@worldsibu/chaincode-controller-interface": "^1.0.4",
     "fabric-ca-client": "^1.1.2",
     "fabric-client": "^1.1.2",
     "tslib": "^1.9.0"
