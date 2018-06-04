@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-controller-interface",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Chaincode Base Storage class. This is not intended to be used as a provider but as an abstract interface of one",
   "license": "ISC",
   "main": "./dist/index.js",

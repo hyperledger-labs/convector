@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-base-storage",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Chaincode Base Storage class. This is not intended to be used as a provider but as an abstract interface of one",
   "license": "ISC",
   "main": "./dist/index.js",
