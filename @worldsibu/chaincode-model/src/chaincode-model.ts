@@ -65,7 +65,11 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
 
         return result;
       }, Object.assign({}, this));
-}
+  }
+
+  public async delete() {
+    await BaseStorage.current.delete(this.id);
+  }
 
   private assign(content: { [key in keyof T]?: T[key] }) {
     Object.assign(this, content);
