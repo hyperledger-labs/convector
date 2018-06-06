@@ -2,7 +2,6 @@ import { Schema } from 'yup';
 
 export function Validate<T>(schema: Schema<T>) {
   return (target: any, key: string) => {
-    let val;
     const setter = target.__lookupSetter__(key) || (v => v);
 
     if (!setter) {
@@ -10,8 +9,14 @@ export function Validate<T>(schema: Schema<T>) {
     }
 
     Object.defineProperty(target, key, {
-      get: () => val,
-      set: newVal => val = schema.validateSync(setter(newVal)),
+      get() {
+        // tslint:disable-next-line:no-invalid-this
+        return this[`_${key}`];
+      },
+      set(newVal) {
+        // tslint:disable-next-line:no-invalid-this
+        this[`_${key}`] = schema.validateSync(setter(newVal));
+      },
       enumerable: true,
       configurable: true
     });
