@@ -1,3 +1,5 @@
+// tslint:disable:no-invalid-this
+
 import { Schema } from 'yup';
 
 export function Validate<T>(schema: Schema<T>) {
@@ -10,12 +12,10 @@ export function Validate<T>(schema: Schema<T>) {
 
     Object.defineProperty(target, key, {
       get() {
-        // tslint:disable-next-line:no-invalid-this
         return this[`_${key}`];
       },
       set(newVal) {
-        // tslint:disable-next-line:no-invalid-this
-        this[`_${key}`] = schema.validateSync(setter(newVal));
+        this[`_${key}`] = schema.validateSync(setter.call(this, newVal));
       },
       enumerable: true,
       configurable: true

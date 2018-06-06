@@ -1,3 +1,5 @@
+// tslint:disable:no-invalid-this
+
 export function ReadOnly() {
   return function (
     target: any,
@@ -11,12 +13,11 @@ export function ReadOnly() {
 
     Object.defineProperty(target, key, {
       get() {
-        // tslint:disable-next-line:no-invalid-this
         return this[`_${key}`];
       },
       set(newVal) {
-        // tslint:disable-next-line:no-invalid-this
-        this[`_${key}`] = this[`_${key}`] === undefined ? setter(newVal) : this[`_${key}`];
+        this[`_${key}`] = this[`_${key}`] === undefined ?
+          setter.call(this, newVal) : this[`_${key}`];
       },
       enumerable: true,
       configurable: true
