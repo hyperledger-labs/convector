@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-model",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Chaincode Model base class",
   "license": "ISC",
   "main": "./dist/index.js",
