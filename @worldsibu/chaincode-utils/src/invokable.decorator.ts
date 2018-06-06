@@ -40,10 +40,14 @@ export function Invokable() {
           let paramResult;
 
           try {
-            paramResult = await schema.validate(args[index], opts);
+            if (opts.update) {
+              paramResult = schema.cast(args[index], opts);
+            } else {
+              paramResult = await schema.validate(args[index], opts);
+            }
 
             if (model) {
-              paramResult = new model(paramResult);
+              paramResult = new model(JSON.parse(args[index]));
             }
           } catch (e) {
             throw new Error(`Invalid param #${index} using value ${args[index]}, ${e.message}`);
