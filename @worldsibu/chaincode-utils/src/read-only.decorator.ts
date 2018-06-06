@@ -3,7 +3,6 @@ export function ReadOnly() {
     target: any,
     key: string
   ) {
-    let val;
     const setter = target.__lookupSetter__(key) || (v => v);
 
     if (!setter) {
@@ -11,8 +10,14 @@ export function ReadOnly() {
     }
 
     Object.defineProperty(target, key, {
-      get: () => val,
-      set: newVal => val === undefined ? val = setter(newVal) : val,
+      get() {
+        // tslint:disable-next-line:no-invalid-this
+        return this[`_${key}`];
+      },
+      set(newVal) {
+        // tslint:disable-next-line:no-invalid-this
+        this[`_${key}`] = this[`_${key}`] === undefined ? setter(newVal) : this[`_${key}`];
+      },
       enumerable: true,
       configurable: true
     });

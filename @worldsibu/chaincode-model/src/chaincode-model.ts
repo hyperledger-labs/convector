@@ -56,6 +56,10 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
 
     return Object.keys(proto)
       .reduce((result, key) => {
+        if (key.startsWith('_')) {
+          return result;
+        }
+
         const desc = Object.getOwnPropertyDescriptor(proto, key);
         const hasGetter = desc && typeof desc.get === 'function';
 
