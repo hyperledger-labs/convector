@@ -64,7 +64,7 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
         const hasGetter = desc && typeof desc.get === 'function';
 
         if (hasGetter) {
-          result[key] = desc.get();
+          result[key] = desc.get.call(this);
         }
 
         return result;
