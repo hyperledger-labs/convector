@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-utils",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Chaincode utils for Typescript",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
