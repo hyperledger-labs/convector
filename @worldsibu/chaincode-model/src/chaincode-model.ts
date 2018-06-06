@@ -54,12 +54,12 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
   public toJSON() {
     const proto = Object.getPrototypeOf(this);
 
+    const base = Object.keys(this)
+      .filter(k => !k.startsWith('_'))
+      .reduce((result, key) => ({...result, [key]: this[key]}), {});
+
     return Object.keys(proto)
       .reduce((result, key) => {
-        if (key.startsWith('_')) {
-          return result;
-        }
-
         const desc = Object.getOwnPropertyDescriptor(proto, key);
         const hasGetter = desc && typeof desc.get === 'function';
 
@@ -68,7 +68,7 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
         }
 
         return result;
-      }, Object.assign({}, this));
+      }, base);
   }
 
   public async delete() {
