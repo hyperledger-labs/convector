@@ -8,6 +8,7 @@ import 'mocha';
 import 'reflect-metadata';
 
 import { Param } from '../src/param.decorator';
+import { Validate } from '../src/validate.decorator';
 import { Controller } from '../src/controller.decorator';
 import { Invokable, getInvokables } from '../src/invokable.decorator';
 
@@ -15,6 +16,7 @@ describe('Invokable Decorator', () => {
   class TestCC extends Chaincode { }
 
   class TestModel {
+    @Validate(yup.string())
     public name: string;
 
     constructor(content) {
@@ -35,6 +37,14 @@ describe('Invokable Decorator', () => {
     @Invokable()
     public async complex(
       @Param(TestModel)
+      model: TestModel
+    ) {
+      return model;
+    }
+
+    @Invokable()
+    public async update(
+      @Param(TestModel, { update: true })
       model: TestModel
     ) {
       return model;
@@ -62,5 +72,12 @@ describe('Invokable Decorator', () => {
 
     expect(result).to.be.instanceof(TestModel);
     expect(result.name).to.eq('test');
+  });
+
+  it('should succeed accepting an incomplete model as a param if it is for update the content', async () => {
+    const stub = new ChaincodeMockStub('test-cc', new TestCC());
+    const result = await (test.update as any)(new StubHelper(stub), [JSON.stringify({})]);
+
+    expect(result).to.be.instanceof(TestModel);
   });
 });
