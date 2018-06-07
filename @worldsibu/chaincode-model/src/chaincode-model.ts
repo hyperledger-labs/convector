@@ -51,7 +51,7 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
     return Object.assign({}, this) as any;
   }
 
-  public toJSON() {
+  public toJSON(): { [key in keyof T]?: T[key] } {
     const proto = Object.getPrototypeOf(this);
 
     const base = Object.keys(this)
