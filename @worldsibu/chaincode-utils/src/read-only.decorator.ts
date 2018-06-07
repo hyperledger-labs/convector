@@ -5,22 +5,21 @@ export function ReadOnly() {
     target: any,
     key: string
   ) {
-    const setter = target.__lookupSetter__(key) || (v => v);
-
-    if (!setter) {
-      delete target[key];
-    }
-
-    Object.defineProperty(target, key, {
+    const getSet = {
       get() {
         return this[`_${key}`];
       },
       set(newVal) {
+        let setter = target.__lookupSetter__(key);
+        setter = !setter || setter === getSet.set ? (v => v) : setter;
+
         this[`_${key}`] = this[`_${key}`] === undefined ?
           setter.call(this, newVal) : this[`_${key}`];
       },
       enumerable: true,
       configurable: true
-    });
+    };
+
+    Object.defineProperty(target, key, getSet);
   };
 }
