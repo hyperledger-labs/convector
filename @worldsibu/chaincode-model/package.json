@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-model",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Chaincode Model base class",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -23,7 +23,7 @@
     "@theledger/fabric-chaincode-utils": "^2.0.9",
     "@worldsibu/chaincode-base-storage": "^0.1.7",
     "@worldsibu/chaincode-errors": "^0.1.6",
-    "@worldsibu/chaincode-utils": "^2.2.2",
+    "@worldsibu/chaincode-utils": "^2.2.3",
     "tslib": "^1.9.0",
     "yup": "^0.24.1"
   },
