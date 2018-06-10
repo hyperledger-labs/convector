@@ -58,7 +58,8 @@ export function Invokable() {
       }
 
       const identity = new ClientIdentity(stubHelper.getStub());
-      const ctx = Object.create(this, { sender: { value: identity.getX509Certificate().fingerPrint } });
+      const namespace = Reflect.getMetadata(controllerMetadataKey, target.constructor);
+      const ctx = Object.create(this[namespace], { sender: { value: identity.getX509Certificate().fingerPrint } });
 
       try {
         return await fn.call(ctx, ...args);
@@ -74,5 +75,8 @@ export function getInvokables(controller: { new(...args: any[]): any }): any {
   const obj = new controller();
 
   return Object.keys(Reflect.getMetadata(invokableMetadataKey, controller))
-    .reduce((invokables, k) => ({ ...invokables, [`${namespace}_${k}`]: obj[k] }), {});
+    .reduce((invokables, k) => ({
+      ...invokables,
+      [`${namespace}_${k}`]: obj[k]
+    }), { [namespace]: obj });
 }
