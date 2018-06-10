@@ -38,7 +38,7 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
   }
 
   public async save() {
-    this.assign(getDefaults(this));
+    this.assign(getDefaults(this), true);
     if (!ensureRequired(this)) {
       throw new Error('Model is not complete');
     }
@@ -75,7 +75,13 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
     await BaseStorage.current.delete(this.id);
   }
 
-  private assign(content: { [key in keyof T]?: T[key] }) {
-    Object.assign(this, content);
+  private assign(content: { [key in keyof T]?: T[key] }, defaults = false) {
+    const args = [this, content];
+
+    if (defaults) {
+      args.reverse();
+    }
+
+    Object.assign({}, ...args);
   }
 }
