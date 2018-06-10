@@ -51,11 +51,12 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
     return Object.assign({}, this) as any;
   }
 
-  public toJSON(): { [key in keyof T]?: T[key] } {
+  public toJSON(skipEmpty = false): { [key in keyof T]?: T[key] } {
     const proto = Object.getPrototypeOf(this);
 
     const base = Object.keys(this)
       .filter(k => !k.startsWith('_'))
+      .filter(k => !skipEmpty || this[k] !== undefined || this[k] !== null)
       .reduce((result, key) => ({...result, [key]: this[key]}), {});
 
     return Object.keys(proto)
@@ -76,7 +77,7 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
   }
 
   private assign(content: { [key in keyof T]?: T[key] }, defaults = false) {
-    const afterDefaults = defaults ? this.toJSON() : {};
+    const afterDefaults = defaults ? this.toJSON(true) : {};
     Object.assign(this, content, afterDefaults);
   }
 }
