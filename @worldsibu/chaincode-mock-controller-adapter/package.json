@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-mock-controller-adapter",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Controller adapter to use as a mock in unit tests",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@theledger/fabric-mock-stub": "^1.2.1",
-    "@worldsibu/chaincode": "^1.1.16",
+    "@worldsibu/chaincode": "^1.1.17",
     "@worldsibu/chaincode-controller-interface": "^1.0.4",
     "tslib": "^1.9.0"
   },
