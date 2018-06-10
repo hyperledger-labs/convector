@@ -76,12 +76,6 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
   }
 
   private assign(content: { [key in keyof T]?: T[key] }, defaults = false) {
-    const args = [this, content];
-
-    if (defaults) {
-      args.reverse();
-    }
-
-    Object.assign({}, ...args);
+    Object.assign(this, content, defaults ? this : {});
   }
 }
