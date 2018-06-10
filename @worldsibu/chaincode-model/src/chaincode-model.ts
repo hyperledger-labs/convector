@@ -68,6 +68,10 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
           result[key] = desc.get.call(this);
         }
 
+        if (skipEmpty && (result[key] === undefined || result[key] === null)) {
+          delete result[key];
+        }
+
         return result;
       }, base);
   }
