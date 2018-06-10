@@ -76,6 +76,7 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
   }
 
   private assign(content: { [key in keyof T]?: T[key] }, defaults = false) {
-    Object.assign(this, content, defaults ? this : {});
+    const afterDefaults = defaults ? this.toJSON() : {};
+    Object.assign(this, content, afterDefaults);
   }
 }
