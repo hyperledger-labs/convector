@@ -3,5 +3,12 @@
   "packages": [
     "@worldsibu/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "bootstrap": {
+      "hoist": true,
+      "nohoist": [
+      ]
+    }
+  }
 }

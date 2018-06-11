@@ -16,13 +16,13 @@
     "lerna:test:module": "f() { lerna run test --stream --scope @worldsibu/chaincode-$1 -- -- --inspect$2; }; f"
   },
   "devDependencies": {
-    "@theledger/fabric-mock-stub": "^1.0.1",
+    "@theledger/fabric-mock-stub": "^1.2.1",
     "@theledger/fabric-shim-crypto-types": "^1.0.4",
     "@theledger/fabric-shim-types": "^1.0.6",
     "@types/bytebuffer": "^5.0.37",
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",
-    "@types/node": "^10.1.2",
+    "@types/node": "^10.3.0",
     "@types/uuid": "^3.4.3",
     "@types/yup": "^0.24.4",
     "@worldsibu/chaincode-manager": "^1.2.13",

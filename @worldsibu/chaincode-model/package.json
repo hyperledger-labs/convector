@@ -6,8 +6,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "files": [
-    "dist/*",
-    "client/*"
+    "dist/*"
   ],
   "scripts": {
     "clean": "rimraf dist",
@@ -28,7 +27,6 @@
     "yup": "^0.24.1"
   },
   "devDependencies": {
-    "@types/yup": "^0.24.3",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",
     "tslint": "^5.9.1",
