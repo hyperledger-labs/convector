@@ -22,6 +22,7 @@
     "@theledger/fabric-mock-stub": "^1.2.1",
     "@worldsibu/chaincode": "^1.1.17",
     "@worldsibu/chaincode-controller-interface": "^1.0.4",
+    "@worldsibu/chaincode-errors": "^0.1.6",
     "tslib": "^1.9.0"
   },
   "devDependencies": {

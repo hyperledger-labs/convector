@@ -6,8 +6,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "files": [
-    "dist/*",
-    "client/*"
+    "dist/*"
   ],
   "scripts": {
     "clean": "rimraf dist",
@@ -28,7 +27,6 @@
   "devDependencies": {
     "@theledger/fabric-shim-crypto-types": "^1.0.4",
     "@theledger/fabric-shim-types": "^1.0.6",
-    "@types/node": "^10.1.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",
     "tslint": "^5.9.1",
