@@ -8,6 +8,7 @@
     "bootstrap": {
       "hoist": true,
       "nohoist": [
+        "@worldsibu/*"
       ]
     }
   }

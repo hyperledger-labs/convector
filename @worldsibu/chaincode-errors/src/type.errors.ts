@@ -5,5 +5,6 @@ export class InvalidTypeError extends Error {
     }
   }
 
+  public name = 'InvalidTypeError';
   public message = 'Invalid Type for chaincode model';
 }
