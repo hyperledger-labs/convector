@@ -1,6 +1,15 @@
 import { Schema } from 'yup';
 import { ClientIdentity } from 'fabric-shim';
 import { StubHelper, ChaincodeError } from '@theledger/fabric-chaincode-utils';
+import {
+  ControllerNamespaceMissingError,
+  ControllerInstantiationError,
+  ControllerInvokablesMissingError,
+  ControllerInvalidInvokeError,
+  ControllerInvalidArgumentError,
+  ControllerArgumentParseError,
+  ControllerInvalidFunctionError
+} from '@worldsibu/chaincode-errors';
 
 import { paramMetadataKey } from './param.decorator';
 import { controllerMetadataKey } from './controller.decorator';
@@ -8,6 +17,7 @@ import { controllerMetadataKey } from './controller.decorator';
 const invokableMetadataKey = Symbol('invokable');
 
 export function Invokable() {
+  debugger;
   return (
     target: any,
     key: string,
@@ -15,7 +25,11 @@ export function Invokable() {
   ) => {
     const fn = descriptor.value!;
 
-    const invokables = Reflect.getMetadata(invokableMetadataKey, target.constructor);
+    if (typeof fn !== 'function') {
+      throw new ControllerInvalidFunctionError();
+    }
+
+    const invokables = Reflect.getMetadata(invokableMetadataKey, target.constructor) || {};
     Reflect.defineMetadata(invokableMetadataKey, {
       ...invokables,
       [key]: true
@@ -30,12 +44,11 @@ export function Invokable() {
       const schemas: [Schema<any>, any, { new(...args: any[]): any }][] =
         Reflect.getOwnMetadata(paramMetadataKey, target, key);
 
-      if (schemas.length !== args.length) {
-        throw new Error(`Arguments mistmatch, fn ${key} called ` +
-          `with ${args.length} params but ${schemas.length} expected`);
-      }
-
       if (schemas) {
+        if (schemas.length !== args.length) {
+          throw new ControllerInvalidInvokeError(key, args.length, schemas.length);
+        }
+
         args = await schemas.reduce(async (result, [schema, opts, model], index) => {
           let paramResult;
 
@@ -45,12 +58,16 @@ export function Invokable() {
             } else {
               paramResult = await schema.validate(args[index], opts);
             }
-
-            if (model) {
-              paramResult = new model(JSON.parse(args[index]));
-            }
           } catch (e) {
-            throw new Error(`Invalid param #${index} using value ${args[index]}, ${e.message}`);
+            throw new ControllerInvalidArgumentError(e, index, args[index]);
+          }
+
+          if (model) {
+            try {
+              paramResult = new model(JSON.parse(args[index]));
+            } catch (e) {
+              throw new ControllerArgumentParseError(e, index, args[index]);
+            }
           }
 
           return [...await result, paramResult];
@@ -64,19 +81,44 @@ export function Invokable() {
       try {
         return await fn.call(ctx, ...args);
       } catch (e) {
-        throw new ChaincodeError(e.message, undefined, e.stack);
+        const error = new ChaincodeError(e.message);
+        error.stack = e.stack;
+        throw error;
       }
     };
   };
 }
 
 export function getInvokables(controller: { new(...args: any[]): any }): any {
-  const namespace = Reflect.getMetadata(controllerMetadataKey, controller);
-  const obj = new controller();
+  let obj: any;
+  let namespace: string;
+  let invokables: any[];
 
-  return Object.keys(Reflect.getMetadata(invokableMetadataKey, controller))
-    .reduce((invokables, k) => ({
-      ...invokables,
+  try {
+    namespace = Reflect.getMetadata(controllerMetadataKey, controller);
+  } catch (e) {
+    throw new ControllerNamespaceMissingError(e, '');
+  }
+
+  try {
+    obj = new controller();
+  } catch (e) {
+    throw new ControllerInstantiationError(e, namespace);
+  }
+
+  try {
+    invokables = Reflect.getMetadata(invokableMetadataKey, controller);
+
+    if (!invokables) {
+      throw new TypeError();
+    }
+  } catch (e) {
+    throw new ControllerInvokablesMissingError(e, namespace);
+  }
+
+  return Object.keys(invokables)
+    .reduce((result, k) => ({
+      ...result,
       [`${namespace}_${k}`]: obj[k]
     }), { [namespace]: obj });
 }

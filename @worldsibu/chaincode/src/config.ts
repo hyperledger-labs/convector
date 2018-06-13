@@ -1,4 +1,10 @@
 import { readFileSync } from 'fs';
+import {
+  ControllerImportError,
+  ControllerMissingError,
+  ConfigurationParseError,
+  ConfigurationFileOpenError
+} from '@worldsibu/chaincode-errors';
 
 export interface IConfig {
   name: string;
@@ -17,10 +23,18 @@ export class Config {
       controllers: []
     };
 
+    let fileContent: string;
+
     try {
-      config = JSON.parse(readFileSync(path, 'utf8'));
+      fileContent = readFileSync(path, 'utf8');
     } catch (e) {
-      throw new Error('Unable to read or parse the configuration file');
+      throw new ConfigurationFileOpenError(e, path);
+    }
+
+    try {
+      config = JSON.parse(fileContent);
+    } catch (e) {
+      throw new ConfigurationParseError(e, fileContent);
     }
 
     return new Config(config.controllers);
@@ -38,7 +52,18 @@ export class Config {
 
   public async getControllers(): Promise<Controller[]> {
     const controllers = this.config
-      .map(async config => (await import(config.name))[config.controller]);
+      .map(async config => {
+        const pkg = await import(config.name)
+          .catch(e => { throw new ControllerImportError(e, config.name); });
+
+        const ctrl = pkg[config.controller];
+
+        if (!ctrl) {
+          throw new ControllerMissingError(config.name, config.controller);
+        }
+
+        return ctrl;
+      });
 
     return Promise.all(controllers);
   }

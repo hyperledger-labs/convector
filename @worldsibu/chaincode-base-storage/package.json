@@ -3,8 +3,8 @@
   "version": "0.1.7",
   "description": "Chaincode Base Storage class. This is not intended to be used as a provider but as an abstract interface of one",
   "license": "ISC",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
   "files": [
     "dist/*"
   ],
@@ -23,9 +23,10 @@
     "tslib": "^1.9.0"
   },
   "devDependencies": {
+    "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",
     "tslint": "^5.9.1",
-    "typescript": "^2.8.3"
+    "typescript": "2.8.3"
   }
 }

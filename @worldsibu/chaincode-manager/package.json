@@ -2,8 +2,8 @@
   "name": "@worldsibu/chaincode-manager",
   "version": "1.2.19",
   "description": "Chaincode manager to install and run chaincodes",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
   "files": [
     "dist/*"
   ],
@@ -31,9 +31,10 @@
     "tslib": "^1.9.0"
   },
   "devDependencies": {
+    "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",
     "tslint": "^5.9.1",
-    "typescript": "^2.8.3"
+    "typescript": "2.8.3"
   }
 }

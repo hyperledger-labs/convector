@@ -11,9 +11,10 @@
     "clean": "npm-run-all -s lerna:clean",
     "================= Lerna =================": "==================================",
     "lerna:install": "lerna bootstrap",
+    "lerna:watch": "lerna run watch --parallel",
     "lerna:clean": "lerna clean --yes && lerna run clean --parallel",
     "lerna:test": "lerna run test",
-    "lerna:test:module": "f() { lerna run test --stream --scope @worldsibu/chaincode-$1 -- -- --inspect$2; }; f"
+    "lerna:test:module": "f() { lerna exec --scope @worldsibu/$1 -- npm run test -- --inspect$2; }; f"
   },
   "devDependencies": {
     "@theledger/fabric-mock-stub": "^1.2.1",

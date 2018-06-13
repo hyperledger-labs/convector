@@ -5,7 +5,8 @@ export class InvalidIdError extends Error {
     }
   }
 
-  public message = 'Invalid or missing id';
+  public name = 'InvalidIdError';
+  public message = 'Invalid or missing id. You either provided an invalid ID or did not sent one';
 }
 
 export class IdNotFoundError extends Error {
@@ -15,5 +16,6 @@ export class IdNotFoundError extends Error {
     }
   }
 
-  public message = 'Id not found';
+  public name = 'IdNotFoundError';
+  public message = 'ID not found. The ID you were using was not found in the storage';
 }
