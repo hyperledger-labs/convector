@@ -1,0 +1,12 @@
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+image: node:8.11.3
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run lerna:lint
+          - npm run lerna:test
