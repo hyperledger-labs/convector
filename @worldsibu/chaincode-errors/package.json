@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-errors",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Chaincode Errors",
   "license": "ISC",
   "main": "./dist/src/index.js",
