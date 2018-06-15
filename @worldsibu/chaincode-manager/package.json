@@ -9,7 +9,7 @@
   ],
   "license": "ISC",
   "bin": {
-    "chaincode-manager": "./dist/command.js"
+    "chaincode-manager": "./dist/src/command.js"
   },
   "scripts": {
     "clean": "rimraf dist",
