@@ -1,7 +1,7 @@
 {
-  "name": "@worldsibu/chaincode-model",
-  "version": "1.2.12",
-  "description": "Chaincode Model base class",
+  "name": "@worldsibu/chaincode-couchdb-storage",
+  "version": "0.0.1",
+  "description": "Chaincode CouchDB Storage class",
   "license": "ISC",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
@@ -14,21 +14,17 @@
     "build": "npm run clean && tsc",
     "prepare": "npm run build",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
-    "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
     "predocs:generate": "npm run clean:docs",
     "docs:generate": "typedoc src --out docs --target ES6 --excludePrivate",
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@theledger/fabric-chaincode-utils": "^2.0.9",
     "@worldsibu/chaincode-base-storage": "^0.1.7",
     "@worldsibu/chaincode-errors": "^0.1.6",
-    "@worldsibu/chaincode-utils": "^2.2.4",
-    "tslib": "^1.9.0",
-    "yup": "^0.24.1"
+    "node-couchdb": "^1.3.0",
+    "tslib": "^1.9.0"
   },
   "devDependencies": {
-    "mocha": "^5.0.3",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",

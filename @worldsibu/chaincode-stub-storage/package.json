@@ -14,6 +14,7 @@
     "build": "npm run clean && tsc",
     "prepare": "npm run build",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
     "predocs:generate": "npm run clean:docs",
     "docs:generate": "typedoc src --out docs --target ES6 --excludePrivate",
     "docs:serve": "http-server docs"
@@ -25,8 +26,11 @@
     "tslib": "^1.9.0"
   },
   "devDependencies": {
+    "@theledger/fabric-chaincode-utils": "^2.0.9",
+    "@theledger/fabric-mock-stub": "^1.2.1",
     "@theledger/fabric-shim-crypto-types": "^1.0.4",
     "@theledger/fabric-shim-types": "^1.0.6",
+    "mocha": "^5.0.3",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",

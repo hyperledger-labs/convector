@@ -1,9 +1,50 @@
-import { BaseStorage } from '@worldsibu/chaincode-base-storage';
-import { ensureRequired, getDefaults } from '@worldsibu/chaincode-utils';
+import * as yup from 'yup';
 import { InvalidIdError } from '@worldsibu/chaincode-errors';
+import { BaseStorage } from '@worldsibu/chaincode-base-storage';
+import {
+  Validate,
+  Required,
+  ensureRequired,
+  getDefaults,
+  getValidatedProperties
+} from '@worldsibu/chaincode-utils';
 
 export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
+  public static async getOne<T extends ChaincodeModel<any>>(
+    this: new (content: any) => T,
+    id: string,
+    type?: new (content: any) => T
+  ): Promise<T> {
+    type = type || this;
+    const content = await BaseStorage.current.get(id);
+    return new type(content);
+  }
+
+  public static async query<T>(type: new (content: any) => T, ...args: any[]): Promise<T|T[]>;
+  public static async query<T>(this: new (content: any) => T, ...args: any[]): Promise<T|T[]> {
+    let type = this;
+
+    // Stupid horrible hack to find the current implementation's parent type
+    if (args[0] && args[0].prototype.__proto__.constructor === ChaincodeModel) {
+      type = args.shift();
+    }
+
+    const content = await BaseStorage.current.query(...args);
+    return Array.isArray(content) ? content.map(c => new type(c)) : new type(content);
+  }
+
+  public static async getAll<T extends ChaincodeModel<any>>(
+    this: new (content: any) => T,
+    type?: string
+  ): Promise<T[]> {
+    type = type || new this('').type;
+    return await ChaincodeModel.query(this, { selector: { type } }) as T[];
+  }
+
+  @Required()
+  @Validate(yup.string())
   public id: string;
+
   public abstract readonly type: string;
 
   constructor();
@@ -54,7 +95,7 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
   public toJSON(skipEmpty = false): { [key in keyof T]?: T[key] } {
     const proto = Object.getPrototypeOf(this);
 
-    const base = Object.keys(this)
+    const base = Object.keys(this).concat('id')
       .filter(k => !k.startsWith('_'))
       .filter(k => !skipEmpty || this[k] !== undefined || this[k] !== null)
       .reduce((result, key) => ({...result, [key]: this[key]}), {});
@@ -81,7 +122,13 @@ export abstract class ChaincodeModel<T extends ChaincodeModel<any>> {
   }
 
   private assign(content: { [key in keyof T]?: T[key] }, defaults = false) {
+    const validated = ['id', 'type', ...getValidatedProperties(this)];
+    const filteredContent = Object.keys(content)
+      .map(key => key.replace(/^_/, ''))
+      .filter(key => validated.indexOf(key) >= 0)
+      .reduce((result, key) => ({ ...result, [key]: content[key] }), {});
+
     const afterDefaults = defaults ? this.toJSON(true) : {};
-    Object.assign(this, content, afterDefaults);
+    Object.assign(this, filteredContent, afterDefaults);
   }
 }

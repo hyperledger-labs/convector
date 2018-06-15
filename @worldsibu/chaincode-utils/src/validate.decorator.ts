@@ -2,6 +2,8 @@
 
 import { Schema } from 'yup';
 
+const validateMetadataKey = Symbol('validate');
+
 export function Validate<T>(schema: Schema<T>) {
   return (target: any, key: string) => {
     const getSet = {
@@ -19,5 +21,23 @@ export function Validate<T>(schema: Schema<T>) {
     };
 
     Object.defineProperty(target, key, getSet);
+
+    const validated = Reflect.getMetadata(validateMetadataKey, target);
+    Reflect.defineMetadata(validateMetadataKey, {
+      ...validated,
+      [key]: true
+    }, target);
   };
+}
+
+export function getValidatedProperties(obj: any) {
+  let validated = {};
+
+  try {
+    validated = Reflect.getMetadata(validateMetadataKey, obj) || {};
+  } catch (e) {
+    // empty
+  }
+
+  return Object.keys(validated);
 }
