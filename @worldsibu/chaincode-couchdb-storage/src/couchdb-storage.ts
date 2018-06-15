@@ -1,4 +1,4 @@
-import CouchDB from 'node-couchdb';
+import * as CouchDB from 'node-couchdb';
 import { InvalidIdError } from '@worldsibu/chaincode-errors';
 import { BaseStorage } from '@worldsibu/chaincode-base-storage';
 
