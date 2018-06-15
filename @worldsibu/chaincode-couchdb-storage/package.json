@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-couchdb-storage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chaincode CouchDB Storage class",
   "license": "ISC",
   "main": "./dist/src/index.js",

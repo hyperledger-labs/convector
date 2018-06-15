@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/chaincode-manager",
-  "version": "1.2.21",
+  "version": "1.2.22",
   "description": "Chaincode manager to install and run chaincodes",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
