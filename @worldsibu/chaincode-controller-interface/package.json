@@ -9,7 +9,7 @@
     "dist/*"
   ],
   "bin": {
-    "generate-controller-interface": "./dist/generate-interface.js"
+    "generate-controller-interface": "./dist/src/generate-interface.js"
   },
   "scripts": {
     "clean": "rimraf dist",
