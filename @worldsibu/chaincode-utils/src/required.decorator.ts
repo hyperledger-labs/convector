@@ -12,7 +12,13 @@ export function Required() {
 }
 
 export function ensureRequired(obj: any) {
-  const required = Reflect.getMetadata(requiredMetadataKey, obj);
+  let required = {};
+
+  try {
+    required = Reflect.getMetadata(requiredMetadataKey, obj) || {};
+  } catch (e) {
+    // empty
+  }
 
   return Object.keys(required)
     .every(k => !required[k] || obj[k] !== undefined);

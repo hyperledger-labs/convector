@@ -17,7 +17,6 @@ import { controllerMetadataKey } from './controller.decorator';
 const invokableMetadataKey = Symbol('invokable');
 
 export function Invokable() {
-  debugger;
   return (
     target: any,
     key: string,

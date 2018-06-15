@@ -13,7 +13,13 @@ import { Controller } from '../src/controller.decorator';
 import { Invokable, getInvokables } from '../src/invokable.decorator';
 
 describe('Invokable Decorator', () => {
-  class TestCC extends Chaincode { }
+  class TestCC extends Chaincode {
+    constructor(ctr: any) {
+      super();
+
+      Object.assign(this, getInvokables(ctr));
+    }
+  }
 
   class TestModel {
     @Validate(yup.string())
@@ -52,31 +58,36 @@ describe('Invokable Decorator', () => {
   }
 
   let test: Test;
+  let testCC: TestCC;
+  let stub: ChaincodeMockStub;
 
-  beforeEach(() => test = new Test());
+  beforeEach(() => {
+    testCC = new TestCC(Test);
+    stub = new ChaincodeMockStub('test-cc', testCC);
+    test = testCC['test'];
+  });
 
   it('should create a map of the invokable functions', () => {
     const invokables = getInvokables(Test);
     expect(invokables.test_plain).to.exist;
+    expect(invokables.test).to.exist;
   });
 
   it('should translate a chaincode call into a controller call', async () => {
-    const stub = new ChaincodeMockStub('test-cc', new TestCC());
-    const result = await (test.plain as any)(new StubHelper(stub), ['test']);
+
+    const result = await test.plain.call(testCC, new StubHelper(stub), ['test']);
     expect(result).to.eq('test');
   });
 
   it('should instantiate models from args', async () => {
-    const stub = new ChaincodeMockStub('test-cc', new TestCC());
-    const result = await (test.complex as any)(new StubHelper(stub), [JSON.stringify({ name: 'test' })]);
+    const result = await test.complex.call(testCC, new StubHelper(stub), [JSON.stringify({ name: 'test' })]);
 
     expect(result).to.be.instanceof(TestModel);
     expect(result.name).to.eq('test');
   });
 
   it('should succeed accepting an incomplete model as a param if it is for update the content', async () => {
-    const stub = new ChaincodeMockStub('test-cc', new TestCC());
-    const result = await (test.update as any)(new StubHelper(stub), [JSON.stringify({})]);
+    const result = await test.update.call(testCC, new StubHelper(stub), [JSON.stringify({})]);
 
     expect(result).to.be.instanceof(TestModel);
   });
