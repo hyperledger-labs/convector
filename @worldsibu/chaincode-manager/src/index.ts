@@ -9,7 +9,7 @@ const manager = new Manager();
 const chaincodePath = dirname(require.resolve('@worldsibu/chaincode'));
 
 function prepare(extraPackages: any = {}, token: string) {
-  const json = readFileSync(join(chaincodePath, '../package.json'), 'utf8');
+  const json = readFileSync(join(chaincodePath, '../../package.json'), 'utf8');
 
   const pkg = JSON.parse(json);
 
