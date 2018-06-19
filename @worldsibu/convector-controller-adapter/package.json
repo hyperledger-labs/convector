@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-controller-adapter",
-  "version": "0.0.1",
+  "version": "1.0.0-0",
   "description": "Chaincode Base Storage class. This is not intended to be used as a provider but as an abstract interface of one",
   "license": "ISC",
   "main": "./dist/src/index.js",
@@ -22,7 +22,7 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@worldsibu/convector-errors": "0.0.1",
+    "@worldsibu/convector-errors": "^1.0.0-0",
     "commander": "^2.15.1",
     "ts-simple-ast": "^11.2.1",
     "tslib": "^1.9.0"

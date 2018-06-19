@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-fabric-controller-adapter",
-  "version": "0.0.1",
+  "version": "1.0.0-0",
   "description": "Controller adapter to use with fabric-client SDK",
   "license": "ISC",
   "main": "./dist/src/index.js",
@@ -22,13 +22,13 @@
     "@worldsibu/convector-controller-adapter": ">=0.0.1"
   },
   "dependencies": {
-    "@worldsibu/convector-errors": "0.0.1",
+    "@worldsibu/convector-errors": "^1.0.0-0",
     "fabric-ca-client": "^1.1.2",
     "fabric-client": "^1.1.2",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
-    "@worldsibu/convector-controller-adapter": "0.0.1",
+    "@worldsibu/convector-controller-adapter": "^1.0.0-0",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",
