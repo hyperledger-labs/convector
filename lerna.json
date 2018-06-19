@@ -3,13 +3,10 @@
   "packages": [
     "@worldsibu/*"
   ],
-  "version": "independent",
+  "version": "0.0.1",
   "command": {
     "bootstrap": {
-      "hoist": true,
-      "nohoist": [
-        "@worldsibu/*"
-      ]
+      "hoist": true
     }
   }
 }
