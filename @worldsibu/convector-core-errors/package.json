@@ -1,0 +1,38 @@
+{
+  "name": "@worldsibu/convector-core-errors",
+  "version": "1.0.0-0",
+  "description": "Convector Errors",
+  "license": "ISC",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "clean:docs": "rimraf docs",
+    "build": "npm run clean && tsc",
+    "watch": "npm-scripts-watcher",
+    "prepare": "npm run build",
+    "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
+    "predocs:generate": "npm run clean:docs",
+    "docs:generate": "typedoc src --out docs --target ES6 --excludePrivate",
+    "docs:serve": "http-server docs"
+  },
+  "watch": {
+    "src/**/*.ts": [
+      "build"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "npm-scripts-watcher": "^1.0.2",
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.9.1",
+    "typescript": "2.8.3"
+  }
+}
