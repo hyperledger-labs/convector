@@ -1,5 +1,4 @@
 {
-  "keyStore": "~/.hfc-key-store",
   "worldsibuNpmToken": "6ffdb1f9-3392-4015-b12b-f8a743b32858",
   "channel": "mychannel",
   "peers": [
@@ -15,6 +14,7 @@
   "admin": {
     "name": "admin",
     "mspName": "Org1MSP",
+    "keyStore": "~/.hfc-key-store",
     "msp": "../../../basic-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com"
   },
   "controllers": [

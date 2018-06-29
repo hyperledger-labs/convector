@@ -1,4 +1,4 @@
-# Convector Chaincode Manager
+# Convector Tool Chaincode Manager
 
 This module contains the chaincode manager with tools to install and run chaincodes in a blockchain. This creates a binary called `chaincode-manager` in the `node_modules/.bin` folder.
 
@@ -16,11 +16,11 @@ The command relies on a configuration file provided at invocation. The file stru
 
 All paths are resolved relative to the config file.
 
-Here's an example on [how the file looks](https://bitbucket.org/worldsibu/convector/src/dbcba39fbce00bb6787186e06900f41fa5cef4c7/%40worldsibu/chaincode-manager/chaincode.config.json?at=develop)
+Here's an example on [how the file looks](https://bitbucket.org/worldsibu/tellus/src/develop/env/chaincode.config.json)
 
 ## Manager Commands
 
-- `install <name> <version>` - install a new for the first time, this can be only executed the first time this chaincode is going to be install using this name
-- `upgrade <name> <version>` - upgrade an existing chaincode
-- `invoke <name> <controller> <function> [args...]` - invoke a function under a controller in a previously installed chaincode
+- `chaincode-manager install <name> <version>` - install a new for the first time, this can be only executed the first time this chaincode is going to be install using this name
+- `chaincode-manager upgrade <name> <version>` - upgrade an existing chaincode
+- `chaincode-manager invoke <name> <controller> <function> [args...]` - invoke a function under a controller in a previously installed chaincode
 - All the commands demand a `-c ./chaincode.config.json` flag
