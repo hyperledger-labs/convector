@@ -1,11 +1,14 @@
 import { dirname, join } from 'path';
 import * as Client from 'fabric-client';
-import { readFileSync, readdirSync } from 'fs';
-import { IConfig as ControllersConfig } from '@worldsibu/convector-core-chaincode';
+import { readFileSync, readdirSync, writeFileSync } from 'fs';
+import { IConfig as ControllersConfig, Config } from '@worldsibu/convector-core-chaincode';
 
 // 5 minutes - this might be too much
 const TIMEOUT = 300000;
 const client = new Client();
+const chaincodePath = dirname(require.resolve('@worldsibu/convector-core-chaincode'));
+
+export { ControllersConfig };
 
 export interface Peer {
   url: string;
@@ -16,6 +19,7 @@ export interface Admin {
   name: string;
   msp: string;
   mspName: string;
+  keyStore?: string;
 }
 
 export interface ManagerConfig {
@@ -24,19 +28,24 @@ export interface ManagerConfig {
   peers: Peer[];
   orderer: Peer;
   channel: string;
-  keyStore: string;
+  keyStore?: string;
   worldsibuNpmToken: string;
   controllers: ControllersConfig[];
 }
 
 export class Manager {
+  public static fromConfig(path: string): Manager {
+    const config = Manager.readConfig(path);
+    return new Manager(config);
+  }
+
   public static readConfig(path: string): ManagerConfig {
     let config: ManagerConfig;
 
     try {
       config = JSON.parse(readFileSync(path, 'utf8'));
     } catch (e) {
-      throw new Error('{INVALID} Failed to read tellus config file');
+      throw new Error('{INVALID} Failed to read chaincode config file');
     }
 
     config.admin.msp = join(dirname(path), config.admin.msp);
@@ -63,8 +72,6 @@ export class Manager {
   public static getCCName(packageName: string): string {
     return packageName.replace(/@worldsibu\//, '');
   }
-
-  public config: ManagerConfig;
 
   private _orderer: Client.Orderer;
   private get orderer() {
@@ -99,21 +106,25 @@ export class Manager {
     return this._peers;
   }
 
-  public async init(config: ManagerConfig): Promise<void> {
-    this.config = config;
+  private chaincodeConfig: Config;
 
-    const cryptoSuite = Client.newCryptoSuite();
-    cryptoSuite.setCryptoKeyStore(Client.newCryptoKeyStore({ path: this.config.keyStore }));
-    client.setCryptoSuite(cryptoSuite);
+  constructor(public config: ManagerConfig) { }
 
-    const store = await Client.newDefaultKeyValueStore({ path: this.config.keyStore });
-    client.setStateStore(store);
-
+  public async init(): Promise<void> {
     const adminMsp = join(this.config.admin.msp, 'msp');
     const keyStore = join(adminMsp, 'keystore');
     const adminCerts = join(adminMsp, 'admincerts');
     const privateKeyFile = readdirSync(keyStore)[0];
     const certFile = readdirSync(adminCerts)[0];
+
+    const commonKeyStore = this.config.keyStore || this.config.admin.keyStore || keyStore;
+
+    const cryptoSuite = Client.newCryptoSuite();
+    cryptoSuite.setCryptoKeyStore(Client.newCryptoKeyStore({ path: commonKeyStore }));
+    client.setCryptoSuite(cryptoSuite);
+
+    const store = await Client.newDefaultKeyValueStore({ path: commonKeyStore });
+    client.setStateStore(store);
 
     const adminUser = await client.createUser({
       skipPersistence: true,
@@ -125,21 +136,23 @@ export class Manager {
       }
     });
 
+    this.chaincodeConfig = new Config(this.config.controllers);
+    this.prepareChaincode(this.chaincodeConfig.getPackages());
+
     await client.setUserContext(adminUser);
   }
 
   public async install(
     name: string,
-    version: string,
-    path: string
+    version: string
   ): Promise<void> {
     const peers = this.peers;
 
     await client.installChaincode({
       txId: client.newTransactionID(true),
+      chaincodePath,
       targets: peers,
       chaincodeId: name,
-      chaincodePath: path,
       chaincodeType: 'node',
       chaincodeVersion: version
     })
@@ -225,5 +238,33 @@ export class Manager {
     });
 
     console.log('Invocated successfully');
+  }
+
+  public async initControllers(
+    name: string,
+    user = 'admin'
+  ) {
+    await this.invoke(name, 'initControllers', undefined, JSON.stringify(this.chaincodeConfig.dump()));
+  }
+
+  private prepareChaincode(extraPackages: any = {}) {
+    const json = readFileSync(join(chaincodePath, '../../package.json'), 'utf8');
+
+    const pkg = JSON.parse(json);
+
+    delete pkg.watch;
+    delete pkg.devDependencies;
+
+    pkg.scripts = { start: pkg.scripts.start };
+    pkg.dependencies = {
+      ...pkg.dependencies,
+      ...extraPackages
+    };
+
+    writeFileSync(join(chaincodePath, 'package.json'), JSON.stringify(pkg), 'utf8');
+    writeFileSync(join(chaincodePath, '.npmrc'), `//registry.npmjs.org/:_authToken=${this.config.worldsibuNpmToken}`, {
+      encoding: 'utf8',
+      flag: 'w'
+    });
   }
 }

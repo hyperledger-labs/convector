@@ -1,8 +1,8 @@
-import { dirname, join } from 'path';
+import { join } from 'path';
 import * as Client from 'fabric-client';
-import { readFileSync, readdirSync } from 'fs';
+import { readdirSync } from 'fs';
 
-import { Admin, ClientConfig, Peer } from './models';
+import { ClientConfig } from './models';
 
 export class ClientHelper {
   public client = new Client();
