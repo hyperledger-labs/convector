@@ -102,7 +102,11 @@ export class Manager {
       return this._peers;
     }
 
-    this._peers = this.config.peers.map(peer => client.newPeer(peer.url));
+    this._peers = this.config.peers.map(peer => {
+      const pem = readdirSync(join(peer.msp, 'tlscacerts'))[0];
+      return client.newPeer(peer.url, { pem });
+    });
+
     return this._peers;
   }
 
