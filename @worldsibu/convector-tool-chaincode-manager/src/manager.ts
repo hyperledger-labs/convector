@@ -184,8 +184,6 @@ export class Manager {
       return { ...packages, [name]: `file:./packages/${name}` };
     }, Promise.resolve({} as KV));
 
-    console.log(extraPackages);
-
     pkg.scripts = { start: pkg.scripts.start };
     pkg.dependencies = {
       ...pkg.dependencies,
