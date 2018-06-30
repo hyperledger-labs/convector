@@ -1,3 +1,4 @@
+/** @module @worldsibu/convector-common-fabric-helper */
 import { join } from 'path';
 import * as Client from 'fabric-client';
 import { readdirSync } from 'fs';

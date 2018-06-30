@@ -14,9 +14,11 @@ program
   .option('-p, --project <path>', 'tsconfig project file', 'tsconfig.json')
   .parse(process.argv);
 
+/** @hidden */
 const tsconfig = join(process.cwd(), program.project);
+/** @hidden */
 const root = dirname(tsconfig);
-
+/** @hidden */
 const project = new Project({
   tsConfigFilePath: tsconfig,
   manipulationSettings: {
@@ -27,9 +29,11 @@ const project = new Project({
 
 project.addExistingSourceFiles(join(root, 'src/**/*.ts'));
 
+/** @hidden */
 const controllerFile = project.getSourceFiles()
   .find(source => !!source.getClass(program.controller));
 
+/** @hidden */
 const client = controllerFile.copy(join(root, program.output, controllerFile.getBaseName()), { overwrite: true });
 
 // client.getImportDeclaration(imp =>
@@ -41,6 +45,7 @@ client.addImportDeclaration({
   namedImports: [{ name: 'ControllerAdapter' }]
 });
 
+/** @hidden */
 const controller = client.getClass(program.controller);
 
 // Rename the controller as ControllerClient
@@ -96,6 +101,7 @@ controller.getMethods().forEach((method, i) => {
 
 client.saveSync();
 
+/** @hidden */
 const indexFile = project.getSourceFile('index.ts')
   .copy(join(root, program.output, 'index.ts'), { overwrite: true });
 

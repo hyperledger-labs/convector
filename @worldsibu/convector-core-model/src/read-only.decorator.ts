@@ -1,3 +1,4 @@
+/** @module convector-core-model */
 // tslint:disable:no-invalid-this
 
 export function ReadOnly() {

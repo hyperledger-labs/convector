@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-storage-stub */
+
 import { Stub } from 'fabric-shim';
 import { InvalidIdError } from '@worldsibu/convector-core-errors';
 import { StubHelper } from '@theledger/fabric-chaincode-utils';

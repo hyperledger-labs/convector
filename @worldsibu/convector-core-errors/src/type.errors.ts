@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-core-errors */
+
 export class InvalidTypeError extends Error {
   public static test(type: string) {
     if (!type) {

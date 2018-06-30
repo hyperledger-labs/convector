@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-tool-chaincode-manager */
+
 import { dirname, join, resolve } from 'path';
 import { copy, rmdir, mkdirp } from 'fs-extra';
 import { readFileSync, writeFileSync } from 'fs';

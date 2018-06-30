@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-core-storage */
+
 export abstract class BaseStorage {
   /**
    * Current storage implementation

@@ -1,3 +1,5 @@
+/** @module convector-core-model */
+
 const requiredMetadataKey = Symbol('required');
 import 'reflect-metadata';
 

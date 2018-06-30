@@ -22,7 +22,7 @@
     "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
     "prepare": "npm run build",
     "predocs:generate": "npm run clean:docs",
-    "docs:generate": "typedoc src --out docs --target ES6 --excludePrivate",
+    "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
     "docs:serve": "http-server docs"
   },
   "dependencies": {
@@ -34,11 +34,13 @@
     "tslib": "^1.9.0"
   },
   "devDependencies": {
+    "http-server": "^0.11.1",
     "mocha": "^5.0.3",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",
     "tslint": "^5.9.1",
+    "typedoc": "^0.11.1",
     "typescript": "2.8.3"
   }
 }

@@ -1,3 +1,5 @@
+/** @module convector-core-model */
+
 const defaultMetadataKey = Symbol('default');
 import 'reflect-metadata';
 

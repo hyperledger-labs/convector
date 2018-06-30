@@ -1,0 +1,17 @@
+{
+  "name": "Convector Framework",
+  "mode": "modules",
+  "out": "docs/",
+  "theme": "default",
+  "target": "ES5",
+  "ignoreCompilerErrors": true,
+  "includeDeclarations": false,
+  "stripInternal": true,
+  "excludePrivate": true,
+  "exclude": [
+    "**/tests/**/*",
+    "**/node_modules/**/*",
+    "examples/**/*"
+  ],
+  "includes": "./tutorials"
+}
