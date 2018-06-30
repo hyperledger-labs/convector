@@ -19,7 +19,8 @@
     "docs:serve": "http-server docs"
   },
   "peerDependencies": {
-    "@worldsibu/convector-core-adapter": ">=1.0.0"
+    "@worldsibu/convector-core-adapter": ">=1.0.0",
+    "@worldsibu/convector-common-fabric-helper": ">=1.0.0"
   },
   "dependencies": {
     "@worldsibu/convector-core-errors": "1.0.0-0",
@@ -28,6 +29,7 @@
     "tslib": "^1.9.0"
   },
   "devDependencies": {
+    "@worldsibu/convector-common-fabric-helper": "1.0.0-0",
     "@worldsibu/convector-core-adapter": "1.0.0-0",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",

@@ -7,6 +7,7 @@ program
   .command('install <name> <version>')
   .option('-c, --config <config>', 'Configuration path', path => join(process.cwd(), path))
   .action(async (name: string, version: string, cmd: any) => {
+    console.log(cmd.config);
     const manager = Manager.fromConfig(cmd.config);
 
     await manager.init();

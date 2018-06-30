@@ -1,12 +1,14 @@
 export interface Peer {
   url: string;
   msp: string;
+  events?: string;
 }
 
 export interface Admin {
   name: string;
   msp: string;
   mspName: string;
+  keyStore?: string;
 }
 
 export interface ClientConfig {
@@ -14,5 +16,11 @@ export interface ClientConfig {
   peers: Peer[];
   orderer: Peer;
   channel: string;
-  keyStore: string;
+  keyStore?: string;
+  txTimeout: number;
+}
+
+export interface TxResult {
+  txId: string;
+  code: string;
 }
