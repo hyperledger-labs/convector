@@ -17,7 +17,7 @@
     "lerna:lint": "lerna run lint",
     "lerna:test:module": "f() { lerna exec --scope @worldsibu/$1 -- npm run test -- --inspect$2; }; f",
     "================= PUBLISH =================": "==================================",
-    "publish:ci": "lerna publish --cd-version=prerelease --preid=next --canary --skip-git"
+    "publish:ci": "lerna publish --cd-version=prerelease --preid=next --canary --amend"
   },
   "devDependencies": {
     "@theledger/fabric-mock-stub": "^1.2.1",
