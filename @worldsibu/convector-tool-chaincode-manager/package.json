@@ -1,5 +1,5 @@
 {
-  "name": "@worldsibu/convector-utils-chaincode-manager",
+  "name": "@worldsibu/convector-tool-chaincode-manager",
   "version": "1.0.0-0",
   "description": "Chaincode manager to install and run chaincodes",
   "main": "./dist/src/index.js",
