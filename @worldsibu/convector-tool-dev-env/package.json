@@ -7,6 +7,9 @@
     "network-objects/*",
     "docker-compose.yml"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "dev-env-start": "./scripts/start.sh",
     "dev-env-stop": "./scripts/stop.sh",

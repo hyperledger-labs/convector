@@ -8,6 +8,9 @@
   "files": [
     "dist/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "generate-controller-interface": "./dist/src/generate-interface.js"
   },
