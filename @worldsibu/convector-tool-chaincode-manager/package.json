@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-tool-chaincode-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chaincode manager to install and run chaincodes",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
