@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-adapter-fabric */
+
 import { ControllerAdapter } from '@worldsibu/convector-core-adapter';
 import { ClientHelper, Peer, ClientConfig } from '@worldsibu/convector-common-fabric-helper';
 

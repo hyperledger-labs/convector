@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-core-errors */
+
 import { BaseError } from './base.error';
 
 const chaincodeSideMessage = 'This is a chaincode error, meaning this happened in the peer container';

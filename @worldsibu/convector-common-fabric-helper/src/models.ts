@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-common-fabric-helper */
+
 export interface Peer {
   url: string;
   msp: string;

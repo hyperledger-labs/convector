@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-core-errors */
+
 import { BaseError } from './base.error';
 import { chaincodeSideMessage } from './common';
 

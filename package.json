@@ -9,15 +9,29 @@
     "================= Life cycle =================": "==================================",
     "install": "npm-run-all -s lerna:install",
     "clean": "npm-run-all -s lerna:clean",
+    "clean:docs": "rimraf docs",
+    "watch": "npm-scripts-watcher",
     "================= Lerna =================": "==================================",
     "lerna:install": "lerna bootstrap",
     "lerna:watch": "lerna run watch --parallel",
     "lerna:clean": "lerna clean --yes && lerna run clean --parallel",
     "lerna:test": "lerna run test",
+    "lerna:docs": "lerna run docs:generate",
     "lerna:lint": "lerna run lint",
     "lerna:test:module": "f() { lerna exec --scope @worldsibu/$1 -- npm run test -- --inspect$2; }; f",
     "================= PUBLISH =================": "==================================",
-    "publish:ci": "lerna publish --cd-version=prerelease --force-publish=* --canary --skip-git --yes"
+    "publish:ci": "lerna publish --cd-version=prerelease --force-publish=* --canary --skip-git --yes",
+    "================= DOCS =================": "==================================",
+    "docs:watch": "npm-run-all -p docs:serve watch",
+    "docs:start": "npm-run-all -s docs:generate docs:serve",
+    "predocs:generate": "npm-run-all -s clean:docs",
+    "docs:generate": "typedoc --options typedoc.json .",
+    "docs:serve": "http-server"
+  },
+  "watch": {
+    "{@worldsibu,tutorials}/**/*.{ts,md}": [
+      "docs:generate"
+    ]
   },
   "devDependencies": {
     "@theledger/fabric-mock-stub": "^1.2.1",
@@ -33,8 +47,12 @@
     "fabric-ca-client": "^1.1.2",
     "fabric-client": "^1.1.2",
     "grpc": "^1.11.3",
+    "http-server": "^0.11.1",
     "lerna": "^2.11.0",
     "npm-run-all": "^4.1.3",
+    "npm-scripts-watcher": "^1.0.2",
+    "typedoc": "^0.11.1",
+    "typedoc-plugin-external-module-name": "^1.1.1",
     "uuid": "^3.2.1"
   }
 }

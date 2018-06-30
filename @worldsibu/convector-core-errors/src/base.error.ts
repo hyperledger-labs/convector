@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-core-errors */
+
 import chalk from 'chalk';
 
 // Explicitly enable chalk by setting the env_var CHALK=true

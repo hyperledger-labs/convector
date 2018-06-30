@@ -1,3 +1,5 @@
+/** @module convector-core-model */
+
 import * as yup from 'yup';
 import { InvalidIdError } from '@worldsibu/convector-core-errors';
 import { BaseStorage } from '@worldsibu/convector-core-storage';
@@ -7,7 +9,19 @@ import { getDefaults } from '../src/default.decorator';
 import { getValidatedProperties } from '../src/validate.decorator';
 import { Required, ensureRequired } from '../src/required.decorator';
 
+/**
+ * This class is intended to be inherited by all the models of the application.
+ *
+ * It provides the underlying communication with the [[BaseStorage]].
+ */
 export abstract class ConvectorModel<T extends ConvectorModel<any>> {
+  /**
+   * Fetch one model by its id and instantiate the result
+   *
+   * @param this The extender type
+   * @param id The ID used to fetch the model
+   * @param type The type to use for instantiation, if not provided, the extender type is used
+   */
   public static async getOne<T extends ConvectorModel<any>>(
     this: new (content: any) => T,
     id: string,
@@ -18,6 +32,13 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     return new type(content);
   }
 
+  /**
+   * Runs a query on the storage layer
+   *
+   * @param this The extender type
+   * @param type The type to use for instantiation, if not provided, the extender type is used
+   * @param args The query params, this is passed directly to the current storage being used
+   */
   public static async query<T>(type: new (content: any) => T, ...args: any[]): Promise<T|T[]>;
   public static async query<T>(this: new (content: any) => T, ...args: any[]): Promise<T|T[]> {
     let type = this;
@@ -31,6 +52,12 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     return Array.isArray(content) ? content.map(c => new type(c)) : new type(content);
   }
 
+  /**
+   * Return all the models with the given [[ConvectorModel.type]]
+   *
+   * @param this The extender type
+   * @param type The type field to lookup and group the results
+   */
   public static async getAll<T extends ConvectorModel<any>>(
     this: new (content: any) => T,
     type?: string
@@ -39,12 +66,32 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     return await ConvectorModel.query(this, { selector: { type } }) as T[];
   }
 
+  /**
+   * This field is [[Required]] and [[Validate]]d using a string schema
+   *
+   * Represents the key used to store the model in the blockchain
+   */
   @Required()
   @Validate(yup.string())
   public id: string;
 
+  /**
+   * This field must be provided by the extender class.
+   *
+   * It should be [[Required]] and [[ReadOnly]]
+   *
+   * We normally use a domain name patter for type names, i.e.: `io.worldsibu.example.user`
+   */
   public abstract readonly type: string;
 
+  /**
+   * The constructor can be called in multiple ways.
+   *
+   * - As an empty box where you instantiate one and start adding data
+   * - As a data fetcher, providing the ID and using [[ConvectorModel.fetch]]
+   * - As a formatter, you just pass an object of any shape into the constructor
+   *    and it will trim the remaining content and leave what's important
+   */
   constructor();
   constructor(id: string);
   constructor(content: { [key in keyof T]?: T[key] });
@@ -61,11 +108,20 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     this.assign(content);
   }
 
+  /**
+   * Given one model loaded into the instance,
+   * update its content with the object passed in the param.
+   *
+   * Store the result after the update occurs.
+   */
   public async update(content: { [key in keyof T]?: T[key] }) {
     this.assign(content);
     await this.save();
   }
 
+  /**
+   * Invokes the [[BaseStorage.get]] method to retrieve the model from storage.
+   */
   public async fetch() {
     const content = await BaseStorage.current.get(this.id) as ConvectorModel<T>;
 
@@ -76,6 +132,9 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     this.assign(content as T);
   }
 
+  /**
+   * Invokes the [[BaseStorage.set]] method to write into chaincode.
+   */
   public async save() {
     this.assign(getDefaults(this), true);
     if (!ensureRequired(this)) {
@@ -86,10 +145,18 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     await BaseStorage.current.set(this.id, this);
   }
 
+  /**
+   * Make a copy of this model
+   */
   public clone(): T {
     return Object.assign({}, this) as any;
   }
 
+  /**
+   * Serealize this model so it can be transferred in the network
+   *
+   * @param skipEmpty Skip the empty properties
+   */
   public toJSON(skipEmpty = false): { [key in keyof T]?: T[key] } {
     const proto = Object.getPrototypeOf(this);
 
@@ -115,10 +182,23 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
       }, base);
   }
 
+  /**
+   * Delete a model and persist the changes into the blockchain.
+   *
+   * Notice that there's no such a concept as **delete** in the blockchain,
+   * so what this does is to remove all the reachable references to the model.
+   */
   public async delete() {
     await BaseStorage.current.delete(this.id);
   }
 
+  /**
+   * Extend the current model definition with some more data
+   *
+   * @hidden
+   *
+   * @param defaults Should the [[Default]]s be applied
+   */
   private assign(content: { [key in keyof T]?: T[key] }, defaults = false) {
     const validated = ['id', 'type', ...getValidatedProperties(this)];
     const filteredContent = Object.keys(content)

@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-adapter-mock */
+
 import * as uuid from 'uuid/v1';
 import { Chaincode, IConfig } from '@worldsibu/convector-core-chaincode';
 import { ChaincodeMockStub, Transform } from '@theledger/fabric-mock-stub';

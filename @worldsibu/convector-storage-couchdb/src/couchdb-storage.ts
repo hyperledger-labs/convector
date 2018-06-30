@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-storage-couchdb */
+
 import * as CouchDB from 'node-couchdb';
 import { InvalidIdError } from '@worldsibu/convector-core-errors';
 import { BaseStorage } from '@worldsibu/convector-core-storage';

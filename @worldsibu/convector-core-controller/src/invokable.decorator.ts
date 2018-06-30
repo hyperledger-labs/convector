@@ -1,3 +1,5 @@
+/** @module convector-core-controller */
+
 import { Schema } from 'yup';
 import { ClientIdentity } from 'fabric-shim';
 import { StubHelper, ChaincodeError } from '@theledger/fabric-chaincode-utils';
@@ -15,8 +17,20 @@ import 'reflect-metadata';
 import { paramMetadataKey } from './param.decorator';
 import { controllerMetadataKey } from './controller.decorator';
 
+/** @hidden */
 const invokableMetadataKey = Symbol('invokable');
 
+/**
+ * Used to expose a function inside a controller
+ * to be called from the outside world.
+ *
+ * The logic behind this decorators involves validating the amount of parameters
+ * expected against the ones received.
+ *
+ * It also injects the [[ConvectorController.sender]] information.
+ *
+ * @decorator
+ */
 export function Invokable() {
   return (
     target: any,
@@ -89,6 +103,16 @@ export function Invokable() {
   };
 }
 
+/**
+ * Return all the invokable methods of a controller
+ *
+ * The controller gets registered in the chaincode using its namespace,
+ * just for further references.
+ *
+ * @hidden
+ *
+ * @param controller
+ */
 export function getInvokables(controller: { new(...args: any[]): any }): any {
   let obj: any;
   let namespace: string;

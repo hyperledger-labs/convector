@@ -1,3 +1,5 @@
+/** @module @worldsibu/convector-core-errors */
+
 export class InvalidIdError extends Error {
   public static test(id: string) {
     if (!id) {

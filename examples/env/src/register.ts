@@ -1,3 +1,5 @@
+/** @ignore */
+
 import { join } from 'path';
 import { homedir } from 'os';
 import * as program from 'commander';
