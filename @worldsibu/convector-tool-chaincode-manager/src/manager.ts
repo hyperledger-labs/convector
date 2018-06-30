@@ -1,7 +1,7 @@
-import { dirname, join } from 'path';
-import * as Client from 'fabric-client';
-import { readFileSync, readdirSync, writeFileSync } from 'fs';
-import { IConfig as ControllersConfig, Config } from '@worldsibu/convector-core-chaincode';
+import { dirname, join, resolve } from 'path';
+import { copy, rmdir, mkdirp } from 'fs-extra';
+import { readFileSync, writeFileSync } from 'fs';
+import { IConfig as ControllersConfig, Config, KV } from '@worldsibu/convector-core-chaincode';
 import { Peer, Admin, ClientConfig, ClientHelper } from '@worldsibu/convector-common-fabric-helper';
 
 const chaincodePath = dirname(require.resolve('@worldsibu/convector-core-chaincode'));
@@ -66,7 +66,7 @@ export class Manager {
     await this.client.init();
 
     this.chaincodeConfig = new Config(this.config.controllers);
-    this.prepareChaincode(this.chaincodeConfig.getPackages());
+    await this.prepareChaincode(this.chaincodeConfig.getPackages());
   }
 
   public async install(
@@ -151,13 +151,40 @@ export class Manager {
     await this.invoke(name, 'initControllers', undefined, JSON.stringify(this.chaincodeConfig.dump()));
   }
 
-  private prepareChaincode(extraPackages: any = {}) {
+  private async prepareChaincode(extraPackages: KV = {}) {
     const json = readFileSync(join(chaincodePath, '../../package.json'), 'utf8');
 
     const pkg = JSON.parse(json);
 
     delete pkg.watch;
     delete pkg.devDependencies;
+
+    const packagesFolderPath = join(chaincodePath, 'packages');
+
+    try {
+      await rmdir(packagesFolderPath);
+    } catch (e) {
+      // empty
+    }
+
+    await mkdirp(packagesFolderPath);
+
+    extraPackages = await Object.keys(extraPackages).reduce(async (pkgs, name) => {
+      const packages = await pkgs;
+
+      if (!extraPackages[name].startsWith('file:')) {
+        return { ...packages, [name]: extraPackages[name] };
+      }
+
+      const packagePath = resolve(process.cwd(), extraPackages[name].replace(/^file:/, ''));
+
+      await mkdirp(join(packagesFolderPath, name));
+      await copy(packagePath, join(packagesFolderPath, name));
+
+      return { ...packages, [name]: `file:./packages/${name}` };
+    }, Promise.resolve({} as KV));
+
+    console.log(extraPackages);
 
     pkg.scripts = { start: pkg.scripts.start };
     pkg.dependencies = {

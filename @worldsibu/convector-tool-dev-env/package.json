@@ -1,0 +1,19 @@
+{
+  "name": "@worldsibu/convector-tool-dev-env",
+  "version": "1.0.0-3",
+  "description": "Development environment",
+  "files": [
+    "scripts/*",
+    "network-objects/*",
+    "docker-compose.yml"
+  ],
+  "bin": {
+    "dev-env-start": "./scripts/start.sh",
+    "dev-env-stop": "./scripts/stop.sh",
+    "dev-env-clean": "./scripts/clean.sh",
+    "dev-env-restart": "./scripts/restart.sh"
+  },
+  "dependencies": {
+    "ts-node": "^6.0.3"
+  }
+}
