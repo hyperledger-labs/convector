@@ -1,26 +1,27 @@
 {
-  "worldsibuNpmToken": "6ffdb1f9-3392-4015-b12b-f8a743b32858",
+  "txTimeout": 300000,
+  "worldsibuNpmToken": "fe52a29b-b390-40b0-8458-7581996d870a",
   "channel": "mychannel",
   "peers": [
     {
       "url": "grpc://localhost:7051",
-      "msp": "../../../basic-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com"
+      "events": "grpc://localhost:7053",
+      "msp": "../../../tellus/env/network-objects/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com"
     }
   ],
   "orderer": {
     "url": "grpc://localhost:7050",
-    "msp": "../../../basic-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com"
+    "msp": "../../../tellus/env/network-objects/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com"
   },
   "admin": {
     "name": "admin",
     "mspName": "Org1MSP",
-    "keyStore": "~/.hfc-key-store",
-    "msp": "../../../basic-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com"
+    "msp": "../../../tellus/env/network-objects/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com"
   },
   "controllers": [
     {
       "name": "@worldsibu/tellus-organization-ccc",
-      "version": "0.1.0",
+      "version": "1.1.7-0-alpha.d22a18bf",
       "controller": "OrganizationController"
     }
   ],
