@@ -8,6 +8,9 @@
   "files": [
     "dist/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "node ./start.js",
     "------------ STANDARD TASKS ------------": "",
