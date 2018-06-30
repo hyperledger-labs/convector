@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-adapter-fabric",
-  "version": "1.0.0-0",
+  "version": "1.0.0-3",
   "description": "Controller adapter to use with fabric-client SDK",
   "license": "ISC",
   "main": "./dist/src/index.js",
@@ -18,19 +18,15 @@
     "docs:generate": "typedoc src --out docs --target ES6 --excludePrivate",
     "docs:serve": "http-server docs"
   },
-  "peerDependencies": {
-    "@worldsibu/convector-core-adapter": ">=1.0.0",
-    "@worldsibu/convector-common-fabric-helper": ">=1.0.0"
-  },
   "dependencies": {
-    "@worldsibu/convector-core-errors": "1.0.0-0",
+    "@worldsibu/convector-common-fabric-helper": "^1.0.0-3",
+    "@worldsibu/convector-core-adapter": "^1.0.0-3",
+    "@worldsibu/convector-core-errors": "^1.0.0-3",
     "fabric-ca-client": "^1.1.2",
     "fabric-client": "^1.1.2",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
-    "@worldsibu/convector-common-fabric-helper": "1.0.0-0",
-    "@worldsibu/convector-core-adapter": "1.0.0-0",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",

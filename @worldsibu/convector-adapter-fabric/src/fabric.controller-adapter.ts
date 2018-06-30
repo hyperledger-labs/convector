@@ -1,6 +1,3 @@
-import { resolve } from 'path';
-import { rejects } from 'assert';
-import * as Client from 'fabric-client';
 import { ControllerAdapter } from '@worldsibu/convector-core-adapter';
 import { ClientHelper, Peer, ClientConfig } from '@worldsibu/convector-common-fabric-helper';
 
