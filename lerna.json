@@ -3,7 +3,7 @@
   "packages": [
     "@worldsibu/*"
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "command": {
     "bootstrap": {
       "hoist": true
