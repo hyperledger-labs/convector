@@ -31,12 +31,12 @@ export class Manager {
       throw new Error('{INVALID} Failed to read chaincode config file');
     }
 
-    config.admin.msp = join(dirname(path), config.admin.msp);
-    config.orderer.msp = join(dirname(path), config.orderer.msp);
+    config.admin.msp = resolve(dirname(path), config.admin.msp);
+    config.orderer.msp = resolve(dirname(path), config.orderer.msp);
 
     config.peers = config.peers.map(peer => ({
       ...peer,
-      msp: join(dirname(path), peer.msp)
+      msp: resolve(dirname(path), peer.msp)
     }));
 
     return config;
