@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-core-errors",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Convector Errors",
   "license": "ISC",
   "main": "./dist/src/index.js",
