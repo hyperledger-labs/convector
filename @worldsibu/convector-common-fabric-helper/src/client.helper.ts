@@ -6,9 +6,21 @@ import { readdirSync } from 'fs';
 import { ClientConfig, TxResult } from './models';
 
 export class ClientHelper {
+  private _id: string;
+  // Read only, initialized the first time
+  public get id() {
+    if (this._id) {
+      return this._id;
+    }
+
+    this._id = `${Date.now()}.${Math.round(Math.random() * 100000000)}`;
+
+    return this._id;
+  }
+  
   public client = new Client();
 
-  private admin: Client.User;
+  public admin: Client.User;
 
   private _orderer: Client.Orderer;
   public get orderer() {
@@ -50,13 +62,13 @@ export class ClientHelper {
   constructor(public config: ClientConfig) { }
 
   public async init(): Promise<void> {
-    const adminMsp = this.config.admin.msp;
+    const adminMsp = this.config.admin!.msp;
     const keyStore = join(adminMsp, 'msp/keystore');
     const adminCerts = join(adminMsp, 'msp/admincerts');
     const privateKeyFile = readdirSync(keyStore)[0];
     const certFile = readdirSync(adminCerts)[0];
 
-    const commonKeyStore = this.config.keyStore || this.config.admin.keyStore || keyStore;
+    const commonKeyStore = this.config.keyStore || this.config.admin!.keyStore || keyStore;
 
     const cryptoSuite = Client.newCryptoSuite();
     cryptoSuite.setCryptoKeyStore(Client.newCryptoKeyStore({ path: commonKeyStore }));
@@ -67,8 +79,8 @@ export class ClientHelper {
 
     this.admin = await this.client.createUser({
       skipPersistence: true,
-      username: `chaincode-admin`,
-      mspid: this.config.admin.mspName,
+      username: this.id,
+      mspid: this.config.admin!.mspName,
       cryptoContent: {
         privateKey: join(keyStore, privateKeyFile),
         signedCert: join(adminCerts, certFile)
