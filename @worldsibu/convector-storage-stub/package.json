@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-storage-stub",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Convector STUB Storage class",
   "license": "ISC",
   "main": "./dist/src/index.js",
@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@theledger/fabric-chaincode-utils": "^2.0.9",
-    "@worldsibu/convector-core-errors": "^1.0.5",
-    "@worldsibu/convector-core-storage": "^1.0.5",
+    "@worldsibu/convector-core-errors": "^1.0.6",
+    "@worldsibu/convector-core-storage": "^1.0.6",
     "tslib": "^1.9.0"
   },
   "devDependencies": {

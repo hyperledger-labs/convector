@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-adapter-mock",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Controller adapter to use as a mock in unit tests",
   "license": "ISC",
   "main": "./dist/src/index.js",
@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "@theledger/fabric-mock-stub": "^1.2.1",
-    "@worldsibu/convector-core-adapter": "^1.0.5",
-    "@worldsibu/convector-core-chaincode": "^1.0.5",
-    "@worldsibu/convector-core-errors": "^1.0.5",
+    "@worldsibu/convector-core-adapter": "^1.0.6",
+    "@worldsibu/convector-core-chaincode": "^1.0.6",
+    "@worldsibu/convector-core-errors": "^1.0.6",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
