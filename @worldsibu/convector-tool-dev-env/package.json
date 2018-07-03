@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-tool-dev-env",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Development environment",
   "files": [
     "scripts/*",
