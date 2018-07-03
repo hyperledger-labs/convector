@@ -6,7 +6,6 @@ import { ClientHelper, Peer, ClientConfig } from '@worldsibu/convector-common-fa
 export { Peer };
 
 export interface FabricConfig extends ClientConfig {
-  user: string;
   chaincode: string;
 }
 
@@ -16,9 +15,6 @@ export class FabricControllerAdapter extends ClientHelper implements ControllerA
   }
 
   public async invoke(controller: string, name: string, ...args: any[]) {
-    const userContext = await this.client.getUserContext(this.config.user, true);
-    await this.client.setUserContext(userContext, true);
-
     return super.invoke(`${controller}_${name}`, this.config.chaincode, ...args);
   }
 }
