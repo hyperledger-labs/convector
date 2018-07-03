@@ -14,7 +14,7 @@ export interface Admin {
 }
 
 export interface ClientConfig {
-  admin: Admin;
+  admin?: Admin;
   peers: Peer[];
   orderer: Peer;
   channel: string;

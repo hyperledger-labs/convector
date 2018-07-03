@@ -130,7 +130,7 @@ export class Manager {
   public async invoke(
     name: string,
     fcn: string,
-    user = 'chaincode-admin',
+    user = this.client.id,
     ...args: string[]
   ): Promise<void> {
     const userContext = await this.client.client.getUserContext(user, true);
@@ -144,6 +144,8 @@ export class Manager {
     await this.client.processProposal(proposal.proposalResponse, proposal.txId);
 
     console.log('Invocated successfully');
+
+    await this.client.client.setUserContext(this.client.admin, true);
   }
 
   public async initControllers(
