@@ -50,13 +50,13 @@ export class ClientHelper {
   constructor(public config: ClientConfig) { }
 
   public async init(): Promise<void> {
-    const adminMsp = this.config.admin.msp;
+    const adminMsp = this.config.admin!.msp;
     const keyStore = join(adminMsp, 'msp/keystore');
     const adminCerts = join(adminMsp, 'msp/admincerts');
     const privateKeyFile = readdirSync(keyStore)[0];
     const certFile = readdirSync(adminCerts)[0];
 
-    const commonKeyStore = this.config.keyStore || this.config.admin.keyStore || keyStore;
+    const commonKeyStore = this.config.keyStore || this.config.admin!.keyStore || keyStore;
 
     const cryptoSuite = Client.newCryptoSuite();
     cryptoSuite.setCryptoKeyStore(Client.newCryptoKeyStore({ path: commonKeyStore }));
@@ -68,7 +68,7 @@ export class ClientHelper {
     this.admin = await this.client.createUser({
       skipPersistence: true,
       username: `chaincode-admin`,
-      mspid: this.config.admin.mspName,
+      mspid: this.config.admin!.mspName,
       cryptoContent: {
         privateKey: join(keyStore, privateKeyFile),
         signedCert: join(adminCerts, certFile)
