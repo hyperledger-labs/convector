@@ -6,7 +6,13 @@ import 'reflect-metadata';
 
 const validateMetadataKey = Symbol('validate');
 
-export function Validate<T>(schema: Schema<T>) {
+export function Validate<T>(input: Schema<T>|{ schema: () => Schema<T>}) {
+  let schema = input as Schema<T>;
+
+  if ('schema' in input) {
+    schema = input.schema as any;
+  }
+
   return (target: any, key: string) => {
     const getSet = {
       get() {
@@ -27,12 +33,12 @@ export function Validate<T>(schema: Schema<T>) {
     const validated = Reflect.getMetadata(validateMetadataKey, target);
     Reflect.defineMetadata(validateMetadataKey, {
       ...validated,
-      [key]: true
+      [key]: schema
     }, target);
   };
 }
 
-export function getValidatedProperties(obj: any) {
+export function getPropertiesValidation(obj: any) {
   let validated = {};
 
   try {
@@ -41,5 +47,9 @@ export function getValidatedProperties(obj: any) {
     // empty
   }
 
-  return Object.keys(validated);
+  return validated;
+}
+
+export function getValidatedProperties(obj: any) {
+  return Object.keys(getPropertiesValidation(obj));
 }

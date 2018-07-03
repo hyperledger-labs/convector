@@ -41,7 +41,8 @@ export class CouchDBStorage extends BaseStorage {
 
   public async get(id: string): Promise<any> {
     InvalidIdError.test(id);
-    return await this.couch.get(this.defaultDB, { selector: { id } });
+    const result = await this.couch.get(this.defaultDB, id);
+    return result.data;
   }
 
   public async set(id: string, content: any) {

@@ -141,4 +141,16 @@ describe('Convector Model', () => {
     const results = await TestModel.getAll();
     expect(results.length).to.eq(3);
   });
+
+  it('should extract the model schema', () => {
+    const schema = TestModel.schema();
+    const flatModel = schema.validateSync({
+      id: 'test',
+      name: '1',
+      extra: true
+    } as any, { stripUnknown: true });
+
+    expect(flatModel).to.include({ id: 'test', name: '1' });
+    expect(flatModel).not.to.include({ extra: true });
+  });
 });
