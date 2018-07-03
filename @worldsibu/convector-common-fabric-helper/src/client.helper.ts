@@ -6,9 +6,21 @@ import { readdirSync } from 'fs';
 import { ClientConfig, TxResult } from './models';
 
 export class ClientHelper {
+  private _id: string;
+  // Read only, initialized the first time
+  public get id() {
+    if (this._id) {
+      return this._id;
+    }
+
+    this._id = `${Date.now()}.${Math.round(Math.random() * 100000000)}`;
+
+    return this._id;
+  }
+  
   public client = new Client();
 
-  private admin: Client.User;
+  public admin: Client.User;
 
   private _orderer: Client.Orderer;
   public get orderer() {
@@ -67,7 +79,7 @@ export class ClientHelper {
 
     this.admin = await this.client.createUser({
       skipPersistence: true,
-      username: `chaincode-admin`,
+      username: this.id,
       mspid: this.config.admin!.mspName,
       cryptoContent: {
         privateKey: join(keyStore, privateKeyFile),
