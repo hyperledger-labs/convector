@@ -6,8 +6,15 @@ import { BaseStorage } from '@worldsibu/convector-core-storage';
 
 import { Validate } from '../src/validate.decorator';
 import { getDefaults } from '../src/default.decorator';
-import { getValidatedProperties } from '../src/validate.decorator';
 import { Required, ensureRequired } from '../src/required.decorator';
+import {
+  getPropertiesValidation,
+  getValidatedProperties
+} from '../src/validate.decorator';
+
+export type FlatConvectorModel<T> = {
+  [L in Exclude<keyof T, keyof ConvectorModel<any>>]: T[L]
+};
 
 /**
  * This class is intended to be inherited by all the models of the application.
@@ -15,6 +22,18 @@ import { Required, ensureRequired } from '../src/required.decorator';
  * It provides the underlying communication with the [[BaseStorage]].
  */
 export abstract class ConvectorModel<T extends ConvectorModel<any>> {
+  public static schema<T extends ConvectorModel<any>>(
+    this: new (...args: any[]) => T
+  ): yup.ObjectSchema<FlatConvectorModel<T>&{id:string}> {
+    const instance = new this();
+
+    return yup.object<FlatConvectorModel<T>&{id:string}>().shape({
+      id: yup.string().required(),
+      key: yup.string(),
+      ...getPropertiesValidation(instance)
+    } as any);
+  }
+
   /**
    * Fetch one model by its id and instantiate the result
    *
