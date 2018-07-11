@@ -2,8 +2,14 @@
   "name": "@worldsibu/convector-tool-dev-env",
   "version": "1.0.6",
   "description": "Development environment",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "files": [
+    "bin/*",
+    "dist/*",
+    "config/*",
     "scripts/*",
+    "examples/*",
     "network-objects/*",
     "docker-compose.yml"
   ],
@@ -13,10 +19,28 @@
   "bin": {
     "dev-env-start": "./scripts/start.sh",
     "dev-env-stop": "./scripts/stop.sh",
+    "dev-env-init": "./scripts/init.sh",
     "dev-env-clean": "./scripts/clean.sh",
-    "dev-env-restart": "./scripts/restart.sh"
+    "dev-env-restart": "./scripts/restart.sh",
+    "user-registry": "./dist/command.js"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "prepare": "npm run build",
+    "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'"
   },
   "dependencies": {
-    "ts-node": "^6.0.3"
+    "@worldsibu/convector-common-fabric-helper": "^1.0.6",
+    "commander": "^2.16.0",
+    "shelljs": "^0.8.2",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.9.1",
+    "typedoc": "^0.11.1",
+    "typescript": "2.8.3"
   }
 }

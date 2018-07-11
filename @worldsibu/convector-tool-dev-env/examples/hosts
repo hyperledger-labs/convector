@@ -1,0 +1,11 @@
+127.0.0.1 orderer.example.com
+127.0.0.1 ca.org1.example.com
+127.0.0.1 ca.org2.example.com
+127.0.0.1 peer0.org1.example.com
+127.0.0.1 peer1.org1.example.com
+127.0.0.1 peer0.org2.example.com
+127.0.0.1 peer1.org2.example.com
+127.0.0.1 couchdb.peer0.org1.example.com
+127.0.0.1 couchdb.peer1.org1.example.com
+127.0.0.1 couchdb.peer0.org2.example.com
+127.0.0.1 couchdb.peer1.org2.example.com

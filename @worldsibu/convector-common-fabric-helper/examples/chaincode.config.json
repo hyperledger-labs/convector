@@ -1,0 +1,5 @@
+{
+  "txTimeout": 300000,
+  "user": "admin",
+  "networkProfile": "./examples/network-profile.yaml"
+}

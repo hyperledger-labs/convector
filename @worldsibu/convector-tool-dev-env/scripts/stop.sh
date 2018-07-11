@@ -1,4 +1,5 @@
-ROOT_DIR=$(dirname "${BASH_SOURCE[0]}")/..
+#!/bin/sh
+ROOT_DIR=$(dirname "$0")/..
 
 COMPOSE_PROJECT_NAME=net \
   docker-compose -f $ROOT_DIR/docker-compose.yml down

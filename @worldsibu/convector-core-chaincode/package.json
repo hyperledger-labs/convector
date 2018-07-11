@@ -14,9 +14,9 @@
   "scripts": {
     "start": "node ./start.js",
     "------------ STANDARD TASKS ------------": "",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist tests/dist",
     "clean:docs": "rimraf docs",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && tsc -p ./tests/tsconfig.json && cp ./tests/ccc/package.json ./tests/dist/ccc/",
     "copy:npmrc": "cp ../../npmrc dist/.npmrc",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",

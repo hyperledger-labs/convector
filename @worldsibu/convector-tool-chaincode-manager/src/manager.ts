@@ -2,21 +2,21 @@
 
 import { dirname, join, resolve } from 'path';
 import { copy, rmdir, mkdirp } from 'fs-extra';
-import { readFileSync, writeFileSync } from 'fs';
+import { copyFileSync, readFileSync, writeFileSync } from 'fs';
+import { ClientConfig, ClientHelper } from '@worldsibu/convector-common-fabric-helper';
 import { IConfig as ControllersConfig, Config, KV } from '@worldsibu/convector-core-chaincode';
-import { Peer, Admin, ClientConfig, ClientHelper } from '@worldsibu/convector-common-fabric-helper';
 
 const chaincodePath = dirname(require.resolve('@worldsibu/convector-core-chaincode'));
 
-export { ControllersConfig, Peer, Admin };
+export { ControllersConfig };
 
 export interface ManagerConfig extends ClientConfig {
   policy: any;
-  worldsibuNpmToken: string;
+  npmrc?: string;
   controllers: ControllersConfig[];
 }
 
-export class Manager {
+export class Manager extends ClientHelper {
   public static fromConfig(path: string): Manager {
     const config = Manager.readConfig(path);
     return new Manager(config);
@@ -30,14 +30,6 @@ export class Manager {
     } catch (e) {
       throw new Error('{INVALID} Failed to read chaincode config file');
     }
-
-    config.admin.msp = resolve(dirname(path), config.admin.msp);
-    config.orderer.msp = resolve(dirname(path), config.orderer.msp);
-
-    config.peers = config.peers.map(peer => ({
-      ...peer,
-      msp: resolve(dirname(path), peer.msp)
-    }));
 
     return config;
   }
@@ -56,39 +48,51 @@ export class Manager {
     return packageName.replace(/@worldsibu\//, '');
   }
 
-  public client: ClientHelper;
-
   private chaincodeConfig: Config;
 
   constructor(public config: ManagerConfig) {
-    this.client = new ClientHelper(config);
+    super(config);
   }
 
   public async init(): Promise<void> {
-    await this.client.init();
+    await super.init();
+    await this.useChannel(this.config.channel);
 
     this.chaincodeConfig = new Config(this.config.controllers);
-    await this.prepareChaincode(this.chaincodeConfig.getPackages());
+
+    try {
+      await this.prepareChaincode(this.chaincodeConfig.getPackages());
+    } catch (e) {
+      console.log('Error while preparing the chaincode files', e);
+      throw e;
+    }
   }
 
   public async install(
     name: string,
     version: string
   ): Promise<void> {
-    const peers = this.client.peers;
-
-    await this.client.client.installChaincode({
-      txId: this.client.client.newTransactionID(true),
+    await this.client.installChaincode({
+      txId: this.client.newTransactionID(true),
       chaincodePath,
-      targets: peers,
       chaincodeId: name,
       chaincodeType: 'node',
-      chaincodeVersion: version
+      chaincodeVersion: version,
+      targets: this.client.getPeersForOrg(undefined)
     })
-      .then(() => console.log('Installed successfully'))
       .catch((e) => {
-        console.log('Error during installation', e.err);
+        console.log('Error during installation', e);
         throw e;
+      })
+      .then(([ responses, proposal ]) => {
+        const e = responses.find(res => res instanceof Error);
+
+        if (e) {
+          console.log('Error during installation', e);
+          throw e;
+        }
+
+        console.log('Installed successfully');
       });
   }
 
@@ -97,15 +101,16 @@ export class Manager {
     version: string,
     ...args: string[]
   ): Promise<void> {
-    const proposal = await this.client.sendInstantiateProposal({
+    const { proposalResponse } = await this.sendInstantiateProposal({
       args,
       fcn: 'init',
       chaincodeId: name,
       chaincodeVersion: version,
-      'endorsement-policy': this.config.policy
+      'endorsement-policy': this.config.policy,
+      targets: this.client.getPeersForOrg(undefined)
     });
 
-    await this.client.processProposal(proposal.proposalResponse, proposal.txId);
+    await this.processProposal(proposalResponse);
 
     console.log('Instantiated successfully');
   }
@@ -115,44 +120,28 @@ export class Manager {
     version: string,
     ...args: string[]
   ): Promise<void> {
-    const proposal = await this.client.sendUpgradeProposal({
+    const { proposalResponse } = await this.sendUpgradeProposal({
       args,
       chaincodeId: name,
       chaincodeVersion: version,
-      'endorsement-policy': this.config.policy
+      'endorsement-policy': this.config.policy,
+      targets: this.client.getPeersForOrg(undefined)
     });
 
-    await this.client.processProposal(proposal.proposalResponse, proposal.txId);
+    await this.processProposal(proposalResponse);
 
     console.log('Upgraded successfully');
   }
 
-  public async invoke(
-    name: string,
-    fcn: string,
-    user = this.client.id,
-    ...args: string[]
-  ): Promise<void> {
-    const userContext = await this.client.client.getUserContext(user, true);
-    await this.client.client.setUserContext(userContext, true);
-
-    const proposal = await this.client.sendTransactionProposal({
-      fcn, args,
-      chaincodeId: name,
-    });
-
-    await this.client.processProposal(proposal.proposalResponse, proposal.txId);
-
-    console.log('Invocated successfully');
-
-    await this.client.client.setUserContext(this.client.admin, true);
-  }
-
   public async initControllers(
     name: string,
-    user = 'chaincode-admin'
+    adminOrUser?: string|true
   ) {
-    await this.invoke(name, 'initControllers', undefined, JSON.stringify(this.chaincodeConfig.dump()));
+    await this.sendTransactionProposal({
+      fcn: 'initControllers',
+      chaincodeId: name,
+      args: [JSON.stringify(this.chaincodeConfig.dump())]
+    }, adminOrUser === true);
   }
 
   private async prepareChaincode(extraPackages: KV = {}) {
@@ -167,11 +156,10 @@ export class Manager {
 
     try {
       await rmdir(packagesFolderPath);
+      await mkdirp(packagesFolderPath);
     } catch (e) {
       // empty
     }
-
-    await mkdirp(packagesFolderPath);
 
     extraPackages = await Object.keys(extraPackages).reduce(async (pkgs, name) => {
       const packages = await pkgs;
@@ -186,7 +174,7 @@ export class Manager {
       await copy(packagePath, join(packagesFolderPath, name));
 
       return { ...packages, [name]: `file:./packages/${name}` };
-    }, Promise.resolve({} as KV));
+    }, Promise.resolve({} as KV)).catch(e => {console.log('Failed to resolve local references', e); return {};});
 
     pkg.scripts = { start: pkg.scripts.start };
     pkg.dependencies = {
@@ -195,9 +183,9 @@ export class Manager {
     };
 
     writeFileSync(join(chaincodePath, 'package.json'), JSON.stringify(pkg), 'utf8');
-    writeFileSync(join(chaincodePath, '.npmrc'), `//registry.npmjs.org/:_authToken=${this.config.worldsibuNpmToken}`, {
-      encoding: 'utf8',
-      flag: 'w'
-    });
+
+    if (this.config.npmrc) {
+      copyFileSync(join(chaincodePath, '.npmrc'), resolve(process.cwd(), this.config.npmrc));
+    }
   }
 }

@@ -1,9 +1,9 @@
 /** @module @worldsibu/convector-adapter-fabric */
 
 import { ControllerAdapter } from '@worldsibu/convector-core-adapter';
-import { ClientHelper, Peer, ClientConfig } from '@worldsibu/convector-common-fabric-helper';
+import { ClientHelper, ClientConfig, TxResult } from '@worldsibu/convector-common-fabric-helper';
 
-export { Peer };
+export { TxResult };
 
 export interface FabricConfig extends ClientConfig {
   chaincode: string;
@@ -14,7 +14,7 @@ export class FabricControllerAdapter extends ClientHelper implements ControllerA
     super(config);
   }
 
-  public async invoke(controller: string, name: string, ...args: any[]) {
-    return super.invoke(`${controller}_${name}`, this.config.chaincode, ...args);
+  public async invoke(controller: string, name: string, adminOrUser?: string|true, ...args: any[]) {
+    return super.invoke(`${controller}_${name}`, this.config.chaincode, adminOrUser, ...args);
   }
 }

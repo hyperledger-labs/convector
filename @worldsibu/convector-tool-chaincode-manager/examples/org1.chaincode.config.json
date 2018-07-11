@@ -1,0 +1,22 @@
+{
+  "txTimeout": 300000,
+  "user": "admin",
+  "channel": "ch1",
+  "networkProfile": "./examples/org1.network-profile.yaml",
+  "controllers": [
+    {
+      "name": "ccc",
+      "version": "file:../convector-core-chaincode/tests/dist/ccc/",
+      "controller": "TestController"
+    }
+  ],
+  "policy": {
+    "identities": [
+      { "role": { "mspId": "Org1MSP", "name": "member" }},
+      { "role": { "mspId": "Org2MSP", "name": "member" }}
+    ],
+    "policy": {
+      "1-of": [{ "signed-by": 0 }, { "signed-by": 1 }]
+    }
+  }
+}

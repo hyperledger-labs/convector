@@ -1,0 +1,61 @@
+---
+Profiles:
+  TwoOrgOrdererGenesis:
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+
+    Consortiums:
+      SampleConsortium:
+        Organizations:
+          - *Org1
+          - *Org2
+
+  TwoOrgChannel:
+    Consortium: SampleConsortium
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *Org1
+        - *Org2
+
+Organizations:
+  - &OrdererOrg
+    Name: OrdererOrg
+    ID: OrdererMSP
+    MSPDir: ../network-objects/crypto-config/ordererOrganizations/example.com/msp
+
+  - &Org1
+    Name: Org1MSP
+    ID: Org1MSP
+    MSPDir: ../network-objects/crypto-config/peerOrganizations/org1.example.com/msp
+    AnchorPeers:
+      - Host: peer0.org1.example.com
+        Port: 7051
+
+  - &Org2
+    Name: Org2MSP
+    ID: Org2MSP
+    MSPDir: ../network-objects/crypto-config/peerOrganizations/org2.example.com/msp
+    AnchorPeers:
+      - Host: peer0.org2.example.com
+        Port: 7051
+
+Orderer: &OrdererDefaults
+  OrdererType: solo
+
+  Addresses:
+    - orderer.example.com:7050
+
+  BatchTimeout: 2s
+
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+
+  Organizations:
+
+Application: &ApplicationDefaults
+  Organizations:
