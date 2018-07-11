@@ -1,118 +1,121 @@
 /** @module @worldsibu/convector-common-fabric-helper */
-import { join } from 'path';
 import * as Client from 'fabric-client';
-import { readdirSync } from 'fs';
 
-import { ClientConfig, TxResult } from './models';
+import { ClientConfig, TxResult, TxListenerResult } from './models';
 
 export class ClientHelper {
-  private _id: string;
-  // Read only, initialized the first time
-  public get id() {
-    if (this._id) {
-      return this._id;
+  public client: Client;
+  public user: Client.User;
+  public config: ClientConfig;
+  public channel: Client.Channel;
+
+  private _organizations: string[];
+  public get organizations() {
+    // If this was already initialized return the result
+    if (this._organizations) {
+      return this._organizations;
     }
 
-    this._id = `${Date.now()}.${Math.round(Math.random() * 100000000)}`;
-
-    return this._id;
-  }
-  
-  public client = new Client();
-
-  public admin: Client.User;
-
-  private _orderer: Client.Orderer;
-  public get orderer() {
-    if (this._orderer) {
-      return this._orderer;
-    }
-
-    this._orderer = this.client.newOrderer(this.config.orderer.url);
-    return this._orderer;
+    return this.channel.getOrganizations()
+      .map((org: any) => org.id as string);
   }
 
-  private _channel: Client.Channel;
-  public get channel() {
-    if (this._channel) {
-      return this._channel;
+  private _channels: (Client.Channel&{name:string})[];
+  public get channels() {
+    if (this._channels) {
+      return this._channels;
     }
 
-    this._channel = this.client.newChannel(this.config.channel);
-    this._channel.addOrderer(this.orderer);
-    this.peers.forEach(peer => this._channel.addPeer(peer));
-
-    return this._channel;
-  }
-
-  private _peers: Client.Peer[];
-  public get peers() {
-    if (this._peers) {
-      return this._peers;
-    }
-
-    this._peers = this.config.peers.map(peer => {
-      const pem = readdirSync(join(peer.msp, 'msp/tlscacerts'))[0];
-      return this.client.newPeer(peer.url, { pem });
+    const channels = Object.keys(this.networkConfig._network_config.channels);
+    this._channels = channels.map(name => {
+      const ch: any = this.client.getChannel(name);
+      ch.name = ch._name;
+      return ch;
     });
 
-    return this._peers;
+    return this._channels;
   }
 
-  constructor(public config: ClientConfig) { }
+  public get networkConfig(): any {
+    return (this.client as any)._network_config as Client;
+  }
 
-  public async init(): Promise<void> {
-    const adminMsp = this.config.admin!.msp;
-    const keyStore = join(adminMsp, 'msp/keystore');
-    const adminCerts = join(adminMsp, 'msp/admincerts');
-    const privateKeyFile = readdirSync(keyStore)[0];
-    const certFile = readdirSync(adminCerts)[0];
+  private $initializing: Promise<void>;
 
-    const commonKeyStore = this.config.keyStore || this.config.admin!.keyStore || keyStore;
+  constructor(config: ClientConfig) {
+    this.config = {
+      txTimeout: 300000,
+      skipInit: false,
+      ...config
+    };
 
-    const cryptoSuite = Client.newCryptoSuite();
-    cryptoSuite.setCryptoKeyStore(Client.newCryptoKeyStore({ path: commonKeyStore }));
-    this.client.setCryptoSuite(cryptoSuite);
+    if (!this.config.skipInit) {
+      this.$initializing = this.init();
+    }
+  }
 
-    const store = await Client.newDefaultKeyValueStore({ path: commonKeyStore });
-    this.client.setStateStore(store);
+  public async init() {
+    if (this.$initializing) {
+      return await this.$initializing;
+    }
 
-    this.admin = await this.client.createUser({
-      skipPersistence: true,
-      username: this.id,
-      mspid: this.config.admin!.mspName,
-      cryptoContent: {
-        privateKey: join(keyStore, privateKeyFile),
-        signedCert: join(adminCerts, certFile)
-      }
-    });
+    this.client = Client.loadFromConfig(this.config.networkProfile);
+
+    await this.client.initCredentialStores();
+
+    if (this.config.user) {
+      await this.useUser(this.config.user);
+    }
+
+    if (this.config.channel) {
+      await this.useChannel(this.config.channel);
+    }
+  }
+
+  public async useUser(name: string) {
+    this.user = await this.client.getUserContext(name, true);
+    await this.client.setUserContext(this.user);
+  }
+
+  public async useChannel(name: string) {
+    this.channel = this.channels.find(ch => ch.name === name);
 
     await this.channel.initialize();
-    await this.client.setUserContext(this.admin);
+
+    return this.channel;
   }
 
-  public async invoke(fcn: string, chaincodeId: string, ...args: any[]) {
-    const { proposalResponse, txId } = await this.sendTransactionProposal({ fcn, chaincodeId, args });
-    return await this.processProposal(proposalResponse, txId);
+  public async invoke(
+    fcn: string,
+    chaincodeId: string,
+    adminOrUser: string|true = this.config.user,
+    ...args: any[]
+  ) {
+    const useAdmin = adminOrUser === true;
+
+    if (!useAdmin) {
+      await this.useUser(adminOrUser as string);
+    }
+
+    const { proposalResponse } = await this.sendTransactionProposal({ fcn, chaincodeId, args }, useAdmin);
+    return await this.processProposal(proposalResponse);
   }
 
   public async processProposal(
     proposalResponse: {
       proposal: Client.Proposal,
       proposalResponses: Client.ProposalResponse[],
-    },
-    txId: Client.TransactionId
+      txId: Client.TransactionId
+    }
   ) {
     const txRequest = this.channel.sendTransaction(proposalResponse);
-    const txListener = this.listenTx(txId.getTransactionID());
+    const txListener = this.listenTx(proposalResponse.txId.getTransactionID());
 
     return await this.processTx(txRequest, txListener);
   }
 
-  public async listenTx(txId: string) {
-    const hub = this.client.newEventHub();
-
-    hub.setPeerAddr(this.config.peers[0].events, {});
+  public async listenTx(txId: string): Promise<TxListenerResult> {
+    const hub = this.channel.getChannelEventHubsForOrg()[0];
     hub.connect();
 
     return await new Promise<{ txId: string, code: string }>((res, rej) => {
@@ -139,7 +142,7 @@ export class ClientHelper {
   public async sendInstantiateProposal(request: {
     [k in keyof Client.ChaincodeInstantiateUpgradeRequest]?: Client.ChaincodeInstantiateUpgradeRequest[k]
   }) {
-    const txId = this.client.newTransactionID();
+    const txId = this.client.newTransactionID(true);
 
     request.args = request.args.map(arg =>
       typeof arg === 'object' ? JSON.stringify(arg) : arg.toString());
@@ -158,16 +161,15 @@ export class ClientHelper {
     }
 
     return {
-      txId,
       result: proposalResponses[0],
-      proposalResponse: { proposalResponses, proposal }
+      proposalResponse: { proposalResponses, proposal, txId }
     };
   }
 
   public async sendUpgradeProposal(request: {
     [k in keyof Client.ChaincodeInstantiateUpgradeRequest]?: Client.ChaincodeInstantiateUpgradeRequest[k]
   }) {
-    const txId = this.client.newTransactionID();
+    const txId = this.client.newTransactionID(true);
 
     request.args = request.args.map(arg =>
       typeof arg === 'object' ? JSON.stringify(arg) : arg.toString());
@@ -186,16 +188,15 @@ export class ClientHelper {
     }
 
     return {
-      txId,
       result: proposalResponses[0],
-      proposalResponse: { proposalResponses, proposal }
+      proposalResponse: { proposalResponses, proposal, txId }
     };
   }
 
   public async sendTransactionProposal(request: {
     [k in keyof Client.ChaincodeInvokeRequest]?: Client.ChaincodeInvokeRequest[k]
-  }) {
-    const txId = this.client.newTransactionID();
+  }, useAdmin = false) {
+    const txId = this.client.newTransactionID(useAdmin);
 
     request.args = request.args.map(arg =>
       typeof arg === 'object' ? JSON.stringify(arg) : arg.toString());
@@ -214,16 +215,15 @@ export class ClientHelper {
     }
 
     return {
-      txId,
       result: proposalResponses[0],
-      proposalResponse: { proposalResponses, proposal }
+      proposalResponse: { proposalResponses, proposal, txId }
     };
   }
 
   public async processTx(
     txRequest: Promise<Client.BroadcastResponse>,
-    txListener: Promise<TxResult>
-  ) {
+    txListener: Promise<TxListenerResult>
+  ): Promise<TxResult> {
     const [ tx, response ] = await Promise.all([ txRequest, txListener ]);
 
     if (!tx || tx.status !== 'SUCCESS' || !response || response.code !== 'VALID') {
@@ -232,6 +232,9 @@ export class ClientHelper {
       throw err;
     }
 
-    return response.txId;
+    return {
+      ...tx,
+      ...response
+    } as TxResult;
   }
 }
