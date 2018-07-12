@@ -3,9 +3,12 @@
 export interface ClientConfig {
   user?: string;
   channel?: string;
+  userMsp?: string;
   txTimeout: number;
+  keyStore?: string;
   skipInit?: boolean;
-  networkProfile: string;
+  userMspPath?: string;
+  networkProfile: string|object;
 }
 
 export interface TxListenerResult {

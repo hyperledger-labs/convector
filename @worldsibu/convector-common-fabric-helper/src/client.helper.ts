@@ -1,5 +1,7 @@
 /** @module @worldsibu/convector-common-fabric-helper */
+import { resolve, join } from 'path';
 import * as Client from 'fabric-client';
+import { ensureDir, readdir, readFile } from 'fs-extra';
 
 import { ClientConfig, TxResult, TxListenerResult } from './models';
 
@@ -54,12 +56,41 @@ export class ClientHelper {
     }
   }
 
-  public async init() {
+  public async init(initKeyStore = false) {
     if (this.$initializing) {
       return await this.$initializing;
     }
 
-    this.client = Client.loadFromConfig(this.config.networkProfile);
+    this.client = new Client();
+
+    // The client needs to create the user credentials based on the CA key/cert
+    if (initKeyStore) {
+      const cryptoSuite = Client.newCryptoSuite();
+      const cryptoStore = Client.newCryptoKeyStore({ path: this.config.keyStore });
+
+      cryptoSuite.setCryptoKeyStore(cryptoStore);
+      this.client.setCryptoSuite(cryptoSuite);
+
+      const mspPath = resolve(process.cwd(), this.config.userMspPath);
+
+      try {
+        await ensureDir(mspPath);
+      } catch (e) {
+        throw new Error(`The userMspPath ${mspPath} is not reachable or not a directory`);
+      }
+
+      await this.client.createUser({
+        skipPersistence: false,
+        mspid: this.config.userMsp,
+        username: this.config.user,
+        cryptoContent: {
+          privateKeyPEM: await this.readSingleFileInDir(join(mspPath, 'keystore')),
+          signedCertPEM: await this.readSingleFileInDir(join(mspPath, 'signcerts'))
+        }
+      });
+    }
+
+    this.client.loadFromConfig(this.config.networkProfile);
 
     await this.client.initCredentialStores();
 
@@ -236,5 +267,23 @@ export class ClientHelper {
       ...tx,
       ...response
     } as TxResult;
+  }
+
+  private async readSingleFileInDir(dirPath: string) {
+    try {
+      await ensureDir(dirPath);
+    } catch (e) {
+      throw new Error(`The directory ${dirPath} is not reachable or not a directory`);
+    }
+
+    const content = await readdir(dirPath);
+
+    if (content.length !== 1) {
+      throw new Error(
+        `The directory ${dirPath} is supposed to only have one file, but found ${content.length}`
+      );
+    }
+
+    return await readFile(join(dirPath, content[0]), 'utf8');
   }
 }

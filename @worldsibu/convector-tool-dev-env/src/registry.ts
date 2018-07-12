@@ -7,12 +7,8 @@ import { ClientHelper, ClientConfig } from '@worldsibu/convector-common-fabric-h
 export type UserParams = IRegisterRequest;
 export type AdminParams = IEnrollmentRequest;
 
-export interface RegistryConfig extends ClientConfig {
-  keyStore: string;
-}
-
 export class Registry extends ClientHelper {
-  static async create(config: RegistryConfig) {
+  static async create(config: ClientConfig) {
     config.keyStore = resolve(process.cwd(), config.keyStore);
     await Client.newDefaultKeyValueStore({ path: config.keyStore });
 
@@ -24,7 +20,7 @@ export class Registry extends ClientHelper {
 
   static async createFromFile(configPath: string) {
     try {
-      const config: RegistryConfig =
+      const config: ClientConfig =
         JSON.parse(readFileSync(resolve(process.cwd(), configPath), 'utf8'));
 
       config.keyStore = resolve(configPath, config.keyStore);
@@ -35,7 +31,7 @@ export class Registry extends ClientHelper {
     }
   }
 
-  constructor(public config: RegistryConfig) {
+  constructor(public config: ClientConfig) {
     super(config);
   }
 

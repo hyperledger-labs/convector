@@ -5,25 +5,43 @@ import * as program from 'commander';
 import { Manager } from './manager';
 
 program
-  .command('install <name> <version>')
-  .option('-c, --config <config>', 'Configuration path', path => resolve(process.cwd(), path))
+  .command('package')
+  .option('-o, --output <path>', 'Output directory', path => resolve(process.cwd(), path))
+  .option('-c, --config <path>', 'Configuration path', path => resolve(process.cwd(), path))
+  .action(async (cmd: any) => {
+    const manager = Manager.fromConfig(cmd.config);
+
+    await manager.package(cmd.output);
+  });
+
+program
+  .command('install <name> <version> <path>')
+  .option('-c, --config <path>', 'Configuration path', path => resolve(process.cwd(), path))
+  .action(async (name: string, version: string, path: string, cmd: any) => {
+    const manager = Manager.fromConfig(cmd.config);
+
+    await manager.init();
+    await manager.install(name, version, path);
+  });
+
+program
+  .command('instantiate <name> <version>')
+  .option('-c, --config <path>', 'Configuration path', path => resolve(process.cwd(), path))
   .action(async (name: string, version: string, cmd: any) => {
     const manager = Manager.fromConfig(cmd.config);
 
     await manager.init();
-    await manager.install(name, version);
     await manager.instantiate(name, version);
     await manager.initControllers(name);
   });
 
 program
   .command('upgrade <name> <version>')
-  .option('-c, --config <config>', 'Configuration path', path => resolve(process.cwd(), path))
+  .option('-c, --config <path>', 'Configuration path', path => resolve(process.cwd(), path))
   .action(async (name: string, version: string, cmd: any) => {
     const manager = Manager.fromConfig(cmd.config);
 
     await manager.init();
-    await manager.install(name, version);
     await manager.upgrade(name, version);
     await manager.initControllers(name);
   });
@@ -31,7 +49,7 @@ program
 program
   .command('invoke <name> <controller> <fn> [args...]')
   .option('-u, --user <user>', 'Send the transaction with the specified enrolled user')
-  .option('-c, --config <config>', 'Configuration path', path => resolve(process.cwd(), path))
+  .option('-c, --config <path>', 'Configuration path', path => resolve(process.cwd(), path))
   .action(async (name: string, controller: string, fn: string, args: string[], cmd: any) => {
     const manager = Manager.fromConfig(cmd.config);
 
