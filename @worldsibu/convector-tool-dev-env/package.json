@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-tool-dev-env",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Development environment",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -31,7 +31,7 @@
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'"
   },
   "dependencies": {
-    "@worldsibu/convector-common-fabric-helper": "1.1.0",
+    "@worldsibu/convector-common-fabric-helper": "1.1.1",
     "commander": "^2.16.0",
     "shelljs": "^0.8.2",
     "tslib": "^1.9.0"
