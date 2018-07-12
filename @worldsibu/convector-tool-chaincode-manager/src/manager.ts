@@ -1,8 +1,8 @@
 /** @module @worldsibu/convector-tool-chaincode-manager */
 
 import { dirname, join, resolve } from 'path';
-import { copy, rmdir, mkdirp } from 'fs-extra';
-import { copyFileSync, readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
+import { copy, rmdir, mkdirp, ensureDir, writeFile, remove } from 'fs-extra';
 import { ClientConfig, ClientHelper } from '@worldsibu/convector-common-fabric-helper';
 import { IConfig as ControllersConfig, Config, KV } from '@worldsibu/convector-core-chaincode';
 
@@ -11,8 +11,9 @@ const chaincodePath = dirname(require.resolve('@worldsibu/convector-core-chainco
 export { ControllersConfig };
 
 export interface ManagerConfig extends ClientConfig {
-  policy: any;
+  policy?: any;
   npmrc?: string;
+  npmtoken?: string;
   controllers: ControllersConfig[];
 }
 
@@ -48,33 +49,25 @@ export class Manager extends ClientHelper {
     return packageName.replace(/@worldsibu\//, '');
   }
 
-  private chaincodeConfig: Config;
+  public chaincodeConfig = new Config(this.config.controllers);
 
   constructor(public config: ManagerConfig) {
     super(config);
   }
 
-  public async init(): Promise<void> {
-    await super.init();
+  public async init(initKeyStore?: boolean): Promise<void> {
+    await super.init(initKeyStore);
     await this.useChannel(this.config.channel);
-
-    this.chaincodeConfig = new Config(this.config.controllers);
-
-    try {
-      await this.prepareChaincode(this.chaincodeConfig.getPackages());
-    } catch (e) {
-      console.log('Error while preparing the chaincode files', e);
-      throw e;
-    }
   }
 
   public async install(
     name: string,
-    version: string
+    version: string,
+    path: string
   ): Promise<void> {
     await this.client.installChaincode({
       txId: this.client.newTransactionID(true),
-      chaincodePath,
+      chaincodePath: resolve(process.cwd(), path),
       chaincodeId: name,
       chaincodeType: 'node',
       chaincodeVersion: version,
@@ -144,7 +137,40 @@ export class Manager extends ClientHelper {
     }, adminOrUser === true);
   }
 
-  private async prepareChaincode(extraPackages: KV = {}) {
+  /**
+   * The only expected param is json object with the keys being
+   * the npm package name for the controller and the value being the npm version
+   *
+   * Instead of version, one can use a relative path to a local npm module.
+   * This should be a valid npm module folder containing a package.json
+   * with a `start` script on it. This is the command that's gonna be executed
+   * in the peer before instantiating the chaincode, so all dependencies must be
+   * resolved by the peer network.
+   *
+   * An optional `npmrc` path can be set in the config file if needed, like for
+   * installing private packages and/or packages from a custom repository.
+   * Or you can pass the `npmtoken` and we'll create the file for you.
+   *
+   * @param output A path for the output folder
+   * @param controllers A key value map of package:version for the controllers
+   */
+  public async package(output: string, controllers: KV = this.chaincodeConfig.getPackages()) {
+    output = resolve(process.cwd(), output);
+
+    try {
+      await ensureDir(output);
+    } catch (e) {
+      throw new Error('The output is not a valid directory');
+    }
+
+    await remove(output);
+
+    try {
+      await copy(chaincodePath, output);
+    } catch (e) {
+      throw new Error('Error while copying the base chaincode to the output path');
+    }
+
     const json = readFileSync(join(chaincodePath, '../../package.json'), 'utf8');
 
     const pkg = JSON.parse(json);
@@ -152,7 +178,7 @@ export class Manager extends ClientHelper {
     delete pkg.watch;
     delete pkg.devDependencies;
 
-    const packagesFolderPath = join(chaincodePath, 'packages');
+    const packagesFolderPath = join(output, 'packages');
 
     try {
       await rmdir(packagesFolderPath);
@@ -161,14 +187,14 @@ export class Manager extends ClientHelper {
       // empty
     }
 
-    extraPackages = await Object.keys(extraPackages).reduce(async (pkgs, name) => {
+    controllers = await Object.keys(controllers).reduce(async (pkgs, name) => {
       const packages = await pkgs;
 
-      if (!extraPackages[name].startsWith('file:')) {
-        return { ...packages, [name]: extraPackages[name] };
+      if (!controllers[name].startsWith('file:')) {
+        return { ...packages, [name]: controllers[name] };
       }
 
-      const packagePath = resolve(process.cwd(), extraPackages[name].replace(/^file:/, ''));
+      const packagePath = resolve(process.cwd(), controllers[name].replace(/^file:/, ''));
 
       await mkdirp(join(packagesFolderPath, name));
       await copy(packagePath, join(packagesFolderPath, name));
@@ -179,13 +205,19 @@ export class Manager extends ClientHelper {
     pkg.scripts = { start: pkg.scripts.start };
     pkg.dependencies = {
       ...pkg.dependencies,
-      ...extraPackages
+      ...controllers
     };
 
-    writeFileSync(join(chaincodePath, 'package.json'), JSON.stringify(pkg), 'utf8');
+    writeFileSync(join(output, 'package.json'), JSON.stringify(pkg), 'utf8');
 
     if (this.config.npmrc) {
-      copyFileSync(join(chaincodePath, '.npmrc'), resolve(process.cwd(), this.config.npmrc));
+      await copy(resolve(process.cwd(), this.config.npmrc), join(output, '.npmrc'));
+    } else if (this.config.npmtoken) {
+      await writeFile(
+        join(output, '.npmrc'),
+        `//registry.npmjs.org/:_authToken=${this.config.npmtoken}`,
+        'utf8'
+      );
     }
   }
 }
