@@ -7,7 +7,6 @@ pipelines:
         caches:
           - node
         script:
-          - echo "//registry.npmjs.org/:_authToken=fe52a29b-b390-40b0-8458-7581996d870a" >> ~/.npmrc
           - npm install
           - npm run lerna:install
           - npm run lerna:lint

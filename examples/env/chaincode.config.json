@@ -1,6 +1,5 @@
 {
   "keyStore": "./env/.hfc-key-store",
-  "worldsibuNpmToken": "fe52a29b-b390-40b0-8458-7581996d870a",
   "channel": "mychannel",
   "peers": [
     {
