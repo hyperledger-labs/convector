@@ -1,8 +1,8 @@
 /**
  * [[include:./templates/header.md]]
- * [[include:./models.md]]
+ * [[include:./chaincode-manager.md]]
  * [[include:./templates/footer.md]]
  *
- * @module Models
+ * @module ChaincodeManger
  * @preferred
  *//** */

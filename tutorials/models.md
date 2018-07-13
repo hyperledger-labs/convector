@@ -50,6 +50,13 @@ model.fetch()
   .then(onModelFound)
   .catch(onModelNotFound);
 ```
+or
+```ts
+class MyModel extends ConvectorModel<MyModel> { ... }
+
+MyModel.getOne(id)
+  .then(onModelFound);
+```
 
 ### As a param constructor and validator
 
@@ -79,3 +86,33 @@ myModel.info = 'info';
 /* ... */
 myModel.save();
 ```
+
+## API
+
+Models are based on `ConvectorModel<T>`, and it provides some basic methods to use on models.
+
+### Querying the chaincode
+
+Some static methods are present for you to query the chaincode. All these methods are subject to the `storage` capabilities, for example, using `storage-couchdb` you will be able to query the database in a more fashin way, even using views or similar.
+
+```typescript
+// You can get one of the models based on the ID
+MyModel.getOne(id).then(onModelFound);
+// Or get all the elements based on the `type` field
+MyModel.getAll('io.worldsibu.models.test').then(onModelsFound);
+// Or make complex queries, depending on the `convector-storage` in use
+MyModel.query({ amount: { $lte: 5 } }).then(onModelsFound);
+```
+
+### Basic properties
+
+All models are required to have an `id` and a `type` field. The declaration of both can be omitted if wanted, but both of them must have a value. If you pass a string as the only param while instantiating a model, it will be used as the ID of that model.
+
+### Base methods
+
+- To fetch the model content from the ledger and load the info in a model use `async myModel.fetch()`, the ID must have been set before this
+- To create or update a whole model in the blockchain you mut use `async myModel.save()`
+- To update a portion of an existing model in the blockchain you must use `async myModel.update({ changes })`
+- To delete the model content in the blockchain you must use `async myModel.delete()` however, notice that a delete in blockchain terms, is just removing the current value from the state, but the historical data will still be there and cannot be removed
+- To clone a model you can use `myModel.clone()`
+- To convert a model to json you can do `JSON.stringify(myModel)` or `myModel.toJSON()`
