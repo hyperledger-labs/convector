@@ -4,9 +4,9 @@ version: "1.0"
 client:
   organization: Org2MSP
   credentialStore:
-    path: ./.hfc-org2
+    path: ./.convector-dev-env/.hfc-org2
     cryptoStore:
-      path: ./.hfc-org2
+      path: ./.convector-dev-env/.hfc-org2
 
 channels:
   ch1:
@@ -47,14 +47,14 @@ organizations:
     peers:
       - peer0.org1.example.com
     certificateAuthorities:
-      - ca.example.com
+      - ca.org1.example.com
 
   Org2MSP:
     mspid: Org2MSP
     peers:
       - peer0.org2.example.com
     certificateAuthorities:
-      - ca.example.com
+      - ca.org2.example.com
     adminPrivateKey:
       path: ../convector-tool-dev-env/network-objects/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/70d9a64cccff14248b04c5c77f39e965f9b0013dabb7311cc765ec82124c79fa_sk
     signedCert:

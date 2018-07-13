@@ -1,6 +1,13 @@
 #!/bin/sh
 ROOT_DIR=$(dirname "$0")/..
 USERS=3
+CONVECTOR_DIR="${CONVECTOR_DIR:-$PWD/.convector-dev-env}"
+CONVECTOR_CONFIG="${CONVECTOR_CONFIG:-$CONVECTOR_DIR/examples}"
+
+rm -rf $CONVECTOR_DIR
+mkdir -p $CONVECTOR_DIR
+cp -r $ROOT_DIR/network-objects $CONVECTOR_DIR/
+cp -r $ROOT_DIR/examples $CONVECTOR_DIR/
 
 function createchannel() {
   for CH in ${@:2}
@@ -37,8 +44,8 @@ function setanchor() {
 function registeradmin() {
   node $ROOT_DIR/dist/command.js add-admin \
     admin adminpw $2 \
-      -k $PWD/.hfc-$1 \
-      -p $ROOT_DIR/config/$1.network-profile.yaml
+      -k $CONVECTOR_DIR/.hfc-$1 \
+      -p $CONVECTOR_CONFIG/$1.network-profile.yaml
 }
 
 function registeruser() {
@@ -46,8 +53,8 @@ function registeruser() {
     $1 admin $4 \
       -a $2.$3 \
       -r client \
-      -k $PWD/.hfc-$2 \
-      -p $ROOT_DIR/config/$2.network-profile.yaml
+      -k $CONVECTOR_DIR/.hfc-$2 \
+      -p $CONVECTOR_CONFIG/$2.network-profile.yaml
 }
 
 createchannel peer0.org1.example.com ch1 ch2
