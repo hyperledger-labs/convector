@@ -36,7 +36,7 @@ Inside your module folder you can create the folder structure of your preference
 
 ## Develop
 
-Create the controllers and models necessary for your application, checkout the guide to leran how to do so.
+Create the [[Controllers]] and [[Models]] necessary for your application, checkout the guide to leran how to do so.
 
 ## Unit Tests
 
@@ -58,7 +58,7 @@ We provide a development environment for you to easily run the chaincodes. All t
 - **restart.sh** - Delete all the generated artifacts and start the environment again
 - **stop.sh** - Just stop the docker containers
 
-Then you can install the chaincodes by using the chaincode manager. Refere to the chaincode manager guide, but in short, running `chaincode-manager --config ./chaincode.config.json install <name yourn chaincode here> <put a version number here>`.
+Then you can install the chaincodes by using the chaincode manager. Refere to the [[ChaincodeManger]] guide, but in short, running `chaincode-manager --config ./chaincode.config.json install <name yourn chaincode here> <put a version number here>`.
 After installing a chaincode you can do 2 things:
 
 - `chaincode-manager --config ./chaincode.config.json upgrade <chaincode name> <next version number>`

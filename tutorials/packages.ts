@@ -1,8 +1,8 @@
 /**
  * [[include:./templates/header.md]]
- * [[include:./models.md]]
+ * [[include:./packages.md]]
  * [[include:./templates/footer.md]]
  *
- * @module Models
+ * @module Packages
  * @preferred
  *//** */

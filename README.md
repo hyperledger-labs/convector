@@ -1,8 +1,32 @@
-# Convector Framework
+# CONVECTOR
 
+[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
+[![Newsletter ](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
+[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
+
+[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+
+
+----
+
+## Using Convector
+
+Dependencies that you need in your project:
+
+* [Node](https://nodejs.org/en/download/)
+* [Docker](http://hyperledger-fabric.readthedocs.io/en/release-1.2/install.html)
+* [yup](https://www.npmjs.com/package/yup)
+* [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+
+Then include to your projects the Convector components.
+
+`npm i -S @worldsibu/convector-{core-{model,storage,controller,adapter},adapter-fabric,storage-{stub,couchdb}}`
+`npm i -D @worldsibu/convector-adapter-mock,tool-{dev-env,chaincode-manager}}`
+
+## About Convector
 Convector is a framework designed to be used by javascript developers which aims to develop in Hyperledger Fabric fast and easily.
-
-## Contents
 The framework is made of different blocks, described below:
 
 ### Convector Core
@@ -18,9 +42,26 @@ Following the modular design pattern from models, controllers have **adapters**,
 Formed by all the `@worldsibu/convector-tool-*` packages. It provides a set of helpers and utilitarians to make the chaincode development easily.
 
 - **Chaincode Manager** used to bundle controllers in a single chaincode and handle the installation and invokation.
-- **Dev Environment** _coming soon_, is a basic dev environment created with Fabric running on docker or vagrant. Contains one organization and one user in that organization, one channel, one orderer, one peer with its database, and all the cryptographic material for this to work.
+- **Dev Environment**, is a basic dev environment created with Fabric running on docker or vagrant. Contains two organization and three users in that organization, two channels, one orderer, one peer per org with its database, and all the cryptographic material for this to work.
 
 ## Model / Controller pattern
 Convector is designed to write reusable pieces of code that describe the nature of what a developer can do in a blockchain. 
 
 A blockchain (for the developer's eyes) is no more than a data layer protected by a logic layer defining the rules of what the outside world can do in with the inner data. Thus, a really comfortable way of writing chaincode logic (_smart contracts_) is by having **Models** describing the shape of the data and **Controllers** describing the actions and rules that apply to the models.
+
+## More
+
+* [Want to see how to create a ERC-20 compatible token on a permissioned blockchain?](https://github.com/worldsibu/convector-example-token)
+* [Creating a project from scratch with Convector](https://github.com/worldsibu/convector-example-marketplace)
+* About the creators: [WorldSibu](https://worldsibu.io)
+
+## Support
+
+* Don't hesitate to include recommendations, feature requests or bugs in our [issues section](https://github.com/worldsibu/convector/issues).
+* To keep up with advances and news on Convector subscribe to our [Newsletter](https://worldsibu.io/subscribe/)
+
+<a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a>
+
+<a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow @worldsibu</a>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
