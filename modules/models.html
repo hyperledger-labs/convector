@@ -69,6 +69,15 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
+						<h2 id="guides">Guides</h2>
+						<ul>
+							<li><a href="getting_started.html">Getting-Started</a></li>
+							<li><a href="packages.html">Packages</a></li>
+							<li><a href="models.html">Models</a></li>
+							<li><a href="controllers.html">Controllers</a></li>
+							<li><a href="chaincodemanger.html">ChaincodeManger</a></li>
+							<li><a href="devenv.html">DevEnv</a></li>
+						</ul>
 						<h2 id="models">Models</h2>
 						<p>We define models as assets you interact with in a blockchain
 						Every data structure should be a model, since it defines what are the minimum necessary properties to be present.</p>
@@ -111,6 +120,12 @@ model.fetch()
   .then(onModelFound)
   .catch(onModelNotFound);
 </code></pre>
+						<p>or</p>
+						<pre><code class="lang-ts"><span class="hljs-keyword">class</span> MyModel <span class="hljs-keyword">extends</span> ConvectorModel&lt;MyModel&gt; { ... }
+
+MyModel.getOne(id)
+  .then(onModelFound);
+</code></pre>
 						<h3 id="as-a-param-constructor-and-validator">As a param constructor and validator</h3>
 						<pre><code class="lang-ts"><span class="hljs-keyword">class</span> MyModel <span class="hljs-keyword">extends</span> ConvectorModel&lt;MyModel&gt; { <span class="hljs-comment">/* ... */</span> }
 
@@ -134,6 +149,37 @@ myModel.info = <span class="hljs-string">'info'</span>;
 <span class="hljs-comment">/* ... */</span>
 myModel.save();
 </code></pre>
+						<h2 id="api">API</h2>
+						<p>Models are based on <code>ConvectorModel&lt;T&gt;</code>, and it provides some basic methods to use on models.</p>
+						<h3 id="querying-the-chaincode">Querying the chaincode</h3>
+						<p>Some static methods are present for you to query the chaincode. All these methods are subject to the <code>storage</code> capabilities, for example, using <code>storage-couchdb</code> you will be able to query the database in a more fashin way, even using views or similar.</p>
+						<pre><code class="lang-typescript"><span class="hljs-comment">// You can get one of the models based on the ID</span>
+MyModel.getOne(id).then(onModelFound);
+<span class="hljs-comment">// Or get all the elements based on the `type` field</span>
+MyModel.getAll(<span class="hljs-string">'io.worldsibu.models.test'</span>).then(onModelsFound);
+<span class="hljs-comment">// Or make complex queries, depending on the `convector-storage` in use</span>
+MyModel.query({ amount: { $lte: <span class="hljs-number">5</span> } }).then(onModelsFound);
+</code></pre>
+						<h3 id="basic-properties">Basic properties</h3>
+						<p>All models are required to have an <code>id</code> and a <code>type</code> field. The declaration of both can be omitted if wanted, but both of them must have a value. If you pass a string as the only param while instantiating a model, it will be used as the ID of that model.</p>
+						<h3 id="base-methods">Base methods</h3>
+						<ul>
+							<li>To fetch the model content from the ledger and load the info in a model use <code>async myModel.fetch()</code>, the ID must have been set before this</li>
+							<li>To create or update a whole model in the blockchain you mut use <code>async myModel.save()</code></li>
+							<li>To update a portion of an existing model in the blockchain you must use <code>async myModel.update({ changes })</code></li>
+							<li>To delete the model content in the blockchain you must use <code>async myModel.delete()</code> however, notice that a delete in blockchain terms, is just removing the current value from the state, but the historical data will still be there and cannot be removed</li>
+							<li>To clone a model you can use <code>myModel.clone()</code></li>
+							<li>To convert a model to json you can do <code>JSON.stringify(myModel)</code> or <code>myModel.toJSON()</code></li>
+						</ul>
+						<hr>
+						<hr>
+						<p>Created with <span style="color: red;">♥</span> by <a href="http://worldsibu.com/">WorldSibu</a></p>
+						<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+						<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a></p>
+						<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+						<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+						<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
+						<script async defer src="https://buttons.github.io/buttons.js"></script>
 					</div>
 				</div>
 			</section>

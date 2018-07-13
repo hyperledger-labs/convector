@@ -64,10 +64,28 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="convector-framework">Convector Framework</h1>
-				<p>Convector is a framework designed to be used by javascript developers which aims to develop in Hyperledger Fabric fast and easily.</p>
-				<h2 id="contents">Contents</h2>
-				<p>The framework is made of different blocks, described below:</p>
+				<h1 id="convector">CONVECTOR</h1>
+				<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+					<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter "></a>
+				<a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a></p>
+				<p><a href="https://github.com/ellerbrock/typescript-badges/"><img src="https://badges.frapsoft.com/typescript/code/typescript.svg?v=101" alt="TypeScript"></a>
+					<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
+				<a href="https://lernajs.io/"><img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna"></a></p>
+				<hr>
+				<h2 id="using-convector">Using Convector</h2>
+				<p>Dependencies that you need in your project:</p>
+				<ul>
+					<li><a href="https://nodejs.org/en/download/">Node</a></li>
+					<li><a href="http://hyperledger-fabric.readthedocs.io/en/release-1.2/install.html">Docker</a></li>
+					<li><a href="https://www.npmjs.com/package/yup">yup</a></li>
+					<li><a href="https://www.npmjs.com/package/reflect-metadata">reflect-metadata</a></li>
+				</ul>
+				<p>Then include to your projects the Convector components.</p>
+				<p><code>npm i -S @worldsibu/convector-{core-{model,storage,controller,adapter},adapter-fabric,storage-{stub,couchdb}}</code>
+				<code>npm i -D @worldsibu/convector-adapter-mock,tool-{dev-env,chaincode-manager}}</code></p>
+				<h2 id="about-convector">About Convector</h2>
+				<p>Convector is a framework designed to be used by javascript developers which aims to develop in Hyperledger Fabric fast and easily.
+				The framework is made of different blocks, described below:</p>
 				<h3 id="convector-core">Convector Core</h3>
 				<p>Formed by all the <code>@worldsibu/convector-core-*</code> packages. It provides all the necessary code to write contract specifications using the <em>Model/Controller</em> pattern.</p>
 				<h3 id="convector-storage">Convector Storage</h3>
@@ -78,11 +96,25 @@
 				<p>Formed by all the <code>@worldsibu/convector-tool-*</code> packages. It provides a set of helpers and utilitarians to make the chaincode development easily.</p>
 				<ul>
 					<li><strong>Chaincode Manager</strong> used to bundle controllers in a single chaincode and handle the installation and invokation.</li>
-					<li><strong>Dev Environment</strong> <em>coming soon</em>, is a basic dev environment created with Fabric running on docker or vagrant. Contains one organization and one user in that organization, one channel, one orderer, one peer with its database, and all the cryptographic material for this to work.</li>
+					<li><strong>Dev Environment</strong>, is a basic dev environment created with Fabric running on docker or vagrant. Contains two organization and three users in that organization, two channels, one orderer, one peer per org with its database, and all the cryptographic material for this to work.</li>
 				</ul>
 				<h2 id="model-controller-pattern">Model / Controller pattern</h2>
 				<p>Convector is designed to write reusable pieces of code that describe the nature of what a developer can do in a blockchain. </p>
 				<p>A blockchain (for the developer&#39;s eyes) is no more than a data layer protected by a logic layer defining the rules of what the outside world can do in with the inner data. Thus, a really comfortable way of writing chaincode logic (<em>smart contracts</em>) is by having <strong>Models</strong> describing the shape of the data and <strong>Controllers</strong> describing the actions and rules that apply to the models.</p>
+				<h2 id="more">More</h2>
+				<ul>
+					<li><a href="https://github.com/worldsibu/convector-example-token">Want to see how to create a ERC-20 compatible token on a permissioned blockchain?</a></li>
+					<li><a href="https://github.com/worldsibu/convector-example-marketplace">Creating a project from scratch with Convector</a></li>
+					<li>About the creators: <a href="https://worldsibu.io">WorldSibu</a></li>
+				</ul>
+				<h2 id="support">Support</h2>
+				<ul>
+					<li>Don&#39;t hesitate to include recommendations, feature requests or bugs in our <a href="https://github.com/worldsibu/convector/issues">issues section</a>.</li>
+					<li>To keep up with advances and news on Convector subscribe to our <a href="https://worldsibu.io/subscribe/">Newsletter</a></li>
+				</ul>
+				<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a></p>
+				<p><a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow @worldsibu</a></p>
+				<script async defer src="https://buttons.github.io/buttons.js"></script>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -96,6 +128,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/__worldsibu_convector_adapter_mock_src_index_.html">"@worldsibu/convector-<wbr>adapter-<wbr>mock/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/__worldsibu_convector_common_fabric_helper_examples_examples_.html">"@worldsibu/convector-<wbr>common-<wbr>fabric-<wbr>helper/examples/examples"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/__worldsibu_convector_common_fabric_helper_src_index_.html">"@worldsibu/convector-<wbr>common-<wbr>fabric-<wbr>helper/src/index"</a>
@@ -123,6 +158,15 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/__worldsibu_convector_tool_chaincode_manager_src_index_.html">"@worldsibu/convector-<wbr>tool-<wbr>chaincode-<wbr>manager/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/__worldsibu_convector_tool_dev_env_src_command_.html">"@worldsibu/convector-<wbr>tool-<wbr>dev-<wbr>env/src/command"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/__worldsibu_convector_tool_dev_env_src_index_.html">"@worldsibu/convector-<wbr>tool-<wbr>dev-<wbr>env/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/__worldsibu_convector_tool_dev_env_src_registry_.html">"@worldsibu/convector-<wbr>tool-<wbr>dev-<wbr>env/src/registry"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_examples_env_src_register_.html">"examples/env/src/register"</a>
@@ -158,13 +202,22 @@
 						<a href="modules/_worldsibu_convector_tool_chaincode_manager.html">@worldsibu/convector-<wbr>tool-<wbr>chaincode-<wbr>manager</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/chaincodemanger.html">Chaincode<wbr>Manger</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/controllers.html">Controllers</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/devenv.html">Dev<wbr>Env</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/getting_started.html">Getting-<wbr><wbr>Started</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/packages.html">Packages</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/convector_core_adapter.html">convector-<wbr>core-<wbr>adapter</a>

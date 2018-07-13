@@ -71,10 +71,20 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#ccname" class="tsd-kind-icon">cc<wbr>Name</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#manager0" class="tsd-kind-icon">manager0</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#manager1" class="tsd-kind-icon">manager1</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#manager2" class="tsd-kind-icon">manager2</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#version" class="tsd-kind-icon">version</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#installfromconfigfile" class="tsd-kind-icon">install<wbr>From<wbr>Config<wbr>File</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#installfromconfigobject" class="tsd-kind-icon">install<wbr>From<wbr>Config<wbr>Object</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#install" class="tsd-kind-icon">install</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#invoke" class="tsd-kind-icon">invoke</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#upgrade" class="tsd-kind-icon">upgrade</a></li>
 							</ul>
 						</section>
@@ -82,18 +92,71 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="ccname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> cc<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">cc<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x27;Test&#x27; + process.argv[3] || &#x27;1&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:4</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="manager0" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> manager0</h3>
+					<div class="tsd-signature tsd-kind-icon">manager0<span class="tsd-signature-symbol">:</span> <a href="../classes/_worldsibu_convector_tool_chaincode_manager.manager.html" class="tsd-signature-type">Manager</a><span class="tsd-signature-symbol"> =&nbsp;new Manager({skipInit: true,txTimeout: 300000,// npmtoken: &#x27;...&#x27;,userMsp: &#x27;Org1MSP&#x27;,userMspPath: &#x27;../convector-tool-dev-env/network-objects/crypto-config/&#x27; +&#x27;peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp&#x27;,networkProfile: &#x27;./examples/org1.network-profile.yaml&#x27;,controllers: [{name: &#x27;ccc&#x27;,version: &#x27;file:../convector-core-chaincode/tests/dist/ccc/&#x27;,controller: &#x27;TestController&#x27;}]})</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:6</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="manager1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> manager1</h3>
+					<div class="tsd-signature tsd-kind-icon">manager1<span class="tsd-signature-symbol">:</span> <a href="../classes/_worldsibu_convector_tool_chaincode_manager.manager.html" class="tsd-signature-type">Manager</a><span class="tsd-signature-symbol"> =&nbsp;Manager.fromConfig(&#x27;./examples/org1.chaincode.config.json&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:22</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="manager2" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> manager2</h3>
+					<div class="tsd-signature tsd-kind-icon">manager2<span class="tsd-signature-symbol">:</span> <a href="../classes/_worldsibu_convector_tool_chaincode_manager.manager.html" class="tsd-signature-type">Manager</a><span class="tsd-signature-symbol"> =&nbsp;Manager.fromConfig(&#x27;./examples/org2.chaincode.config.json&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:23</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="version" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> version</h3>
+					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;parseInt(process.argv[2] || &#x27;1&#x27;, 10)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:3</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="installfromconfigfile" class="tsd-anchor"></a>
-					<h3>install<wbr>From<wbr>Config<wbr>File</h3>
+					<a name="install" class="tsd-anchor"></a>
+					<h3>install</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">install<wbr>From<wbr>Config<wbr>File<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">install<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:3</li>
+									<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:25</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -101,16 +164,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="installfromconfigobject" class="tsd-anchor"></a>
-					<h3>install<wbr>From<wbr>Config<wbr>Object</h3>
+					<a name="invoke" class="tsd-anchor"></a>
+					<h3>invoke</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">install<wbr>From<wbr>Config<wbr>Object<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">invoke<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:12</li>
+									<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:43</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -127,7 +190,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:55</li>
+									<li>Defined in @worldsibu/convector-tool-chaincode-manager/examples/examples.ts:37</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -149,11 +212,26 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#installfromconfigfile" class="tsd-kind-icon">install<wbr>From<wbr>Config<wbr>File</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#ccname" class="tsd-kind-icon">cc<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#manager0" class="tsd-kind-icon">manager0</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#manager1" class="tsd-kind-icon">manager1</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#manager2" class="tsd-kind-icon">manager2</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#version" class="tsd-kind-icon">version</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#installfromconfigobject" class="tsd-kind-icon">install<wbr>From<wbr>Config<wbr>Object</a>
+						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#install" class="tsd-kind-icon">install</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#invoke" class="tsd-kind-icon">invoke</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="__worldsibu_convector_tool_chaincode_manager_examples_examples_.html#upgrade" class="tsd-kind-icon">upgrade</a>

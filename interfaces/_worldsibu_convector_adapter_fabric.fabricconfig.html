@@ -89,13 +89,15 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#admin" class="tsd-kind-icon">admin</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#chaincode" class="tsd-kind-icon">chaincode</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#channel" class="tsd-kind-icon">channel</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#keystore" class="tsd-kind-icon">key<wbr>Store</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#orderer" class="tsd-kind-icon">orderer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#peers" class="tsd-kind-icon">peers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#networkprofile" class="tsd-kind-icon">network<wbr>Profile</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#skipinit" class="tsd-kind-icon">skip<wbr>Init</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#txtimeout" class="tsd-kind-icon">tx<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#user" class="tsd-kind-icon">user</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#usermsp" class="tsd-kind-icon">user<wbr>Msp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#usermsppath" class="tsd-kind-icon">user<wbr>Msp<wbr>Path</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,17 +105,6 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="admin" class="tsd-anchor"></a>
-					<h3>admin</h3>
-					<div class="tsd-signature tsd-kind-icon">admin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Admin</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from ClientConfig.admin</p>
-						<ul>
-							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:13</li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="chaincode" class="tsd-anchor"></a>
 					<h3>chaincode</h3>
@@ -126,12 +117,12 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="channel" class="tsd-anchor"></a>
-					<h3>channel</h3>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> channel</h3>
 					<div class="tsd-signature tsd-kind-icon">channel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from ClientConfig.channel</p>
 						<ul>
-							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:16</li>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:3</li>
 						</ul>
 					</aside>
 				</section>
@@ -142,29 +133,29 @@
 					<aside class="tsd-sources">
 						<p>Inherited from ClientConfig.keyStore</p>
 						<ul>
-							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:17</li>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:6</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="orderer" class="tsd-anchor"></a>
-					<h3>orderer</h3>
-					<div class="tsd-signature tsd-kind-icon">orderer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Peer</span></div>
+					<a name="networkprofile" class="tsd-anchor"></a>
+					<h3>network<wbr>Profile</h3>
+					<div class="tsd-signature tsd-kind-icon">network<wbr>Profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from ClientConfig.orderer</p>
+						<p>Inherited from ClientConfig.networkProfile</p>
 						<ul>
-							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:15</li>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:9</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="peers" class="tsd-anchor"></a>
-					<h3>peers</h3>
-					<div class="tsd-signature tsd-kind-icon">peers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Peer</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="skipinit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> skip<wbr>Init</h3>
+					<div class="tsd-signature tsd-kind-icon">skip<wbr>Init<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from ClientConfig.peers</p>
+						<p>Inherited from ClientConfig.skipInit</p>
 						<ul>
-							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:14</li>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:7</li>
 						</ul>
 					</aside>
 				</section>
@@ -175,7 +166,40 @@
 					<aside class="tsd-sources">
 						<p>Inherited from ClientConfig.txTimeout</p>
 						<ul>
-							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:18</li>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:5</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="user" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user</h3>
+					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ClientConfig.user</p>
+						<ul>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:2</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="usermsp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user<wbr>Msp</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Msp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ClientConfig.userMsp</p>
+						<ul>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:4</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="usermsppath" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user<wbr>Msp<wbr>Path</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Msp<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ClientConfig.userMspPath</p>
+						<ul>
+							<li>Defined in @worldsibu/convector-adapter-fabric/node_modules/@worldsibu/convector-common-fabric-helper/dist/src/models.d.ts:8</li>
 						</ul>
 					</aside>
 				</section>
@@ -202,9 +226,6 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html" class="tsd-kind-icon">Fabric<wbr>Config</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#admin" class="tsd-kind-icon">admin</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#chaincode" class="tsd-kind-icon">chaincode</a>
 							</li>
@@ -215,13 +236,22 @@
 								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#keystore" class="tsd-kind-icon">key<wbr>Store</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#orderer" class="tsd-kind-icon">orderer</a>
+								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#networkprofile" class="tsd-kind-icon">network<wbr>Profile</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#peers" class="tsd-kind-icon">peers</a>
+								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#skipinit" class="tsd-kind-icon">skip<wbr>Init</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#txtimeout" class="tsd-kind-icon">tx<wbr>Timeout</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#user" class="tsd-kind-icon">user</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#usermsp" class="tsd-kind-icon">user<wbr>Msp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_worldsibu_convector_adapter_fabric.fabricconfig.html#usermsppath" class="tsd-kind-icon">user<wbr>Msp<wbr>Path</a>
 							</li>
 						</ul>
 					</li>

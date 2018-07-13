@@ -69,6 +69,15 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
+						<h2 id="guides">Guides</h2>
+						<ul>
+							<li><a href="getting_started.html">Getting-Started</a></li>
+							<li><a href="packages.html">Packages</a></li>
+							<li><a href="models.html">Models</a></li>
+							<li><a href="controllers.html">Controllers</a></li>
+							<li><a href="chaincodemanger.html">ChaincodeManger</a></li>
+							<li><a href="devenv.html">DevEnv</a></li>
+						</ul>
 						<h1 id="getting-started-with-convector">Getting Started with Convector</h1>
 						<h2 id="requirements">Requirements</h2>
 						<p>To start developing chaincodes with Convector, you need to first meet some basic requirements:</p>
@@ -92,7 +101,7 @@
 <span class="hljs-string">./package.json</span>
 <span class="hljs-string">./README.md</span>
 </code></pre><h2 id="develop">Develop</h2>
-						<p>Create the controllers and models necessary for your application, checkout the guide to leran how to do so.</p>
+						<p>Create the <a href="controllers.html">Controllers</a> and <a href="models.html">Models</a> necessary for your application, checkout the guide to leran how to do so.</p>
 						<h2 id="unit-tests">Unit Tests</h2>
 						<p>We strongly suggest you create a unit tests for your controllers, since it&#39;s the easiest way to test their logic. Refer to the guides to learn more about unit testing.</p>
 						<h3 id="tests-on-environments">Tests on Environments</h3>
@@ -106,12 +115,21 @@
 							<li><strong>restart.sh</strong> - Delete all the generated artifacts and start the environment again</li>
 							<li><strong>stop.sh</strong> - Just stop the docker containers</li>
 						</ul>
-						<p>Then you can install the chaincodes by using the chaincode manager. Refere to the chaincode manager guide, but in short, running <code>chaincode-manager --config ./chaincode.config.json install &lt;name yourn chaincode here&gt; &lt;put a version number here&gt;</code>.
+						<p>Then you can install the chaincodes by using the chaincode manager. Refere to the <a href="chaincodemanger.html">ChaincodeManger</a> guide, but in short, running <code>chaincode-manager --config ./chaincode.config.json install &lt;name yourn chaincode here&gt; &lt;put a version number here&gt;</code>.
 						After installing a chaincode you can do 2 things:</p>
 						<ul>
 							<li><code>chaincode-manager --config ./chaincode.config.json upgrade &lt;chaincode name&gt; &lt;next version number&gt;</code></li>
 							<li><code>chaincode-manager --config ./chaincode.config.json invoke --user &lt;username&gt; &lt;chaincode name&gt; &lt;controller name&gt; &lt;function name&gt; [...args]</code> - By default, the dev environment has 2 users, admin and user1</li>
 						</ul>
+						<hr>
+						<hr>
+						<p>Created with <span style="color: red;">♥</span> by <a href="http://worldsibu.com/">WorldSibu</a></p>
+						<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+						<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a></p>
+						<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+						<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+						<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
+						<script async defer src="https://buttons.github.io/buttons.js"></script>
 					</div>
 				</div>
 			</section>

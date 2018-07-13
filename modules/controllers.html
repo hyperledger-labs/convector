@@ -69,7 +69,17 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
+						<h2 id="guides">Guides</h2>
+						<ul>
+							<li><a href="getting_started.html">Getting-Started</a></li>
+							<li><a href="packages.html">Packages</a></li>
+							<li><a href="models.html">Models</a></li>
+							<li><a href="controllers.html">Controllers</a></li>
+							<li><a href="chaincodemanger.html">ChaincodeManger</a></li>
+							<li><a href="devenv.html">DevEnv</a></li>
+						</ul>
 						<h1 id="controllers">Controllers</h1>
+						<h2 id="usage">Usage</h2>
 						<p>We define controllers as the business logic applied to models.
 						Every possible action over a model, should be configured thought controllers.</p>
 						<p>The package <code>@worldsibu/convector-core-controller</code> contains the necessary code to create controllers. Here&#39;s an example of one:</p>
@@ -90,6 +100,54 @@
 						<p>The <code>@Controller</code> decorator let Convector know this class is a controller, and all its methods should be available in the chaincode using the namespace provided.</p>
 						<p>The <code>@Invokable</code> decorator let Convector know all the available methods in this controller. You can probably have more methods in this class, but not all of them are exposed in the chaincode API</p>
 						<p>Finally, the <code>@Param</code> decorator parses the arguments coming in the transactions to the appropriate schema you define. You can also use Models as schemas and they will be instantiated and validated for you.</p>
+						<h2 id="how-do-controllers-work-">How do Controllers work?</h2>
+						<p>After the chaincode is installed and instantiated in the peers, the method <a href="../classes/convector_core_chaincode.chaincode.html#initcontrollers">Chaincode.initControllers</a> is invoked. This method is responsible of iterating over all the controllers specified for the chaincode, imoport them, instantiate all of them and geister all its <code>@Invokable</code> methods in the chaincode to be accesible from the outside. In order to avoid method collitions between multiple controllers, the functions are registered under a namespace, the controller name provided in the <code>@Controller</code> decorator. All the methods get registered in the blokchain using the name <code>{controller}_{method}</code>.</p>
+						<h2 id="anatomy-of-a-controller">Anatomy of a Controller</h2>
+						<p>Controllers are meant for you to validate permissions and update models. It is very usual (but not strict) that you&#39;ll have 3 main sections in your controller bodies:</p>
+						<ul>
+							<li>Validation - Check for permissions or other conditionals that might end up in throwing an error and cancelling the transaction</li>
+							<li>Modification</li>
+							<li>Store</li>
+						</ul>
+						<pre><code class="lang-typescript"><span class="hljs-meta">@Controller</span>(<span class="hljs-string">'token'</span>)
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TokenController <span class="hljs-keyword">extends</span> ConvectorController {
+  <span class="hljs-meta">@Invokable</span>()
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> transfer(
+    <span class="hljs-meta">@Param</span>(yup.string()) to: <span class="hljs-built_in">string</span>,
+    <span class="hljs-meta">@Param</span>(yup.number()) amount: <span class="hljs-built_in">number</span>
+  ) {
+    <span class="hljs-keyword">const</span> token = <span class="hljs-keyword">await</span> Token.getOne(<span class="hljs-string">'TKN'</span>);
+
+    <span class="hljs-comment">// Validation phase</span>
+    <span class="hljs-keyword">if</span> (token.balances[<span class="hljs-keyword">this</span>.sender] &lt; amount) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Sender does not have enough founds'</span>);
+    }
+
+    <span class="hljs-comment">// Modification phase</span>
+    token.balances[<span class="hljs-keyword">this</span>.sender] -= amount;
+    token.balances[to] += amount;
+
+    <span class="hljs-comment">// Store</span>
+    <span class="hljs-keyword">await</span> token.save();
+  }
+}
+</code></pre>
+						<h2 id="do-and-don-ts">Do and Don&#39;ts</h2>
+						<p><strong>Do</strong> declare new public or private methods in the class to have common logic.
+						<strong>Don&#39;t</strong> call another <code>@Invokable</code> method directly from your controller, this will mess up the arguments since we&#39;re expecting some aditional parameters from the blockchain and not the ones you declare.</p>
+						<p><strong>Do</strong> store information in blockchain using models.
+						<strong>Don&#39;t</strong> use any instance property inside a controller. The instance properties here are reset every time the controller is instantiated again.</p>
+						<p><strong>Do</strong> use <code>this.sender</code> as a way to identify the tx sender and validate permissions.
+						<strong>Don&#39;t</strong> trust any parameter in your function as an identity validation, since anyone could have invoked you and moked that param.</p>
+						<hr>
+						<hr>
+						<p>Created with <span style="color: red;">♥</span> by <a href="http://worldsibu.com/">WorldSibu</a></p>
+						<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+						<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a></p>
+						<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+						<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+						<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
+						<script async defer src="https://buttons.github.io/buttons.js"></script>
 					</div>
 				</div>
 			</section>

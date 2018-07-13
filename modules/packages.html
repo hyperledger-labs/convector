@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Peer | Convector Framework</title>
+	<title>Packages | Convector Framework</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_worldsibu_convector_common_fabric_helper.html">@worldsibu/convector-common-fabric-helper</a>
-				</li>
-				<li>
-					<a href="_worldsibu_convector_common_fabric_helper.peer.html">Peer</a>
+					<a href="packages.html">Packages</a>
 				</li>
 			</ul>
-			<h1>Interface Peer</h1>
+			<h1>External module Packages</h1>
 		</div>
 	</div>
 </header>
@@ -71,63 +68,63 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">Peer</span>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_worldsibu_convector_common_fabric_helper.peer.html#events" class="tsd-kind-icon">events</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_worldsibu_convector_common_fabric_helper.peer.html#msp" class="tsd-kind-icon">msp</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_worldsibu_convector_common_fabric_helper.peer.html#url" class="tsd-kind-icon">url</a></li>
-							</ul>
-						</section>
+					<div class="lead">
+						<h2 id="guides">Guides</h2>
+						<ul>
+							<li><a href="getting_started.html">Getting-Started</a></li>
+							<li><a href="packages.html">Packages</a></li>
+							<li><a href="models.html">Models</a></li>
+							<li><a href="controllers.html">Controllers</a></li>
+							<li><a href="chaincodemanger.html">ChaincodeManger</a></li>
+							<li><a href="devenv.html">DevEnv</a></li>
+						</ul>
+						<h1 id="packages">Packages</h1>
+						<p><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></p>
+						<p>Here&#39;s the official list of Convector packages:</p>
+						<h2 id="core">Core</h2>
+						<hr>
+						<ul>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-model">@worldsibu/convector-core-model</a> - The base model and decorators</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-storage">@worldsibu/convector-core-storage</a> - The base storage for models</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-controller">@worldsibu/convector-core-controller</a> - The base controller and decorators</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-adapter">@worldsibu/convector-core-adapter</a> - The base adapter for controllers</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode">@worldsibu/convector-core-chaincode</a> - The base chaincode to mount controllers on top</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-errors">@worldsibu/convector-core-errors</a> - The core errors</li>
+						</ul>
+						<h2 id="adapters">Adapters</h2>
+						<hr>
+						<ul>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-adapter-mock">@worldsibu/convector-adapter-mock</a> - A controller adapter for unit testing</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-adapter-fabric">@worldsibu/convector-adapter-fabric</a> - A controller adapter for hyperledger fabric</li>
+						</ul>
+						<h2 id="storage">Storage</h2>
+						<hr>
+						<ul>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-storage-stub">@worldsibu/convector-storage-stub</a> - A fabric stub storage for models communication with the blockchain</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-storage-couchdb">@worldsibu/convector-storage-couchdb</a> - A couchdb storage for models communication with a database</li>
+						</ul>
+						<h2 id="tools">Tools</h2>
+						<hr>
+						<ul>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-tool-dev-env">@worldsibu/convector-tool-dev-env</a> - A dev environment ready with 2 organizations, 3 users each, one peer, 2 CAs and 1 orderer</li>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-tool-chaincode-manager">@worldsibu/convector-tool-chaincode-manager</a> - A tool to pack and deploy chaincodes using convector</li>
+						</ul>
+						<h2 id="common">Common</h2>
+						<hr>
+						<ul>
+							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-common-fabric-helper">@worldsibu/convector-common-fabric-helper</a> - A library to interact with hyperledger fabric. Meant for internal use but can help you with your application as well</li>
+						</ul>
+						<hr>
+						<hr>
+						<p>Created with <span style="color: red;">♥</span> by <a href="http://worldsibu.com/">WorldSibu</a></p>
+						<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+						<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a></p>
+						<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+						<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+						<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
+						<script async defer src="https://buttons.github.io/buttons.js"></script>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="events" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> events</h3>
-					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in @worldsibu/convector-common-fabric-helper/src/models.ts:6</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="msp" class="tsd-anchor"></a>
-					<h3>msp</h3>
-					<div class="tsd-signature tsd-kind-icon">msp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in @worldsibu/convector-common-fabric-helper/src/models.ts:5</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="url" class="tsd-anchor"></a>
-					<h3>url</h3>
-					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in @worldsibu/convector-common-fabric-helper/src/models.ts:4</li>
-						</ul>
-					</aside>
-				</section>
+				</div>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -137,42 +134,12 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_worldsibu_convector_common_fabric_helper.html">@worldsibu/convector-<wbr>common-<wbr>fabric-<wbr>helper</a>
+						<a href="packages.html">Packages</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_worldsibu_convector_common_fabric_helper.clienthelper.html" class="tsd-kind-icon">Client<wbr>Helper</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_worldsibu_convector_common_fabric_helper.admin.html" class="tsd-kind-icon">Admin</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_worldsibu_convector_common_fabric_helper.clientconfig.html" class="tsd-kind-icon">Client<wbr>Config</a>
-					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_worldsibu_convector_common_fabric_helper.peer.html" class="tsd-kind-icon">Peer</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_worldsibu_convector_common_fabric_helper.peer.html#events" class="tsd-kind-icon">events</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_worldsibu_convector_common_fabric_helper.peer.html#msp" class="tsd-kind-icon">msp</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_worldsibu_convector_common_fabric_helper.peer.html#url" class="tsd-kind-icon">url</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-kind-icon">Tx<wbr>Result</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

@@ -90,16 +90,18 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#channel" class="tsd-kind-icon">channel</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#client" class="tsd-kind-icon">client</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#user" class="tsd-kind-icon">user</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#channel" class="tsd-kind-icon">channel</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#orderer" class="tsd-kind-icon">orderer</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#peers" class="tsd-kind-icon">peers</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#channels" class="tsd-kind-icon">channels</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#networkconfig" class="tsd-kind-icon">network<wbr>Config</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#organizations" class="tsd-kind-icon">organizations</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -113,6 +115,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#sendinstantiateproposal" class="tsd-kind-icon">send<wbr>Instantiate<wbr>Proposal</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#sendtransactionproposal" class="tsd-kind-icon">send<wbr>Transaction<wbr>Proposal</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#sendupgradeproposal" class="tsd-kind-icon">send<wbr>Upgrade<wbr>Proposal</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#usechannel" class="tsd-kind-icon">use<wbr>Channel</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#useuser" class="tsd-kind-icon">use<wbr>User</a></li>
 							</ul>
 						</section>
 					</div>
@@ -130,7 +134,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:48</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:45</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -147,9 +151,19 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="channel" class="tsd-anchor"></a>
+					<h3>channel</h3>
+					<div class="tsd-signature tsd-kind-icon">channel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Channel</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:12</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="client" class="tsd-anchor"></a>
 					<h3>client</h3>
-					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Client</span><span class="tsd-signature-symbol"> =&nbsp;new Client()</span></div>
+					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Client</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:9</li>
@@ -162,7 +176,17 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_worldsibu_convector_common_fabric_helper.clientconfig.html" class="tsd-signature-type">ClientConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:50</li>
+							<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:11</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="user" class="tsd-anchor"></a>
+					<h3>user</h3>
+					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">User</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:10</li>
 						</ul>
 					</aside>
 				</section>
@@ -170,53 +194,53 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="channel" class="tsd-anchor"></a>
-					<h3>channel</h3>
+					<a name="channels" class="tsd-anchor"></a>
+					<h3>channels</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> channel<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Channel</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> channels<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:24</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:26</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Channel</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="orderer" class="tsd-anchor"></a>
-					<h3>orderer</h3>
+					<a name="networkconfig" class="tsd-anchor"></a>
+					<h3>network<wbr>Config</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> orderer<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Orderer</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> networkConfig<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:14</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:41</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Orderer</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="peers" class="tsd-anchor"></a>
-					<h3>peers</h3>
+					<a name="organizations" class="tsd-anchor"></a>
+					<h3>organizations</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> peers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Peer</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> organizations<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:37</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:15</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Peer</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -227,15 +251,21 @@
 					<a name="init" class="tsd-anchor"></a>
 					<h3>init</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>initKeyStore<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:52</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:59</li>
 								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> initKeyStore: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -244,13 +274,13 @@
 					<a name="invoke" class="tsd-anchor"></a>
 					<h3>invoke</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">invoke<span class="tsd-signature-symbol">(</span>fcn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, chaincodeId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">invoke<span class="tsd-signature-symbol">(</span>fcn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, chaincodeId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, adminOrUser<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:82</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:119</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -262,10 +292,13 @@
 									<h5>chaincodeId: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> adminOrUser: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;this.config.user</span></h5>
+								</li>
+								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -273,13 +306,13 @@
 					<a name="listentx" class="tsd-anchor"></a>
 					<h3>listen<wbr>Tx</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">listen<wbr>Tx<span class="tsd-signature-symbol">(</span>txId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">listen<wbr>Tx<span class="tsd-signature-symbol">(</span>txId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txlistenerresult.html" class="tsd-signature-type">TxListenerResult</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:100</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:148</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -288,7 +321,7 @@
 									<h5>txId: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txlistenerresult.html" class="tsd-signature-type">TxListenerResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -296,13 +329,13 @@
 					<a name="processproposal" class="tsd-anchor"></a>
 					<h3>process<wbr>Proposal</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">process<wbr>Proposal<span class="tsd-signature-symbol">(</span>proposalResponse<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, txId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TransactionId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">process<wbr>Proposal<span class="tsd-signature-symbol">(</span>proposalResponse<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:87</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:135</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -316,13 +349,13 @@
 										<li class="tsd-parameter">
 											<h5>proposal<wbr>Responses<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ProposalResponse</span><span class="tsd-signature-symbol">[]</span></h5>
 										</li>
+										<li class="tsd-parameter">
+											<h5>tx<wbr>Id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TransactionId</span></h5>
+										</li>
 									</ul>
 								</li>
-								<li>
-									<h5>txId: <span class="tsd-signature-type">TransactionId</span></h5>
-								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -330,13 +363,13 @@
 					<a name="processtx" class="tsd-anchor"></a>
 					<h3>process<wbr>Tx</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">process<wbr>Tx<span class="tsd-signature-symbol">(</span>txRequest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BroadcastResponse</span><span class="tsd-signature-symbol">&gt;</span>, txListener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">process<wbr>Tx<span class="tsd-signature-symbol">(</span>txRequest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BroadcastResponse</span><span class="tsd-signature-symbol">&gt;</span>, txListener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txlistenerresult.html" class="tsd-signature-type">TxListenerResult</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:211</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:254</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -345,10 +378,10 @@
 									<h5>txRequest: <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BroadcastResponse</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>txListener: <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>txListener: <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txlistenerresult.html" class="tsd-signature-type">TxListenerResult</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-signature-type">TxResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -362,7 +395,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:127</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:173</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -381,13 +414,13 @@
 					<a name="sendtransactionproposal" class="tsd-anchor"></a>
 					<h3>send<wbr>Transaction<wbr>Proposal</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">send<wbr>Transaction<wbr>Proposal<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Transaction<wbr>Proposal<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, useAdmin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:183</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:227</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -396,6 +429,9 @@
 									<h5>request: <span class="tsd-signature-type">object</span></h5>
 									<ul class="tsd-parameters">
 									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> useAdmin: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -412,7 +448,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:155</li>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:200</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -424,6 +460,52 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="usechannel" class="tsd-anchor"></a>
+					<h3>use<wbr>Channel</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">use<wbr>Channel<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:111</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="useuser" class="tsd-anchor"></a>
+					<h3>use<wbr>User</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">use<wbr>User<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in @worldsibu/convector-common-fabric-helper/src/client.helper.ts:106</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -442,6 +524,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="../enums/_worldsibu_convector_common_fabric_helper.status.html" class="tsd-kind-icon">Status</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
@@ -451,19 +536,25 @@
 								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#channel" class="tsd-kind-icon">channel</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#client" class="tsd-kind-icon">client</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#config" class="tsd-kind-icon">config</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#channel" class="tsd-kind-icon">channel</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#user" class="tsd-kind-icon">user</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#orderer" class="tsd-kind-icon">orderer</a>
+								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#channels" class="tsd-kind-icon">channels</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#peers" class="tsd-kind-icon">peers</a>
+								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#networkconfig" class="tsd-kind-icon">network<wbr>Config</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#organizations" class="tsd-kind-icon">organizations</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#init" class="tsd-kind-icon">init</a>
@@ -489,18 +580,21 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#sendupgradeproposal" class="tsd-kind-icon">send<wbr>Upgrade<wbr>Proposal</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#usechannel" class="tsd-kind-icon">use<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_worldsibu_convector_common_fabric_helper.clienthelper.html#useuser" class="tsd-kind-icon">use<wbr>User</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_worldsibu_convector_common_fabric_helper.admin.html" class="tsd-kind-icon">Admin</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_worldsibu_convector_common_fabric_helper.clientconfig.html" class="tsd-kind-icon">Client<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_worldsibu_convector_common_fabric_helper.peer.html" class="tsd-kind-icon">Peer</a>
+						<a href="../interfaces/_worldsibu_convector_common_fabric_helper.txlistenerresult.html" class="tsd-kind-icon">Tx<wbr>Listener<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_worldsibu_convector_common_fabric_helper.txresult.html" class="tsd-kind-icon">Tx<wbr>Result</a>
