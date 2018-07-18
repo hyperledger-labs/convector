@@ -44,8 +44,8 @@ function setanchor() {
 function registeradmin() {
   node $ROOT_DIR/dist/command.js add-admin \
     admin adminpw $2 \
-      -k $CONVECTOR_DIR/.hfc-$1 \
-      -p $CONVECTOR_CONFIG/$1.network-profile.yaml
+      -k "$CONVECTOR_DIR/.hfc-$1" \
+      -p "$CONVECTOR_CONFIG/$1.network-profile.yaml"
 }
 
 function registeruser() {
@@ -53,8 +53,8 @@ function registeruser() {
     $1 admin $4 \
       -a $2.$3 \
       -r client \
-      -k $CONVECTOR_DIR/.hfc-$2 \
-      -p $CONVECTOR_CONFIG/$2.network-profile.yaml
+      -k "$CONVECTOR_DIR/.hfc-$2" \
+      -p "$CONVECTOR_CONFIG/$2.network-profile.yaml"
 }
 
 createchannel peer0.org1.example.com ch1 ch2
