@@ -1,3 +1,12 @@
+## Guides
+
+- [[Getting-Started]]
+- [[Packages]]
+- [[Models]]
+- [[Controllers]]
+- [[ChaincodeManger]]
+- [[DevEnv]]
+
 # Getting Started with Convector
 
 ## Requirements
@@ -63,3 +72,18 @@ After installing a chaincode you can do 2 things:
 
 - `chaincode-manager --config ./chaincode.config.json upgrade <chaincode name> <next version number>`
 - `chaincode-manager --config ./chaincode.config.json invoke --user <username> <chaincode name> <controller name> <function name> [...args]` - By default, the dev environment has 2 users, admin and user1
+
+----
+----
+
+Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
+
+[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
+[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
+
+[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+<a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
