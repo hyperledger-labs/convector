@@ -10,7 +10,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bin": {
     "chaincode-manager": "./dist/src/command.js"
   },

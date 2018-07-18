@@ -2,7 +2,7 @@
   "name": "@worldsibu/convector-adapter-fabric",
   "version": "1.1.3",
   "description": "Controller adapter to use with fabric-client SDK",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [
