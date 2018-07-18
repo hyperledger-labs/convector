@@ -1,3 +1,12 @@
+## Guides
+
+- [[Getting-Started]]
+- [[Packages]]
+- [[Models]]
+- [[Controllers]]
+- [[ChaincodeManger]]
+- [[DevEnv]]
+
 ## Models
 
 We define models as assets you interact with in a blockchain
@@ -116,3 +125,18 @@ All models are required to have an `id` and a `type` field. The declaration of b
 - To delete the model content in the blockchain you must use `async myModel.delete()` however, notice that a delete in blockchain terms, is just removing the current value from the state, but the historical data will still be there and cannot be removed
 - To clone a model you can use `myModel.clone()`
 - To convert a model to json you can do `JSON.stringify(myModel)` or `myModel.toJSON()`
+
+----
+----
+
+Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
+
+[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
+[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
+
+[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+<a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>

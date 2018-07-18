@@ -1,3 +1,12 @@
+## Guides
+
+- [[Getting-Started]]
+- [[Packages]]
+- [[Models]]
+- [[Controllers]]
+- [[ChaincodeManger]]
+- [[DevEnv]]
+
 # Development Environment
 
 We have a tool to manage your dev enviornmnet easily with some commands.
@@ -29,3 +38,18 @@ user-registry add-user [username] [admin-username] [msp] \
   --keystore ./.hfc-key-store \
   --profile ./network-profile.yaml
 ```
+
+----
+----
+
+Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
+
+[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
+[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
+
+[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+<a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
