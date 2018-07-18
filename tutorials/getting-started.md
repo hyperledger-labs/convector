@@ -1,11 +1,11 @@
 ## Guides
 
-- [[Getting-Started]]
-- [[Packages]]
-- [[Models]]
-- [[Controllers]]
-- [[ChaincodeManger]]
-- [[DevEnv]]
+- [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
+- [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
+- [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
+- [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
+- [ChaincodeManger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
+- [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
 
 # Getting Started with Convector
 
@@ -80,10 +80,7 @@ Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsib
 
 [![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
 [![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
+[![Discord](https://img.shields.io/discord/469152206638284800.svg)](https://discord.gg/twRwpWt)
 
 [![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
-<a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a>
-
-<script async defer src="https://buttons.github.io/buttons.js"></script>
