@@ -15,9 +15,9 @@ program
   });
 
 program
-  .command('install <name> <version> <path>')
+  .command('install <path> <name> <version>')
   .option('-c, --config <path>', 'Configuration path', path => resolve(process.cwd(), path))
-  .action(async (name: string, version: string, path: string, cmd: any) => {
+  .action(async (path: string, name: string, version: string, cmd: any) => {
     const manager = Manager.fromConfig(cmd.config);
 
     await manager.init();
