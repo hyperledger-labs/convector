@@ -1,8 +1,9 @@
 # CONVECTOR
 
 [![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
-[![Newsletter ](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
+[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
 [![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
+[![Discord](https://img.shields.io/discord/469152206638284800.svg)](https://discord.gg/twRwpWt)
 
 [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -59,9 +60,4 @@ A blockchain (for the developer's eyes) is no more than a data layer protected b
 
 * Don't hesitate to include recommendations, feature requests or bugs in our [issues section](https://github.com/worldsibu/convector/issues).
 * To keep up with advances and news on Convector subscribe to our [Newsletter](https://worldsibu.io/subscribe/)
-
-<a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a>
-
-<a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow @worldsibu</a>
-
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+* If you need help and chat with our team, join our [Discord](https://discord.gg/twRwpWt)
