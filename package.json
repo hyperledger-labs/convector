@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "Convector Monorepo",
   "author": "Word Sibu",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "scripts": {
     "================= Life cycle =================": "==================================",
     "install": "npm-run-all -s lerna:install",
