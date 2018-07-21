@@ -24,7 +24,8 @@ Dependencies that you need in your project:
 Then include to your projects the Convector components.
 
 `npm i -S @worldsibu/convector-{core-{model,storage,controller,adapter},adapter-fabric,storage-{stub,couchdb}}`
-`npm i -D @worldsibu/convector-adapter-mock,tool-{dev-env,chaincode-manager}}`
+
+`npm i -D @worldsibu/convector-{adapter-mock,tool-{dev-env,chaincode-manager}}`
 
 ## About Convector
 Convector is a framework designed to be used by javascript developers which aims to develop in Hyperledger Fabric fast and easily.
