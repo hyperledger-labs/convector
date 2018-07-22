@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-core-storage",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Convector Core Storage class. This is not intended to be used as a provider but as an abstract interface of one",
   "license": "Apache-2.0",
   "main": "./dist/src/index.js",
@@ -22,7 +22,7 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@worldsibu/convector-core-errors": "1.1.4",
+    "@worldsibu/convector-core-errors": "1.1.5",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
