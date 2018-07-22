@@ -2,7 +2,7 @@
 
 import { dirname, join, resolve } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
-import { copy, rmdir, mkdirp, ensureDir, writeFile, remove } from 'fs-extra';
+import { copy, emptyDir, mkdirp, ensureDir, writeFile, remove } from 'fs-extra';
 import { ClientConfig, ClientHelper } from '@worldsibu/convector-common-fabric-helper';
 import { IConfig as ControllersConfig, Config, KV } from '@worldsibu/convector-core-chaincode';
 
@@ -181,7 +181,7 @@ export class Manager extends ClientHelper {
     const packagesFolderPath = join(output, 'packages');
 
     try {
-      await rmdir(packagesFolderPath);
+      await emptyDir(packagesFolderPath);
       await mkdirp(packagesFolderPath);
     } catch (e) {
       // empty
@@ -198,6 +198,12 @@ export class Manager extends ClientHelper {
 
       await mkdirp(join(packagesFolderPath, name));
       await copy(packagePath, join(packagesFolderPath, name));
+
+      try {
+        await emptyDir(join(packagesFolderPath, name, 'node_modules'));
+      } catch (e) {
+        // empty
+      }
 
       return { ...packages, [name]: `file:./packages/${name}` };
     }, Promise.resolve({} as KV)).catch(e => {console.log('Failed to resolve local references', e); return {};});

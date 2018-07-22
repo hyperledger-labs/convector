@@ -54,7 +54,7 @@ program
     const manager = Manager.fromConfig(cmd.config);
 
     await manager.init();
-    await manager.invoke(name, `${controller}_${fn}`, cmd.user, ...args);
+    await manager.invoke(`${controller}_${fn}`, name, cmd.user, ...args);
   });
 
 program.parse(process.argv);
