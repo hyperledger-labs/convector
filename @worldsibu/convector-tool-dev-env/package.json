@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-tool-dev-env",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Development environment",
   "main": "./dist/index.js",
   "license": "Apache-2.0",
@@ -32,7 +32,7 @@
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'"
   },
   "dependencies": {
-    "@worldsibu/convector-common-fabric-helper": "1.1.5",
+    "@worldsibu/convector-common-fabric-helper": "1.1.6",
     "commander": "^2.16.0",
     "fabric-ca-client": "1.1.2",
     "fabric-client": "1.1.2",
