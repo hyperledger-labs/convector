@@ -1,6 +1,7 @@
 ## Guides
 
 - [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
+- [A typical starter project](https://github.com/worldsibu/convector/blob/develop/tutorials/starter-project.md)
 - [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
 - [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
 - [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
