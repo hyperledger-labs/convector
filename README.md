@@ -21,15 +21,34 @@ Dependencies that you need in your project:
 * [yup](https://www.npmjs.com/package/yup)
 * [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
 
-Then include to your projects the Convector components.
+Then include to your projects the Convector components depending on the layer you are working on.
 
-`npm i -S @worldsibu/convector-{core-{model,storage,controller,adapter},adapter-fabric,storage-{stub,couchdb}}`
+A typical distribution and usage of the components goes as follow (asumming you have a mono-repo, if not, then distribute according to the "why" column which explains what that package installation will give you):
 
-`npm i -D @worldsibu/convector-{adapter-mock,tool-{dev-env,chaincode-manager}}`
+| Project/Layer | Why | Command |
+| --- | --- | --- |
+| Root of your project | To have a dev env and the utility that will let you install, upgrade, invoke and so on, the chaincodes. | `npm install -D @worldsibu/convector-tool-{dev-env,chaincode-manager}` |
+| Root chaincode project. E.g.: chaincodes/ | So that you can share settings between your multiple chaincodes, such as development environment, tests and testing scripts, blockchain installation setup (what to install, where), etc. | `npm install -D @worldsibu/convector-{adapter-mock,tool-{dev-env,chaincode-manager}} chai mocha @types/chai @types/mocha ts-node` |
+| At for each of your chaincode projects. E.g.: chaincodes/cc-token | Each chaincode can be a separate project so that you don't have to carry everything when including in another layer of your stack. |  `npm install -SE @worldsibu/convector-core-{model,controller} && npm i -S yup reflect-metadata && npm i -D @types/yup` |
+| At your backend / api | It typically calls the nodes (peers) of your blockchain, but it may call the World State or other services as well. |  Include each of your chaincode projects, they will carry the basic dependencies `npm install -SE @worldsibu/convector-{adapter-fabric,storage-couchdb} @types/bytebuffer` |
+| At the front end | Here you may be calling your backend/api server, it is great to have the interfaces and structures coming right from the chaincodes layer so that you don't have to copy everything. |  Include each of your chaincode projects, they will carry the basic dependencies. |
+
+[If you want to see this distribution in action see this project! It is also a easy way for you to start a new project](https://github.com/worldsibu/convector-example-drug-supply-chain)
+
+## Guides
+
+- [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
+- [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
+- [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
+- [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
+- [Chaincode Manger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
+- [Development Environment](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
+
+
 
 ## About Convector
-Convector is a framework designed to be used by javascript developers which aims to develop in Hyperledger Fabric fast and easily.
-The framework is made of different blocks, described below:
+Convector is a framework designed to be used by javascript developers that aim to develop in Hyperledger Fabric (for now, more support on other technologies coming) fast and easily.
+The framework is made up of different blocks, described below:
 
 ### Convector Core
 Formed by all the `@worldsibu/convector-core-*` packages. It provides all the necessary code to write contract specifications using the *Model/Controller* pattern.
@@ -55,6 +74,7 @@ A blockchain (for the developer's eyes) is no more than a data layer protected b
 
 * [Want to see how to create a ERC-20 compatible token on a permissioned blockchain?](https://github.com/worldsibu/convector-example-token)
 * [Creating a project from scratch with Convector](https://github.com/worldsibu/convector-example-marketplace)
+* [Creating a fullstack-project from scratch with Convector](https://github.com/worldsibu/convector-example-drug-supply-chain)
 * About the creators: [WorldSibu](https://worldsibu.io)
 
 ## Support
