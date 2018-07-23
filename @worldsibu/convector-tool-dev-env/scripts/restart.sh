@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ROOT_DIR=$(dirname "$0")/..
 
 $ROOT_DIR/scripts/stop.sh
