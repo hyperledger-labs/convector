@@ -94,7 +94,7 @@ controller.getMethods().forEach((method, i) => {
 
   // Proxy the call to the adapter
   method.setBodyText(writer =>
-    writer.writeLine(`await this.adapter.invoke(this.name, '${method.getName()}', ${params});`));
+    writer.writeLine(`await this.adapter.invoke(this.name, '${method.getName()}', undefined, ${params});`));
 
   method.setOrder(i + 2);
 });
