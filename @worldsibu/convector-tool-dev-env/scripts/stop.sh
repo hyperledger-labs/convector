@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ROOT_DIR=$(dirname "$0")/..
 
 COMPOSE_PROJECT_NAME=net \
