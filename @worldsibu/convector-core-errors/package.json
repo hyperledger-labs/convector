@@ -28,7 +28,6 @@
     ]
   },
   "dependencies": {
-    "chalk": "^2.4.1",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
