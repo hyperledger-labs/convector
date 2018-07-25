@@ -1,12 +1,5 @@
 /** @module @worldsibu/convector-core-errors */
 
-import chalk from 'chalk';
-
-// Explicitly enable chalk by setting the env_var CHALK=true
-// Explicitly disable chalk by setting the env_var NOCHALK=true
-// The default is CHALK=true
-chalk.enabled = !!process.env.CHALK || !process.env.NOCHALK;
-
 export class BaseError extends Error {
   public original?: Error;
   public code = 'UNKNOWN';
@@ -44,12 +37,12 @@ export class BaseError extends Error {
 
   protected getMessage(original: string) {
     return `
-    ${chalk.bold(this.code)}
-    ${chalk.yellow(this.description)}
+    ${this.code}
+    ${this.description}
     ${this.explanation}
 
-    ${chalk.green('Original stack:')}
-    ${chalk.gray(original)}
+    Original stack:
+    ${original}
     `;
   }
 }
