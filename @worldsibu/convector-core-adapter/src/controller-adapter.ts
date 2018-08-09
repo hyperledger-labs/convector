@@ -16,7 +16,8 @@ export interface ControllerAdapter {
    *
    * @param controller The controller namespace
    * @param name The function name
+   * @param adminOrUser It the call must be peformed with the admin user or with a custom one
    * @param args The arguments for the function
    */
-  invoke(controller: string, name: string, ...args: any[]): Promise<any>;
+  invoke(controller: string, name: string, adminOrUser?: string|true, ...args: any[]): Promise<any>;
 }

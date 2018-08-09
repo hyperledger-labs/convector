@@ -57,7 +57,7 @@ controller.getProperties().forEach(prop => prop.remove());
 // Read the @Controller decorator and extract the name into a private property
 controller.addProperty({
   name: 'name',
-  scope: Scope.Private,
+  scope: Scope.Public,
   initializer: controller.getDecorator('Controller').getArguments()[0].getText()
 }).setOrder(0);
 
@@ -66,8 +66,13 @@ controller.addConstructor({
   parameters: [
     {
       name: 'adapter',
-      scope: Scope.Private,
+      scope: Scope.Public,
       type: 'ControllerAdapter'
+    }, {
+      name: 'user',
+      scope: Scope.Public,
+      type: 'string',
+      hasQuestionToken: true
     }
   ],
   bodyText: 'super()'
@@ -94,7 +99,7 @@ controller.getMethods().forEach((method, i) => {
 
   // Proxy the call to the adapter
   method.setBodyText(writer =>
-    writer.writeLine(`await this.adapter.invoke(this.name, '${method.getName()}', undefined, ${params});`));
+    writer.writeLine(`await this.adapter.invoke(this.name, '${method.getName()}', this.user, ${params});`));
 
   method.setOrder(i + 2);
 });
