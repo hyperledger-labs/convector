@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-common-fabric-helper",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Convector helper library for fabric communication",
   "license": "Apache-2.0",
   "main": "./dist/src/index.js",
