@@ -18,7 +18,7 @@ export class MockControllerAdapter implements ControllerAdapter {
     return Transform.bufferToObject(response) as any;
   }
 
-  public async invoke(controller: string, name: string, ...args: any[]) {
+  public async invoke(controller: string, name: string, adminOrUser?: string|true, ...args: any[]) {
     return await this.stub.mockInvoke(uuid(), [
       `${controller}_${name}`,
       ...args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg.toString())
