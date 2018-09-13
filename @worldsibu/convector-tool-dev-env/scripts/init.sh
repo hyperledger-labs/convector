@@ -1,5 +1,5 @@
 #!/bin/bash
-ROOT_DIR=$(dirname "$0")/..
+ROOT_DIR=$(dirname "${0}")/..
 USERS=3
 CONVECTOR_DIR="${CONVECTOR_DIR:-$PWD/.convector-dev-env}"
 CONVECTOR_CONFIG="${CONVECTOR_CONFIG:-$CONVECTOR_DIR/examples}"

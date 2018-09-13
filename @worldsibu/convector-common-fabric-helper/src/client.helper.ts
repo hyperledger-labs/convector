@@ -1,7 +1,9 @@
 /** @module @worldsibu/convector-common-fabric-helper */
+import { safeLoad } from 'js-yaml';
 import { resolve, join } from 'path';
 import * as Client from 'fabric-client';
-import { ensureDir, readdir, readFile } from 'fs-extra';
+import { Transform } from '@theledger/fabric-chaincode-utils';
+import { ensureDir, ensureFile, readdir, readFile } from 'fs-extra';
 
 import { ClientConfig, TxResult, TxListenerResult } from './models';
 
@@ -18,11 +20,14 @@ export class ClientHelper {
       return this._organizations;
     }
 
-    return this.channel.getOrganizations()
-      .map((org: any) => org.id as string);
+    return this.channel ?
+      this.channel.getOrganizations()
+        .map((org: any) => org.id as string) :
+      this.networkConfig.getOrganizations()
+        .map(org => org.getMspid());
   }
 
-  private _channels: (Client.Channel&{name:string})[];
+  private _channels: (Client.Channel & { name: string })[];
   public get channels() {
     if (this._channels) {
       return this._channels;
@@ -65,6 +70,9 @@ export class ClientHelper {
 
     // The client needs to create the user credentials based on the CA key/cert
     if (initKeyStore) {
+      const stateStore = await Client.newDefaultKeyValueStore({ path: this.config.keyStore });
+      this.client.setStateStore(stateStore);
+
       const cryptoSuite = Client.newCryptoSuite();
       const cryptoStore = Client.newCryptoKeyStore({ path: this.config.keyStore });
 
@@ -89,6 +97,38 @@ export class ClientHelper {
         }
       });
     }
+
+    if (typeof this.config.networkProfile === 'string') {
+      try {
+        const profileStr =
+          await readFile(resolve(process.cwd(), this.config.networkProfile), 'utf8');
+
+        if (/\.json$/.test(this.config.networkProfile)) {
+          this.config.networkProfile = JSON.parse(profileStr);
+        } else {
+          this.config.networkProfile = safeLoad(profileStr);
+        }
+      } catch (e) {
+        throw new Error(
+          `Failed to read or parse the network profile at '${this.config.networkProfile}', ${e.toString()}`
+        );
+      }
+    }
+
+    const { organizations } = this.config.networkProfile as any;
+
+    await Promise
+      .all(Object.keys(organizations)
+        .map(async name => {
+          const org = organizations[name];
+
+          if (org.adminPrivateKey && org.signedCert) {
+            org.adminPrivateKey.path = await this.getLonelyFile(org.adminPrivateKey.path);
+            org.signedCert.path = await this.getLonelyFile(org.signedCert.path);
+          }
+        }));
+
+    // add here this.client.setTlsClientCertAndKey
 
     this.client.loadFromConfig(this.config.networkProfile);
 
@@ -119,7 +159,7 @@ export class ClientHelper {
   public async invoke(
     fcn: string,
     chaincodeId: string,
-    adminOrUser: string|true = this.config.user,
+    adminOrUser: string | true = this.config.user,
     ...args: any[]
   ) {
     const useAdmin = adminOrUser === true;
@@ -138,11 +178,23 @@ export class ClientHelper {
       proposalResponses: Client.ProposalResponse[],
       txId: Client.TransactionId
     }
-  ) {
+  ): Promise<TxResult> {
     const txRequest = this.channel.sendTransaction(proposalResponse);
     const txListener = this.listenTx(proposalResponse.txId.getTransactionID());
 
-    return await this.processTx(txRequest, txListener);
+    const txResult = await this.processTx(txRequest, txListener);
+    let result: any = proposalResponse.proposalResponses[0].response.payload;
+
+    try {
+      result = Transform.bufferToObject(result);
+    } catch (err) {
+      result = Transform.bufferToString(result);
+    }
+
+    return {
+      ...txResult,
+      result
+    };
   }
 
   public async listenTx(txId: string): Promise<TxListenerResult> {
@@ -178,7 +230,7 @@ export class ClientHelper {
     request.args = request.args.map(arg =>
       typeof arg === 'object' ? JSON.stringify(arg) : arg.toString());
 
-    const [ proposalResponses, proposal ] =
+    const [proposalResponses, proposal] =
       await this.channel.sendInstantiateProposal(
         { ...request, txId } as Client.ChaincodeInstantiateUpgradeRequest,
         this.config.txTimeout
@@ -205,7 +257,7 @@ export class ClientHelper {
     request.args = request.args.map(arg =>
       typeof arg === 'object' ? JSON.stringify(arg) : arg.toString());
 
-    const [ proposalResponses, proposal ] =
+    const [proposalResponses, proposal] =
       await await this.channel.sendUpgradeProposal(
         { ...request, txId } as Client.ChaincodeInstantiateUpgradeRequest,
         this.config.txTimeout
@@ -229,10 +281,10 @@ export class ClientHelper {
   }, useAdmin = false) {
     const txId = this.client.newTransactionID(useAdmin);
 
-    request.args = request.args.map(arg =>
+    request.args = (request.args || []).map(arg =>
       typeof arg === 'object' ? JSON.stringify(arg) : arg.toString());
 
-    const [ proposalResponses, proposal ] =
+    const [proposalResponses, proposal] =
       await this.channel.sendTransactionProposal(
         { ...request, txId } as Client.ChaincodeInvokeRequest,
         this.config.txTimeout
@@ -255,7 +307,7 @@ export class ClientHelper {
     txRequest: Promise<Client.BroadcastResponse>,
     txListener: Promise<TxListenerResult>
   ): Promise<TxResult> {
-    const [ tx, response ] = await Promise.all([ txRequest, txListener ]);
+    const [tx, response] = await Promise.all([txRequest, txListener]);
 
     if (!tx || tx.status !== 'SUCCESS' || !response || response.code !== 'VALID') {
       const err = new Error(`Transaction failed. Status ${tx.status}. Response ${response.code}`);
@@ -285,5 +337,31 @@ export class ClientHelper {
     }
 
     return await readFile(join(dirPath, content[0]), 'utf8');
+  }
+
+  private async getLonelyFile(folderPath: string): Promise<string> {
+    const isFile = await ensureFile(folderPath)
+      .then(() => Promise.resolve(true))
+      .catch(() => Promise.resolve(false));
+
+    const isDir = await ensureDir(folderPath)
+      .then(() => Promise.resolve(true))
+      .catch(() => Promise.resolve(false));
+
+    if (isFile) {
+      return folderPath;
+    }
+
+    if (!isDir) {
+      throw new Error(`Path '${folderPath}' neither a file or a directory`);
+    }
+
+    const content = await readdir(folderPath);
+
+    if (content.length !== 1) {
+      throw new Error(`Directory '${folderPath}' must contain only one file, but contains ${content.length}`);
+    }
+
+    return join(folderPath, content[0]);
   }
 }

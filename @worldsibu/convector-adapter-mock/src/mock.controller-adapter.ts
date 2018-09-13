@@ -19,9 +19,11 @@ export class MockControllerAdapter implements ControllerAdapter {
   }
 
   public async invoke(controller: string, name: string, adminOrUser?: string|true, ...args: any[]) {
-    return await this.stub.mockInvoke(uuid(), [
+    const response = await this.stub.mockInvoke(uuid(), [
       `${controller}_${name}`,
       ...args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg.toString())
     ]);
+
+    return Transform.bufferToObject(response.payload);
   }
 }

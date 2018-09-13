@@ -21,6 +21,8 @@
     "lerna:test:module": "f() { lerna exec --scope @worldsibu/$1 -- npm run test -- --inspect$2; }; f",
     "================= PUBLISH =================": "==================================",
     "publish:ci": "lerna publish --cd-version=prerelease --force-publish=* --canary --skip-git --yes",
+    "prepublishOnly": "echo 'BE CAREFULL, this will publish a new official version in NPM!!!'",
+    "publish": "lerna publish --force-publish=*",
     "================= DOCS =================": "==================================",
     "docs:watch": "npm-run-all -p docs:serve watch",
     "docs:start": "npm-run-all -s docs:generate docs:serve",

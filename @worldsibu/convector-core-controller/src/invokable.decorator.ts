@@ -120,8 +120,12 @@ export function getInvokables(controller: { new(...args: any[]): any }): any {
 
   try {
     namespace = Reflect.getMetadata(controllerMetadataKey, controller);
+
+    if (!namespace) {
+      throw new TypeError();
+    }
   } catch (e) {
-    throw new ControllerNamespaceMissingError(e, '');
+    throw new ControllerNamespaceMissingError(e, controller.name);
   }
 
   try {
