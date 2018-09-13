@@ -1,5 +1,5 @@
 #!/bin/bash
-ROOT_DIR=$(dirname "$0")/..
+ROOT_DIR=$(dirname "${0}")/..
 BIN=$ROOT_DIR/bin
 CONFIG=$ROOT_DIR/config
 NETWORK_OBJECTS=$ROOT_DIR/network-objects

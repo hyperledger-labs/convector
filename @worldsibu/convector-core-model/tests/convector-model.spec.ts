@@ -11,6 +11,7 @@ import { ConvectorModel } from '../src/convector-model';
 
 class TestStorage extends BaseStorage {
   private storage = new Map();
+  private _history = new Map();
 
   public async query(query: any): Promise<any[]> {
     return Array
@@ -25,10 +26,24 @@ class TestStorage extends BaseStorage {
 
   public async set(id: string, content: any) {
     this.storage.set(id, content);
+    this._history.set(id, (this._history.get(id) || []).concat({
+      value: JSON.parse(JSON.stringify(content)),
+      tx_id: undefined,
+      timestamp: Date.now
+    }));
   }
 
   public async delete(id: string) {
     this.storage.delete(id);
+    this._history.set(id, (this._history.get(id) || []).push({
+      value: undefined,
+      tx_id: undefined,
+      timestamp: Date.now
+    }));
+  }
+
+  public async history(id: string) {
+    return this._history.get(id);
   }
 }
 
@@ -152,5 +167,22 @@ describe('Convector Model', () => {
 
     expect(flatModel).to.include({ id: 'test', name: '1' });
     expect(flatModel).not.to.include({ extra: true });
+  });
+
+  it('should extract the history', async () => {
+    const model = new TestModel({ id: 'history', name: '1' });
+    await model.save();
+
+    model.name = '2';
+    await model.save();
+
+    model.name = '3';
+    await model.save();
+
+    const history = await model.history();
+    expect(history).length(3);
+    expect(history[0].value.name).to.eq('1');
+    expect(history[1].value.name).to.eq('2');
+    expect(history[2].value.name).to.eq('3');
   });
 });

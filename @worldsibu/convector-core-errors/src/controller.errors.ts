@@ -35,6 +35,7 @@ export class ControllerNamespaceMissingError extends BaseError {
   public description = 'The controller namespace was not found in the chaincode';
   public explanation = `
     This might happen because you misspelled the controller ${this.ctrl} name
+    Another reason might be that you have multiple Convector versions runnin in node
     ${chaincodeSideMessage}`;
 
   constructor(public original: Error, public ctrl: string) {

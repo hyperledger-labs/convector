@@ -4,9 +4,9 @@ version: "1.0"
 client:
   organization: Org1MSP
   credentialStore:
-    path: ../convector-tool-dev-env/.hfc-org1
+    path: ../convector-tool-dev-env/.convector-dev-env/.hfc-org1
     cryptoStore:
-      path: ../convector-tool-dev-env/.hfc-org1
+      path: ../convector-tool-dev-env/.convector-dev-env/.hfc-org1
 
 channels:
   ch1:
@@ -49,9 +49,9 @@ organizations:
     certificateAuthorities:
       - ca.org1.example.com
     adminPrivateKey:
-      path: ../convector-tool-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/69c76b7cf25d590da9e1cc74f5c9de2414108226a79e2a81d31a8090435e613f_sk
+      path: ../convector-tool-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/
     signedCert:
-      path: ../convector-tool-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+      path: ../convector-tool-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/
 
   Org2MSP:
     mspid: Org2MSP
@@ -62,7 +62,7 @@ organizations:
 
 orderers:
   orderer.example.com:
-    url: grpc://orderer.example.com:7050
+    url: grpc://localhost:7050
     grpcOptions:
       ssl-target-name-override: orderer.example.com
       grpc-max-send-message-length: 15
@@ -71,8 +71,8 @@ orderers:
 
 peers:
   peer0.org1.example.com:
-    url: grpc://peer0.org1.example.com:7051
-    eventUrl: grpc://peer0.org1.example.com:7052
+    url: grpc://localhost:7051
+    eventUrl: grpc://localhost:7052
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
       grpc.keepalive_time_ms: 600000
@@ -80,8 +80,8 @@ peers:
       path: ../convector-tool-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
 
   peer0.org2.example.com:
-    url: grpc://peer0.org2.example.com:8051
-    eventUrl: grpc://peer0.org2.example.com:8052
+    url: grpc://localhost:8051
+    eventUrl: grpc://localhost:8052
     grpcOptions:
       ssl-target-name-override: peer0.org2.example.com
       grpc.keepalive_time_ms: 600000
@@ -90,7 +90,7 @@ peers:
 
 certificateAuthorities:
   ca.org1.example.com:
-    url: http://ca.org1.example.com:7054
+    url: http://localhost:7054
     httpOptions:
       verify: false
     tlsCACerts:
@@ -101,7 +101,7 @@ certificateAuthorities:
     caName: ca.org1.example.com
 
   ca.org2.example.com:
-    url: http://ca.org2.example.com:8054
+    url: http://localhost:8054
     httpOptions:
       verify: false
     tlsCACerts:

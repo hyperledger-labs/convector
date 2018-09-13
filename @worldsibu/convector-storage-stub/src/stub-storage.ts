@@ -32,4 +32,9 @@ export class StubStorage extends BaseStorage {
     InvalidIdError.test(id);
     return await this.stubHelper.getStub().deleteState(id);
   }
+
+  public async history(id: string): Promise<any[]> {
+    InvalidIdError.test(id);
+    return await this.stubHelper.getHistoryForKeyAsList(id);
+  }
 }

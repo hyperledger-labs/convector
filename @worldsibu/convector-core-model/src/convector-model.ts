@@ -16,6 +16,12 @@ export type FlatConvectorModel<T> = {
   [L in Exclude<keyof T, keyof ConvectorModel<any>>]: T[L]
 };
 
+export interface History<T> {
+  value: T;
+  txId: string;
+  timestamp: number;
+}
+
 /**
  * This class is intended to be inherited by all the models of the application.
  *
@@ -151,13 +157,23 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     this.assign(content as T);
   }
 
+  public async history(): Promise<History<T>[]> {
+    const history = await BaseStorage.current.history(this.id);
+
+    return history.map(item => ({
+      txId: item.tx_id,
+      value: new (this.constructor as new (content: any) => T)(item.value),
+      timestamp: item.timestamp
+    }));
+  }
+
   /**
    * Invokes the [[BaseStorage.set]] method to write into chaincode.
    */
   public async save() {
     this.assign(getDefaults(this), true);
     if (!ensureRequired(this)) {
-      throw new Error(`Model ${this.type} is not complete\n${this.toJSON()}`);
+      throw new Error(`Model ${this.type} is not complete\n${JSON.stringify(this)}`);
     }
 
     InvalidIdError.test(this.id);
@@ -168,7 +184,7 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
    * Make a copy of this model
    */
   public clone(): T {
-    return Object.assign({}, this) as any;
+    return new (this.constructor as new (content: any) => T)(Object.assign({}, this));
   }
 
   /**
@@ -223,7 +239,10 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     const filteredContent = Object.keys(content)
       .map(key => key.replace(/^_/, ''))
       .filter(key => validated.indexOf(key) >= 0)
-      .reduce((result, key) => ({ ...result, [key]: content[key] }), {});
+      .reduce((result, key) => ({
+        ...result,
+        [key]: content[key] !== undefined ? content[key] : content['_' + key]
+      }), {});
 
     const afterDefaults = defaults ? this.toJSON(true) : {};
     Object.assign(this, filteredContent, afterDefaults);

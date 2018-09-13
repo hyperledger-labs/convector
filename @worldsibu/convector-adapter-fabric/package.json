@@ -21,12 +21,14 @@
     "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
     "docs:serve": "http-server docs"
   },
+  "peerDependencies": {
+    "fabric-ca-client": ">=1.1.2",
+    "fabric-client": ">=1.1.2"
+  },
   "dependencies": {
     "@worldsibu/convector-common-fabric-helper": "1.1.9",
     "@worldsibu/convector-core-adapter": "1.1.9",
     "@worldsibu/convector-core-errors": "1.1.9",
-    "fabric-ca-client": "^1.1.2",
-    "fabric-client": "^1.1.2",
     "tslib": "^1.9.0"
   },
   "devDependencies": {

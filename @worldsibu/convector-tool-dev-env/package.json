@@ -31,11 +31,13 @@
     "prepare": "npm run build",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'"
   },
+  "peerDependencies": {
+    "fabric-ca-client": ">=1.1.2",
+    "fabric-client": ">=1.1.2"
+  },
   "dependencies": {
     "@worldsibu/convector-common-fabric-helper": "1.1.9",
     "commander": "^2.16.0",
-    "fabric-ca-client": "1.1.2",
-    "fabric-client": "1.1.2",
     "shelljs": "^0.8.2",
     "tslib": "^1.9.0"
   },

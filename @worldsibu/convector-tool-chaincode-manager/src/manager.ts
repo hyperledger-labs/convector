@@ -65,6 +65,7 @@ export class Manager extends ClientHelper {
     version: string,
     path: string
   ): Promise<void> {
+    console.log('Installing now...');
     await this.client.installChaincode({
       txId: this.client.newTransactionID(true),
       chaincodePath: resolve(process.cwd(), path),
@@ -94,6 +95,7 @@ export class Manager extends ClientHelper {
     version: string,
     ...args: string[]
   ): Promise<void> {
+    console.log('Instantiating now...');
     const { proposalResponse } = await this.sendInstantiateProposal({
       args,
       fcn: 'init',
@@ -113,6 +115,7 @@ export class Manager extends ClientHelper {
     version: string,
     ...args: string[]
   ): Promise<void> {
+    console.log('Upgrading now...');
     const { proposalResponse } = await this.sendUpgradeProposal({
       args,
       chaincodeId: name,
@@ -130,11 +133,15 @@ export class Manager extends ClientHelper {
     name: string,
     adminOrUser?: string|true
   ) {
-    await this.sendTransactionProposal({
+    console.log('Initializing controllers now...');
+    const { proposalResponse } = await this.sendTransactionProposal({
       fcn: 'initControllers',
       chaincodeId: name,
-      args: [JSON.stringify(this.chaincodeConfig.dump())]
     }, adminOrUser === true);
+
+    await this.processProposal(proposalResponse);
+
+    console.log('Initialization successfully');
   }
 
   /**
@@ -225,5 +232,8 @@ export class Manager extends ClientHelper {
         'utf8'
       );
     }
+
+    writeFileSync(join(output, 'chaincode.config.json'),
+      JSON.stringify({ controllers: this.chaincodeConfig.dump() }), 'utf8');
   }
 }

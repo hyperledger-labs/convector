@@ -14,7 +14,8 @@ export class FabricControllerAdapter extends ClientHelper implements ControllerA
     super(config);
   }
 
-  public async invoke(controller: string, name: string, adminOrUser?: string|true, ...args: any[]) {
-    return super.invoke(`${controller}_${name}`, this.config.chaincode, adminOrUser, ...args);
+  public async invoke(controller: string, name: string, adminOrUser?: string|true, ...args: any[]): Promise<any> {
+    const txResult = await super.invoke(`${controller}_${name}`, this.config.chaincode, adminOrUser, ...args);
+    return txResult.result;
   }
 }

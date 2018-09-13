@@ -32,4 +32,5 @@ export interface TxResult {
   txId: string;
   code: string;
   status: Status;
+  result?: Object;
 }

@@ -21,10 +21,15 @@
     "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
     "docs:serve": "http-server docs"
   },
+  "peerDependencies": {
+    "fabric-ca-client": ">=1.1.2",
+    "fabric-client": ">=1.1.2"
+  },
   "dependencies": {
-    "fabric-ca-client": "1.1.2",
-    "fabric-client": "1.1.2",
+    "@theledger/fabric-chaincode-utils": "^2.0.9",
+    "@types/js-yaml": "^3.11.2",
     "fs-extra": "^6.0.1",
+    "js-yaml": "^3.12.0",
     "tslib": "^1.9.0"
   },
   "devDependencies": {

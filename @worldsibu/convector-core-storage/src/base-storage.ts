@@ -10,4 +10,5 @@ export abstract class BaseStorage {
   public async abstract set(id: string, content: any);
   public async abstract delete(id: string);
   public async abstract query(...args: any[]): Promise<any[]>;
+  public async abstract history(id: string): Promise<any[]>;
 }
