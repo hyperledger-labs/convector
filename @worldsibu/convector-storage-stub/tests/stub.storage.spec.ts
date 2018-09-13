@@ -1,6 +1,5 @@
 // tslint:disable:no-unused-expression
 
-import * as yup from 'yup';
 import { expect } from 'chai';
 import { Chaincode } from '@theledger/fabric-chaincode-utils';
 import { ChaincodeMockStub } from '@theledger/fabric-mock-stub';
@@ -38,5 +37,15 @@ describe('STUB Storage', () => {
 
     const result = await storage.query({ selector: { type: 'test' } });
     expect(result.length).to.eq(3);
+  });
+
+  it('should return the history of a key', async () => {
+    const key = 'test';
+    await storage.set(key, '1');
+    await storage.set(key, '2');
+    await storage.set(key, '3');
+
+    const history = await storage.history(key);
+    expect(history).length(3);
   });
 });

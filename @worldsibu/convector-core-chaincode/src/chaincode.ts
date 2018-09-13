@@ -23,15 +23,21 @@ import { Config } from './config';
  * [[ConvectorController]] specification.
  */
 export class Chaincode extends CC {
+  // This is a temporal flag to avoid initialize the controllers twice
+  // This class is actually gonna be disposed and created multiple times without warning
+  private initialized = false;
+
   /**
    * Standard Init from Hyperledger Fabric
    */
   public async Init(stub: Stub) {
-    return await super.Init(stub)
+    const response = await super.Init(stub)
       .catch(e => {
         const err = new ChaincodeInitializationError(e);
         throw new ChaincodeError(err.toString());
       });
+
+    return response;
   }
 
   /**
@@ -42,6 +48,9 @@ export class Chaincode extends CC {
    */
   public async Invoke(stub: Stub) {
     BaseStorage.current = new StubStorage(stub);
+
+    await this.initControllers(new StubHelper(stub), [, 'true']);
+
     return await super.Invoke(stub)
       .catch(e => {
         const err = new ChaincodeInvokationError(e);
@@ -57,17 +66,74 @@ export class Chaincode extends CC {
    * controllers present without any problem
    */
   public async initControllers(stub: StubHelper, args: string[]) {
-    let config: Config;
+    // Don't initialize if already initialized or if config is in param
+    if (this.initialized && !args[0]) {
+      return;
+    }
 
-    try {
-      const configObj = JSON.parse(args[0]);
-      config = new Config(configObj);
-    } catch (e) {
-      throw new ConfigurationInvalidError(e);
+    const config = await this.getConfig(stub, args[0], !!args[1]);
+
+    if (!config) {
+      return;
     }
 
     const controllers = await config.getControllers();
 
     controllers.forEach(C => Object.assign(this, getInvokables(C)));
+
+    this.initialized = true;
+  }
+
+  /**
+   * Get the config from the ledger and fallback to load if from file
+   *
+   * @param stub
+   * @param refreshOrConfig If true, read the config from file and ignore the
+   *                        ledger value useful after an upgrade.
+   *                        The value might be the config to fallback if nothing is found
+   * @param dontThrow       Don't throw an exception if the config is not found
+   */
+  private async getConfig(stub: StubHelper, refreshOrConfig: string, dontThrow = false): Promise<Config> {
+    if (refreshOrConfig !== 'true') {
+      try {
+        const ledgerConfig = await stub.getStateAsObject(this.name) as any;
+
+        if (ledgerConfig) {
+          console.log('Found config in ledger', ledgerConfig);
+        }
+
+        const config = Array.isArray(ledgerConfig) ? ledgerConfig : ledgerConfig.controllers;
+
+        return new Config(config);
+      } catch (e) {
+        // empty
+      }
+    }
+
+    try {
+      const config = Config.readFromFile();
+
+      console.log('Found config in package', config.dump());
+      await stub.putState(this.name, { controllers: config.dump() });
+
+      return config;
+    } catch (e) {
+      if (refreshOrConfig && refreshOrConfig === 'true' && !dontThrow) {
+        throw new ConfigurationInvalidError(e);
+      }
+    }
+
+    try {
+      const paramConfig = JSON.parse(refreshOrConfig);
+
+      console.log('Found config in param', paramConfig);
+      await stub.putState(this.name, paramConfig);
+
+      return new Config(paramConfig);
+    } catch (e) {
+      if (!dontThrow) {
+        throw new ConfigurationInvalidError(e);
+      }
+    }
   }
 }

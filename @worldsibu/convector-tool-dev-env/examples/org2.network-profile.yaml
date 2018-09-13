@@ -56,9 +56,9 @@ organizations:
     certificateAuthorities:
       - ca.org2.example.com
     adminPrivateKey:
-      path: ./.convector-dev-env/network-objects/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/70d9a64cccff14248b04c5c77f39e965f9b0013dabb7311cc765ec82124c79fa_sk
+      path: ./.convector-dev-env/network-objects/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/
     signedCert:
-      path: ./.convector-dev-env/network-objects/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem
+      path: ./.convector-dev-env/network-objects/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/
 
 orderers:
   orderer.example.com:

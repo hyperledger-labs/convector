@@ -1,7 +1,7 @@
 import { Manager } from '../src';
 
 const version = parseInt(process.argv[2] || '1', 10);
-const ccName = 'Test' + process.argv[3] || '1';
+const ccName = 'Test' + (process.argv[3] || '1');
 
 const manager0 = new Manager({
   skipInit: true,
@@ -35,9 +35,12 @@ async function install() {
 }
 
 async function upgrade() {
+  console.log('Installing chaincode in the endorser peers');
   await manager1.install(ccName, (version + 1).toString(), 'package');
+  await manager2.install(ccName, (version + 1).toString(), 'package');
+
+  console.log('Upgrading the chaincode');
   await manager1.upgrade(ccName, (version + 1).toString());
-  await manager1.initControllers(ccName);
 }
 
 async function invoke() {
@@ -51,5 +54,9 @@ Promise.resolve()
     manager1.init(true),
     manager2.init()
   ]))
+  //*
   .then(() => install())
+  /*/
+  .then(() => upgrade())
+  //*/
   .then(() => invoke());

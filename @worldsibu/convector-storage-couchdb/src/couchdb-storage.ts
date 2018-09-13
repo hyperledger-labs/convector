@@ -52,4 +52,8 @@ export class CouchDBStorage extends BaseStorage {
   public async delete(id: string) {
     throw new Error('The method `delete` in the CouchDB storage is not supported');
   }
+
+  public async history(id: string): Promise<any[]> {
+    throw new Error('The method `history` in the CouchDB storage is not supported');
+  }
 }
