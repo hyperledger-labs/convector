@@ -6,7 +6,7 @@ import {
   ConvectorController,
   Invokable,
   Param
-} from '@worldsibu/convector-controller';
+} from '@worldsibu/convector-core-controller';
 
 import { Token } from './token.model';
 
@@ -44,6 +44,12 @@ export class TokenController extends ConvectorController {
   ) {
     const token = await Token.getOne(tokenId);
 
+    if (!token.id) {
+      throw new Error(`No token found with id ${tokenId}`);
+    }
+
+    console.log('Using token id', token.id);
+
     if (token.balances[this.sender] < amount) {
       throw new Error('The sender does not have enough founds');
     }
@@ -52,5 +58,10 @@ export class TokenController extends ConvectorController {
     token.balances[this.sender] -= amount;
 
     await token.save();
+  }
+
+  @Invokable()
+  public async whoAmI(): Promise<string> {
+    return this.sender;
   }
 }

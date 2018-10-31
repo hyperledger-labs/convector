@@ -3,7 +3,7 @@
 import { join } from 'path';
 import { expect } from 'chai';
 import * as uuid from 'uuid/v4';
-import { MockControllerAdapter } from '@worldsibu/convector-mock-controller-adapter';
+import { MockControllerAdapter } from '@worldsibu/convector-adapter-mock';
 import 'mocha';
 
 import { Token } from '../src/token.model';
