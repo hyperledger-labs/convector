@@ -3,11 +3,10 @@
 import * as yup from 'yup';
 import {
   ConvectorModel,
-  Default,
   ReadOnly,
   Required,
   Validate
-} from '@worldsibu/convector-model';
+} from '@worldsibu/convector-core-model';
 
 export class Token extends ConvectorModel<Token> {
   @ReadOnly()
