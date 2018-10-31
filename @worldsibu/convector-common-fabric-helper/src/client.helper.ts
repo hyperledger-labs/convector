@@ -340,6 +340,8 @@ export class ClientHelper {
   }
 
   private async getLonelyFile(folderPath: string): Promise<string> {
+    folderPath = resolve(folderPath);
+
     const isFile = await ensureFile(folderPath)
       .then(() => Promise.resolve(true))
       .catch(() => Promise.resolve(false));
