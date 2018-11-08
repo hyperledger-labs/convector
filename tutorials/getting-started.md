@@ -1,41 +1,46 @@
-## Guides
-
-- [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
-- [A typical starter project](https://github.com/worldsibu/convector/blob/develop/tutorials/starter-project.md)
-- [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
-- [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
-- [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
-- [ChaincodeManger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
-- [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
-
 # Getting Started with Convector
 
-## Requirements
+## Prerequisites
 
-To start developing chaincodes with Convector, you need to first meet some basic requirements:
+* [Node](https://nodejs.org/en/download/) 8.11.0 (other versions might work, but this is the one we use for development)
+* [Docker](https://www.docker.com/community-edition)
 
-- You need NodeJS 8.11.0 (other versions might work, but this is the one we use for development)
-- You need [Docker Community Edition](https://www.docker.com/community-edition)
+### In your NodeJS project
+
+* [yup](https://www.npmjs.com/package/yup)
+* [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
 
 Internally we use [Lerna](https://github.com/lerna/lerna) for our projects, and we advice you to do the same, since you'll be working with different npm modules in the same project, although this is totally optional.
 
 We also recommend the use of [npx](https://github.com/zkat/npx) to avoid global dependencies. So this will be your only global dependency. Try `npm i -g npx`.
 
-Create a folder and `cd` into it. Run `npx lerna init`. Fill the blanks.
+## Structure
 
-Create a folder with the structure of your preferences, you can try `./packages/@your-username/your-chaincode-name`. Start a new npm project here: `npm init`.
+Create a folder and `cd` into it. Run `npx lerna init`. Lerna will create the following structure.
+
+```
+./packages/
+./lerna.json
+./package.json
+```
+
+Inside that `packages` folder, create your a folder with your chaincode's name. 
+
+```bash
+./packages/<chaincode-name>
+```
+
+There you will put all of your chaincode's code. Start a new npm project inside that folder `npm init`. Fill the blanks.
 
 Add some basic dependencies so you can get started:
 
-```json
-"@worldsibu/convector-core-controller": "1.0.0",
-"@worldsibu/convector-core-model": "1.0.0",
-"reflect-metadata": "0.1.12",
+```bash
+npm install -SE @worldsibu/convector-core-{model,controller} && npm i -SE reflect-metadata yup
 ```
 
 ## Folder Structure
 
-Inside your module folder you can create the folder structure of your preferences, but we suggest this one:
+Inside your chaincode folder you can create the folder structure of your preferences. We suggest the following.
 
 ```
 ./src
@@ -44,44 +49,139 @@ Inside your module folder you can create the folder structure of your preference
 ./README.md
 ```
 
-## Develop
+Just `mkdir src && mkdir tests`.
 
-Create the [[Controllers]] and [[Models]] necessary for your application, checkout each guide to learn how to do so.
+## Code your smart contracts
+
+Create the [[Controllers]] and [[Models]] necessary for your application, checkout each guide to learn how to do so and more details.
+
+Some basic structure can look like.
+
+`./packages/<chaincode-name>/src/test.controller.ts`
+
+```typescript
+import {
+  Controller,
+  ConvectorController,
+  Invokable,
+  Param
+} from '@worldsibu/convector-core-controller';
+
+import { Test } from './test.model';
+
+@Controller('test')
+export class TestController extends ConvectorController {
+  @Invokable()
+  public async create(
+    @Param(Test)
+    test: Test
+  ) {
+    await test.save();
+  }
+}
+```
+
+`./packages/<chaincode-name>/src/test.model.ts`
+
+```typescript
+import * as yup from 'yup';
+import {
+  ConvectorModel,
+  Default,
+  ReadOnly,
+  Required,
+  Validate
+} from '@worldsibu/convector-core-model';
+
+export class Test extends ConvectorModel<Test> {
+  @ReadOnly()
+  @Required()
+  public readonly type = 'io.worldsibu.test';
+
+  @Required()
+  @Validate(yup.string())
+  public name: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.number())
+  public created: number;
+
+  @Required()
+  @Validate(yup.number())
+  public modified: number;
+}
+```
+
+Bootstrap this structure with `touch ./packages/<chaincode-name>/src/<chaincode-name>.model.ts && touch ./packages/<chaincode-name>/src/<chaincode-name>.controller.ts`.
 
 ## Unit Tests
 
 We strongly suggest you create a unit tests for your controllers, since it's the easiest way to test their logic. Refer to the guides to learn more about unit testing.
 
-### Tests on Environments
+During development you *don't* really need a blockchain. The logic you put in your chaincodes is no more than simple programming logic, so you can mock things up (we help with this) and define unit tests that execute in a virtual environment instead of an actual blockchain.
 
-When you're ready to test on a real chaincode, you can add our tools for development only
+## Take your code to the blockchain
 
+When you're ready to test on a real chaincode, you can add our Convector Tools. `dev-env` will create a *development* blockchain in your computer. **Make sure to do it at the root project folder, not inside `./packages/<chaincode-name>`**.
+
+```bash
+npm install -D @worldsibu/convector-{adapter-mock,tool-{dev-env,chaincode-manager}} fabric-client@1.1.2 fabric-ca-client@1.1.2
 ```
-"@worldsibu/convector-adapter-mock": "1.0.0",
-"@worldsibu/convector-tool-chaincode-manager": "1.0.0",
-"@worldsibu/convector-tool-dev-env": "1.0.0",
+
+This Convector Tool setups a development environment for you to easily run the chaincodes. All the following scripts can be invoked from the path `./node_modules/@worldsibu/convector-tool-dev-env/scripts/*`:
+
+To make it easier for you, add in your **root** `package.json` the following scripts. **Make sure to do it at the root project folder, NOT inside `./packages/<chaincode-name>/package.json`**.
+
+```json
+{
+  "scripts":{
+    "env:restart": "./node_modules/@worldsibu/convector-tool-dev-env/scripts/restart.sh",
+    "env:clean": "./node_modules/@worldsibu/convector-tool-dev-env/scripts/clean.sh"
+  }
+}
 ```
 
-We provide a development environment for you to easily run the chaincodes. All the following scripts can be invoked from the path `./node_modules/@worldsibu/convector-tool-dev-env/scripts/*`:
+Now you can manage your development blockchain straight from simple commands. Try running `npm run env:restart` to kickstart a blockchain in your comnputer.
 
-- **start.sh** - Download the Fabric Docker containers, creates 2 users and creates a channel (blockchain)
-- **restart.sh** - Delete all the generated artifacts and start the environment again
-- **stop.sh** - Just stop the docker containers
+Let's break this commands down.
 
-Then you can install the chaincodes by using the chaincode manager. Refer to the [[ChaincodeManger]] guide, but in short, running `chaincode-manager --config ./chaincode.config.json install <chaincode's name here> <put a version number here>`.
-After installing a chaincode you can do 2 things:
+| Command | What it does |
+|--|--|
+| `env:clean` | Cleans everything up |
+| `env:restart` | Install a whole blockchain from scratch, it will create a folder in the root `.convector-dev-env` with all of the crypto materials you will need, as well it will start a set of containers you can explore by doing `docker ps`. |
 
-- `chaincode-manager --config ./chaincode.config.json upgrade <chaincode name> <next version number>`
-- `chaincode-manager --config ./chaincode.config.json invoke --user <username> <chaincode name> <controller name> <function name> [...args]` - By default, the dev environment has 2 users, admin and user1
+The basic setup is explained in [[Dev-Env]].
+
+After having your blockchain setup you will need to do some tasks with your chaincode, like installing it.
+
+### Chaincode manipulation
+
+By using the chaincode manager you can install and upgrade chaincodes in the blockchain. Refer to the [[Chaincode-Manager]] guide since you will need to first bootstrap some blockchain profiles to define some details about the topology of your blockchain and your chaincode.
 
 ----
+
+## Single script to bootstrap the structure
+
+We are working on bringing to life a CLI like Angular's. Would you like to help the community by collaborating on that project? [Join the discord](https://discord.gg/twRwpWt) but for now, a workaround is to use this script to bootstrap a basic project structure.
+
+First run:
+
+```bash
+PRJ=<replace-this-for-your-project-name>
+```
+
+After defining your project's name, run:
+
+```bash
+npm i -g npx && mkdir $PRJ && cd $PRJ && npx lerna init && cd packages && mkdir $PRJ-cc && cd $PRJ-cc && npm init --y && npm install -SE @worldsibu/convector-core-{model,controller} && npm i -SE reflect-metadata yup && mkdir src && mkdir tests && touch ./src/$PRJ.model.ts && touch ./src/$PRJ.controller.ts && cd .. && cd .. && npm install -D @worldsibu/convector-{adapter-mock,tool-{dev-env,chaincode-manager}} fabric-client@1.1.2 fabric-ca-client@1.1.2
+```
+
 ----
 
-Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
+## Relevant references
 
-[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
-[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
-[![Discord](https://img.shields.io/discord/469152206638284800.svg)](https://discord.gg/twRwpWt)
-
-[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+* [Convector's Architecture](https://github.com/worldsibu/convector/blob/develop/tutorials/fundamentals.md)
+* [Dev resources in our blog](https://medium.com/worldsibu/for-devs/home)
+* [A fullstack TypeScript project showcasing Convector](https://github.com/worldsibu/convector-example-drug-supply-chain)
+* [A bootstrap project for you](https://github.com/worldsibu/convector-boilerplate)

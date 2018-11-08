@@ -5,7 +5,7 @@
 - [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
 - [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
 - [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
-- [ChaincodeManger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
+- [Chaincode-Manager](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
 - [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
 
 # Starter Project
@@ -40,7 +40,7 @@ To create a smart contract system you need:
 * Your code. Containing your smart contracts.
   * It is usually made up of front end modules, backend or APIs, peers (nodes) which run the smart contracts.
 * A development environment (a fullblown test blockchain) created by the [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md).
-* A set of tools to interact with the blockchain, such as [ChaincodeManger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md).
+* A set of tools to interact with the blockchain, such as [Chaincode-Manager](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md).
 
 If you are working with a mono-repo like us, this scripts in your root `package.json` will make your life easier.
 
