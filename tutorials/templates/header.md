@@ -1,8 +1,4 @@
-## Guides
+# Guides
 
+- [[Fundamentals]]
 - [[Getting-Started]]
-- [[Packages]]
-- [[Models]]
-- [[Controllers]]
-- [[ChaincodeManger]]
-- [[DevEnv]]

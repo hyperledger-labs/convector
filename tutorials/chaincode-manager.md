@@ -1,27 +1,16 @@
-## Guides
+# Chaincode Manager
 
-- [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
-- [A typical starter project](https://github.com/worldsibu/convector/blob/develop/tutorials/starter-project.md)
-- [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
-- [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
-- [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
-- [ChaincodeManger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
-- [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
+We have a tool to package and deploy chaincodes generated with convector. Once you install [@worldsibu/convector-tool-chaincode-manager](https://www.npmjs.com/package/@worldsibu/convector-tool-chaincode-manager) installed you will have the `chaincode-manager` commands available in your `.bin` folder inside the `node_modules`.
 
-# Development Environment
+## Package
 
-We have a tool to package and deploy chaincodes generated with convector.
-Once you install [@worldsibu/convector-tool-chaincode-manager](https://www.npmjs.com/package/@worldsibu/convector-tool-chaincode-manager) installed you will have the `chaincode-manager` commands available in your `.bin` folder inside the `node_modules`.
-
-## Packaging an app
-
-Packaging a Convector app consits of copying the core chaincode into a folder, install the controllers and move the local references. To avoid this manual labor we have a command avilable to do it for you.
+Packaging a Convector app consists of copying the core chaincode into a folder, install the controllers and move the local references. To avoid this manual labor we have a command avilable to do it for you.
 
 ```bash
 chaincode-manager package --config ./chaincode.config.json --output ./chaincode
 ```
 
-The configuration file is expected to have a couple of things:
+The configuration file `./chaincode.config.json` is expected to have a couple of things. Please read the following template carefully, since this is a Hyperledger Fabric requirement. Include this in the root of your project.
 
 ```json
 {
@@ -50,7 +39,7 @@ The configuration file is expected to have a couple of things:
 }
 ```
 
-## Deploying an app
+## Deploy
 
 In order to use the packaged app you have to first install it in the corresponding containers and initialized the logic, to do so, we provide some useful commands:
 
@@ -70,15 +59,3 @@ chaincode-manager --config ./chaincode.config.json upgrade [contract name] [cont
 # There's a cli helper to easly test invocations to the chaincode
 chaincode-manager --config ./chaincode.config.json invoke [contract name] [controller] [function] [...args]
 ```
-
-----
-----
-
-Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
-
-[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
-[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
-[![Discord](https://img.shields.io/discord/469152206638284800.svg)](https://discord.gg/twRwpWt)
-
-[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
