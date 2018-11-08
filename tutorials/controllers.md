@@ -1,16 +1,5 @@
-## Guides
-
-- [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
-- [A typical starter project](https://github.com/worldsibu/convector/blob/develop/tutorials/starter-project.md)
-- [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
-- [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
-- [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
-- [ChaincodeManger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
-- [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
-
 # Controllers
 
-## Usage
 We define controllers as the business logic applied to models.
 Every possible action over a model, should be configured thought controllers.
 
@@ -26,7 +15,7 @@ import {
 export class TestController extends ConvectorController {
   @Invokable()
   public async init( @Param(yup.string()) token: Token ) {
-    
+    // code
   }
 }
 ```
@@ -39,7 +28,7 @@ The `@Invokable` decorator let Convector know all the available methods in this 
 
 Finally, the `@Param` decorator parses the arguments coming in the transactions to the appropriate schema you define. You can also use Models as schemas and they will be instantiated and validated for you.
 
-## How do Controllers work?
+## Usage
 
 After the chaincode is installed and instantiated in the peers, the method [[Chaincode.initControllers]] is invoked. This method is responsible of iterating over all the controllers specified for the chaincode, imoport them, instantiate all of them and geister all its `@Invokable` methods in the chaincode to be accesible from the outside. In order to avoid method collitions between multiple controllers, the functions are registered under a namespace, the controller name provided in the `@Controller` decorator. All the methods get registered in the blokchain using the name `{controller}_{method}`.
 
@@ -86,15 +75,3 @@ export class TokenController extends ConvectorController {
 
 **Do** use `this.sender` as a way to identify the tx sender and validate permissions.
 **Don't** trust any parameter in your function as an identity validation, since anyone could have invoked you and moked that param.
-
-----
-----
-
-Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
-
-[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
-[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
-[![Discord](https://img.shields.io/discord/469152206638284800.svg)](https://discord.gg/twRwpWt)
-
-[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)

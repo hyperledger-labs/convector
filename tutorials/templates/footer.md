@@ -1,5 +1,4 @@
 ----
-----
 
 Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
 

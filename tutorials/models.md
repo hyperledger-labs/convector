@@ -1,14 +1,4 @@
-## Guides
-
-- [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
-- [A typical starter project](https://github.com/worldsibu/convector/blob/develop/tutorials/starter-project.md)
-- [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
-- [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
-- [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
-- [ChaincodeManger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
-- [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
-
-## Models
+# Models
 
 We define models as assets you interact with in a blockchain
 Every data structure should be a model, since it defines what are the minimum necessary properties to be present.
@@ -37,7 +27,7 @@ export class ExampleModel extends ConvectorModel<ExampleModel> {
 }
 ```
 
-Notice we're extending `ConvectorModel`. This class is full of rich methods you can use to manipulate the data. Checkout the ChaincodeModel for documentation.
+Notice we're extending `ConvectorModel`. This class is full of rich methods you can use to manipulate the data.
 
 There are multiple decorators you can use to model the data:
 
@@ -50,7 +40,7 @@ There are multiple decorators you can use to model the data:
 
 The children classes can be used in 1 of 3 ways:
 
-### As an model query
+### 1. As an model query
 
 ```ts
 class MyModel extends ConvectorModel<MyModel> { ... }
@@ -68,7 +58,7 @@ MyModel.getOne(id)
   .then(onModelFound);
 ```
 
-### As a param constructor and validator
+### 2. As a param constructor and validator
 
 ```ts
 class MyModel extends ConvectorModel<MyModel> { /* ... */ }
@@ -85,7 +75,7 @@ class MyController {
 }
 ```
 
-### As a container to start filling the model
+### 3. As a container to start filling the model
 
 ```ts
 class MyModel extends ConvectorModel<MyModel> { /* ... */ }
@@ -99,18 +89,20 @@ myModel.save();
 
 ## API
 
-Models are based on `ConvectorModel<T>`, and it provides some basic methods to use on models.
+Models are based on `ConvectorModel<T>`, and it provides some basic *static* methods to use on models.
 
 ### Querying the chaincode
 
-Some static methods are present for you to query the chaincode. All these methods are subject to the `storage` capabilities, for example, using `storage-couchdb` you will be able to query the database in a more fashin way, even using views or similar.
+Some static methods are present for you to query the chaincode storage. All these methods are subject to the `storage` capabilities, for example, using `storage-couchdb` you will be able to query the database in a more fashin way, even using views or similar.
 
 ```typescript
-// You can get one of the models based on the ID
+// Get one of the models based on the ID
 MyModel.getOne(id).then(onModelFound);
-// Or get all the elements based on the `type` field
+
+// Get all the elements based on the `type` field
 MyModel.getAll('io.worldsibu.models.test').then(onModelsFound);
-// Or make complex queries, depending on the `convector-storage` in use
+
+// Complex queries, depending on the `convector-storage` in use
 MyModel.query({ amount: { $lte: 5 } }).then(onModelsFound);
 ```
 
@@ -120,21 +112,9 @@ All models are required to have an `id` and a `type` field. The declaration of b
 
 ### Base methods
 
-- To fetch the model content from the ledger and load the info in a model use `async myModel.fetch()`, the ID must have been set before this
+- To fetch the model content from the ledger and load the data into a model use `async myModel.fetch()`, the ID must have been set before this
 - To create or update a whole model in the blockchain you mut use `async myModel.save()`
 - To update a portion of an existing model in the blockchain you must use `async myModel.update({ changes })`
 - To delete the model content in the blockchain you must use `async myModel.delete()` however, notice that a delete in blockchain terms, is just removing the current value from the state, but the historical data will still be there and cannot be removed
 - To clone a model you can use `myModel.clone()`
 - To convert a model to json you can do `JSON.stringify(myModel)` or `myModel.toJSON()`
-
-----
-----
-
-Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
-
-[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
-[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
-[![Discord](https://img.shields.io/discord/469152206638284800.svg)](https://discord.gg/twRwpWt)
-
-[![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
