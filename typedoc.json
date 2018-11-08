@@ -2,16 +2,19 @@
   "name": "Convector Framework",
   "mode": "modules",
   "out": "docs/",
-  "theme": "default",
+  "theme": "./gh-pages-theme/custom",
   "target": "ES5",
+  "gaID": "UA-128943824-2",
   "ignoreCompilerErrors": true,
   "includeDeclarations": false,
   "stripInternal": true,
   "excludePrivate": true,
+  "media": "./tutorials/images",
   "exclude": [
     "**/tests/**/*",
     "**/node_modules/**/*",
     "examples/**/*"
   ],
-  "includes": "./tutorials"
+  "includes": "./tutorials",
+  "pluging": "none"
 }

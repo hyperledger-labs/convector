@@ -16,15 +16,15 @@ The development environment you get is made up like this.
 
 **Network topology**. All the containers provisioned.
 
-<img src="images/topology.png" alt="topology" class="inline"/>
+![Topology of a development network](media://topology.png)
 
 **Channels**. If you are not that familiar with Fabric, channels are the actual ledgers, you may have multiple. If an organization doesn't belong to a channel, there is no way for them to access the data. 
 
-<img src="images/channels.png" alt="channels" class="inline"/>
+![Default channels](media://channels.png)
 
 **Users**. Entities of the network that can be used to similate actual users.
 
-<img src="images/users.png" alt="topology" class="inline"/>
+![Network users](media://users.png)
 
 ## User Registry
 

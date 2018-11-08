@@ -151,7 +151,7 @@ Let's break this commands down.
 | `env:clean` | Cleans everything up |
 | `env:restart` | Install a whole blockchain from scratch, it will create a folder in the root `.convector-dev-env` with all of the crypto materials you will need, as well it will start a set of containers you can explore by doing `docker ps`. |
 
-The basic setup is explained in [[Dev-Env]].
+The basic setup is explained in [[Development-Environment]].
 
 After having your blockchain setup you will need to do some tasks with your chaincode, like installing it.
 
@@ -163,7 +163,7 @@ By using the chaincode manager you can install and upgrade chaincodes in the blo
 
 ## Single script to bootstrap the structure
 
-We are working on bringing to life a CLI like Angular's. Would you like to help the community by collaborating on that project? [Join the discord](https://discord.gg/twRwpWt) but for now, a workaround is to use this script to bootstrap a basic project structure.
+We are working on bringing to life a CLI like Angular's. Would you like to help the community by collaborating on that project? <a href="https://discord.gg/twRwpWt" target="_blank">Join the discord</a> but for now, a workaround is to use this script to bootstrap a basic project structure.
 
 First run:
 
@@ -181,7 +181,7 @@ npm i -g npx && mkdir $PRJ && cd $PRJ && npx lerna init && cd packages && mkdir 
 
 ## Relevant references
 
-* [Convector's Architecture](https://github.com/worldsibu/convector/blob/develop/tutorials/fundamentals.md)
+* [[Fundamentals]]
 * [Dev resources in our blog](https://medium.com/worldsibu/for-devs/home)
 * [A fullstack TypeScript project showcasing Convector](https://github.com/worldsibu/convector-example-drug-supply-chain)
 * [A bootstrap project for you](https://github.com/worldsibu/convector-boilerplate)

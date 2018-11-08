@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="default no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{#ifCond model.name '==' project.name}}{{project.name}}{{else}}{{model.name}} | {{project.name}}{{/ifCond}}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{{relativeURL "assets/css/main.css"}}">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body>
+
+  {{> header}}
+
+  <div class="container-fluid container-main">
+    <div class="row">
+      <div class="col-2 col-menu menu-sticky-wrap menu-highlight">
+        <nav class="tsd-navigation primary">
+          <ul class="custom-nav">
+            {{> customNav }}
+            {{!-- {{#each navigation.children}}
+            {{> navigation}}
+            {{/each}} --}}
+          </ul>
+        </nav>
+
+        <nav class="tsd-navigation secondary menu-sticky">
+          <ul class="before-current">
+            {{#each toc.children}}
+            {{> toc.root}}
+            {{/each}}
+          </ul>
+        </nav>
+      </div>
+      <div class="col-10 col-content">
+        <div class="tsd-page-title">
+          <div class="container-fluid">
+            <ul class="tsd-breadcrumb">
+              <li>
+                <a href="{{relativeURL "index.html"}}"> Convector Framework</a>
+              </li>
+            </ul>
+            <h1>{{#compact}}
+              {{!-- {{model.kindString}}&nbsp; --}}
+              {{model.name}}
+              {{#if model.typeParameters}}
+              &lt;
+              {{#each model.typeParameters}}
+              {{#if @index}},&nbsp;{{/if}}
+              {{name}}
+              {{/each}}
+              &gt;
+              {{/if}}
+              {{/compact}}</h1>
+          </div>
+        </div>
+        <div>
+          {{{contents}}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{> footer}}
+
+  <div class="overlay"></div>
+  <script src="{{relativeURL "assets/js/main.js"}}"></script>
+  <script>if (location.protocol == 'file:') document.write('<script src="{{relativeURL "assets/js/search.js"}}"><' + '/script>');</script>
+
+  {{> analytics}}
+
+</body>
+
+</html>

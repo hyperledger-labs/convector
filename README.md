@@ -9,8 +9,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
-----
-
 ## What is Convector?
 
 Convector is a **JavaScript-based Development Framework for Enterprise Smart Contract Systems**. Its goal is to make it easier for developers to create, test and deploy enterprise-grade DApps by abstracting complexities that make it hard to get started, plus a collection of tools that speed up your go-to-market.
