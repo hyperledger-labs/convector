@@ -1,30 +1,10 @@
-## Guides
-
-- [Getting-Started](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
-- [A typical starter project](https://github.com/worldsibu/convector/blob/develop/tutorials/starter-project.md)
-- [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
-- [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
-- [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
-- [Chaincode-Manager](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
-- [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
-
-# Starter Project
+# A typical development lifecycle
 
 As said before, Convector doesn't require `Lerna` to run, but we highly recommend it. This starter project's source code can be found [here](https://github.com/worldsibu/convector-example-drug-supply-chain).
 
 We also like mono-repos, and even though they are not required here either, this examples works like that.
 
-## Some basic concepts about Hyperledger Fabric
-
-A Hyperledger Fabric network is not more than some software connected with each other (peers container), a service in charge of making sure the consensus and other communication matters work (orderer container), some cryptographic components that allow for organizations to have control over their resources (Certificate authorities - in this example emulated) and the blockchain, which is made up of Smart Contracts (also referred to as chaincodes) and the ledger (the underlying distributed database). There are other advanced concepts, but for development matters, those are the relevant ones.
-
-A Smart Contracts is just programming code running in an independent container (which can be on multiple languages, we obviously prefer JavaScript 🙂). So the way you get it to work is by deploying it to each organization's peers, they run it and decide if according to the state of the database the rules comply.
-
-Another relevant component is the World State. The World State is simply a no sql database usually with CouchDB. It is compiled out of the blockchain status, which means that even though you can edit its contents, anything will really be changed on the blockchain. Any simple change on the blockchain will regenerate it. It is link to an specific peer of the organization.
-
-For JavaScript chaincodes on Hyperledger Fabric, they are made up of config files referencing projects. So, it is usually a set of packages (with models and controllers inside) that are configured through a file called `...chaincode.config.json`. Even if you have packages called something like "@worldsibu/convector-example-dsc-cc-drug", your chaincode can be installed with a simple name like "drug".
-
-## A typical development lifecycle
+// 
 
 Based on the previous explanation the flow of your application would look like:
 
@@ -39,7 +19,7 @@ To create a smart contract system you need:
 
 * Your code. Containing your smart contracts.
   * It is usually made up of front end modules, backend or APIs, peers (nodes) which run the smart contracts.
-* A development environment (a fullblown test blockchain) created by the [DevEnv](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md).
+* A development environment (a fullblown test blockchain) created by the [Development-Environment](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md).
 * A set of tools to interact with the blockchain, such as [Chaincode-Manager](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md).
 
 If you are working with a mono-repo like us, this scripts in your root `package.json` will make your life easier.
