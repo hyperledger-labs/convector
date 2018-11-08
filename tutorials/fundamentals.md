@@ -58,17 +58,17 @@ A typical distribution and usage of the components goes as follow (asumming you 
 
 ## What's next
 
-* [Packages](https://github.com/worldsibu/convector/blob/develop/tutorials/packages.md)
-* [Models](https://github.com/worldsibu/convector/blob/develop/tutorials/models.md)
-* [Controllers](https://github.com/worldsibu/convector/blob/develop/tutorials/controllers.md)
-* [Chaincode Manger](https://github.com/worldsibu/convector/blob/develop/tutorials/chaincode-manager.md)
-* [Development Environment](https://github.com/worldsibu/convector/blob/develop/tutorials/dev-env.md)
+* [[Packages]]
+* [[Models]]
+* [[Controllers]]
+* [[Chaincode-Manager]]
+* [[Development-Environment]]
 
 ----
 
 ## Relevant references
 
-* [Quickstart](https://github.com/worldsibu/convector/blob/develop/tutorials/getting-started.md)
+* [[Getting-Started]]
 * [Dev resources in our blog](https://medium.com/worldsibu/for-devs/home)
 * [A fullstack TypeScript project showcasing Convector](https://github.com/worldsibu/convector-example-drug-supply-chain)
 * [A bootstrap project for you](https://github.com/worldsibu/convector-boilerplate)

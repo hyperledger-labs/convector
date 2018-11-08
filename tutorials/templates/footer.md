@@ -1,6 +1,5 @@
 ----
 
-Created with <span style="color: red;">♥</span> by [WorldSibu](http://worldsibu.com/)
 
 [![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
 [![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)

@@ -3,7 +3,7 @@
   "name": "convector",
   "version": "0.0.1",
   "description": "Convector Monorepo",
-  "author": "Word Sibu",
+  "author": "WordSibu",
   "license": "Apache-2.0",
   "scripts": {
     "wait": "sleep 5",
@@ -52,7 +52,7 @@
     "cc:upgradeInAll": "f() { npm-run-all -s cc:package \"cc:install -- org1 $1\" \"cc:install -- org2 $1\" \"cc:upgrade -- $1\"; }; f"
   },
   "watch": {
-    "{@worldsibu,tutorials}/**/*.{ts,md}": [
+    "{@worldsibu,tutorials,gh-pages-theme}/**/*.{ts,md,css,map,hbs}": [
       "docs:generate"
     ]
   },
