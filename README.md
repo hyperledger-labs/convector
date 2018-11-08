@@ -26,6 +26,10 @@ For now, we only support **Hyperledger Fabric**, so this documentation is for us
 
 This documentation assumes that you are familiar with [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript), [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html), and [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-1.3/) (at least the basics!).
 
+## Are you looking for an option to Hyperledger Composer?
+
+Yes, we are also aware that Composer's development has experienced some changes and a lot of people are facing uncertainty. If you are one of the devs looking for a way to create smart contract systems with native chaincodes in JavaScript, you are in the right place. <a href="https://medium.com/worldsibu/migrating-from-hyperledger-composer-to-convector-framework-marbles-example-7056b0c0f8f1" target="_blank">You may find this resource valuable on how to Migrate from Composer to Convector</a>.
+
 ## Support
 
 * For recommendations, feature requests, or bugs go to our [issues section](https://github.com/worldsibu/convector/issues).
