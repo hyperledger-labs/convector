@@ -7,6 +7,8 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
 <header>
@@ -22,119 +24,62 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Convector Framework</a>
+					<a href="../index.html" class="title uppercase">
+						<img src="../assets/images/convector.svg" class="convector-logo">
+					</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
-						</div>
-					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="../globals.html">Globals</a>
-				</li>
-				<li>
-					<a href="packages.html">Packages</a>
-				</li>
-			</ul>
-			<h1>External module Packages</h1>
-		</div>
-	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
-		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<h2 id="guides">Guides</h2>
-						<ul>
-							<li><a href="getting_started.html">Getting-Started</a></li>
-							<li><a href="packages.html">Packages</a></li>
-							<li><a href="models.html">Models</a></li>
-							<li><a href="controllers.html">Controllers</a></li>
-							<li><a href="chaincodemanger.html">ChaincodeManger</a></li>
-							<li><a href="devenv.html">DevEnv</a></li>
-						</ul>
-						<h1 id="packages">Packages</h1>
-						<p><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></p>
-						<p>Here&#39;s the official list of Convector packages:</p>
-						<h2 id="core">Core</h2>
-						<hr>
-						<ul>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-model">@worldsibu/convector-core-model</a> - The base model and decorators</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-storage">@worldsibu/convector-core-storage</a> - The base storage for models</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-controller">@worldsibu/convector-core-controller</a> - The base controller and decorators</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-adapter">@worldsibu/convector-core-adapter</a> - The base adapter for controllers</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode">@worldsibu/convector-core-chaincode</a> - The base chaincode to mount controllers on top</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-errors">@worldsibu/convector-core-errors</a> - The core errors</li>
-						</ul>
-						<h2 id="adapters">Adapters</h2>
-						<hr>
-						<ul>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-adapter-mock">@worldsibu/convector-adapter-mock</a> - A controller adapter for unit testing</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-adapter-fabric">@worldsibu/convector-adapter-fabric</a> - A controller adapter for hyperledger fabric</li>
-						</ul>
-						<h2 id="storage">Storage</h2>
-						<hr>
-						<ul>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-storage-stub">@worldsibu/convector-storage-stub</a> - A fabric stub storage for models communication with the blockchain</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-storage-couchdb">@worldsibu/convector-storage-couchdb</a> - A couchdb storage for models communication with a database</li>
-						</ul>
-						<h2 id="tools">Tools</h2>
-						<hr>
-						<ul>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-tool-dev-env">@worldsibu/convector-tool-dev-env</a> - A dev environment ready with 2 organizations, 3 users each, one peer, 2 CAs and 1 orderer</li>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-tool-chaincode-manager">@worldsibu/convector-tool-chaincode-manager</a> - A tool to pack and deploy chaincodes using convector</li>
-						</ul>
-						<h2 id="common">Common</h2>
-						<hr>
-						<ul>
-							<li><a href="https://www.npmjs.com/package/@worldsibu/convector-common-fabric-helper">@worldsibu/convector-common-fabric-helper</a> - A library to interact with hyperledger fabric. Meant for internal use but can help you with your application as well</li>
-						</ul>
-						<hr>
-						<hr>
-						<p>Created with <span style="color: red;">♥</span> by <a href="http://worldsibu.com/">WorldSibu</a></p>
-						<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
-						<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a></p>
-						<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
-						<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
-						<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
-						<script async defer src="https://buttons.github.io/buttons.js"></script>
-					</div>
-				</div>
-			</section>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+		<div class="col-2 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
-				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+				<ul class="custom-nav">
+					<li>
+						<a href="../index.html">Home</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="packages.html">Packages</a>
+					<li>
+						<a href="fundamentals.html">Fundamentals</a>
+						<ul>
+							<li>
+								<a href="packages.html">Packages</a>
+							</li>
+							<li>
+								<a href="models.html">Models</a>
+							</li>
+							<li>
+								<a href="controllers.html">Controllers</a>
+							</li>
+							<li>
+								<a href="chaincode_manager.html">Tool: Chaincode Manager</a>
+							</li>
+							<li>
+								<a href="development_environment.html">Tool: Development Environment</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="getting_started.html">Getting Started</a>
+					</li>
+					<li>
+						<a href="hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+					</li>
+					<li>
+						<a href="https://github.com/worldsibu/convector" target="_blank">
+							<i class="fa fa-github" aria-hidden="true"></i>
+						Source code</a>
+					</li>
+					<li>
+						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
 					</li>
 				</ul>
 			</nav>
@@ -143,72 +88,89 @@
 				</ul>
 			</nav>
 		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
+		<div class="col-10 col-content">
+			<div class="tsd-page-title">
+				<div class="container-fluid">
+					<ul class="tsd-breadcrumb">
+						<li>
+							<a href="../index.html"> Convector Framework</a>
+						</li>
+					</ul>
+					<h1>Packages</h1>
+				</div>
+			</div>
+			<div>
+				<section class="tsd-panel tsd-comment">
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<!-- # Guides
+
+- <a href="fundamentals.html">Fundamentals</a>
+- <a href="getting_started.html">Getting-Started</a> -->
+							<h1 id="packages">Packages</h1>
+							<p><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></p>
+							<p>Here&#39;s the official list of Convector packages:</p>
+							<h2 id="core">Core</h2>
+							<ul>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-model">@worldsibu/convector-core-model</a> - The base model and decorators</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-storage">@worldsibu/convector-core-storage</a> - The base storage for models</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-controller">@worldsibu/convector-core-controller</a> - The base controller and decorators</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-adapter">@worldsibu/convector-core-adapter</a> - The base adapter for controllers</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode">@worldsibu/convector-core-chaincode</a> - The base chaincode to mount controllers on top</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-core-errors">@worldsibu/convector-core-errors</a> - The core errors</li>
+							</ul>
+							<h2 id="adapters">Adapters</h2>
+							<ul>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-adapter-mock">@worldsibu/convector-adapter-mock</a> - A controller adapter for unit testing</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-adapter-fabric">@worldsibu/convector-adapter-fabric</a> - A controller adapter for hyperledger fabric</li>
+							</ul>
+							<h2 id="storage">Storage</h2>
+							<ul>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-storage-stub">@worldsibu/convector-storage-stub</a> - A fabric stub storage for models communication with the blockchain</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-storage-couchdb">@worldsibu/convector-storage-couchdb</a> - A couchdb storage for models communication with a database</li>
+							</ul>
+							<h2 id="tools">Tools</h2>
+							<ul>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-tool-dev-env">@worldsibu/convector-tool-dev-env</a> - A dev environment ready with 2 organizations, 3 users each, one peer, 2 CAs and 1 orderer</li>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-tool-chaincode-manager">@worldsibu/convector-tool-chaincode-manager</a> - A tool to pack and deploy chaincodes using convector</li>
+							</ul>
+							<h2 id="common">Common</h2>
+							<ul>
+								<li><a href="https://www.npmjs.com/package/@worldsibu/convector-common-fabric-helper">@worldsibu/convector-common-fabric-helper</a> - A library to interact with Hyperledger Fabric. Meant for internal use but can help you with your application as well</li>
+							</ul>
+							<hr>
+							<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+								<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
+							<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>
+							<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+							<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+							<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
+							<script async defer src="https://buttons.github.io/buttons.js"></script>
+						</div>
+					</div>
+				</section>
+			</div>
 		</div>
 	</div>
+</div>
+<footer  class="with-border-bottom" >
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<a href="https://worldsibu.io">
+		<img src="../assets/images/worldsibu.svg" class="worldsibu-logo">
+	</a>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
 <script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-128943824-2', '');
+        ga('send', 'pageview');
+    </script>
 </body>
 </html>

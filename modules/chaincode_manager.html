@@ -1,0 +1,194 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Chaincode-Manager | Convector Framework</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title uppercase">
+						<img src="../assets/images/convector.svg" class="convector-logo">
+					</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-2 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul class="custom-nav">
+					<li>
+						<a href="../index.html">Home</a>
+					</li>
+					<li>
+						<a href="fundamentals.html">Fundamentals</a>
+						<ul>
+							<li>
+								<a href="packages.html">Packages</a>
+							</li>
+							<li>
+								<a href="models.html">Models</a>
+							</li>
+							<li>
+								<a href="controllers.html">Controllers</a>
+							</li>
+							<li>
+								<a href="chaincode_manager.html">Tool: Chaincode Manager</a>
+							</li>
+							<li>
+								<a href="development_environment.html">Tool: Development Environment</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="getting_started.html">Getting Started</a>
+					</li>
+					<li>
+						<a href="hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+					</li>
+					<li>
+						<a href="https://github.com/worldsibu/convector" target="_blank">
+							<i class="fa fa-github" aria-hidden="true"></i>
+						Source code</a>
+					</li>
+					<li>
+						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+		<div class="col-10 col-content">
+			<div class="tsd-page-title">
+				<div class="container-fluid">
+					<ul class="tsd-breadcrumb">
+						<li>
+							<a href="../index.html"> Convector Framework</a>
+						</li>
+					</ul>
+					<h1>Chaincode-Manager</h1>
+				</div>
+			</div>
+			<div>
+				<section class="tsd-panel tsd-comment">
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<!-- # Guides
+
+- <a href="fundamentals.html">Fundamentals</a>
+- <a href="getting_started.html">Getting-Started</a> -->
+							<h1 id="chaincode-manager">Chaincode Manager</h1>
+							<p>We have a tool to package and deploy chaincodes generated with convector. Once you install <a href="https://www.npmjs.com/package/@worldsibu/convector-tool-chaincode-manager">@worldsibu/convector-tool-chaincode-manager</a> installed you will have the <code>chaincode-manager</code> commands available in your <code>.bin</code> folder inside the <code>node_modules</code>.</p>
+							<h2 id="package">Package</h2>
+							<p>Packaging a Convector app consists of copying the core chaincode into a folder, install the controllers and move the local references. To avoid this manual labor we have a command avilable to do it for you.</p>
+							<pre><code class="lang-bash">chaincode-manager package --config ./chaincode.config.json --output ./chaincode
+</code></pre>
+							<p>The configuration file <code>./chaincode.config.json</code> is expected to have a couple of things. Please read the following template carefully, since this is a Hyperledger Fabric requirement. Include this in the root of your project.</p>
+							<pre><code class="lang-json">{
+  // This is optional, since chaincodes are installed in a peer container
+  // and the npm packages has to be reachable. If you use a private registry
+  // you&#39;ll have to provide the npmrc file
+  &quot;npmrc&quot;: &quot;./.npmrc&quot;,
+  // Optionally, instead of the file, you can provide just the token if you use
+  // the standard registry but in private mode
+  &quot;npmtoken&quot;: &quot;12312312&quot;,
+  &quot;controllers&quot;: [
+    // Each controller is a reference to an NPM module, thus you have to provide
+    // the name and version, along with the exported class in the `main` file
+    // declared in the package.json
+    {
+      &quot;name&quot;: &quot;@worldsibu/test-1&quot;,
+      &quot;version&quot;: &quot;1.0.0&quot;,
+      &quot;controller&quot;: &quot;Test1Controller&quot;
+    }, {
+      &quot;name&quot;: &quot;@worldsibu/test-2&quot;,
+      // You can provide a path to a local npm package if you want, it will be copied
+      &quot;version&quot;: &quot;file:./some/local/path&quot;,
+      &quot;controller&quot;: &quot;Test2Controller&quot;
+    }
+  ]
+}
+</code></pre>
+							<h2 id="deploy">Deploy</h2>
+							<p>In order to use the packaged app you have to first install it in the corresponding containers and initialized the logic, to do so, we provide some useful commands:</p>
+							<pre><code class="lang-bash"><span class="hljs-comment"># Firts you need to install the chaincodes in every peer</span>
+<span class="hljs-comment"># notice that in our dev env we have two peers, so this will have to be run two times</span>
+<span class="hljs-comment"># with the proper org config file</span>
+chaincode-manager --config ./chaincode.config.json install ./chaincode [contract name] [contract version]
+
+<span class="hljs-comment"># After installing a chaincode, we need to instantiate it, this only has to happen</span>
+<span class="hljs-comment"># in a single peer and all the others will download the block and instantiate automatically</span>
+chaincode-manager --config ./chaincode.config.json instantiate [contract name] [contract version]
+
+<span class="hljs-comment"># Upgrade works with the same logic as instantiate, the peers has to have the chaincode installed already</span>
+chaincode-manager --config ./chaincode.config.json upgrade [contract name] [contract version]
+
+<span class="hljs-comment"># There's a cli helper to easly test invocations to the chaincode</span>
+chaincode-manager --config ./chaincode.config.json invoke [contract name] [controller] [<span class="hljs-keyword">function</span>] [...args]
+</code></pre>
+							<hr>
+							<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+								<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
+							<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>
+							<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+							<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+							<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
+							<script async defer src="https://buttons.github.io/buttons.js"></script>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<footer  class="with-border-bottom" >
+</footer>
+<div class="container tsd-generator">
+	<a href="https://worldsibu.io">
+		<img src="../assets/images/worldsibu.svg" class="worldsibu-logo">
+	</a>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-128943824-2', '');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

@@ -7,6 +7,8 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
 <header>
@@ -22,214 +24,62 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Convector Framework</a>
+					<a href="index.html" class="title uppercase">
+						<img src="assets/images/convector.svg" class="convector-logo">
+					</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
-						</div>
-					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1> Convector Framework</h1>
-		</div>
-	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="convector">CONVECTOR</h1>
-				<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
-					<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter "></a>
-				<a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a></p>
-				<p><a href="https://github.com/ellerbrock/typescript-badges/"><img src="https://badges.frapsoft.com/typescript/code/typescript.svg?v=101" alt="TypeScript"></a>
-					<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
-				<a href="https://lernajs.io/"><img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna"></a></p>
-				<hr>
-				<h2 id="using-convector">Using Convector</h2>
-				<p>Dependencies that you need in your project:</p>
-				<ul>
-					<li><a href="https://nodejs.org/en/download/">Node</a></li>
-					<li><a href="http://hyperledger-fabric.readthedocs.io/en/release-1.2/install.html">Docker</a></li>
-					<li><a href="https://www.npmjs.com/package/yup">yup</a></li>
-					<li><a href="https://www.npmjs.com/package/reflect-metadata">reflect-metadata</a></li>
-				</ul>
-				<p>Then include to your projects the Convector components.</p>
-				<p><code>npm i -S @worldsibu/convector-{core-{model,storage,controller,adapter},adapter-fabric,storage-{stub,couchdb}}</code>
-				<code>npm i -D @worldsibu/convector-adapter-mock,tool-{dev-env,chaincode-manager}}</code></p>
-				<h2 id="about-convector">About Convector</h2>
-				<p>Convector is a framework designed to be used by javascript developers which aims to develop in Hyperledger Fabric fast and easily.
-				The framework is made of different blocks, described below:</p>
-				<h3 id="convector-core">Convector Core</h3>
-				<p>Formed by all the <code>@worldsibu/convector-core-*</code> packages. It provides all the necessary code to write contract specifications using the <em>Model/Controller</em> pattern.</p>
-				<h3 id="convector-storage">Convector Storage</h3>
-				<p>Convector is designed thinking in a modular design from its conception. A model not only can be used at the chaincode layer, since most of the time you&#39;ll have to use the same model in your services or front-end application, the models can be used anywhere. The difference of its behavior is the <strong>storage</strong> layer it uses. At chaincode the storage is the <em>Fabric Shim</em> to save and read data in the blockchain. But if you whish to run a model in a NodeJS backend, the storage layer can be swapped by the CouchDB storage layer, which will allow you to read data, but not write. In a browser environment you can even create your own storage layer mapping to your back-end api.</p>
-				<h3 id="convector-adapters">Convector Adapters</h3>
-				<p>Following the modular design pattern from models, controllers have <strong>adapters</strong>, they are the handlers to route the requests to the appropriate layer. In a blockchain it will be the Fabric API, but on NodeJS it might be the <em>Fabric Client SDK</em>, on unit tests it might be a mock class, and on browser it can map to your APIs.</p>
-				<h3 id="convector-tools">Convector Tools</h3>
-				<p>Formed by all the <code>@worldsibu/convector-tool-*</code> packages. It provides a set of helpers and utilitarians to make the chaincode development easily.</p>
-				<ul>
-					<li><strong>Chaincode Manager</strong> used to bundle controllers in a single chaincode and handle the installation and invokation.</li>
-					<li><strong>Dev Environment</strong>, is a basic dev environment created with Fabric running on docker or vagrant. Contains two organization and three users in that organization, two channels, one orderer, one peer per org with its database, and all the cryptographic material for this to work.</li>
-				</ul>
-				<h2 id="model-controller-pattern">Model / Controller pattern</h2>
-				<p>Convector is designed to write reusable pieces of code that describe the nature of what a developer can do in a blockchain. </p>
-				<p>A blockchain (for the developer&#39;s eyes) is no more than a data layer protected by a logic layer defining the rules of what the outside world can do in with the inner data. Thus, a really comfortable way of writing chaincode logic (<em>smart contracts</em>) is by having <strong>Models</strong> describing the shape of the data and <strong>Controllers</strong> describing the actions and rules that apply to the models.</p>
-				<h2 id="more">More</h2>
-				<ul>
-					<li><a href="https://github.com/worldsibu/convector-example-token">Want to see how to create a ERC-20 compatible token on a permissioned blockchain?</a></li>
-					<li><a href="https://github.com/worldsibu/convector-example-marketplace">Creating a project from scratch with Convector</a></li>
-					<li>About the creators: <a href="https://worldsibu.io">WorldSibu</a></li>
-				</ul>
-				<h2 id="support">Support</h2>
-				<ul>
-					<li>Don&#39;t hesitate to include recommendations, feature requests or bugs in our <a href="https://github.com/worldsibu/convector/issues">issues section</a>.</li>
-					<li>To keep up with advances and news on Convector subscribe to our <a href="https://worldsibu.io/subscribe/">Newsletter</a></li>
-				</ul>
-				<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a></p>
-				<p><a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow @worldsibu</a></p>
-				<script async defer src="https://buttons.github.io/buttons.js"></script>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+		<div class="col-2 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
-				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+				<ul class="custom-nav">
+					<li>
+						<a href="index.html">Home</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_adapter_fabric_src_index_.html">"@worldsibu/convector-<wbr>adapter-<wbr>fabric/src/index"</a>
+					<li>
+						<a href="modules/fundamentals.html">Fundamentals</a>
+						<ul>
+							<li>
+								<a href="modules/packages.html">Packages</a>
+							</li>
+							<li>
+								<a href="modules/models.html">Models</a>
+							</li>
+							<li>
+								<a href="modules/controllers.html">Controllers</a>
+							</li>
+							<li>
+								<a href="modules/chaincode_manager.html">Tool: Chaincode Manager</a>
+							</li>
+							<li>
+								<a href="modules/development_environment.html">Tool: Development Environment</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_adapter_mock_src_index_.html">"@worldsibu/convector-<wbr>adapter-<wbr>mock/src/index"</a>
+					<li>
+						<a href="modules/getting_started.html">Getting Started</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_common_fabric_helper_examples_examples_.html">"@worldsibu/convector-<wbr>common-<wbr>fabric-<wbr>helper/examples/examples"</a>
+					<li>
+						<a href="modules/hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_common_fabric_helper_src_index_.html">"@worldsibu/convector-<wbr>common-<wbr>fabric-<wbr>helper/src/index"</a>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_core_adapter_src_generate_interface_.html">"@worldsibu/convector-<wbr>core-<wbr>adapter/src/generate-<wbr>interface"</a>
+					<li>
+						<a href="https://github.com/worldsibu/convector" target="_blank">
+							<i class="fa fa-github" aria-hidden="true"></i>
+						Source code</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_core_errors_src_index_.html">"@worldsibu/convector-<wbr>core-<wbr>errors/src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_core_storage_src_index_.html">"@worldsibu/convector-<wbr>core-<wbr>storage/src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_storage_couchdb_src_index_.html">"@worldsibu/convector-<wbr>storage-<wbr>couchdb/src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_storage_stub_src_index_.html">"@worldsibu/convector-<wbr>storage-<wbr>stub/src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_tool_chaincode_manager_examples_examples_.html">"@worldsibu/convector-<wbr>tool-<wbr>chaincode-<wbr>manager/examples/examples"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_tool_chaincode_manager_src_command_.html">"@worldsibu/convector-<wbr>tool-<wbr>chaincode-<wbr>manager/src/command"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_tool_chaincode_manager_src_index_.html">"@worldsibu/convector-<wbr>tool-<wbr>chaincode-<wbr>manager/src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_tool_dev_env_src_command_.html">"@worldsibu/convector-<wbr>tool-<wbr>dev-<wbr>env/src/command"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_tool_dev_env_src_index_.html">"@worldsibu/convector-<wbr>tool-<wbr>dev-<wbr>env/src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/__worldsibu_convector_tool_dev_env_src_registry_.html">"@worldsibu/convector-<wbr>tool-<wbr>dev-<wbr>env/src/registry"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_examples_env_src_register_.html">"examples/env/src/register"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_examples_token_src_index_.html">"examples/token/src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_adapter_fabric.html">@worldsibu/convector-<wbr>adapter-<wbr>fabric</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_adapter_mock.html">@worldsibu/convector-<wbr>adapter-<wbr>mock</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_common_fabric_helper.html">@worldsibu/convector-<wbr>common-<wbr>fabric-<wbr>helper</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_core_errors.html">@worldsibu/convector-<wbr>core-<wbr>errors</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_core_storage.html">@worldsibu/convector-<wbr>core-<wbr>storage</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_examples_token.html">@worldsibu/convector-<wbr>examples-<wbr>token</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_storage_couchdb.html">@worldsibu/convector-<wbr>storage-<wbr>couchdb</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_storage_stub.html">@worldsibu/convector-<wbr>storage-<wbr>stub</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_worldsibu_convector_tool_chaincode_manager.html">@worldsibu/convector-<wbr>tool-<wbr>chaincode-<wbr>manager</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/chaincodemanger.html">Chaincode<wbr>Manger</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/controllers.html">Controllers</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/devenv.html">Dev<wbr>Env</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/getting_started.html">Getting-<wbr><wbr>Started</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/models.html">Models</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/packages.html">Packages</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/convector_core_adapter.html">convector-<wbr>core-<wbr>adapter</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/convector_core_chaincode.html">convector-<wbr>core-<wbr>chaincode</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/convector_core_controller.html">convector-<wbr>core-<wbr>controller</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/convector_core_model.html">convector-<wbr>core-<wbr>model</a>
+					<li>
+						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
 					</li>
 				</ul>
 			</nav>
@@ -238,72 +88,85 @@
 				</ul>
 			</nav>
 		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
+		<div class="col-10 col-content">
+			<div class="tsd-page-title">
+				<div class="container-fluid">
+					<ul class="tsd-breadcrumb">
+						<li>
+							<a href="index.html"> Convector Framework</a>
+						</li>
+					</ul>
+					<h1>Convector Framework</h1>
+				</div>
+			</div>
+			<div>
+				<div class="tsd-panel tsd-typography">
+					<h1 id="convector">CONVECTOR</h1>
+					<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+						<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
+						<a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+					<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>
+					<p><a href="https://github.com/ellerbrock/typescript-badges/"><img src="https://badges.frapsoft.com/typescript/code/typescript.svg?v=101" alt="TypeScript"></a>
+						<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
+					<a href="https://lernajs.io/"><img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna"></a></p>
+					<h2 id="what-is-convector-">What is Convector?</h2>
+					<p>Convector is a <strong>JavaScript-based Development Framework for Enterprise Smart Contract Systems</strong>. Its goal is to make it easier for developers to create, test and deploy enterprise-grade DApps by abstracting complexities that make it hard to get started, plus a collection of tools that speed up your go-to-market.</p>
+					<p>For now, we only support <strong>Hyperledger Fabric</strong>, so this documentation is for using Convector Smart Contracts on Hyperledger Fabric.</p>
+					<p><strong>Model/Controller pattern.</strong>  Convector is designed to help you write reusable pieces of code that describe the nature of what a developer can do in a blockchain. A blockchain, in the developer’s eyes, is no more than a data layer protected by a logic layer defining the rules of what the outside world can do in with the inner data. Thus, a really comfortable way of writing chaincode logic (smart contracts) is by having Models describing the shape of the data and Controllers describing the actions and rules that apply to the models.</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Quick look of Convector</th>
+								<th>Start with Convector</th>
+								<th>Fundamentals</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Simple application ready to be used with the whole stack (Hyperledger Fabric, NodeJS, and Angular) using Convector</td>
+								<td>Setup your project and integrate it with your pipeline and project</td>
+								<td>Learn Convector development basics, from architecture to components.</td>
+							</tr>
+							<tr>
+								<td><a href="https://github.com/worldsibu/convector-example-drug-supply-chain">Drug Supply Example</a></td>
+								<td><a href="modules/getting_started.html">Getting-Started</a></td>
+								<td><a href="modules/fundamentals.html">Fundamentals</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<h2 id="assumptions">Assumptions</h2>
+					<p>This documentation assumes that you are familiar with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">JavaScript</a>, <a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html">TypeScript</a>, and <a href="https://hyperledger-fabric.readthedocs.io/en/release-1.3/">Hyperledger Fabric</a> (at least the basics!).</p>
+					<h2 id="are-you-looking-for-an-option-to-hyperledger-composer-">Are you looking for an option to Hyperledger Composer?</h2>
+					<p>Yes, we are also aware that Composer&#39;s development has experienced some changes and a lot of people are facing uncertainty. If you are one of the devs looking for a way to create smart contract systems with native chaincodes in JavaScript, you are in the right place. <a href="https://medium.com/worldsibu/migrating-from-hyperledger-composer-to-convector-framework-marbles-example-7056b0c0f8f1" target="_blank">You may find this resource valuable on how to Migrate from Composer to Convector</a>.</p>
+					<h2 id="support">Support</h2>
+					<ul>
+						<li>For recommendations, feature requests, or bugs go to our <a href="https://github.com/worldsibu/convector/issues">issues section</a>.</li>
+						<li>News on Convector, subscribe to our <a href="https://worldsibu.io/subscribe/">Newsletter</a></li>
+						<li>Need support? Chat directly with our team, join our <a href="https://discord.gg/twRwpWt">Discord</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
+</div>
+<footer  class="with-border-bottom" >
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<a href="https://worldsibu.io">
+		<img src="assets/images/worldsibu.svg" class="worldsibu-logo">
+	</a>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
 <script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-128943824-2', '');
+        ga('send', 'pageview');
+    </script>
 </body>
 </html>
