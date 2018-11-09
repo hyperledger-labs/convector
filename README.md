@@ -20,7 +20,7 @@ For now, we only support **Hyperledger Fabric**, so this documentation is for us
 | Quick look of Convector | Start with Convector | Fundamentals |
 | --- | --- | --- |
 | Simple application ready to be used with the whole stack (Hyperledger Fabric, NodeJS, and Angular) using Convector | Setup your project and integrate it with your pipeline and project | Learn Convector development basics, from architecture to components. |
-| [Drug Supply Example](https://github.com/worldsibu/convector-example-drug-supply-chain) | [[Getting-Started]] | [[Fundamentals]] |
+| [Drug Supply Example](https://github.com/worldsibu/convector-example-drug-supply-chain) | [Getting-Started](https://worldsibu.github.io/convector/modules/getting_started.html) | [Fundamentals](https://worldsibu.github.io/convector/modules/fundamentals.html) |
 
 ## Assumptions
 
