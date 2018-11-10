@@ -115,6 +115,79 @@ export class Test extends ConvectorModel<Test> {
 
 Bootstrap this structure with `touch ./packages/<chaincode-name>/src/<chaincode-name>.model.ts && touch ./packages/<chaincode-name>/src/<chaincode-name>.controller.ts`.
 
+### Dependencies for TypeScript to work correctly
+
+Now that you start bringing code to life you will need a few extra `tsconfig.json` files, so that the decorators can be recognized.
+
+```
+./tsconfig.json
+./packages/<chaincode-name>/tsconfig.json
+```
+
+And include these contents respectively.
+
+```json
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": true,
+        "sourceMap": true,
+        "importHelpers": true,
+        "experimentalDecorators": true,
+        "removeComments": true,
+        "lib": [
+            "es2015"
+        ],
+        "outDir": "./dist",
+        "rootDir": "./src"
+    }
+}
+```
+
+```json
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "."
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
+```
+
+It will also be a good idea to install the following dev dependencies.
+
+#### In your root `./package.json`
+
+```json
+"devDependencies": {
+  "@types/chai": "^4.0.4",
+  "@types/mocha": "^2.2.43",
+  "@types/node": "^10.3.2",
+  "chai": "^4.1.2",
+  "mocha": "^5.0.3",
+  "rimraf": "^2.6.2",
+  "ts-node": "^6.0.3",
+  "typescript": "^2.8.3"
+  }
+```
+
+
+#### In your `./packages/<chaincode-name>/package.json` folder
+
+```json
+"devDependencies": {
+  "chai": "^4.1.2",
+  "mocha": "^5.0.3",
+  "rimraf": "^2.6.2",
+  "ts-node": "^6.0.3",
+  "typescript": "^2.8.3",
+}
+```
+
 ## Unit Tests
 
 We strongly suggest you create a unit tests for your controllers, since it's the easiest way to test their logic. Refer to the guides to learn more about unit testing.
