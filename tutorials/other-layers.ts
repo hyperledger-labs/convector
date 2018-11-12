@@ -1,8 +1,8 @@
 /**
  * [[include:./templates/header.md]]
- * [[include:./node-js.md]]
+ * [[include:./other-layers.md]]
  * [[include:./templates/footer.md]]
  *
- * @module Node-JS
+ * @module Other-Layers
  * @preferred
  *//** */
