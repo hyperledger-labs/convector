@@ -38,6 +38,16 @@ There are multiple decorators you can use to model the data:
 
 ## Usage
 
+To simply create a base model file through <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> run.
+
+```bash
+conv generate model <NAME-OF-MODEL>
+```
+
+Then you can edit it and adapt it as you need.
+
+### More advanced
+
 The children classes can be used in 1 of 3 ways:
 
 ### 1. As an model query
