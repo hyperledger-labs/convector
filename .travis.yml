@@ -10,10 +10,10 @@ install:
   - npm run lerna:test
 #   # - npm run publish:ci
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $githubpagestoken  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
-  on:
-    branch: develop
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: $githubpagestoken  # Set in the settings page of your repository, as a secure variable
+#   keep-history: true
+#   on:
+#     branch: develop
