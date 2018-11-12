@@ -30,6 +30,16 @@ Finally, the `@Param` decorator parses the arguments coming in the transactions 
 
 ## Usage
 
+To simply create a base controller file through <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> run.
+
+```bash
+conv generate controller <NAME-OF-CONTROLLER>
+```
+
+Then you can edit it and adapt it as you need.
+
+### More advanced
+
 After the chaincode is installed and instantiated in the peers, the method [[Chaincode.initControllers]] is invoked. This method is responsible of iterating over all the controllers specified for the chaincode, imoport them, instantiate all of them and geister all its `@Invokable` methods in the chaincode to be accesible from the outside. In order to avoid method collitions between multiple controllers, the functions are registered under a namespace, the controller name provided in the `@Controller` decorator. All the methods get registered in the blokchain using the name `{controller}_{method}`.
 
 ## Anatomy of a Controller
@@ -65,7 +75,7 @@ export class TokenController extends ConvectorController {
 }
 ```
 
-## Do and Don'ts
+## Do's and Don'ts
 
 **Do** declare new public or private methods in the class to have common logic.
 **Don't** call another `@Invokable` method directly from your controller, this will mess up the arguments since we're expecting some aditional parameters from the blockchain and not the ones you declare.

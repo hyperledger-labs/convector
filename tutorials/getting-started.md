@@ -5,6 +5,38 @@
 * [Node](https://nodejs.org/en/download/) 8.11.0 (other versions might work, but this is the one we use for development)
 * [Docker](https://www.docker.com/community-edition)
 
+## Using Convector CLI
+
+Since <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> was released, we recommend using it to provision your Chaincode projects. It makes it easier, faster, and less prone to errors.
+
+To start a new chaincode project follow these steps.
+ 
+```bash
+npm i -g @worldsibu/convector-cli
+
+# Create a new project with a default chaincode package
+conv new PROJECT-NAME -c CHAINCODE-NAME
+
+cd PROJECT-NAME
+
+npm i
+
+# Bring up a development blockchain in your computer
+npm run env:restart
+
+# Install the chaincode to the blockchain
+npm run cc:start -- CHAINCODE-NAME 1
+
+# Apply all the changes you want to the project.
+# When you need to upgrade your chaincode in the blockchain, you can simply do
+npm run cc:upgrade -- CHAINCODE-NAME 2
+
+```
+
+## Doing things manually
+
+<a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released to the public. It makes it even easier to onboard Convector, but if you still want to things manually, you can follow this instructive.
+
 ### In your NodeJS project
 
 * [yup](https://www.npmjs.com/package/yup)
@@ -161,27 +193,10 @@ By using the chaincode manager you can install and upgrade chaincodes in the blo
 
 ----
 
-## Single script to bootstrap the structure
-
-We are working on bringing to life a CLI like Angular's. Would you like to help the community by collaborating on that project? <a href="https://discord.gg/twRwpWt" target="_blank">Join the discord</a> but for now, a workaround is to use this script to bootstrap a basic project structure.
-
-First run:
-
-```bash
-PRJ=<replace-this-for-your-project-name>
-```
-
-After defining your project's name, run:
-
-```bash
-npm i -g npx && mkdir $PRJ && cd $PRJ && npx lerna init && cd packages && mkdir $PRJ-cc && cd $PRJ-cc && npm init --y && npm install -SE @worldsibu/convector-core-{model,controller} && npm i -SE reflect-metadata yup && mkdir src && mkdir tests && touch ./src/$PRJ.model.ts && touch ./src/$PRJ.controller.ts && cd .. && cd .. && npm install -D @worldsibu/convector-{adapter-mock,tool-{dev-env,chaincode-manager}} fabric-client@1.1.2 fabric-ca-client@1.1.2
-```
-
-----
-
 ## Relevant references
 
-* [[Fundamentals]]
-* [Dev resources in our blog](https://medium.com/worldsibu/for-devs/home)
-* [A fullstack TypeScript project showcasing Convector](https://github.com/worldsibu/convector-example-drug-supply-chain)
-* [A bootstrap project for you](https://github.com/worldsibu/convector-boilerplate)
+* [[Fundamentals]].
+* [Dev resources in our blog](https://medium.com/worldsibu/for-devs/home).
+* Take a look at <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a>.
+* [A fullstack TypeScript project showcasing Convector](https://github.com/worldsibu/convector-example-drug-supply-chain).
+* [A bootstrap project for you](https://github.com/worldsibu/convector-boilerplate).
