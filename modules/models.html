@@ -65,18 +65,28 @@
 					</li>
 					<li>
 						<a href="getting_started.html">Getting Started</a>
+						<ul>
+							<li>
+								<a href="other_layers.html">Fullstack usage</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a href="hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
 					</li>
 					<li>
-						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
-						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+						<a href="https://github.com/worldsibu/convector-cli" target="_blank">
+							<i class="fa fa-rocket" aria-hidden="true"></i>
+						Convector CLI</a>
 					</li>
 					<li>
 						<a href="https://github.com/worldsibu/convector" target="_blank">
 							<i class="fa fa-github" aria-hidden="true"></i>
 						Source code</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
 					</li>
 					<li>
 						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
@@ -140,6 +150,11 @@
 								<li><code>@Required(Schema|Model)</code> - used to validate the property to conform a format</li>
 							</ul>
 							<h2 id="usage">Usage</h2>
+							<p>To simply create a base model file through <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> run.</p>
+							<pre><code class="lang-bash">conv generate model &lt;NAME-OF-MODEL&gt;
+</code></pre>
+							<p>Then you can edit it and adapt it as you need.</p>
+							<h3 id="more-advanced">More advanced</h3>
 							<p>The children classes can be used in 1 of 3 ways:</p>
 							<h3 id="1-as-an-model-query">1. As an model query</h3>
 							<pre><code class="lang-ts"><span class="hljs-keyword">class</span> MyModel <span class="hljs-keyword">extends</span> ConvectorModel&lt;MyModel&gt; { ... }
@@ -203,6 +218,7 @@ MyModel.query({ amount: { $lte: <span class="hljs-number">5</span> } }).then(onM
 								<li>To convert a model to json you can do <code>JSON.stringify(myModel)</code> or <code>myModel.toJSON()</code></li>
 							</ul>
 							<hr>
+							<p><a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released! Get familiar with the new way to create Enterprise Smart Contract Systems.</p>
 							<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
 								<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
 							<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>

@@ -65,18 +65,28 @@
 					</li>
 					<li>
 						<a href="../modules/getting_started.html">Getting Started</a>
+						<ul>
+							<li>
+								<a href="../modules/other_layers.html">Fullstack usage</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a href="../modules/hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
 					</li>
 					<li>
-						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
-						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+						<a href="https://github.com/worldsibu/convector-cli" target="_blank">
+							<i class="fa fa-rocket" aria-hidden="true"></i>
+						Convector CLI</a>
 					</li>
 					<li>
 						<a href="https://github.com/worldsibu/convector" target="_blank">
 							<i class="fa fa-github" aria-hidden="true"></i>
 						Source code</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
 					</li>
 					<li>
 						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
@@ -88,14 +98,14 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_worldsibu_convector_examples_token.token.html" class="tsd-kind-icon">Token</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_worldsibu_convector_examples_token.token-1.html" class="tsd-kind-icon">Token</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_worldsibu_convector_examples_token.tokencontroller.html" class="tsd-kind-icon">Token<wbr>Controller</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_worldsibu_convector_examples_token.tokencontroller.html#sender" class="tsd-kind-icon">sender</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_worldsibu_convector_examples_token.tokencontroller.html#init" class="tsd-kind-icon">init</a>
 							</li>
@@ -110,13 +120,7 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_worldsibu_convector_examples_token.tokencontroller-1.html" class="tsd-kind-icon">Token<wbr>Controller</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_worldsibu_convector_examples_token.tokencontrollerclient.html" class="tsd-kind-icon">Token<wbr>Controller<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_worldsibu_convector_examples_token.tokencontrollerclient-1.html" class="tsd-kind-icon">Token<wbr>Controller<wbr>Client</a>
 					</li>
 				</ul>
 			</nav>
@@ -137,15 +141,10 @@
 					<h3>Hierarchy</h3>
 					<ul class="tsd-hierarchy">
 						<li>
-							<a href="_worldsibu_convector_examples_token.tokencontroller.html" class="tsd-signature-type">TokenController</a>
+							<span class="tsd-signature-type">ConvectorController</span>
 							<ul class="tsd-hierarchy">
 								<li>
 									<span class="target">TokenController</span>
-									<ul class="tsd-hierarchy">
-										<li>
-											<a href="_worldsibu_convector_examples_token.tokencontroller.html" class="tsd-signature-type">TokenController</a>
-										</li>
-									</ul>
 								</li>
 							</ul>
 						</li>
@@ -155,6 +154,12 @@
 					<h2>Index</h2>
 					<section class="tsd-panel tsd-index-panel">
 						<div class="tsd-index-content">
+							<section class="tsd-index-section tsd-is-inherited tsd-is-private-protected">
+								<h3>Properties</h3>
+								<ul class="tsd-index-list">
+									<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_worldsibu_convector_examples_token.tokencontroller.html#sender" class="tsd-kind-icon">sender</a></li>
+								</ul>
+							</section>
 							<section class="tsd-index-section ">
 								<h3>Methods</h3>
 								<ul class="tsd-index-list">
@@ -164,6 +169,20 @@
 								</ul>
 							</section>
 						</div>
+					</section>
+				</section>
+				<section class="tsd-panel-group tsd-member-group tsd-is-inherited tsd-is-private-protected">
+					<h2>Properties</h2>
+					<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<a name="sender" class="tsd-anchor"></a>
+						<h3><span class="tsd-flag ts-flagProtected">Protected</span> sender</h3>
+						<div class="tsd-signature tsd-kind-icon">sender<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+						<aside class="tsd-sources">
+							<p>Inherited from ConvectorController.sender</p>
+							<ul>
+								<li>Defined in @worldsibu/convector-core-chaincode/node_modules/@worldsibu/convector-core-controller/dist/src/convector-controller.d.ts:2</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 				<section class="tsd-panel-group tsd-member-group ">
@@ -178,7 +197,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in chaincode/packages/@worldsibu/convector-example-token/src/token.controller.ts:18</li>
+										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/examples/token/src/token.controller.ts#L18">examples/token/src/token.controller.ts:18</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -201,7 +220,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in chaincode/packages/@worldsibu/convector-example-token/src/token.controller.ts:37</li>
+										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/examples/token/src/token.controller.ts#L37">examples/token/src/token.controller.ts:37</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -230,7 +249,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in chaincode/packages/@worldsibu/convector-example-token/src/token.controller.ts:64</li>
+										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/examples/token/src/token.controller.ts#L64">examples/token/src/token.controller.ts:64</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>

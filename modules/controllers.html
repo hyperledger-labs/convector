@@ -65,18 +65,28 @@
 					</li>
 					<li>
 						<a href="getting_started.html">Getting Started</a>
+						<ul>
+							<li>
+								<a href="other_layers.html">Fullstack usage</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a href="hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
 					</li>
 					<li>
-						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
-						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+						<a href="https://github.com/worldsibu/convector-cli" target="_blank">
+							<i class="fa fa-rocket" aria-hidden="true"></i>
+						Convector CLI</a>
 					</li>
 					<li>
 						<a href="https://github.com/worldsibu/convector" target="_blank">
 							<i class="fa fa-github" aria-hidden="true"></i>
 						Source code</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
 					</li>
 					<li>
 						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
@@ -129,6 +139,11 @@
 							<p>The <code>@Invokable</code> decorator let Convector know all the available methods in this controller. You can probably have more methods in this class, but not all of them are exposed in the chaincode API</p>
 							<p>Finally, the <code>@Param</code> decorator parses the arguments coming in the transactions to the appropriate schema you define. You can also use Models as schemas and they will be instantiated and validated for you.</p>
 							<h2 id="usage">Usage</h2>
+							<p>To simply create a base controller file through <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> run.</p>
+							<pre><code class="lang-bash">conv generate controller &lt;NAME-OF-CONTROLLER&gt;
+</code></pre>
+							<p>Then you can edit it and adapt it as you need.</p>
+							<h3 id="more-advanced">More advanced</h3>
 							<p>After the chaincode is installed and instantiated in the peers, the method <a href="../classes/convector_core_chaincode.chaincode.html#initcontrollers">Chaincode.initControllers</a> is invoked. This method is responsible of iterating over all the controllers specified for the chaincode, imoport them, instantiate all of them and geister all its <code>@Invokable</code> methods in the chaincode to be accesible from the outside. In order to avoid method collitions between multiple controllers, the functions are registered under a namespace, the controller name provided in the <code>@Controller</code> decorator. All the methods get registered in the blokchain using the name <code>{controller}_{method}</code>.</p>
 							<h2 id="anatomy-of-a-controller">Anatomy of a Controller</h2>
 							<p>Controllers are meant for you to validate permissions and update models. It is very usual (but not strict) that you&#39;ll have 3 main sections in your controller bodies:</p>
@@ -160,7 +175,7 @@
   }
 }
 </code></pre>
-							<h2 id="do-and-don-ts">Do and Don&#39;ts</h2>
+							<h2 id="do-s-and-don-ts">Do&#39;s and Don&#39;ts</h2>
 							<p><strong>Do</strong> declare new public or private methods in the class to have common logic.
 							<strong>Don&#39;t</strong> call another <code>@Invokable</code> method directly from your controller, this will mess up the arguments since we&#39;re expecting some aditional parameters from the blockchain and not the ones you declare.</p>
 							<p><strong>Do</strong> store information in blockchain using models.
@@ -168,6 +183,7 @@
 							<p><strong>Do</strong> use <code>this.sender</code> as a way to identify the tx sender and validate permissions.
 							<strong>Don&#39;t</strong> trust any parameter in your function as an identity validation, since anyone could have invoked you and moked that param.</p>
 							<hr>
+							<p><a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released! Get familiar with the new way to create Enterprise Smart Contract Systems.</p>
 							<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
 								<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
 							<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>

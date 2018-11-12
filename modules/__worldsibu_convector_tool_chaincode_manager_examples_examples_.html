@@ -65,18 +65,28 @@
 					</li>
 					<li>
 						<a href="getting_started.html">Getting Started</a>
+						<ul>
+							<li>
+								<a href="other_layers.html">Fullstack usage</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a href="hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
 					</li>
 					<li>
-						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
-						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+						<a href="https://github.com/worldsibu/convector-cli" target="_blank">
+							<i class="fa fa-rocket" aria-hidden="true"></i>
+						Convector CLI</a>
 					</li>
 					<li>
 						<a href="https://github.com/worldsibu/convector" target="_blank">
 							<i class="fa fa-github" aria-hidden="true"></i>
 						Source code</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
 					</li>
 					<li>
 						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
@@ -157,7 +167,7 @@
 						<div class="tsd-signature tsd-kind-icon">cc<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x27;Test&#x27; + (process.argv[3] || &#x27;1&#x27;)</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L4">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:4</a></li>
+								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L4">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:4</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -167,7 +177,7 @@
 						<div class="tsd-signature tsd-kind-icon">manager0<span class="tsd-signature-symbol">:</span> <a href="../classes/_worldsibu_convector_tool_chaincode_manager.manager.html" class="tsd-signature-type">Manager</a><span class="tsd-signature-symbol"> =&nbsp;new Manager({skipInit: true,txTimeout: 300000,// npmtoken: &#x27;...&#x27;,userMsp: &#x27;Org1MSP&#x27;,userMspPath: &#x27;../convector-tool-dev-env/network-objects/crypto-config/&#x27; +&#x27;peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp&#x27;,networkProfile: &#x27;./examples/org1.network-profile.yaml&#x27;,controllers: [{name: &#x27;ccc&#x27;,version: &#x27;file:../convector-core-chaincode/tests/dist/ccc/&#x27;,controller: &#x27;TestController&#x27;}]})</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L6">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L6">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:6</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -177,7 +187,7 @@
 						<div class="tsd-signature tsd-kind-icon">manager1<span class="tsd-signature-symbol">:</span> <a href="../classes/_worldsibu_convector_tool_chaincode_manager.manager.html" class="tsd-signature-type">Manager</a><span class="tsd-signature-symbol"> =&nbsp;Manager.fromConfig(&#x27;./examples/org1.chaincode.config.json&#x27;)</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L22">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:22</a></li>
+								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L22">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:22</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -187,7 +197,7 @@
 						<div class="tsd-signature tsd-kind-icon">manager2<span class="tsd-signature-symbol">:</span> <a href="../classes/_worldsibu_convector_tool_chaincode_manager.manager.html" class="tsd-signature-type">Manager</a><span class="tsd-signature-symbol"> =&nbsp;Manager.fromConfig(&#x27;./examples/org2.chaincode.config.json&#x27;)</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L23">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L23">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:23</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -197,7 +207,7 @@
 						<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;parseInt(process.argv[2] || &#x27;1&#x27;, 10)</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L3">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:3</a></li>
+								<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L3">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:3</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -214,7 +224,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L25">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:25</a></li>
+										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L25">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:25</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -231,7 +241,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L46">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:46</a></li>
+										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L46">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:46</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -248,7 +258,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/3a26a27/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L37">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:37</a></li>
+										<li>Defined in <a href="https://github.com/worldsibu/convector/blob/d4f62b6/@worldsibu/convector-tool-chaincode-manager/examples/examples.ts#L37">@worldsibu/convector-tool-chaincode-manager/examples/examples.ts:37</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>

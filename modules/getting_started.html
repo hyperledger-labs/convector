@@ -65,18 +65,28 @@
 					</li>
 					<li>
 						<a href="getting_started.html">Getting Started</a>
+						<ul>
+							<li>
+								<a href="other_layers.html">Fullstack usage</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a href="hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
 					</li>
 					<li>
-						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
-						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+						<a href="https://github.com/worldsibu/convector-cli" target="_blank">
+							<i class="fa fa-rocket" aria-hidden="true"></i>
+						Convector CLI</a>
 					</li>
 					<li>
 						<a href="https://github.com/worldsibu/convector" target="_blank">
 							<i class="fa fa-github" aria-hidden="true"></i>
 						Source code</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
 					</li>
 					<li>
 						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
@@ -113,6 +123,31 @@
 								<li><a href="https://nodejs.org/en/download/">Node</a> 8.11.0 (other versions might work, but this is the one we use for development)</li>
 								<li><a href="https://www.docker.com/community-edition">Docker</a></li>
 							</ul>
+							<h2 id="using-convector-cli">Using Convector CLI</h2>
+							<p>Since <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> was released, we recommend using it to provision your Chaincode projects. It makes it easier, faster, and less prone to errors.</p>
+							<p>To start a new chaincode project follow these steps.</p>
+							<pre><code class="lang-bash">npm i -g @worldsibu/convector-cli
+
+<span class="hljs-comment"># Create a new project with a default chaincode package</span>
+conv new PROJECT-NAME -c CHAINCODE-NAME
+
+<span class="hljs-built_in">cd</span> PROJECT-NAME
+
+npm i
+
+<span class="hljs-comment"># Bring up a development blockchain in your computer</span>
+npm run env:restart
+
+<span class="hljs-comment"># Install the chaincode to the blockchain</span>
+npm run cc:start -- CHAINCODE-NAME 1
+
+<span class="hljs-comment"># Apply all the changes you want to the project.</span>
+<span class="hljs-comment"># When you need to upgrade your chaincode in the blockchain, you can simply do</span>
+npm run cc:upgrade -- CHAINCODE-NAME 2
+
+</code></pre>
+							<h2 id="doing-things-manually">Doing things manually</h2>
+							<p><a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released to the public. It makes it even easier to onboard Convector, but if you still want to things manually, you can follow this instructive.</p>
 							<h3 id="in-your-nodejs-project">In your NodeJS project</h3>
 							<ul>
 								<li><a href="https://www.npmjs.com/package/yup">yup</a></li>
@@ -234,23 +269,16 @@
 							<h3 id="chaincode-manipulation">Chaincode manipulation</h3>
 							<p>By using the chaincode manager you can install and upgrade chaincodes in the blockchain. Refer to the <a href="chaincode_manager.html">Chaincode-Manager</a> guide since you will need to first bootstrap some blockchain profiles to define some details about the topology of your blockchain and your chaincode.</p>
 							<hr>
-							<h2 id="single-script-to-bootstrap-the-structure">Single script to bootstrap the structure</h2>
-							<p>We are working on bringing to life a CLI like Angular&#39;s. Would you like to help the community by collaborating on that project? <a href="https://discord.gg/twRwpWt" target="_blank">Join the discord</a> but for now, a workaround is to use this script to bootstrap a basic project structure.</p>
-							<p>First run:</p>
-							<pre><code class="lang-bash">PRJ=&lt;replace-this-for-your-project-name&gt;
-</code></pre>
-							<p>After defining your project&#39;s name, run:</p>
-							<pre><code class="lang-bash">npm i -g npx &amp;&amp; mkdir <span class="hljs-variable">$PRJ</span> &amp;&amp; <span class="hljs-built_in">cd</span> <span class="hljs-variable">$PRJ</span> &amp;&amp; npx lerna init &amp;&amp; <span class="hljs-built_in">cd</span> packages &amp;&amp; mkdir <span class="hljs-variable">$PRJ</span>-cc &amp;&amp; <span class="hljs-built_in">cd</span> <span class="hljs-variable">$PRJ</span>-cc &amp;&amp; npm init --y &amp;&amp; npm install -SE @worldsibu/convector-core-{model,controller} &amp;&amp; npm i -SE reflect-metadata yup &amp;&amp; mkdir src &amp;&amp; mkdir tests &amp;&amp; touch ./src/<span class="hljs-variable">$PRJ</span>.model.ts &amp;&amp; touch ./src/<span class="hljs-variable">$PRJ</span>.controller.ts &amp;&amp; <span class="hljs-built_in">cd</span> .. &amp;&amp; <span class="hljs-built_in">cd</span> .. &amp;&amp; npm install -D @worldsibu/convector-{adapter-mock,tool-{dev-env,chaincode-manager}} fabric-client@1.1.2 fabric-ca-client@1.1.2
-</code></pre>
-							<hr>
 							<h2 id="relevant-references">Relevant references</h2>
 							<ul>
-								<li><a href="fundamentals.html">Fundamentals</a></li>
-								<li><a href="https://medium.com/worldsibu/for-devs/home">Dev resources in our blog</a></li>
-								<li><a href="https://github.com/worldsibu/convector-example-drug-supply-chain">A fullstack TypeScript project showcasing Convector</a></li>
-								<li><a href="https://github.com/worldsibu/convector-boilerplate">A bootstrap project for you</a></li>
+								<li><a href="fundamentals.html">Fundamentals</a>.</li>
+								<li><a href="https://medium.com/worldsibu/for-devs/home">Dev resources in our blog</a>.</li>
+								<li>Take a look at <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a>.</li>
+								<li><a href="https://github.com/worldsibu/convector-example-drug-supply-chain">A fullstack TypeScript project showcasing Convector</a>.</li>
+								<li><a href="https://github.com/worldsibu/convector-boilerplate">A bootstrap project for you</a>.</li>
 							</ul>
 							<hr>
+							<p><a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released! Get familiar with the new way to create Enterprise Smart Contract Systems.</p>
 							<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
 								<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
 							<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>

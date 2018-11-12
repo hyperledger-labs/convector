@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Hyperledger-Fabric | Convector Framework</title>
+	<title>Other-Layers | Convector Framework</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -106,7 +106,7 @@
 							<a href="../index.html"> Convector Framework</a>
 						</li>
 					</ul>
-					<h1>Hyperledger-Fabric</h1>
+					<h1>Other-Layers</h1>
 				</div>
 			</div>
 			<div>
@@ -117,19 +117,50 @@
 
 - <a href="fundamentals.html">Fundamentals</a>
 - <a href="getting_started.html">Getting-Started</a> -->
-							<h1 id="basic-concepts-about-hyperledger-fabric">Basic concepts about Hyperledger Fabric</h1>
-							<p>We highly recommend that if you are just getting started with Fabric you reference to the official documentation <a href="https://hyperledger-fabric.readthedocs.io/en/release-1.3/key_concepts.html" target="_blank">here</a>. </p>
-							<p>Here&#39;s our &quot;Hyperledger Fabric Components in a Nutshell&quot;.</p>
-							<h2 id="relevant-services">Relevant Services</h2>
-							<p>A Hyperledger Fabric network is not more than some software componentes connected with each other (peers container, also know as nodes), a service in charge of making sure the consensus and other communication matters work (orderering service, represented as a group of container), some cryptographic materials and services that allow for organizations to have control over their resources (Certificate Authorities - in this example emulated) and the blockchain, which is made up of Smart Contracts (also referred to as chaincodes) and the ledger (the underlying distributed database). There are other advanced concepts, but for development matters, those are the relevant ones.</p>
-							<h2 id="chaincode-runtime">Chaincode Runtime</h2>
-							<p><strong>Smart Contracts</strong> or <strong>Chaincodes</strong> are just programming code running in an independent container (which can be on multiple languages, we obviously prefer JavaScript 🙂). So the way you get it to work is by deploying it to each organization&#39;s peers, they run it and decide if according to the state of the database the rules comply.</p>
-							<h2 id="worldstate">WorldState</h2>
-							<p>Another relevant component is the <strong>World State</strong>. The World State is simply a no sql database usually with CouchDB. It is compiled out of the blockchain status, which means that even though you can edit its contents, anything will really be changed on the blockchain. Any simple change on the blockchain will regenerate it. It is link to an specific peer of the organization.</p>
-							<p>For JavaScript chaincodes on Hyperledger Fabric, they are made up of config files referencing projects. So, it is usually a set of packages (with models and controllers inside) that are configured through a file typically called <code>...chaincode.config.json</code>. So that even if you have packages called something like &quot;@worldsibu/convector-example-dsc-cc-drug&quot;, your chaincode can be installed with a simple name like &quot;drug&quot;.</p>
+							<h1 id="-wip-fullstack-usage">[WIP] Fullstack usage</h1>
+							<p>One of Convector&#39;s promises is the fullstack native support for JavaScript development architectures. Here&#39;s a quick entry on how to integrate it to NodeJS and Angular 4+ taking advantage of the built in adapters and storage layers that allow you to seamlessly communicate with the underneath layer.</p>
+							<h2 id="-let-s-assume-a-fairly-typical-architecture-">| Let&#39;s assume a fairly typical architecture. |</h2>
+							<p>| Angular |
+								| NodeJS |
+							| Hyperledger Fabric + CouchDB |</p>
+							<p>Basically data is always in the ledger, the only difference is that when you want to query in a sofisticated way (like filtered or aggregated data) you would use the <a href="https://worldsibu.github.io/convector/modules/hyperledger_fabric.html">World State</a>. The rest is kind of obvious, Angular provides web front end for customers whereas NodeJS works as a backend communicating with the blockchain nodes and using the crypto materials to secure transactions.</p>
+							<p>To allow this integration, the native transpiled Models-Controllers definitions offer a <code>client</code> folder with the resulting model and controller ready to be <em>imported</em> by Node and Angular.</p>
+							<p>The <strong>Adapters</strong> and <strong>Storages</strong> components, let you, through the <code>client</code> files, inject implementations based on the layer you are using the code.</p>
+							<h2 id="adding-convector-to-nodejs">Adding Convector to NodeJS</h2>
+							<p>A NodeJS backend should communicate with one or more nodes, it should sign transactions, and orchestrate calls between the blockchain and the World State database. Adapters and Storages will handle the basic tasks, like calling a Chaincode function or retriving data from the ledger, all you have to do is setup them correctly based on your topology.</p>
+							<p>Somewhere in your code you will need to import the <code>client</code> files, as well setup Adapters and Storages.</p>
+							<pre><code class="lang-typescript"><span class="hljs-comment">/**
+ * Building this adapter allows you to communicate with the
+ * test env created by `convector-tool-dev-env`.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">namespace</span> DrugController {
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">DrugControllerClient</span>&gt; </span>{
+    <span class="hljs-keyword">const</span> user = process.env.USERCERT || <span class="hljs-string">'user1'</span>;
+
+    <span class="hljs-keyword">await</span> SelfGenContext.getClient();
+
+    <span class="hljs-keyword">const</span> adapter = <span class="hljs-keyword">new</span> FabricControllerAdapter({
+      txTimeout: <span class="hljs-number">300000</span>,
+      user: user,
+      channel: process.env.CHANNEL,
+      chaincode: process.env.CHAINCODE,
+      keyStore: resolve(__dirname, process.env.KEYSTORE),
+      networkProfile: resolve(__dirname, process.env.NETWORKPROFILE),
+      userMspPath: process.env.KEYSTORE
+    });
+
+    <span class="hljs-keyword">await</span> adapter.init();
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DrugControllerClient(adapter);
+  }
+}
+
+</code></pre>
+							<h2 id="adding-convector-to-angular">Adding Convector to Angular</h2>
+							<p>In this case, Angular will always call NodeJS which subsequently calls the nodes. What is important here is to keep the Models&#39; structures as well the interfaces</p>
+							<p>As you can see, it&#39;s rather easy to integrate Convector to other TypeScript/JavaScript based projects due to its native development model.</p>
 							<hr>
 							<h2 id="what-s-next">What&#39;s next</h2>
-							<p>Are you a developer looking to better understand blockchain? Read <a href="https://medium.com/worldsibu/what-is-a-blockchain-for-a-software-developer-a-not-so-complicated-explanation-of-the-technology-d94e4d8ca817" target="_blank">this post</a> from our CTO explaining what a blockchain means for a software developer.</p>
+							<p>Want to see an out of the box project working? Take a look at the <a href="https://github.com/worldsibu/convector-example-drug-supply-chain">Drug Supply Example</a>.</p>
 							<hr>
 							<p><a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released! Get familiar with the new way to create Enterprise Smart Contract Systems.</p>
 							<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
