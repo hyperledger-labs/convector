@@ -1,0 +1,311 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Node-JS | Convector Framework</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title uppercase">
+						<img src="../assets/images/convector.svg" class="convector-logo">
+					</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-2 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul class="custom-nav">
+					<li>
+						<a href="../index.html">Home</a>
+					</li>
+					<li>
+						<a href="fundamentals.html">Fundamentals</a>
+						<ul>
+							<li>
+								<a href="packages.html">Packages</a>
+							</li>
+							<li>
+								<a href="models.html">Models</a>
+							</li>
+							<li>
+								<a href="controllers.html">Controllers</a>
+							</li>
+							<li>
+								<a href="chaincode_manager.html">Tool: Chaincode Manager</a>
+							</li>
+							<li>
+								<a href="development_environment.html">Tool: Development Environment</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="getting_started.html">Getting Started</a>
+						<ul>
+							<li>
+								<a href="node_js.html">NodeJS Integration</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
+					</li>
+					<li>
+						<a href="https://github.com/worldsibu/convector-cli" target="_blank">
+							<i class="fa fa-rocket" aria-hidden="true"></i>
+						Convector CLI</a>
+					</li>
+					<li>
+						<a href="https://github.com/worldsibu/convector" target="_blank">
+							<i class="fa fa-github" aria-hidden="true"></i>
+						Source code</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+					</li>
+					<li>
+						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+		<div class="col-10 col-content">
+			<div class="tsd-page-title">
+				<div class="container-fluid">
+					<ul class="tsd-breadcrumb">
+						<li>
+							<a href="../index.html"> Convector Framework</a>
+						</li>
+					</ul>
+					<h1>Node-JS</h1>
+				</div>
+			</div>
+			<div>
+				<section class="tsd-panel tsd-comment">
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<!-- # Guides
+
+- <a href="fundamentals.html">Fundamentals</a>
+- <a href="getting_started.html">Getting-Started</a> -->
+							<h1 id="nodejs-integration">NodeJS Integration</h1>
+							<p>One of Convector&#39;s promises is the fullstack native support for JavaScript development architectures. Here&#39;s a quick entry on how to integrate it to NodeJS taking advantage of the built in adapters and storage layers that allow you to seamlessly communicate with the blockchain nodes.</p>
+							<p>Let&#39;s assume a fairly typical architecture.</p>
+							<p><img src="../media/architecture-fullstack.png" alt="JavaScript Fullstack Architecture"></p>
+							<p>Basically data is always in the ledger, when you want to submit transactions you call the Blockcchain nodes, when you want to query data, you call the CouchDB <a href="https://worldsibu.github.io/convector/modules/hyperledger_fabric.html">World State</a>.</p>
+							<p>To allow this integration, the native transpiled Models-Controllers definitions offer a <code>client</code> folder with the resulting model and controller ready to be <em>imported</em> by your NodeJS server.</p>
+							<p>The <strong>Adapters</strong> and <strong>Storages</strong> components, let you, through the <code>client</code> files, inject implementations based on the layer you are using the code. See <a href="fundamentals.html">Fundamentals</a> for more technical details on adapters and storage layers.</p>
+							<p>This tutorial references to this example implementation: <a href="https://github.com/worldsibu/convector-example-drug-supply-chain">Drug Supply Example</a>.</p>
+							<h2 id="adding-convector-to-a-nodejs-server">Adding Convector to a NodeJS Server</h2>
+							<p>A NodeJS backend should communicate with one or more nodes, it should sign transactions, and orchestrate calls between the blockchain and the World State database. Adapters and Storages will handle the basic tasks, like calling a Chaincode function or retriving data from the ledger, all you have to do is setup them correctly based on your topology.</p>
+							<p>Somewhere in your code you will need to <strong>import</strong> the <code>client</code> files, as well <strong>setup</strong> Adapters and Storages.</p>
+							<h3 id="setting-up-the-connections">Setting up the connections</h3>
+							<p>Be sure to set the following <code>env</code> variables first.</p>
+							<p>Replace the values depending on your settings, the following values are defined as per a Convector <a href="development_environment.html">Development-Environment</a> setup.</p>
+							<pre><code class="lang-bash">KEYSTORE=../../../.convector-dev-env/.hfc-org1
+USERCERT=user1
+ORGCERT=org1
+NETWORKPROFILE=../config/org1.network-profile.yaml
+CHANNEL=ch1
+CHAINCODE=&lt;YOUR-CHAINCODE&gt;
+COUCHDBVIEW=ch1_&lt;YOUR-CHAINCODE&gt;
+COUCHDB_PORT=5984
+COUCHDB_HOST=localhost
+COUCHDB_PROTOCOL=http
+</code></pre>
+							<p>Create a <code>selfGenContext.ts</code> file. It will setup an user context which the official <code>Fabric SDK</code> will run on.</p>
+							<p>Full file in <a href="https://github.com/worldsibu/convector-example-drug-supply-chain/blob/master/%40worldsibu/server/src/selfGenContext.ts">selfGenContext.ts</a>.</p>
+							<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">namespace</span> SelfGenContext {
+
+  <span class="hljs-keyword">interface</span> IdentityFiles {
+    privateKey: <span class="hljs-built_in">string</span>;
+    signedCert: <span class="hljs-built_in">string</span>;
+  }
+
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getClient</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// Check if needed</span>
+    <span class="hljs-keyword">const</span> contextPath = join(__dirname, process.env.KEYSTORE + <span class="hljs-string">'/'</span> + process.env.USERCERT);
+
+    fs.readFile(contextPath, <span class="hljs-string">'utf8'</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, data</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-comment">// doesnt exist! Create it.</span>
+        <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> Client();
+
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Setting up the cryptoSuite ..'</span>);
+
+        <span class="hljs-comment">// ## Setup the cryptosuite (we are using the built in default s/w based implementation)</span>
+        <span class="hljs-keyword">const</span> cryptoSuite = Client.newCryptoSuite();
+        cryptoSuite.setCryptoKeyStore(Client.newCryptoKeyStore({
+          path: process.env.KEYSTORE
+        }));
+
+        client.setCryptoSuite(cryptoSuite);
+
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Setting up the keyvalue store ..'</span>);
+
+        <span class="hljs-comment">// ## Setup the default keyvalue store where the state will be stored</span>
+        <span class="hljs-keyword">const</span> store = <span class="hljs-keyword">await</span> Client.newDefaultKeyValueStore({
+          path: process.env.KEYSTORE
+        });
+
+        client.setStateStore(store);
+
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Creating the admin user context ..'</span>);
+
+        <span class="hljs-keyword">const</span> privateKeyFile = fs.readdirSync(process.env.KEYSTORE + <span class="hljs-string">'/keystore'</span>)[<span class="hljs-number">0</span>];
+
+        <span class="hljs-comment">// ###  GET THE NECESSRY KEY MATERIAL FOR THE ADMIN OF THE SPECIFIED ORG  ##</span>
+        <span class="hljs-keyword">const</span> cryptoContentOrgAdmin: IdentityFiles = {
+          privateKey: process.env.KEYSTORE + <span class="hljs-string">'/keystore/'</span> + privateKeyFile,
+          signedCert: process.env.KEYSTORE + <span class="hljs-string">'/signcerts/cert.pem'</span>
+        };
+
+        <span class="hljs-keyword">await</span> client.createUser({
+          username: process.env.USERCERT,
+          mspid: <span class="hljs-string">`<span class="hljs-subst">${process.env.ORGCERT}</span>MSP`</span>,
+          cryptoContent: cryptoContentOrgAdmin,
+          skipPersistence: <span class="hljs-literal">false</span>
+        });
+
+        <span class="hljs-keyword">return</span> client;
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Context exists'</span>);
+      }
+    });
+
+  }
+}
+</code></pre>
+							<h3 id="setup-your-controller-s-adapter-to-point-to-the-blockchain-nodes">Setup your controller&#39;s Adapter to point to the Blockchain nodes</h3>
+							<p>Setup a <code>FabricControllerAdapter</code>. Adapters are injected into <code>Convector Clients</code> (the one automatically compiled for you).</p>
+							<p>By injecting an adapter, you are pretty much telling the empty self generated <code>client</code> to route function calls to the Hyperledger Fabric blockchain nodes. As if it was magic, when calling the same function you defined in the chaincode inside of your NodeJS server project, the framework will call the blockchain.</p>
+							<p>Full file in <a href="https://github.com/worldsibu/convector-example-drug-supply-chain/blob/master/%40worldsibu/server/src/utils/controllers.ts">controllers.ts</a>.</p>
+							<pre><code class="lang-typescript"><span class="hljs-comment">/**
+ * Building this adapter allows you to communicate with the
+ * test env created by `convector-tool-dev-env`.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">namespace</span> DrugController {
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">DrugControllerClient</span>&gt; </span>{
+    <span class="hljs-keyword">const</span> user = process.env.USERCERT || <span class="hljs-string">'user1'</span>;
+
+    <span class="hljs-keyword">await</span> SelfGenContext.getClient();
+
+    <span class="hljs-comment">// Inject a Adapter of type *Fabric Controller*</span>
+    <span class="hljs-comment">// Setup accordingly to the</span>
+    <span class="hljs-keyword">const</span> adapter = <span class="hljs-keyword">new</span> FabricControllerAdapter({
+      txTimeout: <span class="hljs-number">300000</span>,
+      user: user,
+      channel: process.env.CHANNEL,
+      chaincode: process.env.CHAINCODE,
+      keyStore: resolve(__dirname, process.env.KEYSTORE),
+      networkProfile: resolve(__dirname, process.env.NETWORKPROFILE),
+      userMspPath: process.env.KEYSTORE
+    });
+
+    <span class="hljs-keyword">await</span> adapter.init();
+
+    <span class="hljs-comment">// Return your own implementation of the controller</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DrugControllerClient(adapter);
+  }
+}
+</code></pre>
+							<h3 id="setup-your-model-s-storage-to-point-to-the-couchdb">Setup your model&#39;s Storage to point to the CouchDB</h3>
+							<p>Setup a <code>CouchDBStorage</code>. Storages are injected into <code>Convector Models</code> (the ones automatically compiled for you).</p>
+							<p>By injecting an storage, you are pretty much telling the empty self generated <code>client</code> to route query function calls to the CouchDB WorldState database. Same with Controllers, when calling the  function you would call to load a model from the chaincode (i.e.: <code>getOne()</code>) the framework will call the CouchDB.</p>
+							<p>Full file in <a href="https://github.com/worldsibu/convector-example-drug-supply-chain/blob/master/%40worldsibu/server/src/utils/models.ts">models.ts</a>.</p>
+							<pre><code class="lang-typescript"><span class="hljs-comment">// Inject the setting to your preferred CouchDB server</span>
+BaseStorage.current = <span class="hljs-keyword">new</span> CouchDBStorage({
+  host: process.env.COUCHDB_HOST,
+  protocol: process.env.COUCHDB_PROTOCOL,
+  port: process.env.COUCHDB_PORT
+}, process.env.COUCHDBVIEW);
+</code></pre>
+							<h3 id="invoke-your-fabric-injected-controller">Invoke your Fabric injected Controller</h3>
+							<p>Now that the controller has been initialized, you can start making calls right from your NodeJS controller or Services files.</p>
+							<p>Full file in <a href="https://github.com/worldsibu/convector-example-drug-supply-chain/blob/master/%40worldsibu/server/src/controllers/drug.controller.ts">drug.controller.ts</a>.</p>
+							<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> cntrl = <span class="hljs-keyword">await</span> DrugController.init();
+    <span class="hljs-keyword">await</span> cntrl.transfer(id, to, reportHash, reportUrl, <span class="hljs-built_in">Date</span>.now());
+</code></pre>
+							<h3 id="invoke-your-fabric-injected-model">Invoke your Fabric injected Model</h3>
+							<p>Same with controllers, once we route the calls to our own implementation servers, you can make calls from your NodeJS files.</p>
+							<p>Full file in <a href="https://github.com/worldsibu/convector-example-drug-supply-chain/blob/master/%40worldsibu/server/src/controllers/drug.controller.ts">drug.controller.ts</a>.</p>
+							<pre><code class="lang-typescript"><span class="hljs-comment">// Load an specific model</span>
+<span class="hljs-keyword">await</span> Models.Drug.getOne(fId)
+
+<span class="hljs-comment">// More advanced query to a CouchDB View</span>
+<span class="hljs-keyword">const</span> dbName = <span class="hljs-string">`<span class="hljs-subst">${channel}</span>_<span class="hljs-subst">${cc}</span>`</span>;
+<span class="hljs-keyword">const</span> viewUrl = <span class="hljs-string">'_design/drugs/_view/all'</span>;
+
+<span class="hljs-keyword">await</span> Models.Drug.query(Models.Drug, dbName, viewUrl, queryOptions);
+</code></pre>
+							<h3 id="now-you-have-a-backend-ready-to-work-with-your-blockchain-network-">Now you have a backend ready to work with your blockchain network!</h3>
+							<p>As you can see, it&#39;s rather easy to integrate Convector to other TypeScript/JavaScript based projects due to its native development model.</p>
+							<hr>
+							<h2 id="what-s-next">What&#39;s next</h2>
+							<p>Want to see an out of the box project working? Take a look at the <a href="https://github.com/worldsibu/convector-example-drug-supply-chain">Drug Supply Example</a>.</p>
+							<hr>
+							<p><a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released! Get familiar with the new way to create Enterprise Smart Contract Systems.</p>
+							<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+								<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
+							<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>
+							<p><a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+							<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+							<p><a class="github-button" href="https://github.com/worldsibu/convector" data-icon="octicon-star" data-size="large" aria-label="Star worldsibu/convector on GitHub">Star</a> <a class="github-button" href="https://github.com/worldsibu" data-size="large" aria-label="Follow @worldsibu on GitHub">Follow</a></p>
+							<script async defer src="https://buttons.github.io/buttons.js"></script>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<footer  class="with-border-bottom" >
+</footer>
+<div class="container tsd-generator">
+	<a href="https://worldsibu.io">
+		<img src="../assets/images/worldsibu.svg" class="worldsibu-logo">
+	</a>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-128943824-2', '');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

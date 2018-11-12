@@ -1,0 +1,182 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Convector Framework</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title uppercase">
+						<img src="assets/images/convector.svg" class="convector-logo">
+					</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-2 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul class="custom-nav">
+					<li>
+						<a href="index.html">Home</a>
+					</li>
+					<li>
+						<a href="modules/fundamentals.html">Fundamentals</a>
+						<ul>
+							<li>
+								<a href="modules/packages.html">Packages</a>
+							</li>
+							<li>
+								<a href="modules/models.html">Models</a>
+							</li>
+							<li>
+								<a href="modules/controllers.html">Controllers</a>
+							</li>
+							<li>
+								<a href="modules/chaincode_manager.html">Tool: Chaincode Manager</a>
+							</li>
+							<li>
+								<a href="modules/development_environment.html">Tool: Development Environment</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="modules/getting_started.html">Getting Started</a>
+						<ul>
+							<li>
+								<a href="modules/node_js.html">NodeJS Integration</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="modules/hyperledger_fabric.html">An small overview of Hyperledger Fabric</a>
+					</li>
+					<li>
+						<a href="https://github.com/worldsibu/convector-cli" target="_blank">
+							<i class="fa fa-rocket" aria-hidden="true"></i>
+						Convector CLI</a>
+					</li>
+					<li>
+						<a href="https://github.com/worldsibu/convector" target="_blank">
+							<i class="fa fa-github" aria-hidden="true"></i>
+						Source code</a>
+					</li>
+					<li>
+						<a href="https://medium.com/worldsibu/for-devs/home" target="_blank">
+						<i class="fa fa-medium" aria-hidden="true"></i>Medium Blog</a>
+					</li>
+					<li>
+						<span class="powered-by">Powered by <a href="https://worldsibu.io">WorldSibu</a>. Licensed under an <a href="https://raw.githubusercontent.com/worldsibu/convector/develop/LICENSE.txt" target="_blank">Apache 2.0 license</a>.</span>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+		<div class="col-10 col-content">
+			<div class="tsd-page-title">
+				<div class="container-fluid">
+					<ul class="tsd-breadcrumb">
+						<li>
+							<a href="index.html"> Convector Framework</a>
+						</li>
+					</ul>
+					<h1>Convector Framework</h1>
+				</div>
+			</div>
+			<div>
+				<div class="tsd-panel tsd-typography">
+					<h1 id="convector">CONVECTOR</h1>
+					<p><a href="https://github.com/worldsibu/convector/issues"><img src="https://img.shields.io/github/issues-raw/@worldsibu/convector.svg" alt="Issues"></a>
+						<a href="https://worldsibu.io/subscribe/"><img src="https://img.shields.io/badge/Newsletter--orange.svg" alt="Newsletter"></a>
+						<a href="https://www.npmjs.com/package/@worldsibu/convector-core-chaincode"><img src="https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg" alt="npm"></a>
+					<a href="https://discord.gg/twRwpWt"><img src="https://img.shields.io/discord/469152206638284800.svg" alt="Discord"></a></p>
+					<p><a href="https://github.com/ellerbrock/typescript-badges/"><img src="https://badges.frapsoft.com/typescript/code/typescript.svg?v=101" alt="TypeScript"></a>
+						<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
+					<a href="https://lernajs.io/"><img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna"></a></p>
+					<h2 id="what-is-convector-">What is Convector?</h2>
+					<p>Convector is a <strong>JavaScript-based Development Framework for Enterprise Smart Contract Systems</strong>. Its goal is to make it easier for developers to create, test and deploy enterprise-grade DApps by abstracting complexities that make it hard to get started, plus a collection of tools that speed up your go-to-market.</p>
+					<p>For now, we only support <strong>Hyperledger Fabric</strong>, so this documentation is for using Convector Smart Contracts on Hyperledger Fabric.</p>
+					<p><strong>Model/Controller pattern.</strong>  Convector is designed to help you write reusable pieces of code that describe the nature of what a developer can do in a blockchain. A blockchain, in the developer’s eyes, is no more than a data layer protected by a logic layer defining the rules of what the outside world can do in with the inner data. Thus, a really comfortable way of writing chaincode logic (smart contracts) is by having Models describing the shape of the data and Controllers describing the actions and rules that apply to the models.</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Quick look of Convector</th>
+								<th>Start with Convector</th>
+								<th>Fundamentals</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Simple application ready to be used with the whole stack (Hyperledger Fabric, NodeJS, and Angular) using Convector</td>
+								<td>Setup your project and integrate it with your pipeline and project</td>
+								<td>Learn Convector development basics, from architecture to components.</td>
+							</tr>
+							<tr>
+								<td><a href="https://github.com/worldsibu/convector-example-drug-supply-chain">Drug Supply Example</a></td>
+								<td><a href="https://worldsibu.github.io/convector/modules/getting_started.html">Getting-Started</a></td>
+								<td><a href="https://worldsibu.github.io/convector/modules/fundamentals.html">Fundamentals</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<h2 id="assumptions">Assumptions</h2>
+					<p>This documentation assumes that you are familiar with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">JavaScript</a>, <a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html">TypeScript</a>, and <a href="https://hyperledger-fabric.readthedocs.io/en/release-1.3/">Hyperledger Fabric</a> (at least the basics!).</p>
+					<h2 id="are-you-looking-for-an-option-to-hyperledger-composer-">Are you looking for an option to Hyperledger Composer?</h2>
+					<p>Yes, we are also aware that Composer&#39;s development has experienced some changes and a lot of people are facing uncertainty. If you are one of the devs looking for a way to create smart contract systems with native chaincodes in JavaScript, you are in the right place. <a href="https://medium.com/worldsibu/migrating-from-hyperledger-composer-to-convector-framework-marbles-example-7056b0c0f8f1" target="_blank">You may find this resource valuable on how to Migrate from Composer to Convector</a>.</p>
+					<h2 id="support">Support</h2>
+					<ul>
+						<li>For recommendations, feature requests, or bugs go to our <a href="https://github.com/worldsibu/convector/issues">issues section</a>.</li>
+						<li>News on Convector, subscribe to our <a href="https://worldsibu.io/subscribe/">Newsletter</a></li>
+						<li>Need support? Chat directly with our team, join our <a href="https://discord.gg/twRwpWt">Discord</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<footer  class="with-border-bottom" >
+</footer>
+<div class="container tsd-generator">
+	<a href="https://worldsibu.io">
+		<img src="assets/images/worldsibu.svg" class="worldsibu-logo">
+	</a>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-128943824-2', '');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
