@@ -1,0 +1,10 @@
+{
+  "txTimeout": 300000,
+  "user": "admin",
+  "networkProfile": "./examples/network-profile.yaml",
+  "channel": "channel-name",
+  "skipInit": false,
+  "keyStore": "",
+  "userMsp": "",
+  "userMspPath": ""
+}

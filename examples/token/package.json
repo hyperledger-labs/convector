@@ -1,0 +1,39 @@
+{
+  "name": "@worldsibu/convector-example-token",
+  "version": "1.0.0",
+  "description": "Convector Token Example",
+  "license": "ISC",
+  "main": "./dist/src/index.js",
+  "scripts": {
+    "------------ STANDARD TASKS ------------": "",
+    "clean": "rimraf dist client",
+    "build": "npm run clean && npm run client:generate && tsc",
+    "prepare": "npm run build",
+    "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
+    "test": "npm run build && mocha -r ts-node/register tests/*.spec.ts --reporter spec",
+    "test:e2e": "npm run build && mocha -r ts-node/register -t 300000 tests/*.e2e.ts --reporter spec",
+    "------------ CHAINCODE TASKS ------------": "",
+    "client:generate": "node ./node_modules/@worldsibu/convector-core-adapter/dist/src/generate-interface -c TokenController"
+  },
+  "dependencies": {
+    "@worldsibu/convector-core-storage": "^1.2.0",
+    "@worldsibu/convector-core-chaincode": "^1.2.0",
+    "@worldsibu/convector-core-adapter": "^1.2.0",
+    "@worldsibu/convector-core-controller": "^1.2.0",
+    "@worldsibu/convector-core-model": "^1.2.0",
+    "@worldsibu/convector-storage-stub": "^1.2.0",
+    "reflect-metadata": "^0.1.12",
+    "tslib": "^1.9.0",
+    "yup": "^0.24.1"
+  },
+  "devDependencies": {
+    "@worldsibu/convector-adapter-fabric": "^1.2.0",
+    "@worldsibu/convector-adapter-mock": "^1.2.0",
+    "@worldsibu/convector-storage-couchdb": "^1.2.0",
+    "mocha": "^5.0.3",
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
+  }
+}

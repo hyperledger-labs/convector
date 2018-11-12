@@ -1,0 +1,39 @@
+{
+  "name": "@worldsibu/convector-storage-couchdb",
+  "version": "1.2.0",
+  "description": "Convector CouchDB Storage class",
+  "license": "Apache-2.0",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "clean:docs": "rimraf docs",
+    "build": "npm run clean && tsc",
+    "prepare": "npm run build",
+    "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
+    "predocs:generate": "npm run clean:docs",
+    "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
+    "docs:serve": "http-server docs"
+  },
+  "dependencies": {
+    "@worldsibu/convector-core-errors": "1.2.0",
+    "@worldsibu/convector-core-storage": "1.2.0",
+    "node-couchdb": "^1.3.0",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "npm-scripts-watcher": "^1.0.2",
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.9.1",
+    "typedoc": "^0.11.1",
+    "typescript": "2.8.3"
+  }
+}

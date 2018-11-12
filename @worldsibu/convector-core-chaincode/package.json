@@ -1,0 +1,47 @@
+{
+  "name": "@worldsibu/convector-core-chaincode",
+  "version": "1.2.0",
+  "description": "Convector base chaincode to use in conjunction with controllers and models",
+  "license": "Apache-2.0",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node ./start.js",
+    "------------ STANDARD TASKS ------------": "",
+    "clean": "rimraf dist tests/dist",
+    "clean:docs": "rimraf docs",
+    "build": "npm run clean && tsc && tsc -p ./tests/tsconfig.json && cp ./tests/ccc/package.json ./tests/dist/ccc/",
+    "copy:npmrc": "cp ../../npmrc dist/.npmrc",
+    "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
+    "prepare": "npm run build",
+    "predocs:generate": "npm run clean:docs",
+    "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
+    "docs:serve": "http-server docs"
+  },
+  "dependencies": {
+    "@theledger/fabric-chaincode-utils": "^2.0.9",
+    "@worldsibu/convector-core-controller": "1.2.0",
+    "@worldsibu/convector-core-errors": "1.2.0",
+    "@worldsibu/convector-core-storage": "1.2.0",
+    "@worldsibu/convector-storage-stub": "1.2.0",
+    "reflect-metadata": "^0.1.12",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "mocha": "^5.0.3",
+    "npm-scripts-watcher": "^1.0.2",
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.9.1",
+    "typedoc": "^0.11.1",
+    "typescript": "2.8.3"
+  }
+}

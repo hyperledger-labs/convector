@@ -1,0 +1,43 @@
+{
+  "name": "@worldsibu/convector-common-fabric-helper",
+  "version": "1.2.0",
+  "description": "Convector helper library for fabric communication",
+  "license": "Apache-2.0",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "clean:docs": "rimraf docs",
+    "build": "npm run clean && tsc",
+    "prepare": "npm run build",
+    "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
+    "predocs:generate": "npm run clean:docs",
+    "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
+    "docs:serve": "http-server docs"
+  },
+  "peerDependencies": {
+    "fabric-ca-client": ">=1.1.2",
+    "fabric-client": ">=1.1.2"
+  },
+  "dependencies": {
+    "@theledger/fabric-chaincode-utils": "^2.0.9",
+    "@types/js-yaml": "^3.11.2",
+    "fs-extra": "^6.0.1",
+    "js-yaml": "^3.12.0",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.9.1",
+    "typedoc": "^0.11.1",
+    "typescript": "2.8.3"
+  }
+}

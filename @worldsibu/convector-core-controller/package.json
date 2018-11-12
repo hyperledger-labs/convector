@@ -1,0 +1,52 @@
+{
+  "name": "@worldsibu/convector-core-controller",
+  "version": "1.2.0",
+  "description": "Convector Controller base class",
+  "license": "Apache-2.0",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "clean:docs": "rimraf docs",
+    "build": "npm run clean && tsc",
+    "watch": "npm-scripts-watcher",
+    "prepare": "npm run build",
+    "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
+    "predocs:generate": "npm run clean:docs",
+    "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
+    "docs:serve": "http-server docs"
+  },
+  "watch": {
+    "src/**/*.ts": [
+      "build"
+    ]
+  },
+  "peerDependencies": {
+    "reflect-metadata": ">=0.1.12"
+  },
+  "dependencies": {
+    "@theledger/fabric-chaincode-utils": "^2.0.9",
+    "@worldsibu/convector-core-errors": "1.2.0",
+    "@worldsibu/convector-core-model": "1.2.0",
+    "tslib": "^1.9.0",
+    "yup": "^0.24.1"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "mocha": "^5.0.3",
+    "npm-scripts-watcher": "^1.0.2",
+    "reflect-metadata": "^0.1.12",
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.9.1",
+    "typedoc": "^0.11.1",
+    "typescript": "2.8.3"
+  }
+}

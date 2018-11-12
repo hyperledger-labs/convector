@@ -1,0 +1,16 @@
+{
+  "lerna": "2.11.0",
+  "packages": [
+    "@worldsibu/*",
+    "examples/*"
+  ],
+  "version": "1.2.0",
+  "command": {
+    "publish": {
+      "exact": true
+    },
+    "bootstrap": {
+      "hoist": true
+    }
+  }
+}
