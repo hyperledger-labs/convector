@@ -1,5 +1,6 @@
 ----
 
+<a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> has been recently released! Get familiar with the new way to create Enterprise Smart Contract Systems.
 
 [![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
 [![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
