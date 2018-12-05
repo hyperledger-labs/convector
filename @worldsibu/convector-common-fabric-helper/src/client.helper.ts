@@ -186,10 +186,8 @@ export class ClientHelper {
     let result: any = proposalResponse.proposalResponses[0].response.payload;
 
     try {
-      result = Transform.bufferToObject(result);
-    } catch (err) {
-      result = Transform.bufferToString(result);
-    }
+      result = JSON.parse(result);
+    } catch (err) { }
 
     return {
       ...txResult,
