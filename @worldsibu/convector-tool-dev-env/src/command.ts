@@ -9,8 +9,8 @@ const fixPath = p => resolve(process.cwd(), p);
 
 const dockerEnv = {
   COMPOSE_PROJECT_NAME: 'net',
-  FABRIC_VERSION: 'x86_64-1.3.0',
-  THIRDPARTY_VERSION: 'x86_64-0.4.13'
+  FABRIC_VERSION: '1.3.0',
+  THIRDPARTY_VERSION: '0.4.13'
 };
 
 const tasks = {
