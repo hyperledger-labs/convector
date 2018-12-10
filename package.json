@@ -57,9 +57,9 @@
     ]
   },
   "devDependencies": {
-    "@theledger/fabric-mock-stub": "^1.2.1",
+    "@theledger/fabric-mock-stub": "^3.0.0",
     "@theledger/fabric-shim-crypto-types": "^1.0.4",
-    "@theledger/fabric-shim-types": "^1.0.6",
+    "@theledger/fabric-shim-types": "^2.0.7",
     "@types/bytebuffer": "^5.0.37",
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",
@@ -67,8 +67,8 @@
     "@types/uuid": "^3.4.3",
     "@types/yup": "^0.24.4",
     "chai": "^4.1.2",
-    "fabric-ca-client": "1.1.2",
-    "fabric-client": "1.1.2",
+    "fabric-ca-client": "1.3.0",
+    "fabric-client": "1.3.0",
     "grpc": "^1.11.3",
     "http-server": "^0.11.1",
     "lerna": "^2.11.0",
