@@ -2,7 +2,6 @@
 import { safeLoad } from 'js-yaml';
 import { resolve, join } from 'path';
 import * as Client from 'fabric-client';
-import { Transform } from '@theledger/fabric-chaincode-utils';
 import { ensureDir, ensureFile, readdir, readFile } from 'fs-extra';
 
 import { ClientConfig, TxResult, TxListenerResult } from './models';
@@ -187,7 +186,9 @@ export class ClientHelper {
 
     try {
       result = JSON.parse(result);
-    } catch (err) { }
+    } catch (err) {
+      // This error is expected and harmless
+    }
 
     return {
       ...txResult,
