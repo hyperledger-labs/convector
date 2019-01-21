@@ -32,6 +32,7 @@ Yes, we are also aware that Composer's development has experienced some changes 
 
 ## Support
 
+* [Product Hunt profile](https://www.producthunt.com/posts/convector-smart-contracts)
 * For recommendations, feature requests, or bugs go to our [issues section](https://github.com/worldsibu/convector/issues).
 * News on Convector, subscribe to our [Newsletter](https://worldsibu.io/subscribe/)
 * Need support? Chat directly with our team, join our [Discord](https://discord.gg/twRwpWt)
