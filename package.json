@@ -36,6 +36,7 @@
     "predocs:generate": "npm-run-all -s clean:docs",
     "docs:generate": "typedoc --options typedoc.json .",
     "docs:serve": "http-server",
+    "docs:deploy": "gh-pages-deploy -- 'New Docs Version'",
     "================= Dev Env =================": "==================================",
     "env:init": "CONVECTOR_DIR=./examples/.convector-dev-env CONVECTOR_CONFIG=./examples/orgs ./@worldsibu/convector-tool-dev-env/scripts/init.sh",
     "env:start": "./@worldsibu/convector-tool-dev-env/scripts/start.sh",
@@ -56,6 +57,9 @@
       "docs:generate"
     ]
   },
+  "gh-pages-deploy": {
+    "staticpath": "docs"
+  },
   "devDependencies": {
     "@theledger/fabric-mock-stub": "^1.2.1",
     "@theledger/fabric-shim-crypto-types": "^1.0.4",
@@ -69,6 +73,7 @@
     "chai": "^4.1.2",
     "fabric-ca-client": "1.1.2",
     "fabric-client": "1.1.2",
+    "gh-pages-deploy": "^0.5.1",
     "grpc": "^1.11.3",
     "http-server": "^0.11.1",
     "lerna": "^2.11.0",
