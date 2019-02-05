@@ -8,8 +8,11 @@ Convector Suite main components are:
 * <a href="https://github.com/worldsibu/hurley" target="_blank">Hurley</a> - the easiest way to quickly setup your Hyperledger development environment. Instead of learning all the config files required and navigating tons of yaml files, just do `hurl new` and focus on your smart contract.
 * <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> - the fastest and easiest way to build a new Convector Smart Contracts project. It is fully integrated with Hurley as well.
 
-## What is Convector Smart Contracts?
+<a href="https://discord.gg/twRwpWt" target="_blank">
+        <i class="fab fa-discord"></i>Join the Discord (Chat) Community
+    </a>
 
+## What is Convector Smart Contracts?
 
 [![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
 [![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
