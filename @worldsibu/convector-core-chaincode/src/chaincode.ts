@@ -1,6 +1,6 @@
 /** @module convector-core-chaincode */
 
-import { Stub } from 'fabric-shim';
+import { Stub, ClientIdentity } from 'fabric-shim';
 import { getInvokables } from '@worldsibu/convector-core-controller';
 import { BaseStorage } from '@worldsibu/convector-core-storage';
 import { StubStorage } from '@worldsibu/convector-storage-stub';
@@ -12,6 +12,10 @@ import {
 } from '@worldsibu/convector-core-errors';
 
 import { Config } from './config';
+
+function isFunction(functionToCheck) {
+  return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+}
 
 /**
  * The Chaincode class is used as a wrapper of controllers in a blockchain.
@@ -78,8 +82,32 @@ export class Chaincode extends CC {
     }
 
     const controllers = await config.getControllers();
+    const identity = new ClientIdentity(stub.getStub());
+    const fingerprint = identity.getX509Certificate().fingerPrint;
 
-    controllers.forEach(C => Object.assign(this, getInvokables(C)));
+    controllers.forEach(C => {
+      const invokables = getInvokables(C);
+
+      const injectedInvokables = Object.keys(invokables)
+        .reduce((result, fnName) => ({
+          ...result,
+          [fnName]: isFunction(invokables[fnName]) ?
+            (stubHelper: StubHelper, _args: string[]) =>
+              invokables[fnName].call(this, stubHelper, _args, {
+                sender: {
+                  value: fingerprint
+                },
+                tx: {
+                  value: {
+                    identity,
+                    stub
+                  }
+                }
+              }) :
+            invokables[fnName]
+        }), {});
+      return Object.assign(this, injectedInvokables);
+    });
 
     this.initialized = true;
   }

@@ -1,6 +1,7 @@
 /** @module @worldsibu/convector-examples-token */
 
 import * as yup from 'yup';
+import { ChaincodeTx } from '@worldsibu/convector-core-chaincode';
 import {
   Controller,
   ConvectorController,
@@ -11,7 +12,7 @@ import {
 import { Token, CompanyToken } from './token.model';
 
 @Controller('token')
-export class TokenController extends ConvectorController {
+export class TokenController extends ConvectorController<ChaincodeTx> {
   @Invokable()
   public async init(
     @Param(Token)
@@ -80,5 +81,15 @@ export class TokenController extends ConvectorController {
     }
 
     await token.save();
+  }
+
+  @Invokable()
+  public async getIdentityInfo() {
+    const mspId = this.tx.identity.getMSPID();
+    const cert = this.tx.identity.getX509Certificate();
+    const subject = cert.subject.commonName;
+    const issuer = cert.issuer.commonName;
+
+    return `Cert Fingerprint ${this.sender} for ${subject} (${mspId}) issued by ${issuer}`;
   }
 }

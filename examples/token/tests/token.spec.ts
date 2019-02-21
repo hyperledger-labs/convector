@@ -64,6 +64,14 @@ describe('Token', () => {
     const token = await tokenCtrl.get(tokenId);
     expect(token.balances[certificate]).to.eq(500000);
   });
+
+  it('should be able to access the identity in the controller', async () => {
+    const info = await tokenCtrl.getIdentityInfo();
+
+    console.log(info);
+
+    expect(info).to.exist;
+  });
 });
 
 describe('Extendable Model', () => {
@@ -95,7 +103,11 @@ describe('Extendable Model', () => {
       name: 'Token',
       symbol: 'TKN',
       totalSupply: totalSupply,
-      balances: { [certificate]: totalSupply }
+      balances: { [certificate]: totalSupply },
+      complex: {
+        name: 'Test',
+        value: 5
+      }
     }));
 
     const token = await adapter.getById<CompanyToken>(tokenId);
@@ -114,8 +126,10 @@ describe('Extendable Model', () => {
   });
 
   it('should fail to create a new model if any sub model is missing', async () => {
-    await tokenCtrl.init(new Token({
-      id: tokenId + 1,
+    const id = uuid();
+
+    await tokenCtrl.init(new CompanyToken({
+      id,
       name: 'Token',
       symbol: 'TKN',
       totalSupply: totalSupply,
@@ -123,7 +137,7 @@ describe('Extendable Model', () => {
     }));
 
     console.log('Expected error in unit-test');
-    const token = await adapter.getById<Token<any>>(tokenId + 1);
+    const token = await adapter.getById<CompanyToken>(id);
 
     expect(token).to.not.exist;
   });
