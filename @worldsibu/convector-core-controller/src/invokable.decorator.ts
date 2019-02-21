@@ -1,8 +1,6 @@
 /** @module convector-core-controller */
 
 import { Schema } from 'yup';
-import { ClientIdentity } from 'fabric-shim';
-import { StubHelper, ChaincodeError } from '@theledger/fabric-chaincode-utils';
 import {
   ControllerNamespaceMissingError,
   ControllerInstantiationError,
@@ -55,8 +53,10 @@ export function Invokable() {
     // The use of `function` here is necessary to keep the context of `this`
     descriptor.value = async function internalFn(
       this: any,
-      stubHelper: StubHelper,
-      args: string[]
+      // This used to be the stub param, deprecated now
+      _: any,
+      args: string[],
+      extras: any = {}
     ) {
       const schemas: [Schema<any>, any, { new(...args: any[]): any }][] =
         Reflect.getOwnMetadata(paramMetadataKey, target, key);
@@ -91,14 +91,13 @@ export function Invokable() {
         }, Promise.resolve([]));
       }
 
-      const identity = new ClientIdentity(stubHelper.getStub());
       const namespace = Reflect.getMetadata(controllerMetadataKey, target.constructor);
-      const ctx = Object.create(this[namespace], { sender: { value: identity.getX509Certificate().fingerPrint } });
+      const ctx = Object.create(this[namespace], extras);
 
       try {
         return await fn.call(ctx, ...args);
       } catch (e) {
-        const error = new ChaincodeError(e.message);
+        const error = new Error(e.message);
         error.stack = e.stack;
         throw error;
       }
