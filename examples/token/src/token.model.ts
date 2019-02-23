@@ -6,7 +6,8 @@ import {
   ReadOnly,
   Required,
   Validate,
-  FlatConvectorModel
+  FlatConvectorModel,
+  Default
 } from '@worldsibu/convector-core-model';
 
 export class Complex extends ConvectorModel<Complex> {
@@ -22,9 +23,10 @@ export class Complex extends ConvectorModel<Complex> {
   public name: string;
 }
 
-export class Token extends ConvectorModel<Token> {
+export class TokenBase<T extends TokenBase<any>> extends ConvectorModel<T> {
   @ReadOnly()
-  public readonly type = 'io.worldsibu.examples.token';
+  @Default('io.worldsibu.examples.token-base')
+  public readonly type: string;
 
   @ReadOnly()
   @Required()
@@ -49,4 +51,16 @@ export class Token extends ConvectorModel<Token> {
   @Required()
   @Validate(Complex)
   public complex: FlatConvectorModel<Complex>;
+}
+
+export class Token<T extends Token<any>> extends TokenBase<T> {
+  @ReadOnly()
+  @Default('io.worldsibu.examples.token')
+  public readonly type: string;
+}
+
+export class CompanyToken extends Token<CompanyToken> {
+  @ReadOnly()
+  @Default('io.company.tkn')
+  public readonly type: string;
 }

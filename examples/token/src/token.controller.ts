@@ -8,21 +8,15 @@ import {
   Param
 } from '@worldsibu/convector-core-controller';
 
-import { Token } from './token.model';
+import { Token, CompanyToken } from './token.model';
 
 @Controller('token')
 export class TokenController extends ConvectorController {
-  private initialized = false;
-
   @Invokable()
   public async init(
     @Param(Token)
-    token: Token
+    token: Token<any>
   ) {
-    if (this.initialized) {
-      throw new Error('Token has already been initialized');
-    }
-
     const totalSupply = Object.keys(token.balances)
       .reduce((total, fingerprint) => total + token.balances[fingerprint], 0);
 
@@ -61,7 +55,30 @@ export class TokenController extends ConvectorController {
   }
 
   @Invokable()
+  public async get(
+    @Param(yup.string())
+    tokenId: string
+  ) {
+    return (await Token.getOne(tokenId)).toJSON();
+  }
+
+  @Invokable()
   public async whoAmI(): Promise<string> {
     return this.sender;
+  }
+
+  @Invokable()
+  public async createCompanyToken(
+    @Param(CompanyToken)
+    token: CompanyToken
+  ) {
+    const totalSupply = Object.keys(token.balances)
+      .reduce((total, fingerprint) => total + token.balances[fingerprint], 0);
+
+    if (totalSupply !== token.totalSupply) {
+      throw new Error('The total supply does not match with the initial balances');
+    }
+
+    await token.save();
   }
 }
