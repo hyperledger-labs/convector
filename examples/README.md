@@ -1,13 +1,13 @@
 # Convector Examples
 
-This is the exmaples project to test changes in the core project
+This is the examples project to test changes in the core project
 
 As always, run the commands at the root of the base project
 
 ## Commands
 - `npm run restart` - (Re)starts the dev environment and install the chaincodes
 - `npm run restart:quick` -  Same a restart, but doesn't clean or compile the projects
-- `npm run cc:upgradeInAll -- 2` - Updates the test chaincodes at version 2 (the number has to be alwasy different)
+- `npm run cc:upgradeInAll -- 2` - Updates the test chaincodes at version 2 (the number has to be always different)
 
 ### Tests
 - `lerna run --scope @worldsibu/convector-example-token --stream test` - Runs the unit test (simulated chaincode) `*.spec.ts`
