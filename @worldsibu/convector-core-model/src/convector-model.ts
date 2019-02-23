@@ -193,19 +193,34 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
    * @param skipEmpty Skip the empty properties
    */
   public toJSON(skipEmpty = false): { [key in keyof T]?: T[key] } {
-    const proto = Object.getPrototypeOf(this);
+    let protos = [];
+    let children = this;
+
+    // Search through the parents until reach ConvectorModel
+    do {
+      children = Object.getPrototypeOf(children);
+      protos.push(children);
+    } while (children['__proto__'].constructor.name !== ConvectorModel.name);
+
+    // Get all the descriptors for this model
+    const descriptors = protos.reduce((result, proto) => [
+      ...result,
+      ...Object.keys(proto)
+        // Map the keys to their [key,propDescriptior]
+        .map(key => [key, Object.getOwnPropertyDescriptor(proto, key)])
+    ], []);
 
     const base = Object.keys(this).concat('id')
       .filter(k => !k.startsWith('_'))
       .filter(k => !skipEmpty || this[k] !== undefined || this[k] !== null)
       .reduce((result, key) => ({...result, [key]: this[key]}), {});
 
-    return Object.keys(proto)
-      .reduce((result, key) => {
-        const desc = Object.getOwnPropertyDescriptor(proto, key);
+      return descriptors
+      .reduce((result, [key, desc]) => {
         const hasGetter = desc && typeof desc.get === 'function';
 
         if (hasGetter) {
+          // Apply the descriptors to the children class
           result[key] = desc.get.call(this);
         }
 
