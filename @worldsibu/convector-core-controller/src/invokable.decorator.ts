@@ -17,8 +17,11 @@ import 'reflect-metadata';
 import { paramMetadataKey } from './param.decorator';
 import { controllerMetadataKey } from './controller.decorator';
 
+const g: any = global;
+
 /** @hidden */
-const invokableMetadataKey = Symbol('invokable');
+export const invokableMetadataKey = g.ConvectorInvokableMetadataKey || Symbol('invokable');
+g.ConvectorInvokableMetadataKey = invokableMetadataKey;
 
 /**
  * Used to expose a function inside a controller
