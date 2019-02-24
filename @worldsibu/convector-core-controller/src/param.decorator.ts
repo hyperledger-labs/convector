@@ -4,10 +4,14 @@ import { Schema, object } from 'yup';
 import 'reflect-metadata';
 
 /** @hidden */
+const g: any = global;
+
+/** @hidden */
 const isSchema = (schema: any): schema is Schema<any> => 'validate' in schema;
 
 /** @hidden */
-export const paramMetadataKey = Symbol('param');
+export const paramMetadataKey = g.ConvectorParamMetadataKey || Symbol('param');
+g.ConvectorParamMetadataKey = paramMetadataKey;
 
 /**
  * Used to identify and parse the parameters when a function is invokable in the chaincode.

@@ -4,7 +4,11 @@ import { ControllerInvalidError } from '@worldsibu/convector-core-errors';
 import 'reflect-metadata';
 
 /** @hidden */
-export const controllerMetadataKey = Symbol('controller');
+const g: any = global;
+
+/** @hidden */
+export const controllerMetadataKey = g.ConvectorControllerMetadataKey || Symbol('controller');
+g.ConvectorControllerMetadataKey = controllerMetadataKey;
 
 /**
  * The controller decorator is used to pass the namespace context

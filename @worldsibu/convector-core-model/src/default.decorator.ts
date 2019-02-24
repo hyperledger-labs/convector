@@ -1,6 +1,9 @@
 /** @module convector-core-model */
 
-const defaultMetadataKey = Symbol('default');
+const g: any = global;
+
+export const defaultMetadataKey = g.ConvectorDefaultMetadataKey || Symbol('default');
+g.ConvectorDefaultMetadataKey = defaultMetadataKey;
 import 'reflect-metadata';
 
 export function Default<T>(defaultValue: T) {

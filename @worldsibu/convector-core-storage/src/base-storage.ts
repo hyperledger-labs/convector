@@ -1,10 +1,17 @@
 /** @module @worldsibu/convector-core-storage */
 
+const g: any = global;
+
 export abstract class BaseStorage {
   /**
    * Current storage implementation
    */
-  public static current: BaseStorage;
+  public static get current(): BaseStorage {
+    return g.ConvectorBaseStorageCurrent;
+  }
+  public static set current(storage: BaseStorage) {
+    g.ConvectorBaseStorageCurrent = storage;
+  }
 
   public async abstract get(id: string): Promise<any>;
   public async abstract set(id: string, content: any);
