@@ -123,7 +123,7 @@ describe('Extendable Model', () => {
     }));
 
     console.log('Expected error in unit-test');
-    const token = await adapter.getById<Token>(tokenId + 1);
+    const token = await adapter.getById<Token<any>>(tokenId + 1);
 
     expect(token).to.not.exist;
   });
