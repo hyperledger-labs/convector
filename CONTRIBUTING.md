@@ -21,3 +21,9 @@ for more details, but in short:
 
 Before get your hands down to code please open an issue describing your idea,
 or refer to our [Discord](https://discord.gg/hG33TK) chat
+
+## Submitting a pull request
+
+Make sure to follow the [PR template](https://raw.githubusercontent.com/hyperledger-labs/convector/blob/develop/.github/PULL_REQUEST_TEMPLATE.md)
+
+- Squash all your commits into one, following the [conventional commits guide](https://www.conventionalcommits.org/en/v1.0.0-beta.2/)
