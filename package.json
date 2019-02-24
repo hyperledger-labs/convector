@@ -69,7 +69,7 @@
     "@types/mocha": "^2.2.43",
     "@types/node": "^10.3.0",
     "@types/uuid": "^3.4.3",
-    "@types/yup": "^0.24.4",
+    "@types/yup": "^0.26.9",
     "chai": "^4.1.2",
     "fabric-ca-client": "1.1.2",
     "fabric-client": "1.1.2",

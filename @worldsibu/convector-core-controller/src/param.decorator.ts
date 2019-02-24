@@ -39,7 +39,7 @@ export function Param<T>(
     const schemas: [Schema<any>, any, { new(...args: any[]): T }] =
       Reflect.getOwnMetadata(paramMetadataKey, target, propertyKey) || [];
 
-    const schema = isSchema(model) ? model : object<T>()
+    const schema = isSchema(model) ? model : object()
       .transform(value => value instanceof model ? value : new model(value));
 
     schemas[parameterIndex] = [schema, opts, !isSchema(model) && model];

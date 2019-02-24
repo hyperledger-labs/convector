@@ -6,7 +6,7 @@ import * as uuid from 'uuid/v4';
 import { MockControllerAdapter } from '@worldsibu/convector-adapter-mock';
 import 'mocha';
 
-import { Token, CompanyToken } from '../src/token.model';
+import { Token, CompanyToken, Element, SubElement } from '../src/token.model';
 import { TokenControllerClient } from '../client';
 
 describe('Token', () => {
@@ -140,5 +140,38 @@ describe('Extendable Model', () => {
     const token = await adapter.getById<CompanyToken>(id);
 
     expect(token).to.not.exist;
+  });
+});
+
+describe.only('Recursive Model', () => {
+  let adapter: MockControllerAdapter;
+  let tokenCtrl: TokenControllerClient;
+
+  before(async () => {
+    adapter = new MockControllerAdapter();
+    tokenCtrl = new TokenControllerClient(adapter);
+
+    await adapter.init([
+      {
+        version: '*',
+        controller: 'TokenController',
+        name: join(__dirname, '..')
+      }
+    ]);
+  });
+
+  it('should allow recursive models', async () => {
+    await tokenCtrl.saveRecursive(new Element({
+      id: '123',
+      ref: {
+        test: '',
+        ref: undefined
+      }
+    }));
+
+    const el = await adapter.getById<Element>('123');
+
+    expect(el.type).to.eq('io.example.element');
+    expect(el.ref.test).to.eq('');
   });
 });

@@ -79,7 +79,7 @@
     "no-unused-variable": true,
     "no-unsafe-finally": true,
     "no-parameter-properties": false,
-    "no-use-before-declare": true,
+    "no-use-before-declare": false,
     "use-isnan": true,
     "switch-default": true,
     "jsdoc-format": false,

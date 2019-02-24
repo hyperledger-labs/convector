@@ -29,14 +29,12 @@ export interface History<T> {
  */
 export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   public static schema<T extends ConvectorModel<any>>(
-    this: new (...args: any[]) => T
+    this: Function&{prototype: T}
   ): yup.ObjectSchema<FlatConvectorModel<T>&{id:string,type:string}> {
-    const instance = new this();
-
     return yup.object<FlatConvectorModel<T>&{id:string,type:string}>().shape({
       id: yup.string().required(),
       type: yup.string(),
-      ...getPropertiesValidation(instance)
+      ...getPropertiesValidation(this.prototype)
     } as any);
   }
 
