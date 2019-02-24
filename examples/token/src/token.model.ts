@@ -64,3 +64,21 @@ export class CompanyToken extends Token<CompanyToken> {
   @Default('io.company.tkn')
   public readonly type: string;
 }
+
+export class Element<T extends Element<any>=Element<any>> extends ConvectorModel<T> {
+  @Default('io.example.element')
+  @Required()
+  public readonly type: string;
+
+  @Validate(yup.lazy(() => SubElement.schema()))
+  public ref?: FlatConvectorModel<SubElement>;
+}
+
+export class SubElement extends Element<SubElement> {
+  @Default('io.example.element.subElement')
+  @Required()
+  public readonly type: string;
+
+  @Validate(yup.string())
+  public test: string;
+}
