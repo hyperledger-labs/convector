@@ -1,5 +1,13 @@
 # Development Environment
 
+```text
+Even if the Development Environment binaries still exist, they are currently being converted into Hur
+```
+
+Please refer to [Hurley](https://github.com/worldsibu/hurley)'s homepage for more information.
+
+![Hurley Development Environment Manager](media://hurley.svg)
+
 We have a tool to manage your dev environment easily with some commands.
 Once you install [@worldsibu/convector-tool-dev-env](https://www.npmjs.com/package/@worldsibu/convector-tool-dev-env) you will have the folowwing commands available in your `.bin` folder inside the `node_modules`:
 

@@ -1,4 +1,18 @@
-# CONVECTOR
+# CONVECTOR SUITE
+
+The Convector Suite is an Open Source Suite for Enterprise Blockchain Networks. It is composed of a group of Development tools for Hyperledger Fabric and aim to be an agnostic toolset.
+
+Convector Suite main components are:
+
+* <a href="https://github.com/worldsibu/convector" target="_blank">Convector Smart Contracts</a> - JavaScript-based Development Framework for Enterprise Smart Contract Systems
+* <a href="https://github.com/worldsibu/hurley" target="_blank">Hurley</a> - the easiest way to quickly setup your Hyperledger development environment. Instead of learning all the config files required and navigating tons of yaml files, just do `hurl new` and focus on your smart contract.
+* <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> - the fastest and easiest way to build a new Convector Smart Contracts project. It is fully integrated with Hurley as well.
+
+<a href="https://discord.gg/twRwpWt" target="_blank">
+        <i class="fab fa-discord"></i>Join the Discord (Chat) Community
+    </a>
+
+## What is Convector Smart Contracts?
 
 [![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
 [![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
@@ -9,18 +23,16 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
-## What is Convector?
-
 Convector is a **JavaScript-based Development Framework for Enterprise Smart Contract Systems**. Its goal is to make it easier for developers to create, test and deploy enterprise-grade DApps by abstracting complexities that make it hard to get started, plus a collection of tools that speed up your go-to-market.
 
 For now, we only support **Hyperledger Fabric**, so this documentation is for using Convector Smart Contracts on Hyperledger Fabric.
 
 **Model/Controller pattern.**  Convector is designed to help you write reusable pieces of code that describe the nature of what a developer can do in a blockchain. A blockchain, in the developer’s eyes, is no more than a data layer protected by a logic layer defining the rules of what the outside world can do in with the inner data. Thus, a really comfortable way of writing chaincode logic (smart contracts) is by having Models describing the shape of the data and Controllers describing the actions and rules that apply to the models.
 
-| Quick look of Convector | Start with Convector | Fundamentals |
-| --- | --- | --- |
-| Simple application ready to be used with the whole stack (Hyperledger Fabric, NodeJS, and Angular) using Convector | Setup your project and integrate it with your pipeline and project | Learn Convector development basics, from architecture to components. |
-| [Drug Supply Example](https://github.com/worldsibu/convector-example-drug-supply-chain) | [Getting-Started](https://worldsibu.github.io/convector/modules/getting_started.html) | [Fundamentals](https://worldsibu.github.io/convector/modules/fundamentals.html) |
+| Quick look of Convector                                                                                            | Start with Convector                                                                  | Fundamentals                                                                    |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Simple application ready to be used with the whole stack (Hyperledger Fabric, NodeJS, and Angular) using Convector | Setup your project and integrate it with your pipeline and project                    | Learn Convector development basics, from architecture to components.            |
+| [Drug Supply Example](https://github.com/worldsibu/convector-example-drug-supply-chain)                            | [Getting-Started](https://worldsibu.github.io/convector/modules/getting_started.html) | [Fundamentals](https://worldsibu.github.io/convector/modules/fundamentals.html) |
 
 ## Assumptions
 
