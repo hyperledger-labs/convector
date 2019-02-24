@@ -9,7 +9,7 @@ import {
   Param
 } from '@worldsibu/convector-core-controller';
 
-import { Token, CompanyToken } from './token.model';
+import { Token, CompanyToken, Element } from './token.model';
 
 @Controller('token')
 export class TokenController extends ConvectorController<ChaincodeTx> {
@@ -91,5 +91,13 @@ export class TokenController extends ConvectorController<ChaincodeTx> {
     const issuer = cert.issuer.commonName;
 
     return `Cert Fingerprint ${this.sender} for ${subject} (${mspId}) issued by ${issuer}`;
+  }
+
+  @Invokable()
+  public async saveRecursive(
+    @Param(Element)
+    el: Element
+  ) {
+    await el.save();
   }
 }

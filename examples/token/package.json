@@ -10,7 +10,7 @@
     "build": "npm run clean && npm run client:generate && tsc",
     "prepare": "npm run build",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
-    "test": "npm run build && mocha --inspect=0.0.0.0:9339 -r ts-node/register tests/*.spec.ts --reporter spec",
+    "test": "npm run build && mocha -r ts-node/register tests/*.spec.ts --reporter spec",
     "test:e2e": "npm run build && mocha -r ts-node/register -t 300000 tests/*.e2e.ts --reporter spec",
     "------------ CHAINCODE TASKS ------------": "",
     "client:generate": "node ./node_modules/@worldsibu/convector-core-adapter/dist/src/generate-interface -c TokenController"
@@ -24,7 +24,7 @@
     "@worldsibu/convector-storage-stub": "^1.2.0",
     "reflect-metadata": "^0.1.12",
     "tslib": "^1.9.0",
-    "yup": "^0.24.1"
+    "yup": "^0.26.10"
   },
   "devDependencies": {
     "@worldsibu/convector-adapter-fabric": "^1.2.0",
