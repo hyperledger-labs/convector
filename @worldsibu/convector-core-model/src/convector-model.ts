@@ -64,8 +64,8 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
    * @param type The type to use for instantiation, if not provided, the extender type is used
    * @param args The query params, this is passed directly to the current storage being used
    */
-  public static async query<T>(type: new (content: any) => T, ...args: any[]): Promise<T|T[]>;
-  public static async query<T>(this: new (content: any) => T, ...args: any[]): Promise<T|T[]> {
+  public static async query<T>(type: new (content: any) => T, ...args: any[]): Promise<T | T[]>;
+  public static async query<T>(this: new (content: any) => T, ...args: any[]): Promise<T | T[]> {
     let type = this;
 
     // Stupid horrible hack to find the current implementation's parent type
@@ -120,7 +120,7 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   constructor();
   constructor(id: string);
   constructor(content: { [key in keyof T]?: T[key] });
-  constructor(content?: string|{ [key in keyof T]?: T[key] }) {
+  constructor(content?: string | { [key in keyof T]?: T[key] }) {
     if (!content) {
       return;
     }
@@ -173,7 +173,12 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   public async save() {
     this.assign(getDefaults(this), true);
     if (!ensureRequired(this)) {
-      throw new Error(`Model ${this.type} is not complete\n${JSON.stringify(this)}`);
+      if (!this.id) {
+        throw new Error(`Model ${this.type} is missing the 'id' property \n${JSON.stringify(this)}`);
+      } else {
+        throw new Error(`Model ${this.type} is not complete\n${JSON.stringify(this)}.
+        Check your model definition for more details.`);
+      }
     }
 
     InvalidIdError.test(this.id);
@@ -213,7 +218,7 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     const base = Object.keys(this).concat('id')
       .filter(k => !k.startsWith('_'))
       .filter(k => !skipEmpty || this[k] !== undefined || this[k] !== null)
-      .reduce((result, key) => ({...result, [key]: this[key]}), {});
+      .reduce((result, key) => ({ ...result, [key]: this[key] }), {});
 
       return descriptors
       .reduce((result, [key, desc]) => {
