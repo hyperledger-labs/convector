@@ -15,6 +15,29 @@ hgroup,
 main,
 nav,
 section,
+summary,
+p,
+a,
+span,
+div,
+li,
+ul,
+input,
+textarea {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
 summary {
     display: block;
 }
@@ -2105,15 +2128,14 @@ ul.tsd-descriptions>li> :last-child> :last-child> :last-child {
 }
 
 body {
-    background: #f3f3f3;
+    background: #f9f9fb;
     font-family: "Segoe UI", sans-serif;
     font-size: 16px;
     color: #000000;
 }
 
 a {
-    color: #00a875;
-    ;
+    color: #073FEF;
     text-decoration: none;
 }
 
@@ -2683,7 +2705,7 @@ footer .tsd-legend {
 
 .tsd-navigation.primary ul li a:hover {
     text-decoration: none;
-    color: #00a875;
+    color: #073FEF;
 }
 
 .tsd-navigation.primary ul li li a {
@@ -3380,6 +3402,7 @@ img {
     padding: 12px 0 12px 5px;
     font-style: italic;
     color: #666;
+    font-size: 12px;
     margin-top: 40px;
     display: block;
 }
@@ -3387,7 +3410,7 @@ img {
 .powered-by a {
     padding: 0 !important;
     display: inline !important;
-    color: #00a875 !important;
+    color: #073FEF !important;
 }
 
 /** Bootstrap fixes **/
@@ -3407,4 +3430,29 @@ img {
 
 .custom-nav i>ul i a {
     padding: 12px 0 0 24px;
+}
+
+.social-menu {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.social-menu>li {
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+}
+
+.social-menu>li>a {
+    font-size: 18px;
+    padding: 6px;
+}
+
+.double-content {
+    display: flex;
+}
+
+.double-content>div {
+    flex: 1 0 0;
 }

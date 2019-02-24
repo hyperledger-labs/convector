@@ -4,13 +4,16 @@
 import { Schema } from 'yup';
 import 'reflect-metadata';
 
-const validateMetadataKey = Symbol('validate');
+const g: any = global;
+
+export const validateMetadataKey = g.ConvectorValidateMetadataKey || Symbol('validate');
+g.ConvectorValidateMetadataKey = validateMetadataKey;
 
 export function Validate<T>(input: Schema<T>|{ schema: () => Schema<T>}) {
   let schema = input as Schema<T>;
 
   if ('schema' in input) {
-    schema = input.schema as any;
+    schema = input.schema();
   }
 
   return (target: any, key: string) => {

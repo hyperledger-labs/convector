@@ -38,12 +38,17 @@ describe('Token', () => {
       name: 'Token',
       symbol: 'TKN',
       totalSupply: totalSupply,
-      balances: { [certificate]: totalSupply }
+      balances: { [certificate]: totalSupply },
+      complex: {
+        name: 'Test',
+        value: 5
+      }
     }));
 
     const token = await adapter.getById<Token>(tokenId);
 
     expect(token).to.exist;
+    expect(token.complex.name).to.eq('Test');
     expect(token.balances[certificate]).to.eq(totalSupply);
   });
 
@@ -53,5 +58,20 @@ describe('Token', () => {
     const token = await adapter.getById<Token>(tokenId);
 
     expect(token.balances[certificate]).to.eq(500000);
+  });
+
+  it('should fail to create a new model if any sub model is missing', async () => {
+    await tokenCtrl.init(new Token({
+      id: tokenId + 1,
+      name: 'Token',
+      symbol: 'TKN',
+      totalSupply: totalSupply,
+      balances: { [certificate]: totalSupply }
+    }));
+
+    console.log('Expected error in unit-test');
+    const token = await adapter.getById<Token>(tokenId + 1);
+
+    expect(token).to.not.exist;
   });
 });

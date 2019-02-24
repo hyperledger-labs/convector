@@ -5,8 +5,22 @@ import {
   ConvectorModel,
   ReadOnly,
   Required,
-  Validate
+  Validate,
+  FlatConvectorModel
 } from '@worldsibu/convector-core-model';
+
+export class Complex extends ConvectorModel<Complex> {
+  @ReadOnly()
+  public readonly type = 'io.worldsibu.examples.complex';
+
+  @Required()
+  @Validate(yup.mixed())
+  public value: any;
+
+  @Required()
+  @Validate(yup.string())
+  public name: string;
+}
 
 export class Token extends ConvectorModel<Token> {
   @ReadOnly()
@@ -31,4 +45,8 @@ export class Token extends ConvectorModel<Token> {
   @Required()
   @Validate(yup.string())
   public symbol: string;
+
+  @Required()
+  @Validate(Complex)
+  public complex: FlatConvectorModel<Complex>;
 }
