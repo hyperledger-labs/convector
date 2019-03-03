@@ -3,16 +3,18 @@
 import { join } from 'path';
 import { expect } from 'chai';
 import * as uuid from 'uuid/v4';
-import { MockControllerAdapter } from '@worldsibu/convector-adapter-mock';
 import 'mocha';
 
-import { Token, CompanyToken, Element, SubElement } from '../src/token.model';
-import { TokenControllerClient } from '../client';
+import { MockControllerAdapter } from '@worldsibu/convector-adapter-mock';
+import { ClientFactory, ConvectorControllerClient } from '@worldsibu/convector-core-adapter';
+
+import { TokenController } from '../src/token.controller';
+import { Token, CompanyToken, Element } from '../src/token.model';
 
 describe('Token', () => {
   let tokenId: string;
   let adapter: MockControllerAdapter;
-  let tokenCtrl: TokenControllerClient;
+  let tokenCtrl: ConvectorControllerClient<TokenController>;
 
   const totalSupply = 1000000;
   // Mock certificate fingerprint
@@ -21,7 +23,7 @@ describe('Token', () => {
   before(async () => {
     tokenId = uuid();
     adapter = new MockControllerAdapter();
-    tokenCtrl = new TokenControllerClient(adapter);
+    tokenCtrl = ClientFactory(TokenController, adapter);
 
     await adapter.init([
       {
@@ -77,7 +79,7 @@ describe('Token', () => {
 describe('Extendable Model', () => {
   let tokenId: string;
   let adapter: MockControllerAdapter;
-  let tokenCtrl: TokenControllerClient;
+  let tokenCtrl: ConvectorControllerClient<TokenController>;
 
   const totalSupply = 1000000;
   // Mock certificate fingerprint
@@ -86,7 +88,7 @@ describe('Extendable Model', () => {
   before(async () => {
     tokenId = uuid();
     adapter = new MockControllerAdapter();
-    tokenCtrl = new TokenControllerClient(adapter);
+    tokenCtrl = ClientFactory(TokenController, adapter);
 
     await adapter.init([
       {
@@ -145,11 +147,11 @@ describe('Extendable Model', () => {
 
 describe.only('Recursive Model', () => {
   let adapter: MockControllerAdapter;
-  let tokenCtrl: TokenControllerClient;
+  let tokenCtrl: ConvectorControllerClient<TokenController>;
 
   before(async () => {
     adapter = new MockControllerAdapter();
-    tokenCtrl = new TokenControllerClient(adapter);
+    tokenCtrl = ClientFactory(TokenController, adapter);
 
     await adapter.init([
       {

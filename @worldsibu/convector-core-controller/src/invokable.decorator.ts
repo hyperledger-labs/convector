@@ -3,7 +3,6 @@
 import { Schema } from 'yup';
 import {
   ControllerNamespaceMissingError,
-  ControllerInstantiationError,
   ControllerInvokablesMissingError,
   ControllerInvalidInvokeError,
   ControllerInvalidArgumentError,
@@ -13,6 +12,7 @@ import {
 import 'reflect-metadata';
 
 import { paramMetadataKey } from './param.decorator';
+import { ConvectorController } from './convector-controller';
 import { controllerMetadataKey } from './controller.decorator';
 
 const g: any = global;
@@ -115,10 +115,12 @@ export function Invokable() {
  *
  * @param controller
  */
-export function getInvokables(controller: { new(...args: any[]): any }): any {
-  let obj: any;
+export function getInvokables(controller: new(...args: any[]) => ConvectorController): {
+  invokables: { [k: string]: (new(...args: any[]) => ConvectorController) };
+  namespace: string;
+} {
   let namespace: string;
-  let invokables: any[];
+  let invokables: any;
 
   try {
     namespace = Reflect.getMetadata(controllerMetadataKey, controller);
@@ -131,12 +133,6 @@ export function getInvokables(controller: { new(...args: any[]): any }): any {
   }
 
   try {
-    obj = new controller();
-  } catch (e) {
-    throw new ControllerInstantiationError(e, namespace);
-  }
-
-  try {
     invokables = Reflect.getMetadata(invokableMetadataKey, controller);
 
     if (!invokables) {
@@ -146,9 +142,8 @@ export function getInvokables(controller: { new(...args: any[]): any }): any {
     throw new ControllerInvokablesMissingError(e, namespace);
   }
 
-  return Object.keys(invokables)
-    .reduce((result, k) => ({
-      ...result,
-      [`${namespace}_${k}`]: obj[k]
-    }), { [namespace]: obj });
+  return {
+    invokables,
+    namespace
+  };
 }

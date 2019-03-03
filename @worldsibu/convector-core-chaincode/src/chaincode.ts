@@ -8,7 +8,8 @@ import { Chaincode as CC, StubHelper, ChaincodeError } from '@theledger/fabric-c
 import {
   ChaincodeInitializationError,
   ChaincodeInvokationError,
-  ConfigurationInvalidError
+  ConfigurationInvalidError,
+  ControllerInstantiationError
 } from '@worldsibu/convector-core-errors';
 
 import { Config } from './config';
@@ -35,13 +36,12 @@ export class Chaincode extends CC {
    * Standard Init from Hyperledger Fabric
    */
   public async Init(stub: Stub) {
-    const response = await super.Init(stub)
-      .catch(e => {
-        const err = new ChaincodeInitializationError(e);
-        throw new ChaincodeError(err.toString());
-      });
-
-    return response;
+    try {
+      return await super.Init(stub);
+    } catch (e) {
+      const err = new ChaincodeInitializationError(e);
+      throw new ChaincodeError(err.toString());
+    }
   }
 
   /**
@@ -53,13 +53,13 @@ export class Chaincode extends CC {
   public async Invoke(stub: Stub) {
     BaseStorage.current = new StubStorage(stub);
 
-    await this.initControllers(new StubHelper(stub), [, 'true']);
-
-    return await super.Invoke(stub)
-      .catch(e => {
-        const err = new ChaincodeInvokationError(e);
-        throw new ChaincodeError(err.toString());
-      });
+    try {
+      await this.initControllers(new StubHelper(stub), [, 'true']);
+      return await super.Invoke(stub);
+    } catch(e) {
+      const err = new ChaincodeInvokationError(e);
+      throw new ChaincodeError(err.toString());
+    }
   }
 
   /**
@@ -86,14 +86,22 @@ export class Chaincode extends CC {
     const fingerprint = identity.getX509Certificate().fingerPrint;
 
     controllers.forEach(C => {
-      const invokables = getInvokables(C);
+      let obj: any;
+      const ctrlInvokables = getInvokables(C);
 
-      const injectedInvokables = Object.keys(invokables)
-        .reduce((result, fnName) => ({
+      try {
+        obj = new C();
+      } catch (e) {
+        throw new ControllerInstantiationError(e, ctrlInvokables.namespace);
+      }
+
+      const injectedInvokables = Object.keys(ctrlInvokables.invokables)
+        .map(k => [k, `${ctrlInvokables.namespace}_${k}`])
+        .reduce((result, [fnName, internalName]) => ({
           ...result,
-          [fnName]: isFunction(invokables[fnName]) ?
+          [internalName]: isFunction(obj[fnName]) ?
             (stubHelper: StubHelper, _args: string[]) =>
-              invokables[fnName].call(this, stubHelper, _args, {
+              obj[fnName].call(this, stubHelper, _args, {
                 sender: {
                   value: fingerprint
                 },
@@ -104,8 +112,9 @@ export class Chaincode extends CC {
                   }
                 }
               }) :
-            invokables[fnName]
-        }), {});
+              obj[fnName]
+        }), { [ctrlInvokables.namespace]: obj });
+
       return Object.assign(this, injectedInvokables);
     });
 

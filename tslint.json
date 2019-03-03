@@ -6,7 +6,7 @@
     ],
     "curly": true,
     "eofline": false,
-    "forin": true,
+    "forin": false,
     "indent": [
       true,
       "spaces",
@@ -63,7 +63,7 @@
       true
     ],
     "no-invalid-this": [
-      true
+      false
     ],
     "cyclomatic-complexity": [
       true,

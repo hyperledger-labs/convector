@@ -28,6 +28,8 @@ export interface History<T> {
  * It provides the underlying communication with the [[BaseStorage]].
  */
 export abstract class ConvectorModel<T extends ConvectorModel<any>> {
+  private static type = 'io.convector.model';
+
   public static schema<T extends ConvectorModel<any>>(
     this: Function&{prototype: T}
   ): yup.ObjectSchema<FlatConvectorModel<T>&{id:string,type:string}> {
@@ -52,7 +54,14 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   ): Promise<T> {
     type = type || this;
     const content = await BaseStorage.current.get(id);
-    return new type(content);
+
+    const model = new type(content);
+
+    if (content.type !== model.type) {
+      throw new Error(`Possible ID collision, element ${id} of type ${content.type} is not ${model.type}`);
+    }
+
+    return model;
   }
 
   /**
@@ -67,7 +76,7 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     let type = this;
 
     // Stupid horrible hack to find the current implementation's parent type
-    if (args[0] && args[0].prototype.__proto__.constructor === ConvectorModel) {
+    if (args[0] && 'type' in args[0] && args[0].type === ConvectorModel.type) {
       type = args.shift();
     }
 
@@ -213,12 +222,13 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
         .map(key => [key, Object.getOwnPropertyDescriptor(proto, key)])
     ], []);
 
+    // debugger;
     const base = Object.keys(this).concat('id')
       .filter(k => !k.startsWith('_'))
-      .filter(k => !skipEmpty || this[k] !== undefined || this[k] !== null)
+      .filter(k => !skipEmpty || !(this[k] === undefined || this[k] === null))
       .reduce((result, key) => ({ ...result, [key]: this[key] }), {});
 
-      return descriptors
+    return descriptors
       .reduce((result, [key, desc]) => {
         const hasGetter = desc && typeof desc.get === 'function';
 
@@ -229,6 +239,10 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
 
         if (skipEmpty && (result[key] === undefined || result[key] === null)) {
           delete result[key];
+        }
+
+        if (result[key] instanceof ConvectorModel) {
+          result[key] = result[key].toJSON(true);
         }
 
         return result;

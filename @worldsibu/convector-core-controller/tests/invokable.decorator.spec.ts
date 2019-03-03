@@ -12,12 +12,14 @@ import { Validate } from '@worldsibu/convector-core-model';
 
 import { Param } from '../src/param.decorator';
 import { Controller } from '../src/controller.decorator';
+import { ConvectorController } from '../src/convector-controller';
 import { Invokable, getInvokables } from '../src/invokable.decorator';
 
 class TestCC extends Chaincode {
   constructor(ctr: any) {
     super();
-    Object.assign(this, getInvokables(ctr));
+    const { namespace, invokables } = getInvokables(ctr);
+    Object.assign(this, { [namespace]: new ctr() }, invokables);
   }
 }
 
@@ -31,9 +33,9 @@ class TestModel {
 }
 
 @Controller('test')
-class Test {
+class Test extends ConvectorController {
   @Invokable()
-  public async sender() {
+  public async me() {
     return this.sender;
   }
 
@@ -92,13 +94,12 @@ describe('Invokable Decorator', () => {
   });
 
   it('should create a map of the invokable functions', () => {
-    const invokables = getInvokables(Test);
-    expect(invokables.test_plain).to.exist;
-    expect(invokables.test).to.exist;
+    const { invokables } = getInvokables(Test);
+    expect(invokables.plain).to.exist;
   });
 
   it('should initialize and return the `this.sender`', async () => {
-    const result = await test.sender
+    const result = await test.me
       .call(testCC, new StubHelper(stub), [], getExtras());
     console.log('should initialize and return the `this.sender`');
     console.log(result);

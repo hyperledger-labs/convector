@@ -5,4 +5,5 @@
  * @preferred
  *//** */
 
+export * from './controller-client';
 export * from './controller-adapter';
