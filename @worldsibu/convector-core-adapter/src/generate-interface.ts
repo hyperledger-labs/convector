@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+try {
+  require('commander');
+  require('ts-simple-ast');
+} catch (e) {
+  console.error('Dependencies commander and ts-simple-ast are required for the generate-controller-interface command');
+  process.exit(1);
+}
+
 import * as program from 'commander';
 import { join, dirname } from 'path';
 import Project, {

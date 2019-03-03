@@ -6,7 +6,6 @@ import * as uuid from 'uuid/v1';
 import { ChaincodeMockStub } from '@theledger/fabric-mock-stub';
 import 'mocha';
 
-import { Config } from '../src/config';
 import { Chaincode } from '../src/chaincode';
 
 describe('Generic Chaincode', () => {

@@ -7,7 +7,7 @@ import 'mocha';
 import 'reflect-metadata';
 
 import { Validate } from '../src/validate.decorator';
-import { ConvectorModel } from '../src/convector-model';
+import { ConvectorModel, FlatConvectorModel } from '../src/convector-model';
 
 class TestStorage extends BaseStorage {
   private storage = new Map();
@@ -52,6 +52,13 @@ class TestModel extends ConvectorModel<TestModel> {
 
   @Validate(yup.string())
   public name: string;
+}
+
+class TestNestModel extends ConvectorModel<TestNestModel> {
+  public type = 'io.worldsibu.test.nest';
+
+  @Validate(TestModel)
+  public test: FlatConvectorModel<TestModel>;
 }
 
 describe('Convector Model', () => {
@@ -123,6 +130,21 @@ describe('Convector Model', () => {
       id: 'test',
       name: 'test',
       type: 'io.worldsibu.test'
+    });
+  });
+
+  it('should dump the nested properties', () => {
+    const test = new TestModel({ name: 'test' });
+    const original = new TestNestModel({ id: 'test-nest', test });
+    const dump = original.toJSON();
+
+    expect(dump).to.deep.include({
+      id: 'test-nest',
+      type: 'io.worldsibu.test.nest',
+      test: {
+        name: 'test',
+        type: 'io.worldsibu.test',
+      }
     });
   });
 

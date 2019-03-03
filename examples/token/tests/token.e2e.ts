@@ -3,18 +3,20 @@
 import { expect } from 'chai';
 import { resolve } from 'path';
 import * as uuid from 'uuid/v4';
+import 'mocha';
+
 import { BaseStorage } from '@worldsibu/convector-core-storage';
 import { CouchDBStorage } from '@worldsibu/convector-storage-couchdb';
 import { FabricControllerAdapter } from '@worldsibu/convector-adapter-fabric';
-import 'mocha';
+import { ClientFactory, ConvectorControllerClient } from '@worldsibu/convector-core-adapter';
 
 import { Token } from '../src/token.model';
-import { TokenControllerClient } from '../client';
+import { TokenController } from '../src/token.controller';
 
 describe('Token e2e', () => {
   let tokenId: string;
   let adapter: FabricControllerAdapter;
-  let tokenCtrl: TokenControllerClient;
+  let tokenCtrl: ConvectorControllerClient<TokenController>;
 
   const totalSupply = 1000000;
   // Mock certificate fingerprint
@@ -34,7 +36,7 @@ describe('Token e2e', () => {
       networkProfile: resolve(__dirname, networkProfile),
       userMspPath: keystore
     });
-    tokenCtrl = new TokenControllerClient(adapter);
+    tokenCtrl = ClientFactory(TokenController, adapter);
 
     BaseStorage.current = new CouchDBStorage({
       host: 'localhost',
@@ -53,12 +55,17 @@ describe('Token e2e', () => {
       name: 'Token',
       symbol: 'TKN',
       totalSupply: totalSupply,
-      balances: { [certificate]: totalSupply }
+      balances: { [certificate]: totalSupply },
+      complex: {
+        name: 'Test',
+        value: 5
+      }
     }));
 
     const token = await Token.getOne(tokenId);
 
     expect(token).to.exist;
+    expect(token.complex.name).to.eq('Test');
     expect(token.balances[certificate]).to.eq(totalSupply);
   });
 
@@ -68,5 +75,18 @@ describe('Token e2e', () => {
     const token = await Token.getOne(tokenId);
 
     expect(token.balances[certificate]).to.eq(500000);
+  });
+
+  it('should retrieve a token', async () => {
+    const token = await tokenCtrl.get(tokenId);
+    expect(token.balances[certificate]).to.eq(500000);
+  });
+
+  it('should be able to access the identity in the controller', async () => {
+    const info = await tokenCtrl.getIdentityInfo();
+
+    console.log(info);
+
+    expect(info).to.exist;
   });
 });
