@@ -12,9 +12,17 @@ import {
   getValidatedProperties
 } from '../src/validate.decorator';
 
-export type FlatConvectorModel<T> = {
-  [L in Exclude<keyof T, keyof ConvectorModel<any>>]: T[L]
-};
+export type RequiredKeys<T> = { [K in keyof T]-?:
+  string extends K ? never : number extends K ? never : {} extends Pick<T, K> ? never : K
+} extends { [_ in keyof T]-?: infer U } ? U extends keyof T ? U : never : never;
+
+export type OptionalKeys<T> = { [K in keyof T]-?:
+  string extends K ? never : number extends K ? never : {} extends Pick<T, K> ? K : never
+} extends { [_ in keyof T]-?: infer U } ? U extends keyof T ? U : never : never;
+
+export declare type FlatConvectorModel<T> =
+  {[L in Exclude<OptionalKeys<T>, keyof ConvectorModel<any>>]?: T[L]} &
+  {[L in Exclude<RequiredKeys<T>, keyof ConvectorModel<any>>]: T[L]};
 
 export interface History<T> {
   value: T;
