@@ -52,6 +52,17 @@ class TestModel extends ConvectorModel<TestModel> {
 
   @Validate(yup.string())
   public name: string;
+
+  @Validate(yup.number())
+  public optionalProperty?: number;
+}
+
+class TestFlatModel extends ConvectorModel<TestFlatModel> {
+  public type = 'io.worldsibu.test2';
+
+  @Validate(TestModel)
+  public child: FlatConvectorModel<TestModel>;
+
 }
 
 class TestNestModel extends ConvectorModel<TestNestModel> {
@@ -207,4 +218,22 @@ describe('Convector Model', () => {
     expect(history[1].value.name).to.eq('2');
     expect(history[2].value.name).to.eq('3');
   });
+});
+
+describe('FlatConvectorModel', ()=>{
+  it('Should ignore optional property', ()=>{
+    var item = new TestModel();
+    var parent = new TestFlatModel();
+    parent.child = item;
+    expect(parent.child.optionalProperty).to.undefined;
+  });
+
+  it('Should set optional property', ()=>{
+    var item = new TestModel();
+    var parent = new TestFlatModel();
+    parent.child = item;
+    item.optionalProperty = 12345;
+    expect(parent.child.optionalProperty).to.equal(12345);
+  });
+
 });
