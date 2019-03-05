@@ -203,7 +203,6 @@ describe('FlatConvectorModel', ()=>{
   it('Should ignore optional property', ()=>{
     var item = new TestModel();
     var parent = new TestFlatModel();
-    //This will not compile before the fix
     parent.child = item;
     expect(parent.child.optionalProperty).to.undefined;
   });
