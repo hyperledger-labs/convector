@@ -1,9 +1,10 @@
 // tslint:disable:no-unused-expression
-
+import * as chai from 'chai';
 import { join } from 'path';
 import { expect } from 'chai';
 import * as uuid from 'uuid/v4';
 import 'mocha';
+import * as chaiAsPromised from 'chai-as-promised';
 
 import { MockControllerAdapter } from '@worldsibu/convector-adapter-mock';
 import { ClientFactory, ConvectorControllerClient } from '@worldsibu/convector-core-adapter';
@@ -12,6 +13,7 @@ import { TokenController } from '../src/token.controller';
 import { Token, CompanyToken, Element } from '../src/token.model';
 
 describe('Token', () => {
+  chai.use(chaiAsPromised);
   let tokenId: string;
   let adapter: MockControllerAdapter;
   let tokenCtrl: ConvectorControllerClient<TokenController>;
@@ -60,6 +62,11 @@ describe('Token', () => {
     const token = await adapter.getById<Token<any>>(tokenId);
 
     expect(token.balances[certificate]).to.eq(500000);
+  });
+
+  it('should fail expectedly', async () => {
+    await expect(tokenCtrl.failMe()).to.be.eventually
+      .rejectedWith('Expected to fail');
   });
 
   it('should retrieve a token', async () => {
@@ -130,13 +137,13 @@ describe('Extendable Model', () => {
   it('should fail to create a new model if any sub model is missing', async () => {
     const id = uuid();
 
-    await tokenCtrl.init(new CompanyToken({
+    await expect(tokenCtrl.init(new CompanyToken({
       id,
       name: 'Token',
       symbol: 'TKN',
       totalSupply: totalSupply,
       balances: { [certificate]: totalSupply }
-    }));
+    }))).to.be.eventually.rejected;
 
     console.log('Expected error in unit-test');
     const token = await adapter.getById<CompanyToken>(id);
@@ -145,7 +152,7 @@ describe('Extendable Model', () => {
   });
 });
 
-describe.only('Recursive Model', () => {
+describe('Recursive Model', () => {
   let adapter: MockControllerAdapter;
   let tokenCtrl: ConvectorControllerClient<TokenController>;
 
