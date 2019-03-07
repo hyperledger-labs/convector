@@ -190,6 +190,11 @@ describe('Convector Model', () => {
     expect(results.length).to.eq(3);
   });
 
+  it('should return an empty model when not found in DB', async () => {
+    const result = await TestModel.getOne('invalid-id');
+    expect(result.id).to.undefined;
+  });
+
   it('should extract the model schema', () => {
     const schema = TestModel.schema();
     const flatModel = schema.validateSync({
