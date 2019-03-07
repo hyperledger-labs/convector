@@ -55,8 +55,12 @@ export class Chaincode extends CC {
 
     try {
       await this.initControllers(new StubHelper(stub), [, 'true']);
-      return await super.Invoke(stub);
-    } catch(e) {
+      let invokeRes = await super.Invoke(stub);
+      if (invokeRes.status === 500) {
+        throw new ChaincodeError(invokeRes.message);
+      }
+      return invokeRes;
+    } catch (e) {
       const err = new ChaincodeInvokationError(e);
       throw new ChaincodeError(err.toString());
     }
@@ -112,7 +116,7 @@ export class Chaincode extends CC {
                   }
                 }
               }) :
-              obj[fnName]
+            obj[fnName]
         }), { [ctrlInvokables.namespace]: obj });
 
       return Object.assign(this, injectedInvokables);

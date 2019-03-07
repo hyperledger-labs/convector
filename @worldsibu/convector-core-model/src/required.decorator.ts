@@ -27,5 +27,11 @@ export function ensureRequired(obj: any) {
   }
 
   return Object.keys(required)
-    .every(k => !required[k] || obj[k] !== undefined);
+    .every(k => {
+      let res = !required[k] || obj[k] !== undefined;
+      if (!res) {
+        console.log(`Validation error. Field ${k} is required but was not found.`);
+      }
+      return res;
+    });
 }

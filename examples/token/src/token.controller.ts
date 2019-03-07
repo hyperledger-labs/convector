@@ -69,6 +69,11 @@ export class TokenController extends ConvectorController<ChaincodeTx> {
   }
 
   @Invokable()
+  public async failMe(): Promise<string> {
+    throw new Error('Expected to fail');
+  }
+
+  @Invokable()
   public async createCompanyToken(
     @Param(CompanyToken)
     token: CompanyToken

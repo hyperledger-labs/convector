@@ -280,8 +280,13 @@ export class ClientHelper {
   }, useAdmin = false) {
     const txId = this.client.newTransactionID(useAdmin);
 
-    request.args = (request.args || []).map(arg =>
-      typeof arg === 'object' ? JSON.stringify(arg) : arg.toString());
+    request.args = (request.args || []).map(arg => {
+      if (!arg) {
+        // tslint:disable-next-line:max-line-length
+        throw new Error('Undefined parameters received as part of the transaction, check how the function is being called');
+      }
+      return typeof arg === 'object' ? JSON.stringify(arg) : arg.toString();
+    });
 
     const [proposalResponses, proposal] =
       await this.channel.sendTransactionProposal(

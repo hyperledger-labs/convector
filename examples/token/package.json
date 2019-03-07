@@ -16,12 +16,14 @@
     "client:generate": "node ./node_modules/@worldsibu/convector-core-adapter/dist/src/generate-interface -c TokenController"
   },
   "dependencies": {
-    "@worldsibu/convector-core-storage": "^1.2.0",
-    "@worldsibu/convector-core-chaincode": "^1.2.0",
+    "@types/chai-as-promised": "^7.1.0",
     "@worldsibu/convector-core-adapter": "^1.2.0",
+    "@worldsibu/convector-core-chaincode": "^1.2.0",
     "@worldsibu/convector-core-controller": "^1.2.0",
     "@worldsibu/convector-core-model": "^1.2.0",
+    "@worldsibu/convector-core-storage": "^1.2.0",
     "@worldsibu/convector-storage-stub": "^1.2.0",
+    "chai-as-promised": "^7.1.1",
     "reflect-metadata": "^0.1.12",
     "tslib": "^1.9.0",
     "yup": "^0.26.10"

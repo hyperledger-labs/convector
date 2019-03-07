@@ -9,7 +9,7 @@ const g: any = global;
 export const validateMetadataKey = g.ConvectorValidateMetadataKey || Symbol('validate');
 g.ConvectorValidateMetadataKey = validateMetadataKey;
 
-export function Validate<T>(input: Schema<T>|{ schema: () => Schema<T>}) {
+export function Validate<T>(input: Schema<T> | { schema: () => Schema<T> }) {
   let schema = input as Schema<T>;
 
   if ('schema' in input) {
@@ -25,7 +25,13 @@ export function Validate<T>(input: Schema<T>|{ schema: () => Schema<T>}) {
         let setter = target.__lookupSetter__(key);
         setter = !setter || setter === getSet.set ? (v => v) : setter;
 
-        this[`_${key}`] = schema.validateSync(setter.call(this, newVal));
+        try {
+          this[`_${key}`] = schema.validateSync(setter.call(this, newVal));
+        } catch (ex) {
+          ex.message = `Error for field '${key}' with val '${JSON.stringify(newVal)}' ${ex.message}`;
+          throw ex;
+        }
+
       },
       enumerable: true,
       configurable: true
