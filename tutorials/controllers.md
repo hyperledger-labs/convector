@@ -14,7 +14,7 @@ import {
 @Controller('test-controller')
 export class TestController extends ConvectorController {
   @Invokable()
-  public async init( @Param(yup.string()) token: Token ) {
+  public async init(@Param(yup.string()) token: Token) {
     // code
   }
 }
@@ -22,33 +22,43 @@ export class TestController extends ConvectorController {
 
 The first thing to notice is we're extending `ConvectorController`. This is a really thin class, only containing the basic information of the sender and the transaction.
 
-The `@Controller` decorator let Convector know this class is a controller, and all its methods should be available in the chaincode using the namespace provided.
+The `@Controller` decorator lets Convector know this class is a controller, and all its methods should be available in the chaincode using the namespace provided.
 
-The `@Invokable` decorator let Convector know all the available methods in this controller. You can probably have more methods in this class, but not all of them are exposed in the chaincode API
+The `@Invokable` decorator lets Convector know all the available methods in this controller. You can probably have more methods in this class, but not all of them are exposed in the chaincode API
 
 Finally, the `@Param` decorator parses the arguments coming in the transactions to the appropriate schema you define. You can also use Models as schemas and they will be instantiated and validated for you.
 
 ## Usage
 
-To simply create a base controller file through <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> run.
+After the chaincode is installed and instantiated in the peers, the method [[Chaincode.initControllers]] is invoked. This method is responsible of iterating over all the controllers specified for the chaincode, import them, instantiate all of them and register all its `@Invokable` methods in the chaincode to be accesible from the outside.
 
-```bash
-conv generate controller <NAME-OF-CONTROLLER>
+In order to avoid method collisions between multiple controllers, the functions are registered under a namespace, the controller name provided in the `@Controller` decorator. All the methods get registered in the blokchain using the name `{controller}_{method}`.
+
+For example, the following code:
+
+```typescript
+@Controller('test')
+export class TestController extends ConvectorController {
+  @Invokable()
+  public async init(@Param(yup.string()) token: Token) {
+    // code
+  }
+  @Invokable()
+  public async create(@Param(yup.string()) token: Token) {
+    // code
+  }
+}
 ```
 
-Then you can edit it and adapt it as you need.
-
-### More advanced
-
-After the chaincode is installed and instantiated in the peers, the method [[Chaincode.initControllers]] is invoked. This method is responsible of iterating over all the controllers specified for the chaincode, imoport them, instantiate all of them and geister all its `@Invokable` methods in the chaincode to be accesible from the outside. In order to avoid method collitions between multiple controllers, the functions are registered under a namespace, the controller name provided in the `@Controller` decorator. All the methods get registered in the blokchain using the name `{controller}_{method}`.
+Will generate two functions as follows `test_init` and `test_create`.
 
 ## Anatomy of a Controller
 
-Controllers are meant for you to validate permissions and update models. It is very usual (but not strict) that you'll have 3 main sections in your controller bodies:
+Controllers are to validate permissions, perform logic, and update models. It is very usual (but not strict) that you'll have 3 main sections in your controller bodies:
 
-- Validation - Check for permissions or other conditionals that might end up in throwing an error and cancelling the transaction
-- Modification
-- Store
+- **Validation** - Check for permissions or other conditionals that might end up in throwing an error and cancelling the transaction
+- **Modification**
+- **Store**
 
 ```typescript
 @Controller('token')

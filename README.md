@@ -36,7 +36,7 @@ For now, we only support **Hyperledger Fabric**, so this documentation is for us
 
 ## Assumptions
 
-This documentation assumes that you are familiar with [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript), [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html), and [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-1.3/) (at least the basics!).
+This documentation assumes that you are familiar with [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript), [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html), and [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-1.4/) (at least the basics!).
 
 ## Are you looking for an option to Hyperledger Composer?
 
