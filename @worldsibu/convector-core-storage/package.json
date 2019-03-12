@@ -3,6 +3,11 @@
   "version": "1.2.0",
   "description": "Convector Core Storage class. This is not intended to be used as a provider but as an abstract interface of one",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperledger-labs/convector/tree/develop/%40worldsibu/convector-core-storage"
+  },
+  "homepage": "https://worldsibu.tech/convector/convector-smart-contracts/",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [

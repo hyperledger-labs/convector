@@ -3,6 +3,11 @@
   "version": "1.2.0",
   "description": "Convector helper library for fabric communication",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperledger-labs/convector/tree/develop/%40worldsibu/convector-common-fabric-helper"
+  },
+  "homepage": "https://worldsibu.tech/convector/convector-smart-contracts/",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [
@@ -26,7 +31,7 @@
     "fabric-client": ">=1.1.2"
   },
   "dependencies": {
-    "@theledger/fabric-chaincode-utils": "^2.0.9",
+    "@theledger/fabric-chaincode-utils": "^4.0.1",
     "@types/js-yaml": "^3.11.2",
     "fs-extra": "^6.0.1",
     "js-yaml": "^3.12.0",

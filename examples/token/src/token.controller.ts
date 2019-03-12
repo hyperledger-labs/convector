@@ -1,13 +1,13 @@
 /** @module @worldsibu/convector-examples-token */
 
 import * as yup from 'yup';
-import { ChaincodeTx } from '@worldsibu/convector-core-chaincode';
+import { ChaincodeTx } from '@worldsibu/convector-platform-fabric';
 import {
   Controller,
   ConvectorController,
   Invokable,
   Param
-} from '@worldsibu/convector-core-controller';
+} from '@worldsibu/convector-core';
 
 import { Token, CompanyToken, Element } from './token.model';
 

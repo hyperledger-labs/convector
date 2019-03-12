@@ -7,7 +7,7 @@ import 'mocha';
 import * as chaiAsPromised from 'chai-as-promised';
 
 import { MockControllerAdapter } from '@worldsibu/convector-adapter-mock';
-import { ClientFactory, ConvectorControllerClient } from '@worldsibu/convector-core-adapter';
+import { ClientFactory, ConvectorControllerClient } from '@worldsibu/convector-core';
 
 import { TokenController } from '../src/token.controller';
 import { Token, CompanyToken, Element } from '../src/token.model';

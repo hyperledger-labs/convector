@@ -1,6 +1,6 @@
 /** @module @worldsibu/convector-storage-stub */
 
-import { Stub } from 'fabric-shim';
+import { ChaincodeStub } from 'fabric-shim';
 import { InvalidIdError } from '@worldsibu/convector-core-errors';
 import { StubHelper } from '@theledger/fabric-chaincode-utils';
 import { BaseStorage } from '@worldsibu/convector-core-storage';
@@ -8,7 +8,7 @@ import { BaseStorage } from '@worldsibu/convector-core-storage';
 export class StubStorage extends BaseStorage {
   private stubHelper: StubHelper;
 
-  constructor(stub: Stub) {
+  constructor(stub: ChaincodeStub) {
     super();
 
     this.stubHelper = new StubHelper(stub);

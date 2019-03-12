@@ -11,6 +11,11 @@
     "access": "public"
   },
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperledger-labs/convector/tree/develop/%40worldsibu/convector-tool-chaincode-manager"
+  },
+  "homepage": "https://worldsibu.tech/convector/convector-smart-contracts/",
   "bin": {
     "chaincode-manager": "./dist/src/command.js"
   },

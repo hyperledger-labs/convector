@@ -8,7 +8,7 @@ import {
   Validate,
   FlatConvectorModel,
   Default
-} from '@worldsibu/convector-core-model';
+} from '@worldsibu/convector-core';
 
 export class Complex extends ConvectorModel<Complex> {
   @ReadOnly()
