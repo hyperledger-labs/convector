@@ -1,9 +1,9 @@
 /** @module convector-core-chaincode */
 
-import { Stub, ClientIdentity } from 'fabric-shim';
-import { getInvokables } from '@worldsibu/convector-core-controller';
 import { BaseStorage } from '@worldsibu/convector-core-storage';
 import { StubStorage } from '@worldsibu/convector-storage-stub';
+import { getInvokables } from '@worldsibu/convector-core-controller';
+import { ChaincodeStub, ClientIdentity, ChaincodeResponse } from 'fabric-shim';
 import { Chaincode as CC, StubHelper, ChaincodeError } from '@theledger/fabric-chaincode-utils';
 import {
   ChaincodeInitializationError,
@@ -13,6 +13,8 @@ import {
 } from '@worldsibu/convector-core-errors';
 
 import { Config } from './config';
+
+export { ChaincodeResponse };
 
 function isFunction(functionToCheck) {
   return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
@@ -35,7 +37,7 @@ export class Chaincode extends CC {
   /**
    * Standard Init from Hyperledger Fabric
    */
-  public async Init(stub: Stub) {
+  public async Init(stub: ChaincodeStub): Promise<ChaincodeResponse> {
     try {
       return await super.Init(stub);
     } catch (e) {
@@ -50,7 +52,7 @@ export class Chaincode extends CC {
    * This method is invoked when you want to call any function in the controller,
    * it first calls this function
    */
-  public async Invoke(stub: Stub) {
+  public async Invoke(stub: ChaincodeStub): Promise<ChaincodeResponse> {
     BaseStorage.current = new StubStorage(stub);
 
     try {

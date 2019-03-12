@@ -3,6 +3,11 @@
   "version": "1.2.0",
   "description": "Controller adapter to use as a mock in unit tests",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperledger-labs/convector/tree/develop/%40worldsibu/convector-adapter-mock"
+  },
+  "homepage": "https://worldsibu.tech/convector/convector-smart-contracts/",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [
@@ -22,7 +27,7 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@theledger/fabric-mock-stub": "^1.2.1",
+    "@theledger/fabric-mock-stub": "^4.0.0",
     "@worldsibu/convector-core-adapter": "1.2.0",
     "@worldsibu/convector-core-chaincode": "1.2.0",
     "@worldsibu/convector-core-errors": "1.2.0",

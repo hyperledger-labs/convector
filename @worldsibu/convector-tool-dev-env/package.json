@@ -4,6 +4,11 @@
   "description": "Development environment",
   "main": "./dist/index.js",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperledger-labs/convector/tree/develop/%40worldsibu/convector-tool-dev-env"
+  },
+  "homepage": "https://worldsibu.tech/convector/convector-smart-contracts/",
   "typings": "./dist/index.d.ts",
   "files": [
     "bin/*",
@@ -37,7 +42,7 @@
   },
   "dependencies": {
     "@worldsibu/convector-common-fabric-helper": "1.2.0",
-    "commander": "^2.16.0",
+    "commander": "^2.15.1",
     "shelljs": "^0.8.2",
     "tslib": "^1.9.0"
   },
