@@ -1,9 +1,13 @@
 /** @module @worldsibu/convector-storage-stub */
 
 import { ChaincodeStub } from 'fabric-shim';
-import { InvalidIdError } from '@worldsibu/convector-core-errors';
-import { StubHelper } from '@theledger/fabric-chaincode-utils';
 import { BaseStorage } from '@worldsibu/convector-core-storage';
+import { InvalidIdError } from '@worldsibu/convector-core-errors';
+import { StubHelper, Transform } from '@theledger/fabric-chaincode-utils';
+
+// Remove when this gets merged
+// https://github.com/wearetheledger/fabric-node-chaincode-utils/pull/23
+Transform.isObject = data => data !== null && typeof data === 'object';
 
 export class StubStorage extends BaseStorage {
   private stubHelper: StubHelper;
