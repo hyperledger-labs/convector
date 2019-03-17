@@ -60,7 +60,13 @@ export class TokenController extends ConvectorController<ChaincodeTx> {
     @Param(yup.string())
     tokenId: string
   ) {
-    return (await Token.getOne(tokenId)).toJSON();
+    const token = await Token.getOne(tokenId);
+
+    if (!token.id) {
+      throw new Error(`No token found with id ${tokenId}`);
+    }
+
+    return token;
   }
 
   @Invokable()

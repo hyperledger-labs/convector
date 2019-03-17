@@ -12,6 +12,6 @@ npm-debug.log*
 dist
 docs
 .convector-dev-env
-chaincode
+chaincode-*
 
 .history

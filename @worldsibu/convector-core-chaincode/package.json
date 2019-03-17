@@ -17,7 +17,8 @@
     "access": "public"
   },
   "scripts": {
-    "start": "node ./start.js",
+    "start": "pm2-runtime ./start.js",
+    "start:debug": "pm2-dev --node-args=\"--inspect=$DEBUG_PORT\" --watch=./packages ./start.js",
     "------------ STANDARD TASKS ------------": "",
     "clean": "rimraf dist tests/dist",
     "clean:docs": "rimraf docs",
@@ -32,10 +33,9 @@
   },
   "dependencies": {
     "@theledger/fabric-chaincode-utils": "^4.0.1",
-    "@worldsibu/convector-core-controller": "1.2.0",
-    "@worldsibu/convector-core-errors": "1.2.0",
-    "@worldsibu/convector-core-storage": "1.2.0",
+    "@worldsibu/convector-core": "1.2.0",
     "@worldsibu/convector-storage-stub": "1.2.0",
+    "pm2": "^3.4.0",
     "reflect-metadata": "^0.1.12",
     "tslib": "^1.9.0"
   },

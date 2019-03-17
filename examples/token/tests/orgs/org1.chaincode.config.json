@@ -1,8 +1,0 @@
-{
-  "skipInit": true,
-  "user": "admin",
-  "txTimeout": 300000,
-  "channel": "ch1",
-  "keyStore": "../.convector-dev-env/.hfc-org1",
-  "networkProfile": "./examples/token/tests/orgs/org1.network-profile.yaml"
-}
