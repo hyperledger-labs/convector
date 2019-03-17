@@ -74,6 +74,11 @@ export class Chaincode extends CC {
    *
    * Notice that if you upgrade from/to another chaincode, you can change the
    * controllers present without any problem
+   *
+   * #### WARNING ####
+   * Don't ever use stub as the current tx stub,
+   * since this one is of the one that instantiated the chaincode
+   * #################
    */
   public async initControllers(stub: StubHelper, args: string[]) {
     // Don't initialize if already initialized or if config is in param
@@ -88,8 +93,6 @@ export class Chaincode extends CC {
     }
 
     const controllers = await config.getControllers();
-    const identity = new ClientIdentity(stub.getStub());
-    const fingerprint = identity.getX509Certificate().fingerPrint;
 
     controllers.forEach(C => {
       let obj: any;
@@ -106,19 +109,21 @@ export class Chaincode extends CC {
         .reduce((result, [fnName, internalName]) => ({
           ...result,
           [internalName]: isFunction(obj[fnName]) ?
-            (stubHelper: StubHelper, _args: string[]) =>
-              obj[fnName].call(this, stubHelper, _args, {
+            (stubHelper: StubHelper, _args: string[]) => {
+              const identity = new ClientIdentity(stubHelper.getStub());
+              const fingerprint = identity.getX509Certificate().fingerPrint;
+              return obj[fnName].call(this, stubHelper, _args, {
                 sender: {
                   value: fingerprint
                 },
                 tx: {
                   value: {
                     identity,
-                    stub
+                    stub: stubHelper
                   }
                 }
-              }) :
-            obj[fnName]
+              });
+            } : obj[fnName]
         }), { [ctrlInvokables.namespace]: obj });
 
       return Object.assign(this, injectedInvokables);

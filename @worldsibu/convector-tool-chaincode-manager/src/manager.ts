@@ -215,7 +215,7 @@ export class Manager extends ClientHelper {
       return { ...packages, [name]: `file:./packages/${name}` };
     }, Promise.resolve({} as KV)).catch(e => {console.log('Failed to resolve local references', e); return {};});
 
-    pkg.scripts = { start: pkg.scripts.start };
+    pkg.scripts = { start: pkg.scripts.start, 'start:debug': pkg.scripts['start:debug'] };
     pkg.dependencies = {
       ...pkg.dependencies,
       ...controllers

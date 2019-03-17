@@ -10,8 +10,8 @@
     "build": "npm run clean && tsc",
     "prepare": "npm run build",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
-    "test": "npm run build && mocha -r ts-node/register tests/*.spec.ts --reporter spec",
-    "test:e2e": "npm run build && mocha -r ts-node/register -t 300000 tests/*.e2e.ts --reporter spec",
+    "test": "mocha -r ts-node/register tests/*.spec.ts --reporter spec",
+    "test:e2e": "mocha -r ts-node/register -t 300000 tests/*.e2e.ts --reporter spec",
     "------------ CHAINCODE TASKS ------------": "",
     "client:generate": "node ./node_modules/@worldsibu/convector-core-adapter/dist/src/generate-interface -c TokenController"
   },

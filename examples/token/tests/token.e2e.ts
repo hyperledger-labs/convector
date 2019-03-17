@@ -22,26 +22,30 @@ describe('Token e2e', () => {
   let certificate: string;
 
   before(async () => {
-    const keystore = '../../../.convector-dev-env/.hfc-org1';
-    const networkProfile = './orgs/org1.network-profile.yaml';
+    const keyStore = resolve(__dirname, '../../../.convector-dev-env/.hfc-org1');
+    const networkProfile = resolve(__dirname, '../../../.convector-dev-env',
+      'network-profiles/org1.network-profile.yaml');
+    const userMspPath = resolve(__dirname, '../../../.convector-dev-env',
+      'artifacts/crypto-config/peerOrganizations/org1.hurley.lab/users/Admin@org1.hurley.lab/msp');
 
     tokenId = uuid();
     adapter = new FabricControllerAdapter({
       txTimeout: 300000,
-      user: 'user1',
+      user: 'admin',
       channel: 'ch1',
-      chaincode: 'convector',
-      keyStore: resolve(__dirname, keystore),
-      networkProfile: resolve(__dirname, networkProfile),
-      userMspPath: keystore
+      chaincode: 'token',
+      keyStore,
+      networkProfile,
+      userMspPath,
+      userMsp: 'org1MSP'
     });
     tokenCtrl = ClientFactory(TokenController, adapter);
 
     BaseStorage.current = new CouchDBStorage({
       host: 'localhost',
       protocol: 'http',
-      port: '5984'
-    }, 'ch1_convector');
+      port: '5084'
+    }, 'ch1_token');
 
     await adapter.init();
 

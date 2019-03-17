@@ -1,0 +1,10 @@
+{
+  "skipInit": true,
+  "controllers": [
+    {
+      "name": "@worldsibu/convector-example-token",
+      "version": "file:./examples/token",
+      "controller": "TokenController"
+    }
+  ]
+}

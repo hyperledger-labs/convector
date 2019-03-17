@@ -235,7 +235,7 @@ export class ClientHelper {
         this.config.txTimeout
       );
 
-    if (!proposalResponses.every(pr => pr.response && pr.response.status === 200)) {
+    if (!proposalResponses.every((pr: Client.ProposalResponse) => pr.response && pr.response.status === 200)) {
       const err = new Error('Transaction proposal was bad');
       err['responses'] = proposalResponses;
 
@@ -243,8 +243,12 @@ export class ClientHelper {
     }
 
     return {
-      result: proposalResponses[0],
-      proposalResponse: { proposalResponses, proposal, txId }
+      result: proposalResponses[0] as Client.ProposalResponse,
+      proposalResponse: {
+        txId,
+        proposal,
+        proposalResponses: proposalResponses as Client.ProposalResponse[]
+      }
     };
   }
 
@@ -262,7 +266,7 @@ export class ClientHelper {
         this.config.txTimeout
       );
 
-    if (!proposalResponses.every(pr => pr.response && pr.response.status === 200)) {
+    if (!proposalResponses.every((pr: Client.ProposalResponse) => pr.response && pr.response.status === 200)) {
       const err = new Error('Transaction proposal was bad');
       err['responses'] = proposalResponses;
 
@@ -270,8 +274,12 @@ export class ClientHelper {
     }
 
     return {
-      result: proposalResponses[0],
-      proposalResponse: { proposalResponses, proposal, txId }
+      result: proposalResponses[0] as Client.ProposalResponse,
+      proposalResponse: {
+        txId,
+        proposal,
+        proposalResponses: proposalResponses as Client.ProposalResponse[]
+      }
     };
   }
 
@@ -294,7 +302,7 @@ export class ClientHelper {
         this.config.txTimeout
       );
 
-    if (!proposalResponses.every(pr => pr.response && pr.response.status === 200)) {
+    if (!proposalResponses.every((pr: Client.ProposalResponse) => pr.response && pr.response.status === 200)) {
       const err = new Error('Transaction proposal was bad');
       err['responses'] = proposalResponses;
 
@@ -302,8 +310,12 @@ export class ClientHelper {
     }
 
     return {
-      result: proposalResponses[0],
-      proposalResponse: { proposalResponses, proposal, txId }
+      result: proposalResponses[0] as Client.ProposalResponse,
+      proposalResponse: {
+        txId,
+        proposal,
+        proposalResponses: proposalResponses as Client.ProposalResponse[]
+      }
     };
   }
 
