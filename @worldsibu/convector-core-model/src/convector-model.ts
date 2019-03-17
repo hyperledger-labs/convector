@@ -58,10 +58,11 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   public static async getOne<T extends ConvectorModel<any>>(
     this: new (content: any) => T,
     id: string,
-    type?: new (content: any) => T
+    type?: new (content: any) => T,
+    storageOptions?: any
   ): Promise<T> {
     type = type || this;
-    const content = await BaseStorage.current.get(id);
+    const content = await BaseStorage.current.get(id, storageOptions);
 
     const model = new type(content);
 
@@ -162,8 +163,8 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   /**
    * Invokes the [[BaseStorage.get]] method to retrieve the model from storage.
    */
-  public async fetch() {
-    const content = await BaseStorage.current.get(this.id) as ConvectorModel<T>;
+  public async fetch(storageOptions?: any) {
+    const content = await BaseStorage.current.get(this.id, storageOptions) as ConvectorModel<T>;
 
     if (content.type !== this.type) {
       throw new Error(`Possible ID collision, element ${this.id} of type ${content.type} is not ${this.type}`);
@@ -184,8 +185,10 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
 
   /**
    * Invokes the [[BaseStorage.set]] method to write into chaincode.
+   *
+   * @param storageOptions Extra options to pass to the storage layer. The type depends on the storage
    */
-  public async save() {
+  public async save(storageOptions?: any) {
     this.assign(getDefaults(this), true);
     if (!ensureRequired(this)) {
       if (!this.id) {
@@ -197,7 +200,7 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     }
 
     InvalidIdError.test(this.id);
-    await BaseStorage.current.set(this.id, this);
+    await BaseStorage.current.set(this.id, this, storageOptions);
   }
 
   /**
@@ -263,8 +266,8 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
    * Notice that there's no such a concept as **delete** in the blockchain,
    * so what this does is to remove all the reachable references to the model.
    */
-  public async delete() {
-    await BaseStorage.current.delete(this.id);
+  public async delete(storageOptions?: any) {
+    await BaseStorage.current.delete(this.id, storageOptions);
   }
 
   /**

@@ -1,7 +1,6 @@
 /** @module @worldsibu/convector-storage-stub */
 
-import { BaseStorage } from '@worldsibu/convector-core-storage';
-import { InvalidIdError,  } from '@worldsibu/convector-core-errors';
+import { InvalidIdError, BaseStorage } from '@worldsibu/convector-core';
 
 export class LocalstorageStorage extends BaseStorage {
   constructor(public namespace = 'CONVECTOR_STORAGE') {

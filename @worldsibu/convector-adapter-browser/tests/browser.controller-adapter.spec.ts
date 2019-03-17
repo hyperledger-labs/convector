@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import 'mocha';
 import 'reflect-metadata';
 
-import { ConvectorController, Controller, Invokable, Param } from '@worldsibu/convector-core-controller';
+import { ConvectorController, Controller, Invokable } from '@worldsibu/convector-core';
 
 import { BrowserControllerAdapter } from '../src/browser.controller-adapter';
 

@@ -17,13 +17,12 @@
     "access": "public"
   },
   "scripts": {
-    "start": "pm2-runtime ./start.js",
-    "start:debug": "pm2-dev --node-args=\"--inspect=$DEBUG_PORT\" --watch=./packages ./start.js",
+    "start": "node ./start.js",
+    "start:debug": "nodemon --inspect=$DEBUG_PORT ./start.js",
     "------------ STANDARD TASKS ------------": "",
     "clean": "rimraf dist tests/dist",
     "clean:docs": "rimraf docs",
-    "build": "npm run clean && tsc && tsc -p ./tests/tsconfig.json && cp ./tests/ccc/package.json ./tests/dist/ccc/",
-    "copy:npmrc": "cp ../../npmrc dist/.npmrc",
+    "build": "npm run clean && tsc && tsc -p ./tests/tsconfig.json",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
     "prepare": "npm run build",
@@ -35,13 +34,13 @@
     "@theledger/fabric-chaincode-utils": "^4.0.1",
     "@worldsibu/convector-core": "1.2.0",
     "@worldsibu/convector-storage-stub": "1.2.0",
-    "pm2": "^3.4.0",
     "reflect-metadata": "^0.1.12",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
     "http-server": "^0.11.1",
     "mocha": "^5.0.3",
+    "nodemon": "^1.18.10",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",

@@ -158,17 +158,49 @@ export class ClientHelper {
   public async invoke(
     fcn: string,
     chaincodeId: string,
-    adminOrUser: string | true = this.config.user,
+    config: any = {},
     ...args: any[]
   ) {
-    const useAdmin = adminOrUser === true;
+    const user = config.user || this.config.user;
+    const useAdmin = user === true;
 
     if (!useAdmin) {
-      await this.useUser(adminOrUser as string);
+      await this.useUser(user);
     }
 
-    const { proposalResponse } = await this.sendTransactionProposal({ fcn, chaincodeId, args }, useAdmin);
+    const extra: Partial<Client.ChaincodeInvokeRequest> = {};
+    if (config.transient) {
+      extra.transientMap = Object.keys(config.transient).reduce((map, k) => ({
+        ...map,
+        [k]: Buffer.from(typeof config.transient[k] === 'string' ?
+          config.transient[k] : JSON.stringify(config.transient[k]))
+      }), {});
+    }
+
+    const { proposalResponse } = await this.sendTransactionProposal({ fcn, chaincodeId, args, ...extra }, useAdmin);
     return await this.processProposal(proposalResponse);
+  }
+
+  public async query(
+    fcn: string,
+    chaincodeId: string,
+    config: any = {},
+    ...args: any[]
+  ) {
+    const user = config.user || this.config.user;
+    const useAdmin = user === true;
+
+    if (!useAdmin) {
+      await this.useUser(user as string);
+    }
+
+    const txResult = await this.sendQueryTx({ fcn, chaincodeId, args }, useAdmin);
+    const result = JSON.parse(txResult.result.response.payload.toString('utf8'));
+
+    return {
+      ...txResult,
+      result
+    };
   }
 
   public async processProposal(
@@ -221,9 +253,7 @@ export class ClientHelper {
     });
   }
 
-  public async sendInstantiateProposal(request: {
-    [k in keyof Client.ChaincodeInstantiateUpgradeRequest]?: Client.ChaincodeInstantiateUpgradeRequest[k]
-  }) {
+  public async sendInstantiateProposal(request: Partial<Client.ChaincodeInstantiateUpgradeRequest>) {
     const txId = this.client.newTransactionID(true);
 
     request.args = request.args.map(arg =>
@@ -252,9 +282,7 @@ export class ClientHelper {
     };
   }
 
-  public async sendUpgradeProposal(request: {
-    [k in keyof Client.ChaincodeInstantiateUpgradeRequest]?: Client.ChaincodeInstantiateUpgradeRequest[k]
-  }) {
+  public async sendUpgradeProposal(request: Partial<Client.ChaincodeInstantiateUpgradeRequest>) {
     const txId = this.client.newTransactionID(true);
 
     request.args = request.args.map(arg =>
@@ -283,9 +311,7 @@ export class ClientHelper {
     };
   }
 
-  public async sendTransactionProposal(request: {
-    [k in keyof Client.ChaincodeInvokeRequest]?: Client.ChaincodeInvokeRequest[k]
-  }, useAdmin = false) {
+  public async sendTransactionProposal(request: Partial<Client.ChaincodeInvokeRequest>, useAdmin = false) {
     const txId = this.client.newTransactionID(useAdmin);
 
     request.args = (request.args || []).map(arg => {
@@ -311,6 +337,49 @@ export class ClientHelper {
 
     return {
       result: proposalResponses[0] as Client.ProposalResponse,
+      proposalResponse: {
+        txId,
+        proposal,
+        proposalResponses: proposalResponses as Client.ProposalResponse[]
+      }
+    };
+  }
+
+  public async sendQueryTx(request: Partial<Client.ChaincodeInvokeRequest>, useAdmin = false) {
+    const txId = this.client.newTransactionID(useAdmin);
+
+    request.args = (request.args || []).map(arg => {
+      if (!arg) {
+        // tslint:disable-next-line:max-line-length
+        throw new Error('Undefined parameters received as part of the transaction, check how the function is being called');
+      }
+      return typeof arg === 'object' ? JSON.stringify(arg) : arg.toString();
+    });
+
+    const queryPeers = this.channel.getPeers()
+      .filter(peer => peer.isInRole('chaincodeQuery'))
+      .map(peer => peer.getPeer());
+
+    // let proposalResponses: Client.ProposalResponse;
+    // let proposal: Client.Proposal;
+
+    const [proposalResponses, proposal] = await this.channel.sendTransactionProposal(
+      { ...request, txId, targets: queryPeers } as Client.ChaincodeInvokeRequest,
+      this.config.txTimeout
+    );
+
+    const successResponse = proposalResponses
+      .find((pr: Client.ProposalResponse) => pr.response && pr.response.status === 200);
+
+    if (!successResponse) {
+      const err = new Error('All query responses were bad');
+      err['responses'] = proposalResponses;
+
+      throw err;
+    }
+
+    return {
+      result: successResponse as Client.ProposalResponse,
       proposalResponse: {
         txId,
         proposal,

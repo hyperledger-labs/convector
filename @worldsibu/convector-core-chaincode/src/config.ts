@@ -6,7 +6,7 @@ import {
   ControllerMissingError,
   ConfigurationParseError,
   ConfigurationFileOpenError
-} from '@worldsibu/convector-core-errors';
+} from '@worldsibu/convector-core';
 
 /** Model for the controller configuration */
 export interface IConfig {

@@ -26,3 +26,16 @@ export class ChaincodeInvokationError extends BaseError {
     this.message = super.getMessage(super.getOriginal());
   }
 }
+
+export class ChaincodeInvalidTransientError extends BaseError {
+  public code = 'CC_INV_TRANS_ERR';
+  public description = 'Invalid transient value for function';
+  public explanation = `
+    There was an error while trying to parse the transient data using value ${this.value}
+    ${chaincodeSideMessage}`;
+
+  constructor(public original: Error, public value: any) {
+    super();
+    this.message = super.getMessage(super.getOriginal());
+  }
+}
