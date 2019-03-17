@@ -1,7 +1,6 @@
 /** @module @worldsibu/convector-adapter-browser */
 
-import { ControllerAdapter } from '@worldsibu/convector-core-adapter';
-import { ConvectorController, getInvokables } from '@worldsibu/convector-core-controller';
+import { ControllerAdapter, ConvectorController, getInvokables } from '@worldsibu/convector-core';
 
 export class BrowserControllerAdapter implements ControllerAdapter {
   private user: string;
@@ -23,7 +22,7 @@ export class BrowserControllerAdapter implements ControllerAdapter {
   public async invoke(
     controller: string,
     name: string,
-    adminOrUser?: string|true,
+    config: any = {},
     ...args: any[]
   ) {
     const ctrl = this.controllers.get(controller);
@@ -31,7 +30,7 @@ export class BrowserControllerAdapter implements ControllerAdapter {
       { [controller]: ctrl },
       {},
       args.map(a => typeof a === 'string' ? a : JSON.stringify(a)),
-      { sender: { value: adminOrUser || this.user } }
+      { sender: { value: config.user || this.user } }
     );
   }
 }

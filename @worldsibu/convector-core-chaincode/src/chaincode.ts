@@ -1,18 +1,19 @@
 /** @module convector-core-chaincode */
 
-import { BaseStorage } from '@worldsibu/convector-core-storage';
 import { StubStorage } from '@worldsibu/convector-storage-stub';
-import { getInvokables } from '@worldsibu/convector-core-controller';
 import { ChaincodeStub, ClientIdentity, ChaincodeResponse } from 'fabric-shim';
 import { Chaincode as CC, StubHelper, ChaincodeError } from '@theledger/fabric-chaincode-utils';
 import {
+  BaseStorage,
+  getInvokables,
   ChaincodeInitializationError,
   ChaincodeInvokationError,
   ConfigurationInvalidError,
   ControllerInstantiationError
-} from '@worldsibu/convector-core-errors';
+} from '@worldsibu/convector-core';
 
 import { Config } from './config';
+import { ChaincodeTx } from './chaincode-tx';
 
 export { ChaincodeResponse };
 
@@ -109,7 +110,7 @@ export class Chaincode extends CC {
         .reduce((result, [fnName, internalName]) => ({
           ...result,
           [internalName]: isFunction(obj[fnName]) ?
-            (stubHelper: StubHelper, _args: string[]) => {
+            async (stubHelper: StubHelper, _args: string[]) => {
               const identity = new ClientIdentity(stubHelper.getStub());
               const fingerprint = identity.getX509Certificate().fingerPrint;
               return obj[fnName].call(this, stubHelper, _args, {
@@ -117,10 +118,7 @@ export class Chaincode extends CC {
                   value: fingerprint
                 },
                 tx: {
-                  value: {
-                    identity,
-                    stub: stubHelper
-                  }
+                  value: new ChaincodeTx(stubHelper, identity)
                 }
               });
             } : obj[fnName]

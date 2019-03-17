@@ -1,8 +1,7 @@
 /** @module @worldsibu/convector-storage-stub */
 
 import { ChaincodeStub } from 'fabric-shim';
-import { BaseStorage } from '@worldsibu/convector-core-storage';
-import { InvalidIdError } from '@worldsibu/convector-core-errors';
+import { BaseStorage, InvalidIdError } from '@worldsibu/convector-core';
 import { StubHelper, Transform } from '@theledger/fabric-chaincode-utils';
 
 // Remove when this gets merged
@@ -22,18 +21,28 @@ export class StubStorage extends BaseStorage {
     return await this.stubHelper.getQueryResultAsList(query);
   }
 
-  public async get(id: string): Promise<any> {
+  /**
+   * storageOptions parameter correspond to the StubHelper param
+   * @see https://wearetheledger.github.io/fabric-node-chaincode-utils/modules/_models_getstateoptions_.html
+   */
+  public async get(id: string, storageOptions?: any): Promise<any> {
     InvalidIdError.test(id);
-    return await this.stubHelper.getStateAsObject(id);
+    return await this.stubHelper.getStateAsObject(id, storageOptions);
   }
 
-  public async set(id: string, content: any) {
+  public async set(id: string, content: any, storageOptions?: any) {
     InvalidIdError.test(id);
-    return await this.stubHelper.putState(id, JSON.stringify(content));
+    return await this.stubHelper.putState(id, JSON.stringify(content), storageOptions);
   }
 
-  public async delete(id: string) {
+  public async delete(id: string, storageOptions: any = {}) {
     InvalidIdError.test(id);
+
+    if (storageOptions.privateCollection) {
+      return await this.stubHelper.getStub()
+        .deletePrivateData(storageOptions.privateCollection, id);
+    }
+
     return await this.stubHelper.getStub().deleteState(id);
   }
 

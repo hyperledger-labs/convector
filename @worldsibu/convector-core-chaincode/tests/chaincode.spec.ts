@@ -30,11 +30,17 @@ describe('Generic Chaincode', () => {
     });
 
     it('should invoke a controller', async () => {
-      const id = 'Sibu';
-
       const response = await stub.mockInvoke(uuid(), ['test_test']);
-
       expect(response.status).to.eql(200);
+    });
+
+    it('should work with transient data', async () => {
+      const transient = new Map<string, Buffer>();
+      transient.set('test', Buffer.from('Transient'));
+
+      const response = await stub.mockInvoke(uuid(), ['test_testTransient'], transient);
+
+      expect(JSON.parse(response.payload.toString('utf8'))).to.eql('Transient');
     });
   });
 });

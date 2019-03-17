@@ -16,8 +16,18 @@ export interface ControllerAdapter {
    *
    * @param controller The controller namespace
    * @param name The function name
-   * @param adminOrUser It the call must be peformed with the admin user or with a custom one
+   * @param config Extra paramters to the custom adapter
    * @param args The arguments for the function
    */
-  invoke(controller: string, name: string, adminOrUser?: string|true, ...args: any[]): Promise<any>;
+  invoke(controller: string, name: string, config?: any, ...args: any[]): Promise<any>;
+
+  /**
+   * This is going to be called whenever a controller needs to query the chaincode
+   *
+   * @param controller The controller namespace
+   * @param name The function name
+   * @param config Extra paramters to the custom adapter
+   * @param args The arguments for the function
+   */
+  query?(controller: string, name: string, config?: any, ...args: any[]): Promise<any>;
 }

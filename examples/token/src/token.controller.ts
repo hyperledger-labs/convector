@@ -66,7 +66,7 @@ export class TokenController extends ConvectorController<ChaincodeTx> {
       throw new Error(`No token found with id ${tokenId}`);
     }
 
-    return token;
+    return token.toJSON();
   }
 
   @Invokable()
