@@ -37,10 +37,12 @@
     "reflect-metadata": "^0.1.12",
     "tslib": "^1.9.0"
   },
+  "chaincodeDevDependencies": {
+    "nodemon": "^1.18.10"
+  },
   "devDependencies": {
     "http-server": "^0.11.1",
     "mocha": "^5.0.3",
-    "nodemon": "^1.18.10",
     "npm-scripts-watcher": "^1.0.2",
     "rimraf": "^2.6.2",
     "ts-node": "^6.0.3",
