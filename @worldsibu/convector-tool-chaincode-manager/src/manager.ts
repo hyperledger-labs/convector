@@ -184,6 +184,7 @@ export class Manager extends ClientHelper {
 
     delete pkg.watch;
     delete pkg.devDependencies;
+    pkg.devDependencies = pkg.chaincodeDevDependencies || {};
 
     const packagesFolderPath = join(output, 'packages');
 
