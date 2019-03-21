@@ -80,6 +80,16 @@ describe('Token e2e', () => {
     expect(token.balances[certificate]).to.eq(500000);
   });
 
+  it('should fail expectedly', async () => {
+    try {
+      await tokenCtrl.failMe();
+    } catch (error) {
+      expect(error.responses).to.exist;
+      expect(error.responses).to.be.of.lengthOf(2);
+      expect(error.responses[0].error.message).to.eql('Expected to fail');
+    }
+  });
+
   it('should retrieve a token', async () => {
     const token = await tokenCtrl.get(tokenId);
     expect(token.balances[certificate]).to.eq(500000);

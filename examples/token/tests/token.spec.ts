@@ -65,8 +65,13 @@ describe('Token', () => {
   });
 
   it('should fail expectedly', async () => {
-    await expect(tokenCtrl.failMe()).to.be.eventually
-      .rejectedWith('Expected to fail');
+    try {
+      await tokenCtrl.failMe();
+    } catch (error) {
+      expect(error.responses).to.exist;
+      expect(error.responses).to.be.of.lengthOf(1);
+      expect(error.responses[0].error.message).to.eql('Expected to fail');
+    }
   });
 
   it('should retrieve a token', async () => {

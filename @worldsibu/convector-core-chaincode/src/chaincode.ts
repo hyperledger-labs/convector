@@ -60,7 +60,7 @@ export class Chaincode extends CC {
       await this.initControllers(new StubHelper(stub), [, 'true']);
       const invokeRes = await super.Invoke(stub);
       if (invokeRes.status === 500) {
-        return error(Buffer.from(JSON.stringify(invokeRes.message)));
+        return error(Buffer.from(JSON.stringify(invokeRes.message.toString())));
       }
       return invokeRes;
     } catch (e) {
