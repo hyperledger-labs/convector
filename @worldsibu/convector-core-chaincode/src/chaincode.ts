@@ -1,7 +1,7 @@
 /** @module convector-core-chaincode */
 
 import { StubStorage } from '@worldsibu/convector-storage-stub';
-import { ChaincodeStub, ClientIdentity, ChaincodeResponse } from 'fabric-shim';
+import { ChaincodeStub, ClientIdentity, ChaincodeResponse, error } from 'fabric-shim';
 import { Chaincode as CC, StubHelper, ChaincodeError } from '@theledger/fabric-chaincode-utils';
 import {
   BaseStorage,
@@ -43,7 +43,7 @@ export class Chaincode extends CC {
       return await super.Init(stub);
     } catch (e) {
       const err = new ChaincodeInitializationError(e);
-      throw new ChaincodeError(err.toString());
+      return error(Buffer.from(JSON.stringify(new ChaincodeError(err.toString()))));
     }
   }
 
@@ -58,14 +58,14 @@ export class Chaincode extends CC {
 
     try {
       await this.initControllers(new StubHelper(stub), [, 'true']);
-      let invokeRes = await super.Invoke(stub);
+      const invokeRes = await super.Invoke(stub);
       if (invokeRes.status === 500) {
-        throw new ChaincodeError(invokeRes.message);
+        return error(Buffer.from(JSON.stringify(invokeRes.message)));
       }
       return invokeRes;
     } catch (e) {
       const err = new ChaincodeInvokationError(e);
-      throw new ChaincodeError(err.toString());
+      return error(Buffer.from(JSON.stringify(new ChaincodeError(err.toString()))));
     }
   }
 

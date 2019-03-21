@@ -8,10 +8,11 @@ program
   .command('package')
   .option('-o, --output <path>', 'Output directory', path => resolve(process.cwd(), path))
   .option('-c, --config <path>', 'Configuration path', path => resolve(process.cwd(), path))
+  .option('-u, --update', 'Update the content instead of replace it')
   .action(async (cmd: any) => {
     const manager = Manager.fromConfig(cmd.config);
 
-    await manager.package(cmd.output);
+    await manager.package(cmd.output, undefined, cmd.update);
   });
 
 program

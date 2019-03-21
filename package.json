@@ -41,8 +41,8 @@
     "================= Chaincodes =================": "==================================",
     "cc:start": "f() { npm run cc:package -- $1; npm run cc:install $1; }; f",
     "cc:upgrade": "f() { npm run cc:package -- $1; hurl upgrade $1 node $2 -P ./chaincode-$1 -p $PWD/.convector-dev-env; }; f",
-    "cc:package": "f() { node ./@worldsibu/convector-tool-chaincode-manager/dist/src/command.js --config ./examples/$1.config.json --output ./chaincode-$1 package; }; f",
-    "cc:install": "f() { hurl install $1 node -P --debug ./chaincode-$1 -p $PWD/.convector-dev-env; }; f"
+    "cc:package": "f() { node ./@worldsibu/convector-tool-chaincode-manager/dist/src/command.js --update --config ./examples/$1.config.json --output ./chaincode-$1 package; }; f",
+    "cc:install": "f() { hurl install $1 node --debug -P ./chaincode-$1 -p $PWD/.convector-dev-env; }; f"
   },
   "commitlint": {
     "extends": [
@@ -95,7 +95,7 @@
     "@types/node": "^10.3.0",
     "@types/uuid": "^3.4.3",
     "@types/yup": "^0.26.9",
-    "@worldsibu/hurley": "0.5.1",
+    "@worldsibu/hurley": "^1.0.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "fabric-ca-client": "1.4.0",

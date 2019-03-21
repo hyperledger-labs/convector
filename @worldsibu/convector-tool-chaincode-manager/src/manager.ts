@@ -160,8 +160,9 @@ export class Manager extends ClientHelper {
    *
    * @param output A path for the output folder
    * @param controllers A key value map of package:version for the controllers
+   * @param update When true it will update the package content
    */
-  public async package(output: string, controllers: KV = this.chaincodeConfig.getPackages()) {
+  public async package(output: string, controllers: KV = this.chaincodeConfig.getPackages(), update = false) {
     output = resolve(process.cwd(), output);
 
     try {
@@ -170,7 +171,9 @@ export class Manager extends ClientHelper {
       throw new Error('The output is not a valid directory');
     }
 
-    await remove(output);
+    if (!update) {
+      await remove(output);
+    }
 
     try {
       await copy(chaincodePath, output);
