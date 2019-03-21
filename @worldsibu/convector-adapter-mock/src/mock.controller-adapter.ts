@@ -1,9 +1,9 @@
 /** @module @worldsibu/convector-adapter-mock */
 
 import * as uuid from 'uuid/v1';
-import { ControllerAdapter } from '@worldsibu/convector-core';
 import { Chaincode, IConfig } from '@worldsibu/convector-core-chaincode';
 import { ChaincodeMockStub, Transform } from '@theledger/fabric-mock-stub';
+import { ControllerAdapter, ClientResponseError } from '@worldsibu/convector-core';
 
 // Remove when this gets merged
 // https://github.com/wearetheledger/fabric-node-chaincode-utils/pull/23
@@ -36,6 +36,25 @@ export class MockControllerAdapter implements ControllerAdapter {
       `${controller}_${name}`,
       ...args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg.toString())
     ], transientMap);
+
+    if (response.status === 500) {
+      let err: any = response.message.toString();
+
+      try {
+        err = JSON.parse(JSON.parse(err));
+      } catch (e) {
+        try {
+          err = JSON.parse(err);
+        } catch (e) {
+          // empty
+        }
+      }
+
+      throw new ClientResponseError([{
+        error: err,
+        response
+      }]);
+    }
 
     return Transform.bufferToObject(response.payload);
   }
