@@ -29,13 +29,12 @@ export class FabricControllerAdapter extends ClientHelper implements ControllerA
         errors = err.responses
           .map(response => ({
             response,
-            error: JSON.parse(Buffer.from(JSON.parse(
-              response.message.replace(/^.+\{/, '{')
-            )).toString('utf8'))
+            error: JSON.parse(response.message.replace(/^.+\{/, '{'))
           }));
-      } catch (err) {
+      } catch (e) {
         throw new ClientResponseError(err.responses.map(error => ({
-          error
+          error,
+          response: error
         })));
       }
 
