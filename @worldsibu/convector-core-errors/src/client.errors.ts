@@ -1,7 +1,6 @@
 /** @module @worldsibu/convector-core-errors */
 
 import { BaseError } from './base.error';
-import { chaincodeSideMessage } from './common';
 
 export interface ClientChaincodeResponse {
   error?: any;
@@ -15,6 +14,12 @@ export class ClientResponseError extends BaseError {
 
   constructor(public responses: ClientChaincodeResponse[]) {
     super();
-    this.message = super.getMessage(super.getOriginal());
+    const firstResWithErr = responses.find(res => res.error);
+    this.message = super.getMessage(firstResWithErr ?
+      firstResWithErr.error instanceof Error ?
+        firstResWithErr.error.stack :
+        JSON.stringify(firstResWithErr.error) :
+      this.getOriginal()
+    );
   }
 }
