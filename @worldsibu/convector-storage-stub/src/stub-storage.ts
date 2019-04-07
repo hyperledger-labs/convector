@@ -9,7 +9,7 @@ import { StubHelper, Transform } from '@theledger/fabric-chaincode-utils';
 Transform.isObject = data => data !== null && typeof data === 'object';
 
 export class StubStorage extends BaseStorage {
-  private stubHelper: StubHelper;
+  public stubHelper: StubHelper;
 
   constructor(stub: ChaincodeStub) {
     super();
