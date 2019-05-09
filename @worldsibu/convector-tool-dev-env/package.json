@@ -8,6 +8,19 @@
     "type": "git",
     "url": "https://github.com/hyperledger-labs/convector/tree/develop/%40worldsibu/convector-tool-dev-env"
   },
+  "keywords": [
+    "typescript",
+    "chaincode",
+    "blockchain",
+    "hyperledger",
+    "solutions",
+    "environment",
+    "hyperledger fabric",
+    "smart contract",
+    "run",
+    "hurley",
+    "composer"
+  ],
   "homepage": "https://worldsibu.tech/convector/convector-smart-contracts/",
   "typings": "./dist/index.d.ts",
   "files": [
