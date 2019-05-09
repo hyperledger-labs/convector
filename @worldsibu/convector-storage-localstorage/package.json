@@ -7,6 +7,19 @@
     "type": "git",
     "url": "https://github.com/hyperledger-labs/convector/tree/develop/%40worldsibu/convector-storage-localstorage"
   },
+  "keywords": [
+    "typescript",
+    "chaincode",
+    "blockchain",
+    "hyperledger",
+    "solutions",
+    "environment",
+    "hyperledger fabric",
+    "smart contract",
+    "run",
+    "hurley",
+    "composer"
+  ],
   "homepage": "https://worldsibu.tech/convector/convector-smart-contracts/",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
