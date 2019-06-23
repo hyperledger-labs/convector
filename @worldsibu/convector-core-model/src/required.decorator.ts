@@ -1,10 +1,10 @@
 /** @module convector-core-model */
 
-const g: any = global;
+import * as g from 'window-or-global';
+import 'reflect-metadata';
 
 export const requiredMetadataKey = g.ConvectorRequiredMetadataKey || Symbol('required');
 g.ConvectorRequiredMetadataKey = requiredMetadataKey;
-import 'reflect-metadata';
 
 export function Required() {
   return (target: any, key: string) => {

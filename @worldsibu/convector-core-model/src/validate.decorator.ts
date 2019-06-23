@@ -2,9 +2,8 @@
 // tslint:disable:no-invalid-this
 
 import { Schema } from 'yup';
+import * as g from 'window-or-global';
 import 'reflect-metadata';
-
-const g: any = global;
 
 export const validateMetadataKey = g.ConvectorValidateMetadataKey || Symbol('validate');
 g.ConvectorValidateMetadataKey = validateMetadataKey;

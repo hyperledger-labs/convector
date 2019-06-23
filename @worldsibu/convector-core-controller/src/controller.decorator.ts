@@ -1,10 +1,8 @@
 /** @module convector-core-controller */
 
+import * as g from 'window-or-global';
 import { ControllerInvalidError } from '@worldsibu/convector-core-errors';
 import 'reflect-metadata';
-
-/** @hidden */
-const g: any = global;
 
 /** @hidden */
 export const controllerMetadataKey = g.ConvectorControllerMetadataKey || Symbol('controller');

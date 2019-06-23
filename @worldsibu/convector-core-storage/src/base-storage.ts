@@ -1,6 +1,6 @@
 /** @module @worldsibu/convector-core-storage */
 
-const g: any = global;
+import * as g from 'window-or-global';
 
 export abstract class BaseStorage {
   /**
