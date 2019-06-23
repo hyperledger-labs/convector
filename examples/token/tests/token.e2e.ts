@@ -102,4 +102,12 @@ describe('Token e2e', () => {
 
     expect(info).to.exist;
   });
+
+  it('should return the raw response', async () => {
+    const response: any = await tokenCtrl.$raw().getIdentityInfo();
+
+    console.log(response);
+
+    expect(response.txId).to.exist;
+  });
 });

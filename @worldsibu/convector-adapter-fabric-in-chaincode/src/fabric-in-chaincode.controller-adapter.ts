@@ -31,6 +31,9 @@ export class InChaincodeAdapter implements ControllerAdapter {
     // On unit tests it might change the context for the subsecuent calls
     storage.stubHelper = config.tx.stub;
 
-    return JSON.parse(res.payload.toString('utf8'));
+    return {
+      ...res,
+      result: JSON.parse(res.payload.toString('utf8'))
+    };
   }
 }

@@ -29,15 +29,19 @@ class TestAdapter implements ControllerAdapter {
   }
 
   async invoke(controller, name, config, ...args) {
-    if (config.test) {
+    if (config.casa) {
       return 'from-adapter';
     }
 
-    return this.ctrl[name]({}, args, {});
+    return {
+      result: this.ctrl[name]({}, args, {})
+    };
   }
 
   async query(controller, name, config, ...args) {
-    return this.ctrl[name]({}, args, {});
+    return {
+      result: this.ctrl[name]({}, args, {})
+    };
   }
 }
 
@@ -60,6 +64,14 @@ describe('Controller Client', () => {
     const adapter = new TestAdapter(TestController);
     const testCtrl = ClientFactory(TestController, adapter);
 
-    expect(await testCtrl.$config({ test: true }).test()).to.eq('from-adapter');
+    expect(await testCtrl.$config({ casa: true }).test()).to.eq('from-adapter');
+  });
+
+  it('it should make a raw call, retuning all the response data', async () => {
+    const adapter = new TestAdapter(TestController);
+    const testCtrl = ClientFactory(TestController, adapter);
+
+    const response: any = await testCtrl.$raw().test();
+    expect(response).to.haveOwnProperty('result');
   });
 });
