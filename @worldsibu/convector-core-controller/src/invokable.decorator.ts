@@ -1,6 +1,7 @@
 /** @module convector-core-controller */
 
 import { Schema } from 'yup';
+import * as g from 'window-or-global';
 import {
   ControllerNamespaceMissingError,
   ControllerInvokablesMissingError,
@@ -14,8 +15,6 @@ import 'reflect-metadata';
 import { paramMetadataKey } from './param.decorator';
 import { ConvectorController } from './convector-controller';
 import { controllerMetadataKey } from './controller.decorator';
-
-const g: any = global;
 
 /** @hidden */
 export const invokableMetadataKey = g.ConvectorInvokableMetadataKey || Symbol('invokable');
