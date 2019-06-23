@@ -16,8 +16,7 @@ export class FabricControllerAdapter extends ClientHelper implements ControllerA
 
   public async invoke(controller: string, name: string, config?: any, ...args: any[]): Promise<any> {
     try {
-      const txResult = await super.invoke(`${controller}_${name}`, this.config.chaincode, config, ...args);
-      return txResult.result;
+      return await super.invoke(`${controller}_${name}`, this.config.chaincode, config, ...args);
     } catch (err) {
       if (!err.responses) {
         throw err;
@@ -43,7 +42,6 @@ export class FabricControllerAdapter extends ClientHelper implements ControllerA
   }
 
   public async query(controller: string, name: string, config?: any, ...args: any[]): Promise<any> {
-    const txResult = await super.query(`${controller}_${name}`, this.config.chaincode, config, ...args);
-    return txResult.result;
+    return super.query(`${controller}_${name}`, this.config.chaincode, config, ...args);
   }
 }

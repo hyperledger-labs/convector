@@ -47,7 +47,7 @@ export class FirstController extends ConvectorController {
   ): Promise<FlatConvectorModel<Third>> {
     // Cross invoke the chaincode and return what it returns
     // Do this when you DON'T have the chaincode sourcecode, all you need is the name of the fn
-    const third = await adapter.rawInvoke('third_get', { tx: this.tx, channel, chaincode }, '1');
+    const {result: third} = await adapter.rawInvoke('third_get', { tx: this.tx, channel, chaincode }, '1');
 
     // Save the external model in this ledger
     await new Third({id: `third:${id}`, ...third}).save();

@@ -56,6 +56,9 @@ export class MockControllerAdapter implements ControllerAdapter {
       }]);
     }
 
-    return Transform.bufferToObject(response.payload);
+    return {
+      ...response,
+      result: Transform.bufferToObject(response.payload),
+    };
   }
 }
