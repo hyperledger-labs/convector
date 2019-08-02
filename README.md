@@ -1,21 +1,33 @@
 # CONVECTOR SUITE
 
-The Convector Suite is an Open Source Suite for Enterprise Blockchain Networks. It is composed of a group of Development tools for Hyperledger Fabric and aim to be an agnostic toolset.
+The Convector Suite is an Open Source Suite for Enterprise Blockchain Networks created and maintained by [WorldSibu](https://worldsibu.tech). It is composed of a group of Development tools for Hyperledger Fabric and aims to be an agnostic toolset.
 
-Convector Suite main components are:
+> [WorldSibu](https://worldsibu.tech?ref=github) is an enterprise development platform for private blockchain systems. Creators of the open source suite [Convector](https://worldsibu.tech/convector?ref=github), as well as the enterprise offering [Forma](https://worldsibu.tech/forma?ref=github), the blockchain infrastructure automation platform with multi-cloud capabilities.
 
-* <a href="https://github.com/worldsibu/convector" target="_blank">Convector Smart Contracts</a> - JavaScript-based Development Framework for Enterprise Smart Contract Systems
-* <a href="https://github.com/worldsibu/hurley" target="_blank">Hurley</a> - the easiest way to quickly setup your Hyperledger development environment. Instead of learning all the config files required and navigating tons of yaml files, just do `hurl new` and focus on your smart contract.
+The Convector Suite is targeted at beginners and experts alike. For newcomers to the blockchain world is the easiest and fastest way to create great code. For experts it's the means to efficiently create scalable and secure code. The Convector Suite follows modern coding paradigms and was built from the ground up to run in multiple ledger technologies.
+
+The Convector Suite main components are:
+
+* <a href="https://worldsibu.tech/convector/convector-smart-contracts?ref=github" target="_blank">Convector Smart Contracts</a> - JavaScript-based Development Framework for Enterprise Smart Contract Systems
+* <a href="https://worldsibu.tech/convector/hurley-development-environment?ref=github" target="_blank">Hurley</a> - the easiest way to quickly setup your Hyperledger development environment. Instead of learning all the config files required and navigating tons of yaml files, just do `hurl new` and focus on your smart contract.
 * <a href="https://github.com/worldsibu/convector-cli" target="_blank">Convector CLI</a> - the fastest and easiest way to build a new Convector Smart Contracts project. It is fully integrated with Hurley as well.
+* <a href="https://github.com/worldsibu/convector-rest-api" target="_blank">Convector REST Server</a> - a RESTful API generator from a Convector smart contract. One command and you can expose your smart contract to the world.
 
-<a href="https://discord.gg/twRwpWt" target="_blank">
+## Some key links:
+
+* [Official Documentation site](https://docs.worldsibu.com/convector).
+* [Official tutorial for begginers](https://docs.worldsibu.com/article/99-tutorial-getting-started)
+* [Github code examples](https://github.com/worldsibu) and [Code examples directory](https://docs.worldsibu.com/article/73-code-samples)
+* [Video tutorials](https://www.youtube.com/watch?v=BmVNMR-O_os&list=PL-1Vd1bTiSr_i2qeqeHCUWaD74ymRvidb)
+
+Have doubts, want to collaborate or just meet other Convector devs around the world? <a href="https://discord.gg/twRwpWt" target="_blank">
         <i class="fab fa-discord"></i>Join the Discord (Chat) Community
     </a>
 
 ## What is Convector Smart Contracts?
 
-[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/worldsibu/convector/issues)
-[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.io/subscribe/)
+[![Issues](https://img.shields.io/github/issues-raw/@worldsibu/convector.svg)](https://github.com/hyperledger-labs/convector/issues)
+[![Newsletter](https://img.shields.io/badge/Newsletter--orange.svg)](https://worldsibu.tech/subscribe/)
 [![npm](https://img.shields.io/npm/v/@worldsibu/convector-core-chaincode.svg)](https://www.npmjs.com/package/@worldsibu/convector-core-chaincode)
 [![Discord](https://img.shields.io/discord/469152206638284800.svg)](https://discord.gg/twRwpWt)
 
@@ -23,16 +35,35 @@ Convector Suite main components are:
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
-Convector is a **JavaScript-based Development Framework for Enterprise Smart Contract Systems**. Its goal is to make it easier for developers to create, test and deploy enterprise-grade DApps by abstracting complexities that make it hard to get started, plus a collection of tools that speed up your go-to-market.
+Convector is a **JavaScript-based Development Framework for Enterprise Smart Contract Systems**. Its goal is to make it easier for developers to create, test and deploy enterprise-grade blockchain-based systems by abstracting complexities that make it hard to get started, plus a collection of tools that speed up your go-to-market.
 
 For now, we only support **Hyperledger Fabric**, so this documentation is for using Convector Smart Contracts on Hyperledger Fabric.
 
 **Model/Controller pattern.**  Convector is designed to help you write reusable pieces of code that describe the nature of what a developer can do in a blockchain. A blockchain, in the developer’s eyes, is no more than a data layer protected by a logic layer defining the rules of what the outside world can do in with the inner data. Thus, a really comfortable way of writing chaincode logic (smart contracts) is by having Models describing the shape of the data and Controllers describing the actions and rules that apply to the models.
 
-| Quick look of Convector                                                                                            | Start with Convector                                                                  | Fundamentals                                                                    |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Simple application ready to be used with the whole stack (Hyperledger Fabric, NodeJS, and Angular) using Convector | Setup your project and integrate it with your pipeline and project                    | Learn Convector development basics, from architecture to components.            |
-| [Drug Supply Example](https://github.com/worldsibu/convector-example-drug-supply-chain)                            | [Getting-Started](https://worldsibu.github.io/convector/modules/getting_started.html) | [Fundamentals](https://worldsibu.github.io/convector/modules/fundamentals.html) |
+## Create your first blockchain project
+
+> Make sure you meet the [pre-requisites](https://docs.worldsibu.com/article/71-getting-started#prerequisites).
+
+```
+npm i -g @worldsibu/convector-cli
+conv new car
+cd car
+npm install
+
+# Start your local blockchain network
+npm run env:restart
+
+# Install the smart contract
+npm run cc:start -- car
+
+# Send your first transaction to the blockchain - Wait a few seconds!
+hurl invoke car car_create '{"id":"car1","name":"jetta", "created":1,"modified":1}'
+
+# See your new record created in the blockchain by visiting: http://localhost:5084/_utils/#database/ch1_car/_all_docs
+```
+
+Then, you can visit the [official Docs Site](https://docs.worldsibu.com/convector), [automatically add a REST API](https://github.com/worldsibu/convector-rest-api), or build it and [deploy it to an enterprise blockchain network](https://docs.worldsibu.com/forma/tutorial).
 
 ## Assumptions
 
@@ -45,6 +76,6 @@ Yes, we are also aware that Composer's development has experienced some changes 
 ## Support
 
 * [Product Hunt profile](https://www.producthunt.com/posts/convector-smart-contracts)
-* For recommendations, feature requests, or bugs go to our [issues section](https://github.com/worldsibu/convector/issues).
-* News on Convector, subscribe to our [Newsletter](https://worldsibu.io/subscribe/)
+* For recommendations, feature requests, or bugs go to our [issues section](https://github.com/hyperledger-labs/convector/issues).
+* News on Convector, subscribe to our [Newsletter](https://worldsibu.tech/subscribe/)
 * Need support? Chat directly with our team, join our [Discord](https://discord.gg/twRwpWt)
