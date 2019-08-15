@@ -1,10 +1,8 @@
 {
   "txTimeout": 300000,
   "user": "admin",
-  "networkProfile": "./examples/network-profile.yaml",
-  "channel": "channel-name",
-  "skipInit": false,
-  "keyStore": "",
-  "userMsp": "",
-  "userMspPath": ""
+  "channel": "ch1",
+  "keyStore": "../../.convector-dev-env/.hfc-org1",
+  "networkProfile": "../../.convector-dev-env/network-profiles/org1.network-profile.yaml",
+  "userMspPath": "../../.convector-dev-env/artifacts/crypto-config/peerOrganizations/org1.hurley.lab/users/Admin@org1.hurley.lab/msp"
 }

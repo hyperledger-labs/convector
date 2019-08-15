@@ -6,7 +6,7 @@ import * as uuid from 'uuid/v4';
 import 'mocha';
 
 import { CouchDBStorage } from '@worldsibu/convector-storage-couchdb';
-import { FabricControllerAdapter } from '@worldsibu/convector-platform-fabric';
+import { FabricControllerAdapter, ClientHelper } from '@worldsibu/convector-platform-fabric';
 import { BaseStorage, ClientFactory, ConvectorControllerClient } from '@worldsibu/convector-core';
 
 import { Token } from '../src/token.model';
@@ -37,9 +37,11 @@ describe('Token e2e', () => {
       keyStore,
       networkProfile,
       userMspPath,
-      userMsp: 'org1MSP'
+      // userMsp: 'org1MSP'
     });
     tokenCtrl = ClientFactory(TokenController, adapter);
+
+    (adapter as ClientHelper).cleanUp();
 
     BaseStorage.current = new CouchDBStorage({
       host: 'localhost',

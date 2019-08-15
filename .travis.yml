@@ -1,13 +1,19 @@
 language: node_js
 node_js:
   - "8.11.3"
-# # before_install:
-#   # -
+
 install:
   - npm install
   - npm run lerna:lint
   - npm run lerna:test
-#   # - npm run publish:ci
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: npm run publish:ci
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH != master && $TRAVIS_EVENT_TYPE == pull_request"
 
 # deploy:
 #   provider: pages
