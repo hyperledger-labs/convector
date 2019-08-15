@@ -48,6 +48,8 @@ export class ClientHelper {
 
   private $initializing: Promise<void>;
 
+  private hubsInUse: Client.ChannelEventHub[] = [];
+
   constructor(config: ClientConfig) {
     this.config = {
       txTimeout: 300000,
@@ -69,16 +71,21 @@ export class ClientHelper {
 
     // The client needs to create the user credentials based on the CA key/cert
     if (initKeyStore) {
-      const stateStore = await Client.newDefaultKeyValueStore({ path: this.config.keyStore });
+      const stateStore = await Client.newDefaultKeyValueStore({
+        path: this.renderVariables(this.config.keyStore)
+      });
       this.client.setStateStore(stateStore);
 
       const cryptoSuite = Client.newCryptoSuite();
-      const cryptoStore = Client.newCryptoKeyStore({ path: this.config.keyStore });
+      const cryptoStore = Client.newCryptoKeyStore({
+        path: this.renderVariables(this.config.keyStore)
+      });
 
       cryptoSuite.setCryptoKeyStore(cryptoStore);
       this.client.setCryptoSuite(cryptoSuite);
 
-      const mspPath = resolve(process.cwd(), this.config.userMspPath);
+      const mspPath = resolve(process.cwd(),
+        this.renderVariables(this.config.userMspPath));
 
       try {
         await ensureDir(mspPath);
@@ -98,18 +105,18 @@ export class ClientHelper {
     }
 
     if (typeof this.config.networkProfile === 'string') {
+      const networkProfilePath = this.renderVariables(this.config.networkProfile);
       try {
-        const profileStr =
-          await readFile(resolve(process.cwd(), this.config.networkProfile), 'utf8');
+        const profileStr = await readFile(resolve(process.cwd(), networkProfilePath), 'utf8');
 
-        if (/\.json$/.test(this.config.networkProfile)) {
+        if (/\.json$/.test(networkProfilePath)) {
           this.config.networkProfile = JSON.parse(profileStr);
         } else {
           this.config.networkProfile = safeLoad(profileStr);
         }
       } catch (e) {
         throw new Error(
-          `Failed to read or parse the network profile at '${this.config.networkProfile}', ${e.toString()}`
+          `Failed to read or parse the network profile at '${networkProfilePath}', ${e.toString()}`
         );
       }
     }
@@ -140,6 +147,15 @@ export class ClientHelper {
     if (this.config.channel) {
       await this.useChannel(this.config.channel);
     }
+  }
+
+  public close() {
+    console.log('Cleaning up event hubs');
+    this.hubsInUse
+      .filter(hub => hub.isconnected())
+      .map(hub => hub.disconnect());
+
+    this.hubsInUse = [];
   }
 
   public async useUser(name: string) {
@@ -229,20 +245,23 @@ export class ClientHelper {
   }
 
   public async listenTx(txId: string): Promise<TxListenerResult> {
-    const hub = this.channel.getChannelEventHubsForOrg()[0];
-    hub.connect();
+    let hub = this.channel.getChannelEventHubsForOrg()[0];
+    hub.checkConnection(true);
+    this.hubsInUse.push(hub);
 
     return await new Promise<{ txId: string, code: string }>((res, rej) => {
       const timeout = setTimeout(() => {
-        hub.disconnect();
+        hub.unregisterTxEvent(txId);
+        hub = undefined;
         const seconds = this.config.txTimeout / 1000;
-        rej(new Error(`Transaction did not complete within ${seconds} seconds`));
+        rej(new Error(`We could not hear back from orderer within ${seconds} seconds, `+
+          `closing connection. Increase the txTimeout if more time is needed`));
       }, this.config.txTimeout);
 
       hub.registerTxEvent(txId, (tx, code) => {
         clearTimeout(timeout);
         hub.unregisterTxEvent(txId);
-        hub.disconnect();
+        hub = undefined;
 
         if (code !== 'VALID') {
           return rej(new Error(`Problem with the transaction. Event status ${code}`));
@@ -450,5 +469,9 @@ export class ClientHelper {
     }
 
     return join(folderPath, content[0]);
+  }
+
+  private renderVariables(data: string = '') {
+    return data.replace(/(\$[a-z_0-9]+)/ig, variable => process.env[variable.slice(1)] || variable);
   }
 }
