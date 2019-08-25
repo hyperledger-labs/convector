@@ -2,6 +2,7 @@
 
 import * as uuid from 'uuid/v1';
 import * as selfsigned from 'selfsigned';
+import { pki, asn1, md } from 'node-forge';
 import { Chaincode, IConfig } from '@worldsibu/convector-core-chaincode';
 import { ChaincodeMockStub, Transform } from '@theledger/fabric-mock-stub';
 import { ControllerAdapter, ClientResponseError } from '@worldsibu/convector-core';
@@ -90,5 +91,16 @@ export class MockControllerAdapter implements ControllerAdapter {
     const attrsFormatted = Object.keys(props).map(k => ({ name: k, value: props[k] }));
     const pems = selfsigned.generate(attrsFormatted);
     this.users[name] = pems.cert;
+  }
+
+  getUserFingerprint(user: string) {
+    const cert = pki.certificateFromPem(this.users[user]);
+    return md.sha1
+      .create()
+      .update(asn1.toDer(pki.certificateToAsn1(cert)).getBytes())
+      .digest()
+      .toHex()
+      .toUpperCase()
+      .replace(/(.{2})(?=.)/g, '$1:');
   }
 }
