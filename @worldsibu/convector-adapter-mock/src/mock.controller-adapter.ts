@@ -76,14 +76,19 @@ export class MockControllerAdapter implements ControllerAdapter {
     };
   }
 
-  addUser(name: string);
+  addUser(name: string, certificate?: string);
   addUser(props: CertificateProps);
-  addUser(props: string|CertificateProps) {
+  addUser(props: string|CertificateProps, certificate?: string) {
     let name: string;
 
     if (typeof props === 'string') {
       name = props;
       props = {commonName: props};
+
+      if (certificate) {
+        this.users[name] = certificate;
+        return;
+      }
     } else {
       name = props.commonName;
     }
