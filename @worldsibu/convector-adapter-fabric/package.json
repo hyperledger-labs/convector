@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-adapter-fabric",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "Controller adapter to use with fabric-client SDK",
   "license": "Apache-2.0",
   "repository": {
@@ -44,8 +44,8 @@
     "fabric-client": ">=1.1.2"
   },
   "dependencies": {
-    "@worldsibu/convector-common-fabric-helper": "^1.3.7",
-    "@worldsibu/convector-core": "^1.3.7",
+    "@worldsibu/convector-common-fabric-helper": "^1.3.8",
+    "@worldsibu/convector-core": "^1.3.8",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
