@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-platform-browser",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "Convector packages for browser support",
   "license": "Apache-2.0",
   "repository": {
@@ -41,8 +41,8 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@worldsibu/convector-adapter-browser": "^1.3.7",
-    "@worldsibu/convector-storage-localstorage": "^1.3.7",
+    "@worldsibu/convector-adapter-browser": "^1.3.8",
+    "@worldsibu/convector-storage-localstorage": "^1.3.8",
     "tslib": "^1.9.0"
   },
   "devDependencies": {

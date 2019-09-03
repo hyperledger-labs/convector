@@ -1,6 +1,6 @@
 {
   "name": "@worldsibu/convector-platform-fabric",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "Convector packages for fabric support",
   "license": "Apache-2.0",
   "repository": {
@@ -41,11 +41,11 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@worldsibu/convector-adapter-fabric": "^1.3.7",
-    "@worldsibu/convector-common-fabric-helper": "^1.3.7",
-    "@worldsibu/convector-core-chaincode": "^1.3.7",
-    "@worldsibu/convector-storage-stub": "^1.3.7",
-    "@worldsibu/convector-tool-chaincode-manager": "^1.3.7",
+    "@worldsibu/convector-adapter-fabric": "^1.3.8",
+    "@worldsibu/convector-common-fabric-helper": "^1.3.8",
+    "@worldsibu/convector-core-chaincode": "^1.3.8",
+    "@worldsibu/convector-storage-stub": "^1.3.8",
+    "@worldsibu/convector-tool-chaincode-manager": "^1.3.8",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
