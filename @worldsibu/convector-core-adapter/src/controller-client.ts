@@ -53,9 +53,9 @@ export function ClientFactory<T extends ConvectorController>(
 
       if (this.query && adapter.query) {
         res = await adapter.query(namespace, fn, config, ...args);
+      } else {
+        res = await adapter.invoke(namespace, fn, config, ...args);
       }
-
-      res = await adapter.invoke(namespace, fn, config, ...args);
 
       // Use the property `result` unless it's not available
       return typeof res === 'object' && 'result' in res && !this.raw ?
