@@ -184,7 +184,7 @@ export class ClientHelper {
       await this.useUser(user);
     }
 
-    const extra: Partial<Client.ChaincodeInvokeRequest> = {};
+    const extra: Partial<Client.ChaincodeInvokeRequest> = config.invokeArgs || {};
     if (config.transient) {
       extra.transientMap = Object.keys(config.transient).reduce((map, k) => ({
         ...map,
