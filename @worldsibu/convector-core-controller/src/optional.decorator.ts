@@ -16,7 +16,7 @@ g.ConvectorOptionalParamMetadataKey = optionalMetadataKey;
  *
  * @decorator
  */
-export function Optional<T>() {
+export function OptionalParam<T>() {
   return (target: any, propertyKey: string, parameterIndex: number) => {
 
     const optionals: number[] =
