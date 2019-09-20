@@ -14,6 +14,7 @@ import { Param } from '../src/param.decorator';
 import { Controller } from '../src/controller.decorator';
 import { ConvectorController } from '../src/convector-controller';
 import { Invokable, getInvokables } from '../src/invokable.decorator';
+import { Optional } from '../src/optional.decorator';
 
 class TestCC extends Chaincode {
   constructor(ctr: any) {
@@ -69,6 +70,17 @@ class Test extends ConvectorController {
     name: string
   ) {
     return this.plain(name);
+  }
+
+  @Invokable()
+  public async optionalParam(
+    @Param(yup.string())
+    name: string,
+    @Optional()
+    @Param(yup.string())
+    sufix: string = 'test'
+  ) {
+    return `${name} ${sufix}`;
   }
 }
 
@@ -139,5 +151,16 @@ describe('Invokable Decorator', () => {
       .call(testCC, new StubHelper(stub), [JSON.stringify({})], getExtras());
 
     expect(result).to.be.instanceof(TestModel);
+  });
+
+  it('should allow invokes with optional params', async () => {
+    const result = await test.optionalParam
+      .call(testCC, new StubHelper(stub), ['test'], getExtras());
+    expect(result).to.eq('test test');
+  });
+
+  it('should reject if less parameters are passed', async () => {
+    await test.optionalParam.call(testCC, new StubHelper(stub), [], getExtras())
+      .then(() => expect.fail('It should have failed'), () => console.log('Expected error'));
   });
 });
