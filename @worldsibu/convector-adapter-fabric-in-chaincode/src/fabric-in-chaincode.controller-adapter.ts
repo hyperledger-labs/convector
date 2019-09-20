@@ -24,12 +24,19 @@ export class InChaincodeAdapter implements ControllerAdapter {
     }
 
     const stub = config.tx.stub.getStub();
+    // Patch mock stub
+    let beforeTx = 'signedProposal' in stub ? {
+      signedProposal: (stub as any).signedProposal,
+      txID: (stub as any).txID,
+      transientMap: (stub as any).transientMap
+    } : {};
     const res = await stub.invokeChaincode(config.chaincode, [fn, ...args], config.channel);
     const storage = BaseStorage.current as StubStorage;
 
     // Make sure the stub is still the same
     // On unit tests it might change the context for the subsecuent calls
     storage.stubHelper = config.tx.stub;
+    Object.assign(stub, beforeTx);
 
     return {
       ...res,
