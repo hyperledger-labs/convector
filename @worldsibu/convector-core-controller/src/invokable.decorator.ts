@@ -55,12 +55,15 @@ export function Invokable() {
       // This used to be the stub param, deprecated now
       _: any,
       args: string[],
-      extras: any = {},
+      extras: any,
       ...rest: any[]
     ) {
+      let internalCall = false;
       // This is a local chaincode call, pass through
       if ('_internal_invokable' in this) {
-        return fn.call(this, _, args, extras, ...rest);
+        args = [_, args, extras, ...rest].filter(param => param !== undefined);
+        internalCall = true;
+        extras = {};
       }
 
       const schemas: [Schema<any>, any, { new(...args: any[]): any }][] =
@@ -97,7 +100,7 @@ export function Invokable() {
       }
 
       const namespace = Reflect.getMetadata(controllerMetadataKey, target.constructor);
-      const ctx = Object.create(this[namespace], {...extras, _internal_invokable: {value:true}});
+      const ctx = Object.create(internalCall ? this : this[namespace], {...(extras || {}), _internal_invokable: {value:true}});
 
       try {
         return await fn.call(ctx, ...args);
