@@ -8,11 +8,13 @@ import {
   ControllerInvalidInvokeError,
   ControllerInvalidArgumentError,
   ControllerArgumentParseError,
-  ControllerInvalidFunctionError
+  ControllerInvalidFunctionError,
+  ControllerUndefinedArgumentError
 } from '@worldsibu/convector-core-errors';
 import 'reflect-metadata';
 
 import { paramMetadataKey } from './param.decorator';
+import { optionalMetadataKey } from './optional.decorator';
 import { ConvectorController } from './convector-controller';
 import { controllerMetadataKey } from './controller.decorator';
 
@@ -70,12 +72,22 @@ export function Invokable() {
         Reflect.getOwnMetadata(paramMetadataKey, target, key);
 
       if (schemas) {
-        if (schemas.length !== args.length) {
-          throw new ControllerInvalidInvokeError(key, args.length, schemas.length);
+        const optionals: number[] = Reflect.getOwnMetadata(optionalMetadataKey, target, key) || [];
+
+        if (schemas.length - optionals.length < args.length) {
+          throw new ControllerInvalidInvokeError(key, args.length, schemas.length - optionals.length);
         }
 
         args = await schemas.reduce(async (result, [schema, opts, model], index) => {
           let paramResult;
+
+          if (args[index] === undefined) {
+            if (optionals.indexOf(index) === -1) {
+              throw new ControllerUndefinedArgumentError(index);
+            }
+
+            return [...await result, undefined];
+          }
 
           try {
             if (opts.update) {

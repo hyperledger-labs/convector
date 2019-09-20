@@ -96,6 +96,19 @@ export class ControllerInvalidInvokeError extends BaseError {
   }
 }
 
+export class ControllerUndefinedArgumentError extends BaseError {
+  public code = 'CTRL_UNDEF_ARG_ERR';
+  public description = 'Undefined argument passed in controller';
+  public explanation = `
+    Undefined argument #${this.index}, use @Optional() if need to omit
+    ${chaincodeSideMessage}`;
+
+  constructor(public index: number) {
+    super();
+    this.message = super.getMessage(super.getOriginal());
+  }
+}
+
 export class ControllerInvalidArgumentError extends BaseError {
   public code = 'CTRL_INV_ARG_ERR';
   public description = 'Invalid argument passed in controller';
