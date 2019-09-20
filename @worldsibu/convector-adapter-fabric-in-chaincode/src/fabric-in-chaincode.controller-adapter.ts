@@ -38,6 +38,11 @@ export class InChaincodeAdapter implements ControllerAdapter {
     storage.stubHelper = config.tx.stub;
     Object.assign(stub, beforeTx);
 
+    if (res.status === 500) {
+      const rawMessage = res.message.toString();
+      throw rawMessage ? JSON.parse(rawMessage) : res;
+    }
+
     const rawResult = res.payload.toString('utf8');
 
     return {
