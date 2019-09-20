@@ -14,7 +14,7 @@ import { Param } from '../src/param.decorator';
 import { Controller } from '../src/controller.decorator';
 import { ConvectorController } from '../src/convector-controller';
 import { Invokable, getInvokables } from '../src/invokable.decorator';
-import { Optional } from '../src/optional.decorator';
+import { OptionalParam } from '../src/optional.decorator';
 
 class TestCC extends Chaincode {
   constructor(ctr: any) {
@@ -76,7 +76,7 @@ class Test extends ConvectorController {
   public async optionalParam(
     @Param(yup.string())
     name: string,
-    @Optional()
+    @OptionalParam()
     @Param(yup.string())
     sufix: string = 'test'
   ) {

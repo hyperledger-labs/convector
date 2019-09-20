@@ -74,7 +74,7 @@ export function Invokable() {
       if (schemas) {
         const optionals: number[] = Reflect.getOwnMetadata(optionalMetadataKey, target, key) || [];
 
-        if (schemas.length - optionals.length < args.length) {
+        if (schemas.length - optionals.length > args.length) {
           throw new ControllerInvalidInvokeError(key, args.length, schemas.length - optionals.length);
         }
 
