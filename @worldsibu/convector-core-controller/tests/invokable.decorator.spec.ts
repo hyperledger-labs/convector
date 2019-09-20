@@ -62,6 +62,14 @@ class Test extends ConvectorController {
   ) {
     return model;
   }
+
+  @Invokable()
+  public async internalCall(
+    @Param(yup.string())
+    name: string
+  ) {
+    return this.plain(name);
+  }
 }
 
 describe('Invokable Decorator', () => {
@@ -108,6 +116,12 @@ describe('Invokable Decorator', () => {
 
   it('should translate a chaincode call into a controller call', async () => {
     const result = await test.plain
+      .call(testCC, new StubHelper(stub), ['test'], getExtras());
+    expect(result).to.eq('test');
+  });
+
+  it('should allow internal calls to be made in the methods', async () => {
+    const result = await test.internalCall
       .call(testCC, new StubHelper(stub), ['test'], getExtras());
     expect(result).to.eq('test');
   });
