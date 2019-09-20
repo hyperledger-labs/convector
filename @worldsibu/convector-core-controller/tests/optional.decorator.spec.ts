@@ -6,9 +6,9 @@ import 'mocha';
 import 'reflect-metadata';
 
 import { Param, paramMetadataKey } from '../src/param.decorator';
-import { Optional, optionalMetadataKey } from '../src/optional.decorator';
+import { OptionalParam, optionalMetadataKey } from '../src/optional.decorator';
 
-describe('Optional Decorator', () => {
+describe('OptionalParam Decorator', () => {
   class TestModel {
     public name: string;
 
@@ -21,7 +21,7 @@ describe('Optional Decorator', () => {
     test(
       @Param(yup.number())
       param1: number,
-      @Optional()
+      @OptionalParam()
       @Param(TestModel)
       param2: TestModel
     ) {
