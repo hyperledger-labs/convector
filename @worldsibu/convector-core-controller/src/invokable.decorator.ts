@@ -115,7 +115,9 @@ export function Invokable() {
       const ctx = Object.create(internalCall ? this : this[namespace], {...(extras || {}), _internal_invokable: {value:true}});
 
       try {
-        return await fn.call(ctx, ...args);
+        const response = await fn.call(ctx, ...args);
+        // Flatten the objects structure
+        return typeof response === 'object' ? JSON.parse(JSON.stringify(response)) : response;
       } catch (e) {
         const error = new Error(e.message);
         error.stack = e.stack;
