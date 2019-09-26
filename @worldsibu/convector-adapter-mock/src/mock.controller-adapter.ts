@@ -48,7 +48,7 @@ export class MockControllerAdapter implements ControllerAdapter {
 
     const response = await this.stub.mockInvoke(uuid(), [
       `${controller}_${name}`,
-      ...args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg.toString())
+      ...args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg === undefined ? undefined : arg.toString())
     ], transientMap);
 
     if (response.status === 500) {
