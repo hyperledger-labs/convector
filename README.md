@@ -20,7 +20,7 @@ The Convector Suite main components are:
 * [Github code examples](https://github.com/worldsibu) and [Code examples directory](https://docs.worldsibu.com/article/73-code-samples)
 * [Video tutorials](https://www.youtube.com/watch?v=BmVNMR-O_os&list=PL-1Vd1bTiSr_i2qeqeHCUWaD74ymRvidb)
 
-Have doubts, want to collaborate or just meet other Convector devs around the world? <a href="https://discord.gg/twRwpWt" target="_blank">
+Have doubts, want to collaborate or just meet other Convector devs around the world? <a href="https://covalentx.com/convector-community/" target="_blank">
         <i class="fab fa-discord"></i>Join the Discord (Chat) Community
     </a>
 
@@ -78,4 +78,4 @@ Yes, we are also aware that Composer's development has experienced some changes 
 * [Product Hunt profile](https://www.producthunt.com/posts/convector-smart-contracts)
 * For recommendations, feature requests, or bugs go to our [issues section](https://github.com/hyperledger-labs/convector/issues).
 * News on Convector, subscribe to our [Newsletter](https://worldsibu.tech/subscribe/)
-* Need support? Chat directly with our team, join our [Discord](https://discord.gg/twRwpWt)
+* Need support? Chat directly with our team, join our [Discord](https://covalentx.com/convector-community/)
