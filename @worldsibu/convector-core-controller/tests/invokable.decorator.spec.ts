@@ -8,7 +8,7 @@ import { Chaincode, StubHelper } from '@theledger/fabric-chaincode-utils';
 import 'mocha';
 import 'reflect-metadata';
 
-import { Validate } from '@worldsibu/convector-core-model';
+import { Validate, ConvectorModel } from '@worldsibu/convector-core-model';
 
 import { Param } from '../src/param.decorator';
 import { Controller } from '../src/controller.decorator';
@@ -24,13 +24,11 @@ class TestCC extends Chaincode {
   }
 }
 
-class TestModel {
+class TestModel extends ConvectorModel<TestModel> {
+  public type = 'test';
+
   @Validate(yup.string())
   public name: string;
-
-  constructor(content) {
-    this.name = content.name;
-  }
 }
 
 @Controller('test')
@@ -142,15 +140,14 @@ describe('Invokable Decorator', () => {
     const result = await test.complex
       .call(testCC, new StubHelper(stub), [JSON.stringify({ name: 'test' })], getExtras());
 
-    expect(result).to.be.instanceof(TestModel);
-    expect(result.name).to.eq('test');
+    expect(new TestModel(result).name).to.eq('test');
   });
 
   it('should succeed accepting an incomplete model as a param if it is for update the content', async () => {
     const result = await test.update
       .call(testCC, new StubHelper(stub), [JSON.stringify({})], getExtras());
 
-    expect(result).to.be.instanceof(TestModel);
+    expect(new TestModel(result)).to.be.instanceof(TestModel);
   });
 
   it('should allow invokes with optional params', async () => {
