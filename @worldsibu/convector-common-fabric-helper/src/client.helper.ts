@@ -467,7 +467,7 @@ export class ClientHelper {
     return join(folderPath, content[0]);
   }
 
-  private renderVariables(data: string = '') {
+  private renderVariables(data = '') {
     return data.replace(/(\$[a-z_0-9]+)/ig, variable => process.env[variable.slice(1)] || variable);
   }
 }

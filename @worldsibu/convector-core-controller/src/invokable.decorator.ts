@@ -112,7 +112,10 @@ export function Invokable() {
       }
 
       const namespace = Reflect.getMetadata(controllerMetadataKey, target.constructor);
-      const ctx = Object.create(internalCall ? this : this[namespace], {...(extras || {}), _internal_invokable: {value:true}});
+      const ctx = Object.create(internalCall ? this : this[namespace], {
+        ...(extras || {}),
+        _internal_invokable: {value:true}
+      });
 
       try {
         const response = await fn.call(ctx, ...args);
