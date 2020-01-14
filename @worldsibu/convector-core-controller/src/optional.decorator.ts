@@ -1,11 +1,7 @@
 /** @module convector-core-controller */
 
 import * as g from 'window-or-global';
-import { Schema, object } from 'yup';
 import 'reflect-metadata';
-
-/** @hidden */
-const isSchema = (schema: any): schema is Schema<any> => 'validate' in schema;
 
 /** @hidden */
 export const optionalMetadataKey = g.ConvectorOptionalParamMetadataKey || Symbol('optional-param');
