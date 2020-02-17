@@ -8,7 +8,7 @@ const isSchema = (schema: any): schema is Schema<any> => 'validate' in schema;
 export class ChaincodeTx {
   constructor(public stub: StubHelper, public identity: ClientIdentity) { }
 
-  public getTransientValue<T>(name: string, validator: Schema<T>|{ new (...args): T}): Promise<T> {
+  public getTransientValue<T>(name: string, validator: Schema<T>|{ new (...args: any[]): T}): Promise<T> {
     const schema = isSchema(validator) ? validator : object()
       .transform(value => value instanceof validator ? value : new validator(value));
 
