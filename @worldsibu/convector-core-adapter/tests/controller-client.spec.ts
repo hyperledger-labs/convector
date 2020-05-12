@@ -74,4 +74,15 @@ describe('Controller Client', () => {
     const response: any = await testCtrl.$raw().test();
     expect(response).to.haveOwnProperty('result');
   });
+
+  it.only('it should pass config to adapter and query the controllers', async () => {
+    const adapter = new TestAdapter(TestController);
+    const testCtrl = ClientFactory(TestController, adapter);
+    const mockData = {car: 'Range Rover Vogue', color: "Silicon Silver"}
+
+    const newCtrl = testCtrl.$config(mockData).$query();
+
+    expect(newCtrl.config, 'config params passed correctly').to.eq(mockData);
+    expect(newCtrl.query, 'query property passed correctly').to.true;
+  });
 });

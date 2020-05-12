@@ -13,22 +13,22 @@ export interface IConvectorControllerClient<T extends ConvectorController> {
 
 export const controllerClientMethods = {
   $withUser<T extends ConvectorController>(this: IConvectorControllerClient<T>, user: string|true) {
-    const newClient = ClientFactory(this.ctrl, this.adapter);
+    const newClient = ClientFactory(this.ctrl, this.adapter, this);
     newClient.user = user;
     return newClient;
   },
   $query<T extends ConvectorController>(this: IConvectorControllerClient<T>) {
-    const newClient = ClientFactory(this.ctrl, this.adapter);
+    const newClient = ClientFactory(this.ctrl, this.adapter, this);
     newClient.query = true;
     return newClient;
   },
   $config<T extends ConvectorController>(this: IConvectorControllerClient<T>, config: any) {
-    const newClient = ClientFactory(this.ctrl, this.adapter);
+    const newClient = ClientFactory(this.ctrl, this.adapter, this);
     newClient.config = config;
     return newClient;
   },
   $raw<T extends ConvectorController>(this: IConvectorControllerClient<T>) {
-    const newClient = ClientFactory(this.ctrl, this.adapter);
+    const newClient = ClientFactory(this.ctrl, this.adapter, this);
     newClient.raw = true;
     return newClient;
   }
@@ -39,10 +39,11 @@ export type ConvectorControllerClient<T extends ConvectorController> =
 
 export function ClientFactory<T extends ConvectorController>(
   ctrl: new (content?: any) => T,
-  adapter: ControllerAdapter
+  adapter: ControllerAdapter,
+  extrasProperties?: IConvectorControllerClient<T>
 ): ConvectorControllerClient<T> {
   const client: ConvectorControllerClient<T> = new ctrl() as any;
-  Object.assign(client, { ctrl, adapter, query: false, raw: false }, controllerClientMethods);
+  Object.assign(client, { ctrl, adapter, query: false, raw: false }, controllerClientMethods, extrasProperties || {});
 
   const { namespace, invokables } = getInvokables(ctrl);
 
