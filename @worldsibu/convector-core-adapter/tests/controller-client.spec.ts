@@ -75,7 +75,7 @@ describe('Controller Client', () => {
     expect(response).to.haveOwnProperty('result');
   });
 
-  it.only('it should pass config to adapter and query the controllers', async () => {
+  it('it should pass config to adapter and query the controllers', async () => {
     const adapter = new TestAdapter(TestController);
     const testCtrl = ClientFactory(TestController, adapter);
     const mockData = {car: 'Range Rover Vogue', color: "Silicon Silver"}
