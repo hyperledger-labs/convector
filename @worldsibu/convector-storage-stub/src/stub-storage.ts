@@ -17,8 +17,8 @@ export class StubStorage extends BaseStorage {
     this.stubHelper = new StubHelper(stub);
   }
 
-  public async query(query: any): Promise<any[]> {
-    return await this.stubHelper.getQueryResultAsList(query);
+  public async query(query: any, storageOptions?: any): Promise<any[]> {
+    return await this.stubHelper.getQueryResultAsList(query, storageOptions);
   }
 
   /**
