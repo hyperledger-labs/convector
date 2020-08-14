@@ -62,11 +62,13 @@ export class Chaincode extends CC {
       if (invokeRes.status === 500) {
         const err = (invokeRes.message as any) instanceof Buffer ?
           invokeRes.message.toString() : JSON.stringify(invokeRes.message);
+        console.log('There was an error calling the function', err);
         return error(Buffer.from(err));
       }
       return invokeRes;
     } catch (e) {
       const err = new ChaincodeInvokationError(e);
+      console.log('There was an error', err);
       return error(Buffer.from(JSON.stringify(new ChaincodeError(err.toString()))));
     }
   }
