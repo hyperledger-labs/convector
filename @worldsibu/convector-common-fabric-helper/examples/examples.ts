@@ -1,5 +1,5 @@
 import { ClientHelper } from '../src/client.helper';
-import * as uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 
 const config = require('./chaincode.config.json');
 const helper = new ClientHelper(config);

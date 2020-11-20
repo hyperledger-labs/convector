@@ -2,7 +2,7 @@
 import * as chai from 'chai';
 import { join } from 'path';
 import { expect } from 'chai';
-import * as uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import 'mocha';
 import * as chaiAsPromised from 'chai-as-promised';
 

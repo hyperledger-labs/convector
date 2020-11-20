@@ -1,6 +1,6 @@
 // tslint:disable:no-unused-expression
 
-import * as uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 import { expect } from 'chai';
 import { Chaincode } from '@theledger/fabric-chaincode-utils';
 import { ChaincodeMockStub } from '@theledger/fabric-mock-stub';

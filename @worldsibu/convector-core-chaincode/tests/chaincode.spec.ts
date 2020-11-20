@@ -2,7 +2,7 @@
 
 import { join } from 'path';
 import { expect } from 'chai';
-import * as uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 import { ChaincodeMockStub } from '@theledger/fabric-mock-stub';
 import 'mocha';
 
