@@ -13,9 +13,9 @@ export abstract class BaseStorage {
     g.ConvectorBaseStorageCurrent = storage;
   }
 
-  public async abstract get(id: string, storageOptions?: any): Promise<any>;
-  public async abstract set(id: string, content: any, storageOptions?: any);
-  public async abstract delete(id: string, storageOptions?: any);
-  public async abstract query(...args: any[]): Promise<any[]>;
-  public async abstract history(id: string): Promise<any[]>;
+  public abstract get(id: string, storageOptions?: any): Promise<any>;
+  public abstract set(id: string, content: any, storageOptions?: any);
+  public abstract delete(id: string, storageOptions?: any);
+  public abstract query(...args: any[]): Promise<any[]>;
+  public abstract history(id: string): Promise<any[]>;
 }

@@ -1,6 +1,6 @@
 /** @module @worldsibu/convector-adapter-mock */
 
-import * as uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 import * as selfsigned from 'selfsigned';
 import { pki, asn1, md } from 'node-forge';
 import { Chaincode, IConfig } from '@worldsibu/convector-core-chaincode';

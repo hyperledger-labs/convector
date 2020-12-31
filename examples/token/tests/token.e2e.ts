@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 import { resolve } from 'path';
-import * as uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import 'mocha';
 
 import { CouchDBStorage } from '@worldsibu/convector-storage-couchdb';
