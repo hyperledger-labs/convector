@@ -41,7 +41,7 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
-    "@theledger/fabric-mock-stub": "^4.0.0",
+    "@theledger/fabric-mock-stub": "^5.0.0",
     "@worldsibu/convector-core": "^1.3.8",
     "@worldsibu/convector-core-chaincode": "^1.3.8",
     "node-forge": "^0.8.5",

@@ -88,6 +88,7 @@
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "@theledger/fabric-shim-crypto-types": "^1.0.5",
+    "@theledger/fabric-mock-stub": "^5.0.0",
     "@types/bytebuffer": "^5.0.37",
     "@types/chai": "^4.0.4",
     "@types/chai-as-promised": "^7.1.0",
