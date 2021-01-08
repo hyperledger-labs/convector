@@ -33,7 +33,7 @@ describe('Token e2e', () => {
       txTimeout: 300000,
       user: 'admin',
       channel: 'ch1',
-      chaincode: 'token',
+      chaincode: 'token1',
       keyStore,
       networkProfile,
       userMspPath,
@@ -41,17 +41,19 @@ describe('Token e2e', () => {
     });
     tokenCtrl = ClientFactory(TokenController, adapter);
 
-    (adapter as ClientHelper).cleanUp();
-
     BaseStorage.current = new CouchDBStorage({
       host: 'localhost',
       protocol: 'http',
       port: '5084'
-    }, 'ch1_token');
+    }, 'ch1_token1');
 
     await adapter.init();
 
     certificate = await tokenCtrl.whoAmI();
+  });
+
+  after(() => {
+    (adapter as ClientHelper).close();
   });
 
   it('should initialize the token', async () => {
@@ -111,5 +113,26 @@ describe('Token e2e', () => {
     console.log(response);
 
     expect(response.txId).to.exist;
+  });
+
+  it('should preserve the context in parallel invokes', async () => {
+    await Array(10).fill('').reduce(async (result, _, n) => {
+      await result;
+      console.log(`Processing batch ${n+1}/10`);
+      await Promise.all(Array(10).fill('').map(async (_, m) => {
+        console.log(`Processing item ${m+1}/10`);
+        await tokenCtrl.init(new Token({
+          id: uuid(),
+          name: 'Token',
+          symbol: 'TKN',
+          totalSupply: totalSupply,
+          balances: { [certificate]: totalSupply },
+          complex: {
+            name: 'Test',
+            value: 5
+          }
+        }));
+      }));
+    });
   });
 });
