@@ -1,16 +1,23 @@
 /** @module @worldsibu/convector-core-storage */
 
-import * as g from 'window-or-global';
+import { createNamespace, Namespace } from 'cls-hooked';
+
+export const BaseStorageNamespace: Namespace = createNamespace('@worldsibu/convector-core-storage');
 
 export abstract class BaseStorage {
+  private static _currentStorage: BaseStorage;
   /**
    * Current storage implementation
    */
   public static get current(): BaseStorage {
-    return g.ConvectorBaseStorageCurrent;
+    return BaseStorageNamespace.active ? BaseStorageNamespace.get('current') : this._currentStorage;
   }
   public static set current(storage: BaseStorage) {
-    g.ConvectorBaseStorageCurrent = storage;
+    if (BaseStorageNamespace.active) {
+      BaseStorageNamespace.set('current', storage);
+    } else {
+      this._currentStorage = storage;
+    }
   }
 
   public async abstract get(id: string, storageOptions?: any): Promise<any>;

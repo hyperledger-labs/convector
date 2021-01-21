@@ -6,6 +6,7 @@ import { Chaincode as CC, StubHelper, ChaincodeError } from '@theledger/fabric-c
 import {
   BaseStorage,
   getInvokables,
+  BaseStorageNamespace,
   ChaincodeInitializationError,
   ChaincodeInvokationError,
   ConfigurationInvalidError,
@@ -54,11 +55,15 @@ export class Chaincode extends CC {
    * it first calls this function
    */
   public async Invoke(stub: ChaincodeStub): Promise<ChaincodeResponse> {
-    BaseStorage.current = new StubStorage(stub);
-
     try {
-      await this.initControllers(new StubHelper(stub), [, 'true']);
-      const invokeRes = await super.Invoke(stub);
+      let invokeRes;
+
+      await BaseStorageNamespace.runAndReturn(async () => {
+        BaseStorage.current = new StubStorage(stub);
+        await this.initControllers(new StubHelper(stub), [, 'true']);
+        invokeRes = await super.Invoke(stub);
+      });
+
       if (invokeRes.status === 500) {
         const err = (invokeRes.message as any) instanceof Buffer ?
           invokeRes.message.toString() : JSON.stringify(invokeRes.message);

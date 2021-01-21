@@ -39,10 +39,10 @@
     "env:restart": "hurl new -p $PWD/.convector-dev-env",
     "env:clean": "hurl clean",
     "================= Chaincodes =================": "==================================",
-    "cc:start": "f() { npm run cc:package -- $1; npm run cc:install $1; }; f",
+    "cc:start": "f() { npm run cc:package -- $1; npm run cc:install $1 $2; }; f",
     "cc:upgrade": "f() { npm run cc:package -- $1; hurl upgrade $1 node $2 -P ./chaincode-$1 -p $PWD/.convector-dev-env; }; f",
     "cc:package": "f() { node ./@worldsibu/convector-tool-chaincode-manager/dist/src/command.js --update --config ./examples/$1.config.json --output ./chaincode-$1 package; }; f",
-    "cc:install": "f() { hurl install $1 node --debug -P ./chaincode-$1 -p $PWD/.convector-dev-env; }; f"
+    "cc:install": "f() { hurl install ${2:-$1} node --debug -P ./chaincode-$1 -p $PWD/.convector-dev-env; }; f"
   },
   "commitlint": {
     "extends": [
@@ -87,11 +87,12 @@
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
-    "@theledger/fabric-shim-crypto-types": "^1.0.5",
     "@theledger/fabric-mock-stub": "^5.0.0",
+    "@theledger/fabric-shim-crypto-types": "^1.0.5",
     "@types/bytebuffer": "^5.0.37",
     "@types/chai": "^4.0.4",
     "@types/chai-as-promised": "^7.1.0",
+    "@types/cls-hooked": "^4.3.1",
     "@types/mocha": "^2.2.43",
     "@types/node": "^10.3.0",
     "@types/uuid": "^3.4.3",
