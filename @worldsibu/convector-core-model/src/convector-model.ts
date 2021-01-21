@@ -66,8 +66,8 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
 
     const model = new type(content);
 
-    if ((content && model) && content.type !== model.type) {
-      throw new Error(`Possible ID collision, element ${id} of type ${content.type} is not ${model.type}`);
+    if ((content && model) && content.type !== new type('').type) {
+      throw new Error(`Possible ID collision, element ${id} of type ${content.type} is not ${new type('').type}`);
     }
 
     return model;

@@ -68,7 +68,7 @@ export class Chaincode extends CC {
       return invokeRes;
     } catch (e) {
       const err = new ChaincodeInvokationError(e);
-      console.log('There was an error', err);
+      console.log('There was an error', e);
       return error(Buffer.from(JSON.stringify(new ChaincodeError(err.toString()))));
     }
   }
