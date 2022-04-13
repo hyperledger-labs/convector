@@ -40,7 +40,9 @@
     "docs:serve": "http-server docs"
   },
   "dependencies": {
+    "@types/cls-hooked": "^4.3.1",
     "@worldsibu/convector-core-errors": "^1.3.8",
+    "cls-hooked": "git+https://github.com/bringg/cls-hooked.git",
     "tslib": "^1.9.0",
     "window-or-global": "^1.0.1"
   },
